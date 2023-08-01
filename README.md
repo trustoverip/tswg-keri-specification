@@ -28,3 +28,6 @@ $ make
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
 
+#### Note
+
+This work was migrated from https://github.com/WebOfTrust/ietf-keri.
