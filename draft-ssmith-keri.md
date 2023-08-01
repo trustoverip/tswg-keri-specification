@@ -24,7 +24,7 @@ normative:
 
   KERI-ID:
     target: https://github.com/WebOfTrust/ietf-keri
-    title: IETF KERI (Key Event Receipt Infrastructure) Internet Draft
+    title: IETF KERI (Key Event Receipt Infrastructure) Internet-Draft
     date: 2022
     author:
       ins: S. Smith
@@ -33,7 +33,7 @@ normative:
 
   CESR-ID:
     target: https://github.com/WebOfTrust/ietf-cesr
-    title: IETF CESR (Composable Event Streaming Representation) Internet Draft
+    title: IETF CESR (Composable Event Streaming Representation) Internet-Draft
     date: 2022
     author:
       ins: S. Smith
@@ -42,7 +42,7 @@ normative:
 
   SAID-ID:
     target: https://github.com/WebOfTrust/ietf-said
-    title: IETF SAID (Self-Addressing IDentifier) Internet Draft
+    title: IETF SAID (Self-Addressing IDentifier) Internet-Draft
     date: 2022
     author:
       ins: S. Smith
@@ -52,7 +52,7 @@ normative:
 
   OOBI-ID:
     target: https://github.com/WebOfTrust/ietf-oobi
-    title: IETF OOBI (Out-Of-Band-Introduction) Internet Draft
+    title: IETF OOBI (Out-Of-Band-Introduction) Internet-Draft
     author:
       ins: S. Smith
       name: Samuel M. Smith
@@ -61,7 +61,7 @@ normative:
 
   DIDK-ID:
     target: https://github.com/WebOfTrust/ietf-did-keri
-    title: IETF DID-KERI Internet Draft
+    title: IETF DID-KERI Internet-Draft
     author:
       ins: P. Feairheller
       name: Phil Feairheller
