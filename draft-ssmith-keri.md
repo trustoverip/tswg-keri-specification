@@ -50,15 +50,6 @@ normative:
       org: ProSapien LLC
     date: 2022
 
-  OOBI-ID:
-    target: https://github.com/WebOfTrust/ietf-oobi
-    title: IETF OOBI (Out-Of-Band-Introduction) Internet Draft
-    author:
-      ins: S. Smith
-      name: Samuel M. Smith
-      org: ProSapien LLC
-    date: 2022
-
   DIDK-ID:
     target: https://github.com/WebOfTrust/ietf-did-keri
     title: IETF DID-KERI Internet Draft
@@ -533,7 +524,7 @@ A special case may arise when the set of public keys has only one member, i.e. t
 
 * Each controller in a set of controllers may prove its contribution to the control authority over the identifier in either an interactive or non-interactive fashion. One form of interactive proof is to satisfy a challenge of that control. The challenger creates a unique challenge message. The controller responds by non-repudiably signing that challenge with the private key from the keypair under its control. The challenger can then cryptographically verify the signature using the public key from the controller's key pair. One form of non-interactive proof is to periodically contribute to a monotonically increasing sequence of non-repudiably signed updates of some data item. Each update includes a monotonically increasing sequence number or date-time stamp. Any observer can then cryptographically verify the signature using the public key from the controller's keypair and verify that the update was made by the controller.  In general, only members of the set of controllers can create verifiable non-repudiable signatures using their keypairs. Consequently, the identifier is strongly bound to the set of controllers via provable control over the keypairs.
 
-*** Tetrad Bindings
+### Tetrad Bindings
 
 At inception, the triad of identifier, keypairs, and controllers are strongly bound together. But for those bindings to persist after a key rotation, another mechanism is required. That mechanism is a verifiable data structure called a *key event log* (KEL) {{KERI}}{{VDS}}.  The KEL is not necessary for identifiers that are non-transferable and do not need to persist control via key rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL, non-transferable (ephemeral) identifiers do not.
 
