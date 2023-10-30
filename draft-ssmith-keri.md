@@ -486,8 +486,7 @@ The KERI identifier system overlay leverages the properties of cryptonymous Self
 
 ## Autonomic IDentifier (AID)
 
-A Key Event Log (KEL) gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because their keys may be refreshed or updated via rotation allowing secure control over the identifier in spite of key weakness or even compromise.
-This family of generalized enhanced SCIDs we call ***autonomic identifiers*** (AIDs). *Autonomic* means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing properties of this class of identifier.
+Use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because their keys may be refreshed or updated via rotation allowing secure control over the identifier in spite of key weakness or even compromise. This family of generalized enhanced SCIDs we call Autonomic Identifiers (AIDs). Autonomic means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing properties of this class of identifier. An AID may exhibit other self-managing properties such as transferable control using key pre-rotation which enables control over such an AID to persist in spite of key weakness or compromise due to exposure. Authoritative control over the identifier persists in spite of the evolution of the Key state.
 
 ## Key Pre-rotation Concept
 
