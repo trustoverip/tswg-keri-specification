@@ -27,6 +27,7 @@ jobs:
 
       - name: Combine
         run: |
+          mkdir docs
           rm -f docs/index.md
           touch docs/index.md; cat 0*.md > docs/index.md
 
