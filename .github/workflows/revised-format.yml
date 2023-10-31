@@ -1,4 +1,4 @@
-name: Build draft
+name: revised-format
 on:
   push: 
     branches:
