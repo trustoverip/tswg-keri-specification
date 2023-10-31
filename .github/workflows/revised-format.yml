@@ -3,6 +3,10 @@ on:
   push: 
     branches:
       - revised-format
+  workflow_dispatch:
+    branches:
+      - revised-format
+
 jobs:
   publish:
     runs-on: ubuntu-latest
