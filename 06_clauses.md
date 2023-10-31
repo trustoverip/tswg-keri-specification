@@ -297,3 +297,9 @@ The pre-rotation mechanism supports partial pre-rotation or more exactly partial
 ###	Custodial rotation
 
 Partial pre-rotation supports another important use case that of custodial key Rotation. Because control authority is split between two key sets, the first for signing authority and the second (pre-rotated) for Rotation authority, the associated thresholds and key list can be structured in such a way that a designated custodial agent can hold signing authority while the original Controller can hold exclusive Rotation authority. The holder of the Rotation authority can then at any time without the cooperation of the custodial agent, if need be, revoke the agent's signing authority and assign it so some other agent or return that authority to itself.
+
+# Secure signing in KERI using CESR encoding 
+
+## Security considerations
+
+TODO security
