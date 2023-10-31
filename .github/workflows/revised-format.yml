@@ -1,0 +1,45 @@
+name: revised-format
+on:
+  push: 
+    branches:
+      - revised-format
+  workflow_dispatch:
+    branches:
+      - revised-format
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10.4
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.4
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Combine
+        run: |
+          rm -f docs/index.md
+          touch docs/index.md; cat 0*.md > docs/index.md
+
+      - name: Deploy
+        run: |
+          mkdocs gh-deploy
+
+      - name: pandoc
+        uses: MatthiasValvekens/pandoc-iso@master
+        with:
+          md-in: docs/index.md
+          docx-out: docs/index.docx
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}-iso-draft
+          path: docs/index.docx
