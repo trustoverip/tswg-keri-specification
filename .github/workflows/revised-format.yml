@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with: 
+          ref: revised-format
 
       - name: Set up Python 3.10.4
         uses: actions/setup-python@v2
