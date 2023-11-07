@@ -1,6 +1,6 @@
 # Licensing
 
-All software and documentation in this repository are *Copyright 2023 ACDC Contributors* and 
+All software and documentation in this repository are *Copyright 2023 KERI Contributors* and 
 all contributions to this repository are *Licensed under the OWFa 1.0 (the "License")* [here](https://github.com/trustoverip/tswg-acdc-specification/blob/main/LICENSE).
 
 As as defined in the License, contributions include but are not limited to patents, source code, specification text, 
