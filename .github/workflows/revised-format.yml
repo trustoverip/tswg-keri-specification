@@ -25,12 +25,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Combine
-        run: |
-          mkdir docs
-          rm -f docs/index.md
-          touch docs/index.md; cat 0*.md > docs/index.md
-
       - name: Deploy
         run: |
           mkdocs gh-deploy
@@ -38,11 +32,11 @@ jobs:
       - name: pandoc
         uses: MatthiasValvekens/pandoc-iso@master
         with:
-          md-in: docs/index.md
-          docx-out: docs/index.docx
+          md-in: spec.md
+          docx-out: docs/spec.docx
 
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-iso-draft
-          path: docs/index.docx
+          name: ${{ github.event.repository.name }}-toip-draft
+          path: docs/spec.docx
