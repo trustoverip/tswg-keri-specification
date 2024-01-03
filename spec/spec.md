@@ -413,7 +413,7 @@ Common normalized ACDC and KERI labels
 
 ### Digest seal
 
-```
+```json
 {
   "d": "Eabcde..."
 }
@@ -421,7 +421,7 @@ Common normalized ACDC and KERI labels
 
 ### Merkle Tree root digest seal
 
-```
+```json
 {
   "rd": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
 }
@@ -429,7 +429,7 @@ Common normalized ACDC and KERI labels
 
 ### Backer seal
 
-```
+```json
 {
   "bi": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
   "d" : "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
@@ -437,7 +437,7 @@ Common normalized ACDC and KERI labels
 ```
 
 ### Event seal
-```
+```json
 {
 
   "i": "Ebietyi8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM.",
@@ -449,7 +449,7 @@ Common normalized ACDC and KERI labels
 
 ### Last Establishment event seal (6.3.5)
 
-```
+```json
 {
   "i": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
 }
@@ -460,6 +460,592 @@ Common normalized ACDC and KERI labels
 Because adding the `d` field SAID to every Key event Message type will break all the explicit test vectors. Its no additional effort to normalize the field ordering across all Message types and Seals.
 
 Originally all Messages included an `i` field but that is not true anymore. So the changed field ordering is to put the fields that are common to all Message types first in order followed by fields that are not common. The common fields are `v`, `t`, `d`.
+
+#### Inception Event Message Body
+
+
+```json
+{
+  "v": "KERI10JSON0001ac_",
+  "t": "icp",
+  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
+  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
+  "s": "0",
+  "kt": "2", // 2 of 3
+  "k" :
+    [
+      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
+      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
+      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+    ],
+  "nt": "3",  // 3 of 5
+  "n" :
+    [
+      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
+      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
+      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
+      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
+      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+    ],
+  "bt": "2",
+  "b":
+    [
+      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
+      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
+      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+    ],
+  "c": [],
+  "a": []
+}
+```
+
+
+
+#### Rotation Event Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rot",
+  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
+  "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
+  "s" : "1",
+  "p" : "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
+  "kt": "2", // 2 of 3
+  "k" :
+    [
+      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
+      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
+      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+    ],
+  "nt": "3",  // 3 of 5
+  "n" :
+    [
+      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
+      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
+      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
+      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
+      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+    ],
+  "bt": "1",
+  "ba": ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
+  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+  "a" : []
+}
+```
+
+
+#### Interaction Event Message Body
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "isn",
+  "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
+  "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
+  "s": "2",
+  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
+  "a":
+  [
+    {
+      "d": "ELvaU6Z-i0d8JJR2nmwyYAZAoTNZH3UfSVPzhzS6b5CM",
+      "i": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
+      "s": "1"
+    }
+  ]
+}
+```
+
+
+### Delegated Key Event Messages
+
+
+ToDo in delegation section below. Delegated custodial example with partial rotation and using 0 fraction signing weights on exposed pre-rotated keys
+
+
+
+#### Delegated Inception Event Message Body
+
+```json
+{
+  "v": "KERI10JSON0001ac_",
+  "t": "icp",
+  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
+  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
+  "s": "0",
+  "kt": "2", // 2 of 3
+  "k" :
+    [
+      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
+      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
+      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+    ],
+  "nt": "3",  // 3 of 5
+  "n" :
+    [
+      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
+      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
+      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
+      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
+      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+    ],
+  "bt": "2",
+  "b":
+    [
+      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
+      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
+      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+    ],
+  "c": [],
+  "a": [],
+  "di": "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+}
+```
+
+
+#### Delegated Rotation Event Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "drt",
+  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
+  "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
+  "s" : "1",
+  "p" : "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
+  "kt": "2", // 2 of 3
+  "k" :
+    [
+      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
+      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
+      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+    ],
+  "nt": "3",  // 3 of 5
+  "n" :
+    [
+      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
+      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
+      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
+      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
+      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+    ],
+  "bt": "1",
+  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
+  "br":  ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+  "a" :[]
+  "di" : "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+}
+```
+
+
+### Receipt Messages
+
+#### Non-Transferable Prefix Signer Receipt Message Body
+For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
+
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "rct",
+  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+  "s": "1"
+}
+```
+
+#### Transferable Prefix Signer Receipt Message Body
+For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "vrc",
+  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+  "s": "1",
+  "a":
+    {
+      "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+      "i": "AYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8JZAoTNZH3ULv",
+      "s": "4"
+    }
+}
+```
+
+
+### Other Messages
+
+#### Query Message Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "qry",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "logs",
+  "rr": "log/processor",
+  "q" :
+  {
+    "i" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "s" : "5",
+    "dt": "2020-08-01T12:20:05.123456+00:00",
+  }
+}
+```
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "qry",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "logs",
+  "rr": "log/processor",
+  "q" :
+  {
+    "d" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "s" : "5",
+    "dt": "2020-08-01T12:20:05.123456+00:00",
+  }
+}
+```
+
+#### Reply Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rpy",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "logs/processor",
+  "a" :
+  {
+    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "name": "John Jones",
+    "role": "Founder",
+  }
+}
+```
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rpy",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "logs/processor",
+  "a" :
+  {
+    "d":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "name": "John Jones",
+    "role": "Founder",
+  }
+}
+```
+
+#### Prod Message Body
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "prd",
+  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "r": "sealed/data",
+  "rr": "process/sealed/data"
+  "q":
+  {
+     d" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "s" : "5",
+    "ri": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "dd": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"
+  }
+}
+```
+
+
+#### Bare Message Body
+
+Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
+A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "bre",
+  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "r": "process/sealed/data",
+  "a":
+  {
+    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "dt": "2020-08-22T17:50:12.988921+00:00",
+    "name": "John Jones",
+    "role": "Founder",
+  }
+}
+```
+
+
+#### Exchange Message Body
+
+```json
+{
+  "v": "KERI10JSON00006a_",
+  "t": "exn",
+  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
+  "dt": "2021-11-12T19:11:19.342132+00:00",
+  "r": "/echo",
+  "rr": "/echo/response",
+  "a": {
+    "msg": "test"
+  }
+}
+```
+
+### Notices Embedded in Reply Messages
+
+#### Key State Notice (KSN)
+
+```json
+{
+  "v": "KERI10JSON0001d9_",
+  "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
+  "i": "E4BsxCYUtUx3d6UkDVIQ9Ke3CLQfqWBfICSmjIzkS1u4",
+  "s": "0",
+  "p": "",
+  "f": "0",
+  "dt": "2021-01-01T00:00:00.000000+00:00",
+  "et": "icp",
+  "kt": "1",
+  "k": [
+    "DqI2cOZ06RwGNwCovYUWExmdKU983IasmUKMmZflvWdQ"
+  ],
+  "n": "E7FuL3Z_KBgt_QAwuZi1lUFNC69wvyHSxnMFUsKjZHss",
+  "bt": "1",
+  "b": [
+    "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
+  ],
+  "c": [],
+  "ee": {
+    "s": "0",
+    "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
+    "br": [],
+    "ba": []
+  },
+  "di": ""
+}
+```
+
+#### Embedded in Reply
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rpy",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "/ksn/BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
+  "a" :
+    {
+      "v": "KERI10JSON0001d9_",
+      "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
+      "i": "E4BsxCYUtUx3d6UkDVIQ9Ke3CLQfqWBfICSmjIzkS1u4",
+      "s": "0",
+      "p": "",
+      "f": "0",
+      "dt": "2021-01-01T00:00:00.000000+00:00",
+      "et": "icp",
+      "kt": "1",
+      "k": [
+        "DqI2cOZ06RwGNwCovYUWExmdKU983IasmUKMmZflvWdQ"
+      ],
+      "n": "E7FuL3Z_KBgt_QAwuZi1lUFNC69wvyHSxnMFUsKjZHss",
+      "bt": "1",
+      "b": [
+        "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
+      ],
+      "c": [],
+      "ee": {
+        "s": "0",
+        "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
+        "br": [],
+        "ba": []
+      },
+      "di": ""
+    }
+}
+```
+
+#### Transaction State Notice (TSN)
+
+```json
+{
+  "v": "KERI10JSON0001b0_",
+  "d": "EpltHxeKueSR1a7e0_oSAhgO6U7VDnX7x4KqNCwBqbI0",
+  "i": "EoN_Ln_JpgqsIys-jDOH8oWdxgWqs7hzkDGeLWHb9vSY",
+  "s": "1",
+  "ii": "EaKJ0FoLxO1TYmyuprguKO7kJ7Hbn0m0Wuk5aMtSrMtY",
+  "dt": "2021-01-01T00:00:00.000000+00:00",
+  "et": "vrt",
+  "a": {
+    "s": 2,
+    "d": "Ef12IRHtb_gVo5ClaHHNV90b43adA0f8vRs3jeU-AstY"
+  },
+  "bt": "1",
+  "br": [],
+  "ba": [
+    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+  ],
+  "b": [
+    "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+  ],
+  "c": []
+}
+```
+
+#### Embedded in Reply
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rpy",
+  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
+  "r" : "/ksn/registry/BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU",
+  "a" :
+    {
+      "v": "KERI10JSON0001b0_",
+      "d": "EpltHxeKueSR1a7e0_oSAhgO6U7VDnX7x4KqNCwBqbI0",
+      "i": "EoN_Ln_JpgqsIys-jDOH8oWdxgWqs7hzkDGeLWHb9vSY",
+      "s": "1",
+      "ii": "EaKJ0FoLxO1TYmyuprguKO7kJ7Hbn0m0Wuk5aMtSrMtY",
+      "dt": "2021-01-01T00:00:00.000000+00:00",
+      "et": "vrt",
+      "a": {
+        "s": 2,
+        "d": "Ef12IRHtb_gVo5ClaHHNV90b43adA0f8vRs3jeU-AstY"
+      },
+      "bt": "1",
+      "br": [],
+      "ba": [
+        "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+      ],
+      "b": [
+        "BwFbQvUaS4EirvZVPUav7R_KDHB8AKmSfXNpWnZU_YEU"
+      ],
+      "c": []
+    }
+}
+```
+
+### Transaction Event Log Messages
+
+#### Registry Inception Event Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "vcp",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "ii": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
+  "s" : "0",
+  "bt": "1",
+  "b" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
+  "c" : ["NB"]
+}
+
+```
+
+#### Registry Rotation Event Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "vrt",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+  "s" : "2",
+  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "bt": "1",
+  "br" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
+  "ba" : []
+}
+```
+
+#### Backerless ACDC Issuance Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "iss",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+  "s" : "0",
+  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "dt": "2020-08-01T12:20:05.123456+00:00"
+}
+```
+
+#### Backerless ACDC Revocation Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "rev",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+  "s" : "1",
+  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "dt": "2020-08-01T12:20:05.123456+00:00"
+}
+```
+
+#### Backered ACDC Issuance Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "bis",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+  "s" : "0",
+  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "ra" : {
+      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
+      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
+      "s": 0
+  }
+  "dt": "2020-08-01T12:20:05.123456+00:00"
+}
+```
+
+#### Backered ACDC Revocation Message Body
+
+```json
+{
+  "v" : "KERI10JSON00011c_",
+  "t" : "brv",
+  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
+  "s" : "1",
+  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
+  "ri" : "EvxMACzQxU2rDj-X5SPDZYtUn56i4fjjH8yDRFRzaMfI",
+  "ra" : {
+      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
+      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
+      "s": 0
+  }
+  "dt": "2020-08-01T12:20:05.123456+00:00"
+}
+```
 
 # KERI key management
 
@@ -552,7 +1138,7 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
-```
+```json
 {
   "v": "KERI10JSON0001ac_",
   "t": "icp",
