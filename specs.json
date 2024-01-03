@@ -1,0 +1,21 @@
+
+{
+  "specs": [
+    {
+      "title": "Key Event Receipt Infrastructure",
+      "spec_directory": "./spec",
+      "output_path": "./docs",
+      "markdown_paths": [
+        "spec.md"
+      ],
+      "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
+      "logo_link": "https://github.com/trustoverip/tswg-keri-specification",
+      "katex": true,
+      "source": {
+        "host": "github",
+        "account": "trustoverip",
+        "repo": "tswg-keri-specification"
+      }
+    }
+  ]
+}
