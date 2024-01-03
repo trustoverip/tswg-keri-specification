@@ -54,9 +54,9 @@ The primary key management operation is key Rotation (transference) via a novel 
 
 The KA2CE approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. The KERI approach to DKMI allows for more granular composition. Moreover, because KERI is event streamed it enables DKMI that operates in-stride with data events streaming applications such as web 3.0, IoT, and others where performance and scalability are more important. The core KERI engine is identifier namespace independent. This makes KERI a candidate for a universal portable DKMI.
 
-The main motivation for this work is to provide a secure decentralized foundation of attributional trust for the Internet as a trustable spanning layer in the form of an identifier system security overlay. This identifier system security overlay provides verifiable authorship (authenticity) of any message or data item via secure (Cryptographically verifiable) attribution to a cryptonymous (cryptographic strength pseudonymous) SCID {{KERI}}{{UIT}}{{SCPK}}{{SFS}}{{SCPN}}{{SCURL}}{{PKI}}.
+The main motivation for this work is to provide a secure decentralized foundation of attributional trust for the Internet as a trustable spanning layer in the form of an identifier system security overlay. This identifier system security overlay provides verifiable authorship (authenticity) of any message or data item via secure (Cryptographically verifiable) attribution to a cryptonymous (cryptographic strength pseudonymous) SCID [@KERI][@UIT][@SCPK][@SFS][@SCPN][@SCURL][@PKI].
 
-Thus, KERI addresses major flaw in the original design of the Internet Protocol (IP) which is that the Internet has no security layer(s) (i.e., Session or Presentation layers) to provide interoperable Verifiable authenticity {{RFC0791}}. There was no built-in mechanism for secure attribution to the source of a packet. Specifically, the IP packet header includes a source address field that indicates the IP address of the device that sent the packet. Anyone (including any intermediary) can forge an IP packet. Because the source address of such a packet can be undetectably forged, a recipient may not be able to ascertain when or if the packet was sent by an imposter.  This means that secure attribution mechanisms for the Internet must be overlaid (bolted-on). KERI provides such a security overlay specifically an identifier system security overlay.
+Thus, KERI addresses major flaw in the original design of the Internet Protocol (IP) which is that the Internet has no security layer(s) (i.e., Session or Presentation layers) to provide interoperable Verifiable authenticity [@RFC0791]. There was no built-in mechanism for secure attribution to the source of a packet. Specifically, the IP packet header includes a source address field that indicates the IP address of the device that sent the packet. Anyone (including any intermediary) can forge an IP packet. Because the source address of such a packet can be undetectably forged, a recipient may not be able to ascertain when or if the packet was sent by an imposter.  This means that secure attribution mechanisms for the Internet must be overlaid (bolted-on). KERI provides such a security overlay specifically an identifier system security overlay.
 
 ## Status of This Memo
 
@@ -125,7 +125,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 Primitive
 
-: a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR  {{CESR-ID}}.
+: a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR  [@CESR-ID].
 
 Cryptographic Primitive
 
@@ -133,7 +133,7 @@ Cryptographic Primitive
 
 Cryptonym
 
-: a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) {{OWF}}{{COWF}}{{TMCrypto}}{{QCHC}}. A Cryptonym is a type of Primitive . Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must  be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
+: a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [@OWF][@COWF][@TMCrypto][@QCHC]. A Cryptonym is a type of Primitive . Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must  be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
 
 Self-certifying identifier (SCID)
 
@@ -311,7 +311,7 @@ Each Controller in a set of Controllers may prove its contribution to the contro
 
 ### Tetrad bindings
 
-At Inception, the triad of identifier, keypairs, and Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure {{KERI}}{{VDS}}.  The KEL is not necessary for identifiers that are non-transferable and do not need to persist control via key Rotation in spite of key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL, non-transferable (ephemeral) identifiers do not.
+At Inception, the triad of identifier, keypairs, and Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [@KERI][@VDS].  The KEL is not necessary for identifiers that are non-transferable and do not need to persist control via key Rotation in spite of key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL, non-transferable (ephemeral) identifiers do not.
 
 For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event  which is a serialization of the incepting information associated with the identifier mentioned previously.
 
@@ -391,11 +391,11 @@ Some fields in KERI data structures may have a SAID (self-referential content ad
 
 Each SAID provides a stable universal cryptographically verifiable and agile reference to its encapsulating block (serialized field map).
 
-A cryptographic commitment (such as a digital signature or cryptographic digest) on a given digest with sufficient cryptographic strength including collision resistance is equivalent to a commitment to the block from which the given digest was derived. Specifically, a digital signature on a SAID makes a Verifiable cryptographic non-repudiable commitment that is equivalent to a commitment on the full serialization of the associated block from which the SAID was derived. This enables reasoning about KERI data structures in whole or in part via their SAIDS in a fully interoperable, Verifiable, compact, and secure manner. This also supports the well-known bow-tie model of Ricardian Contracts {{RC}}. This includes reasoning about the whole KERI data structure given by its top-level SAID, `d`, field as well as reasoning about any nested or attached data structures using their SAIDS.
+A cryptographic commitment (such as a digital signature or cryptographic digest) on a given digest with sufficient cryptographic strength including collision resistance is equivalent to a commitment to the block from which the given digest was derived. Specifically, a digital signature on a SAID makes a Verifiable cryptographic non-repudiable commitment that is equivalent to a commitment on the full serialization of the associated block from which the SAID was derived. This enables reasoning about KERI data structures in whole or in part via their SAIDS in a fully interoperable, Verifiable, compact, and secure manner. This also supports the well-known bow-tie model of Ricardian Contracts [@RC]. This includes reasoning about the whole KERI data structure given by its top-level SAID, `d`, field as well as reasoning about any nested or attached data structures using their SAIDS.
 
 #### AID fields
 
-Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified SCID as described above {{KERI}}{{KERI-ID}}. An AID must be self-certifying.
+Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified SCID as described above [@KERI][@KERI-ID]. An AID must be self-certifying.
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
 #### Next Threshold field
@@ -538,7 +538,7 @@ Each Non-establishment event must be signed by a threshold-satisficing subset of
 
 The creator of the Inception event must create two sets of keypairs, the current (initial) set, and the next set. The private keys from the current set are kept as secrets. The public keys from the current set are exposed via inclusion in the Inception event. Both the public and private keys from the next set are kept as secrets and only the cryptographic digests of the public keys from the next set are exposed via inclusion in the event. The public keys from the next set are only exposed in a subsequent Establishment event, if any.  Both thresholds are exposed via inclusion in the event.
 
-Upon emittance of the Inception event, the current (initial) set of keypairs becomes the current set of Verifiable authoritative signing keypairs for the AID. Emittance of the Inception event also issues the identifier. Moreover, to be verifiably authoritative, the Inception event must be signed by a threshold satisficing subset of the current (initial) set of private keys. The Inception event may be verified against the attached signatures using the included current (initial) list of public keys. When self-addressing, a digest of the serialization of the Inception event provides the AID itself as derived by the SAID protocol {{SAID-ID}}.
+Upon emittance of the Inception event, the current (initial) set of keypairs becomes the current set of Verifiable authoritative signing keypairs for the AID. Emittance of the Inception event also issues the identifier. Moreover, to be verifiably authoritative, the Inception event must be signed by a threshold satisficing subset of the current (initial) set of private keys. The Inception event may be verified against the attached signatures using the included current (initial) list of public keys. When self-addressing, a digest of the serialization of the Inception event provides the AID itself as derived by the SAID protocol [@SAID-ID].
 
 There must be only one Establishment event that is an Inception event.. All subsequent Establishment events must be Rotation events.
 
@@ -608,21 +608,16 @@ Also, recall that a pre-rotated keypair is designated by the digest of its publi
 
 The following example illustrates the lifecycle roles of the key sets drawn from a sequence of keys used for three Establishment events; one Inception followed by two Rotations. The initial number of authoritative keypairs is three and then changes to two and then changes back to three.
 
-+------------+-----------------------------------------------------+----------+--------------------------------------------------------------+-----------+
-| **Event**  | **Current Keypairs**                                | **CT**   | **Next Keypairs**                                            | **NT**    |
-+============+=====================================================+==========+==============================================================+===========+
-| **0**      | [A<sup>0,0</sup>, A<sup>1,0</sup>, A<sup>2,0</sup>] | 2        | [H(A<sup>3,1</sup>), H(A<sup>4,1</sup>)]                     | 1         |
-+------------+-----------------------------------------------------+----------+--------------------------------------------------------------+-----------+
-| **1**      | [A<sup>3,1</sup>, A<sup>4,1</sup>]                  | 1        | [H(A<sup>5,2</sup>), H(A<sup>6,2</sup>), H(A<sup>7,2</sup>)] | 2         |
-+------------+-----------------------------------------------------+----------+--------------------------------------------------------------+-----------+
-| **2**      | [A<sup>5,2</sup>, A<sup>6,2</sup>, A<sup>7,2</sup>] | 2        | [H(A<sup>8,3</sup>), H(A<sup>9,3</sup>), H(A<sup>10,3</sup>] | 2         |
-+------------+-----------------------------------------------------+----------+--------------------------------------------------------------+-----------+
+|Event| Current Keypairs | CT | Next Keypairs| NT |
+|:-:|--:|--:|--:|--:|
+|0| *[A<sup>0,0</sup>, A<sup>1,0</sup>, A<sup>2,0</sup>]* | 2 | *[H(A<sup>3,1</sup>), H(A<sup>4,1</sup>)]* | 1 |
+|1| *[A<sup>3,1</sup>, A<sup>4,1</sup>]* | 1 | *[H(A<sup>5,2</sup>), H(A<sup>6,2</sup>), H(A<sup>7,2</sup>)]* | 2 |
+|2| *[A<sup>5,2</sup>, A<sup>6,2</sup>, A<sup>7,2</sup>]* | 2 | *[H(A<sup>8,3</sup>), H(A<sup>9,3</sup>), H(A<sup>10,3</sup>]* | 2 |
 
 Where:
 
-CTH means Current threshold.
-
-NTH means Next threshold.
+* CTH means Current threshold.
+* NTH means Next threshold.
 
 ## Reserve rotation
 
@@ -632,40 +627,27 @@ Reserve rotation example:
 
 Provided here is an illustrative example to help to clarify the pre-rotation protocol, especially with regard to  and threshold satisfaction for Reserve rotation.
 
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **SN**  | **Role** | **Keys**                                                                                         | **Thresholds**              | 
-+=========+==========+==================================================================================================+=============================+
-| **0**   | Crnt     | *[A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>]*                    | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **0**   | Next     | *[H(A<sup>5</sup>), H(A<sup>6</sup>), H(A<sup>7</sup>), H(A<sup>8</sup>), H(A<sup>9</sup>)]*     | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **1**   | Crnt     | *[A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>]*                                                  | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **1**   | Next     | *[H(A<sup>10</sup>), H(A<sup>11</sup>), H(A<sup>12</sup>), H(A<sup>8</sup>),H(A<sup>9</sup>)]*   | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **2**   | Crnt     | *[A<sup>10</sup>, A<sup>8</sup>, A<sup>9</sup>]*                                                 | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **2**   | Next     | *[H(A<sup>13</sup>), H(A<sup>14</sup>), H(A<sup>15</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **3**   | Crnt     | *[A<sup>13</sup>, A<sup>14</sup>, A<sup>15</sup>]*                                               | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **3**   | Next     | *[H(A<sup>18</sup>), H(A<sup>19</sup>), H(A<sup>20</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **4**   | Crnt     | *[A<sup>18</sup>, A<sup>20</sup>, A<sup>21</sup>]*                                               | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **4**   | Next     | *[H(A<sup>22</sup>), H(A<sup>23</sup>), H(A<sup>24</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **5**   | Crnt     | *[A<sup>22</sup>, A<sup>25</sup>, A<sup>26</sup>, A<sup>16</sup>, A<sup>17</sup>]*               | *[1/2, 1/2, 1/2, 0, 0]*     |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **5**   | Next     | *[H(A<sup>27</sup>), H(A<sup>28</sup>), H(A<sup>29</sup>), H(A<sup>30</sup>),H(A<sup>31</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
+| SN | Role | Keys | Threshold |
+|:-:|:-:|--:|--:|
+| 0 | Crnt | *[A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
+| 0 | Next | *[H(A<sup>5</sup>), H(A<sup>6</sup>), H(A<sup>7</sup>), H(A<sup>8</sup>), H(A<sup>9</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]* |
+| 1 | Crnt | *[A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>]* | *[1/2, 1/2, 1/2]* |
+| 1 | Next | *[H(A<sup>10</sup>), H(A<sup>11</sup>), H(A<sup>12</sup>), H(A<sup>8</sup>),H(A<sup>9</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]*  |
+| 2 | Crnt | *[A<sup>10</sup>, A<sup>8</sup>, A<sup>9</sup>]* | *[1/2, 1/2, 1/2]* |
+| 2 | Next | *[H(A<sup>13</sup>), H(A<sup>14</sup>), H(A<sup>15</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]*  |
+| 3 | Crnt | *[A<sup>13</sup>, A<sup>14</sup>, A<sup>15</sup>]* | *[1/2, 1/2, 1/2]* |
+| 3 | Next | *[H(A<sup>18</sup>), H(A<sup>19</sup>), H(A<sup>20</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]*  |
+| 4 | Crnt | *[A<sup>18</sup>, A<sup>20</sup>, A<sup>21</sup>]* | *[1/2, 1/2, 1/2]* |
+| 4 | Next | *[H(A<sup>22</sup>), H(A<sup>23</sup>), H(A<sup>24</sup>), H(A<sup>16</sup>),H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]*  |
+| 5 | Crnt | *[A<sup>22</sup>, A<sup>25</sup>, A<sup>26</sup>, A<sup>16</sup>, A<sup>17</sup>]* | *[1/2, 1/2, 1/2, 0, 0]* |
+| 5 | Next | *[H(A<sup>27</sup>), H(A<sup>28</sup>), H(A<sup>29</sup>), H(A<sup>30</sup>),H(A<sup>31</sup>)]* | *[1/2, 1/2, 1/2, 1/4, 1/4]*  |
 
 Where, in  the column labels:
 
-SN is the sequence number of the event. Each event uses two rows in the table.
-Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
-Keys is the list of public keys denoted with indexed label of the keypair sequence.
-Threshold is the threshold of signatures that must be satisfied for validity.
+* SN is the sequence number of the event. Each event uses two rows in the table.
+* Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
+* Keys is the list of public keys denoted with indexed label of the keypair sequence.
+* Threshold is the threshold of signatures that must be satisfied for validity.
 
 Commentary of each event:
 
@@ -690,38 +672,30 @@ Custodial rotation example:
 
 Provided here is an illustrative example to help to clarify the pre-rotation protocol, especially with regard to threshold satisfaction for Custodial rotation.
 
-
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **SN**  | **Role** | **Keys**                                                                                         | **Thresholds**              | 
-+=========+==========+==================================================================================================+=============================+
-| **0**   | Crnt     | *[A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]*                                                  | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **0**   | Next     | *[H(A<sup>3</sup>), H(A<sup>4</sup>), H(A<sup>5</sup>)]*                                         | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **1**   | Crnt     | *[A<sup>3</sup>, A<sup>4</sup>, A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>, A<sup>8</sup>]*     | *[0, 0, 0, 1/2, 1/2, 1/2]*  |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **1**   | Next     | *[H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>)]*                                       | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **2**   | Crnt     | *[A<sup>9</sup>, A<sup>10</sup>, A<sup>11</sup>, A<sup>12</sup>, A<sup>13</sup>, A<sup>14</sup>]*| *[0, 0, 0, 1/2, 1/2, 1/2]*  |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
-| **2**   | Next     | *[H(A<sup>15</sup>), H(A<sup>16</sup>), H(A<sup>17</sup>)]*                                      | *[1/2, 1/2, 1/2]*           |
-+---------+----------+--------------------------------------------------------------------------------------------------+-----------------------------+
+| SN | Role | Keys | Threshold |
+|:-:|:-:|--:|--:|
+| 0 | Crnt | *[A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]* | *[1/2, 1/2, 1/2]* |
+| 0 | Next | *[H(A<sup>3</sup>), H(A<sup>4</sup>), H(A<sup>5</sup>)]* | *[1/2, 1/2, 1/2]* |
+| 1 | Crnt | *[A<sup>3</sup>, A<sup>4</sup>, A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>, A<sup>8</sup>]* | *[0, 0, 0, 1/2, 1/2, 1/2]* |
+| 1 | Next | *[H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>)]* | *[1/2, 1/2, 1/2]* |
+| 2 | Crnt | *[A<sup>9</sup>, A<sup>10</sup>, A<sup>11</sup>, A<sup>12</sup>, A<sup>13</sup>, A<sup>14</sup>]* | *[0, 0, 0, 1/2, 1/2, 1/2]* |
+| 2 | Next | *[H(A<sup>15</sup>), H(A<sup>16</sup>), H(A<sup>17</sup>)]* | *[1/2, 1/2, 1/2]*  |
 
 Where for the column labels:
 
-SN is the sequence number of the event. Each event uses two rows in the table.
-Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
-Keys is the list of public keys denoted with indexed label of the keypair sequence.
-Threshold is the threshold of signatures that must be satisfied for validity.
+* SN is the sequence number of the event. Each event uses two rows in the table.
+* Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
+* Keys is the list of public keys denoted with indexed label of the keypair sequence.
+* Threshold is the threshold of signatures that must be satisfied for validity.
 
 
 Commentary of each event:
 
-(0) Inception: The private keys from current signing keypairs  A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are held by the custodian of the identifier. The owner of the identifier provides the digests of the next rotation keypairs, H(A<sup>3</sup>), H(A<sup>4</sup>), and H(A<sup>5</sup>) to the custodian in order that the custodian may include them in the event and then sign the event. The owner holds the private keys from the next rotation keypairs A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup>. A self-addressing AID would then be created by the formulation of the Inception event. Once formed, the custodian controls the signing authority over the identifier by virtue of holding the associated private keys for the current key list. But the Controller exercises the rotation authority by virtue of holding the associated private keys for the next key list. Because the Controller of the rotation authority may at their sole discretion revoke and replace the keys that hold signing authority, the owner, holder of the next private keys, is ultimately in control of the identifier so constituted by this Inception event.
+* (0) Inception: The private keys from current signing keypairs  A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are held by the custodian of the identifier. The owner of the identifier provides the digests of the next rotation keypairs, H(A<sup>3</sup>), H(A<sup>4</sup>), and H(A<sup>5</sup>) to the custodian in order that the custodian may include them in the event and then sign the event. The owner holds the private keys from the next rotation keypairs A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup>. A self-addressing AID would then be created by the formulation of the Inception event. Once formed, the custodian controls the signing authority over the identifier by virtue of holding the associated private keys for the current key list. But the Controller exercises the rotation authority by virtue of holding the associated private keys for the next key list. Because the Controller of the rotation authority may at their sole discretion revoke and replace the keys that hold signing authority, the owner, holder of the next private keys, is ultimately in control of the identifier so constituted by this Inception event.
 
-(1) Rotation: The owner changes custodians with this event. The new custodian creates new current signing keypairs, A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> and holds the associated private keys. The new custodian provides the public keys A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> to the owner so that the owner can formulate and sign the Rotation event that transfers signing authority to the new custodian. The owner exposes its rotation public keys,  A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup> by including them in the new current key list. But the weights of those rotation keys in the new current signing threshold are all 0 so they have no signing authority.  The owner creates a new set of next keypairs and includes their public key digests, H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>) in the new next key list. The owner holds the associated private keys and thereby retains rotation authority. This event must be signed by any two of A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup> in order to satisfy the prior next threshold and also must be signed by any two A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> in order to satisfy the new current signing threshold. The new current threshold and new next threshold clearly delineate that the new custodian now holds exclusive signing authority and owner continues to retain exclusive rotation authority.
+* (1) Rotation: The owner changes custodians with this event. The new custodian creates new current signing keypairs, A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> and holds the associated private keys. The new custodian provides the public keys A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> to the owner so that the owner can formulate and sign the Rotation event that transfers signing authority to the new custodian. The owner exposes its rotation public keys,  A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup> by including them in the new current key list. But the weights of those rotation keys in the new current signing threshold are all 0 so they have no signing authority.  The owner creates a new set of next keypairs and includes their public key digests, H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>) in the new next key list. The owner holds the associated private keys and thereby retains rotation authority. This event must be signed by any two of A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup> in order to satisfy the prior next threshold and also must be signed by any two A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> in order to satisfy the new current signing threshold. The new current threshold and new next threshold clearly delineate that the new custodian now holds exclusive signing authority and owner continues to retain exclusive rotation authority.
 
-(2) Rotation: Change to yet another custodian following the same pattern as event \#1
+* (2) Rotation: Change to yet another custodian following the same pattern as event \#1
 
 ### Partial pre-rotation 
 
@@ -750,7 +724,7 @@ If the current key list includes the full set of keys from the prior next key li
 
 ## Cryptographic strength
 
-For crypto-systems with perfect-security, the critical design parameter is the number of bits of entropy needed to resist any practical brute force attack. In other words, when a large random or pseudo-random number from a cryptographic strength pseudo-random number generator (CSPRNG) {{CSPRNG}} expressed as a string of characters is used as a seed or private key to a cryptosystem with perfect-security, the critical design parameter is determined by the amount of random entropy in that string needed to withstand a brute force attack. Any subsequent cryptographic operations must preserve that minimum level of cryptographic strength. In information theory, {{IThry}}{{ITPS}} the entropy of a message or string of characters is measured in bits. Another way of saying this is that the degree of randomness of a string of characters can be measured by the number of bits of entropy in that string.  Assuming conventional non-quantum computers, the convention wisdom is that, for systems with information-theoretic or perfect-security, the seed/key needs to have on the order of 128 bits (16 bytes, 32 hex characters) of entropy to practically withstand any brute force attack {{TMCrypto}}{{QCHC}}. A cryptographic quality random or pseudo-random number expressed as a string of characters will have essentially as many bits of entropy as the number of bits in the number. For other crypto-systems such as digital signatures that do not have perfect-security, the size of the seed/key may need to be much larger than 128 bits in order to maintain 128 bits of cryptographic strength.
+For crypto-systems with perfect-security, the critical design parameter is the number of bits of entropy needed to resist any practical brute force attack. In other words, when a large random or pseudo-random number from a cryptographic strength pseudo-random number generator (CSPRNG) [@CSPRNG] expressed as a string of characters is used as a seed or private key to a cryptosystem with perfect-security, the critical design parameter is determined by the amount of random entropy in that string needed to withstand a brute force attack. Any subsequent cryptographic operations must preserve that minimum level of cryptographic strength. In information theory, [@IThry][@ITPS] the entropy of a message or string of characters is measured in bits. Another way of saying this is that the degree of randomness of a string of characters can be measured by the number of bits of entropy in that string.  Assuming conventional non-quantum computers, the convention wisdom is that, for systems with information-theoretic or perfect-security, the seed/key needs to have on the order of 128 bits (16 bytes, 32 hex characters) of entropy to practically withstand any brute force attack [@TMCrypto][@QCHC]. A cryptographic quality random or pseudo-random number expressed as a string of characters will have essentially as many bits of entropy as the number of bits in the number. For other crypto-systems such as digital signatures that do not have perfect-security, the size of the seed/key may need to be much larger than 128 bits in order to maintain 128 bits of cryptographic strength.
 
 An N-bit long base-2 random number has 2<sup>N</sup> different possible values. Given that no other information is available to an attacker with perfect-security, the attacker may need to try every possible value before finding the correct one. Thus the number of attempts that the attacker would have to try maybe as much as 2<sup>N-1</sup>.  Given available computing power, one can easily show that 128 bits is a large enough N to make brute force attack computationally infeasible.
 
