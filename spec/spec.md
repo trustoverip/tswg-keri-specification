@@ -20,6 +20,8 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
+https://github.com/trustoverip/specification-template/issues/51
+
 [//]: # (\maketitle)
 
 [//]: # (\newpage)
@@ -34,6 +36,8 @@ Key Event Receipt Infrastructure (KERI)
 
 The foreword goes here.
 
+https://github.com/trustoverip/specification-template/issues/47
+
 [//]: # (:::)
 
 [//]: # (\newpage)
@@ -44,7 +48,11 @@ The foreword goes here.
 
 [//]: # (:::)
 
+https://github.com/trustoverip/specification-template/issues/48
+
 This document presents identity system-based secure overlay for the Internet is presented. This system is based on a Key Event Receipt Infrastructure (KERI) or the KERI protocol. The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme as the background for the acronym KERI. [@DAD]
+
+https://github.com/trustoverip/tswg-keri-specification/issues/29
 
 The identity system-based secure overlay for the Internet, based on KERI includes a primary root-of-trust in Self-certifying identifiers (SCIDs) [@UIT] [@SCPK] [@SFS] [@SCPN] [@SCURL]. This root-of-trust  presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs). These are part of an Autonomic Identity System (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the internet. Associated with this system is a decentralized key management infrastructure (DKMI). 
 
@@ -93,6 +101,8 @@ IN NO EVENT WILL ANY ToIP PARTY BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR
 
 ## Scope
 
+https://github.com/trustoverip/specification-template/issues/49
+
 The identity system-based secure overlay for the Internet, based on KERI, includes a primary root-of-trust in Self-certifying identifiers (SCIDs). This root-of-trust presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs), which are part of an Autonomic identity system (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the Internet. Associated with this system is a Decentralized key management infrastructure (DKMI). 
 
 The primary root-of-trust are SCIDs that are strongly bound at issuance to a cryptographic signing (public, private) keypair, which is self-contained until/unless control needs to be transferred to a new keypair. In that event, an append-only chained key-event log of signed transfer statements provides end-verifiable control provenance. This makes intervening operational infrastructure replaceable because the event logs may be served up by any infrastructure including ambient infrastructure. End verifiable logs on ambient infrastructure enable ambient verifiability (verifiable by anyone, anywhere, at any time).
@@ -115,6 +125,8 @@ The following documents are referred to in the text in such a way that some or a
 
 
 ## Terms and Definitions
+
+https://github.com/trustoverip/specification-template/issues/50
 
 For the purposes of this document, the following terms and definitions apply.
 
@@ -193,6 +205,8 @@ Verifiable
 
 End-verifiability
 
+https://github.com/trustoverip/tswg-keri-specification/issues/35
+
 : todo
 
 Duplicity
@@ -221,6 +235,8 @@ Key event receipt
 
 List  list of terms to be defined:
 
+https://github.com/trustoverip/tswg-keri-specification/issues/36
+
 Self-addressing identifiers (SAIDs)
 SAD (Self-Addressed Data)
 Autonomic namespaces (ANs)
@@ -239,9 +255,15 @@ Current threshold
 Next threshold
 Ricardian contracts (RC)
 
+https://github.com/trustoverip/tswg-keri-specification/issues/18
+
 [//]: # (KERI foundational overview {#sec:content})
 
 ## KERI foundational overview
+
+https://github.com/trustoverip/tswg-keri-specification/issues/44
+
+https://github.com/trustoverip/tswg-keri-specification/issues/30
 
 ### KERI’s identifier system security overlay
 
@@ -297,6 +319,8 @@ In simple form , an identifier-system security-overlay binds together a triad co
 When these bindings are strong, then the overlay is highly unvunerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vunerable to attack. With KERI all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See the Annex A on cryptographic strength for more detail.
 
 The bound triad is created as follows:
+
+https://github.com/trustoverip/tswg-keri-specification/issues/33
 
 Each Controller in the set of Controllers creates an asymmetric `(public, private)` keypair. The public key is derived from the private key or seed using a one-way derivation that must have a minimum cryptographic strength of approximately 128 bits. Depending on the crypto-suite used to derive a keypair, the private key or seed may itself have a length larger than 128 bits. A Controller may use a cryptographic strength pseudo-random number generator (CSPRNG) to create the private key or seed material.
 
@@ -377,6 +401,8 @@ The primary field labels are compact in that they use only one or two characters
 
 ##### Version string field
 
+https://github.com/trustoverip/tswg-keri-specification/issues/20
+
 The Version string, `v`, field must be the first field in any top-level KERI field map in which it appears. Typically the Version string, `v`, field appears as the first top-level field in a KERI Message body. This enables a RegEx stream parser to consistently find the Version string in any of the supported serialization formats for KERI Messages. The `v` field provides a regular expression target for determining the serialization format and size (character count) of a serialized KERI Message body. A stream parser may use the Version string to extract and deserialize (deterministically) any serialized KERI Message body in a stream of serialized KERI Messages. Each KERI Message in a stream may use a different serialization type.
 
 The format of the Version string is `KERIvvSSSShhhhhh_`. The first four characters `KERI` indicate the enclosing field map serialization. The next two characters, `vv` provide the lowercase hexadecimal notation for the major and minor Version numbers of the Version of the KERI specification used for the serialization. The first `v` provides the major Version number and the second `v` provides the minor Version number. For example, `01` indicates major Version 0 and minor Version 1 or in dotted-decimal notation `0.1`. Likewise `1c` indicates major Version 1 and minor Version decimal 12 or in dotted-decimal notation `1.12`. 
@@ -398,6 +424,14 @@ A cryptographic commitment (such as a digital signature or cryptographic digest)
 Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified SCID as described above [@KERI][@KERI-ID]. An AID must be self-certifying.
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
+###### Namespaced AIDs 
+Because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. The examples below use the W3C DID namespace specification with the `did:keri` method {{DIDK-ID}}. But the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
+
+https://github.com/trustoverip/tswg-keri-specification/issues/19
+
+Because AIDs may be namespaced, the essential component of an AID is the cryptographically derived Controller identifier prefix.  An AID must be the Controller identifier prefix.  part of a W3C Decentralized Identifier (DID) {{W3C_DID}} or other namespace convention.
+
+
 ##### Next Threshold field
 
 The `nt` field is next threshold for the Next establishment event.
@@ -410,6 +444,8 @@ Common normalized ACDC and KERI labels
 `a` is the data attributes or data anchors depending on the message type
 
 ###  Seals
+
+https://github.com/trustoverip/tswg-keri-specification/issues/21
 
 #### Digest seal
 
@@ -463,6 +499,9 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Inception Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
+https://github.com/trustoverip/tswg-keri-specification/issues/39
 
 ```json
 {
@@ -501,6 +540,8 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Rotation Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -534,6 +575,8 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Interaction Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v": "KERI10JSON00011c_",
@@ -559,6 +602,8 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 ToDo in delegation section below. Delegated custodial example with partial rotation and using 0 fraction signing weights on exposed pre-rotated keys
 
 ##### Delegated Inception Event Message Body
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -599,6 +644,8 @@ ToDo in delegation section below. Delegated custodial example with partial rotat
 
 ##### Delegated Rotation Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -638,6 +685,7 @@ ToDo in delegation section below. Delegated custodial example with partial rotat
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -651,7 +699,10 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
 
 ##### Transferable Prefix Signer Receipt Message Body
 
+
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -673,6 +724,8 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
 
 ##### Query Message Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -689,6 +742,8 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
   }
 }
 ```
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -710,6 +765,8 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
 
 ##### Reply Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -725,6 +782,8 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
   }
 }
 ```
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -745,16 +804,18 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
 
 ##### Prod Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v": "KERI10JSON00011c_",
   "t": "prd",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
   "r": "sealed/data",
-  "rr": "process/sealed/data"
+  "rr": "process/sealed/data",
   "q":
   {
-     d" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "d" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
     "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
     "s" : "5",
     "ri": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
@@ -767,6 +828,8 @@ For receipts, the `d` field is the SAID of the associated event, not the receipt
 
 Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
 A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -788,6 +851,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Exchange Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v": "KERI10JSON00006a_",
@@ -805,6 +870,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 #### Notices Embedded in Reply Messages
 
 ##### Key State Notice (KSN)
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -837,6 +904,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 ```
 
 ##### Embedded in Reply
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -878,6 +947,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Transaction State Notice (TSN)
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v": "KERI10JSON0001b0_",
@@ -904,6 +975,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 ```
 
 ##### Embedded in Reply
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -942,6 +1015,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Registry Inception Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -959,6 +1034,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Registry Rotation Event Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -975,6 +1052,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Backerless ACDC Issuance Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -988,6 +1067,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 ```
 
 ##### Backerless ACDC Revocation Message Body
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -1004,6 +1085,8 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
 
 ##### Backered ACDC Issuance Message Body
 
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+
 ```json
 {
   "v" : "KERI10JSON00011c_",
@@ -1016,12 +1099,14 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
       "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
       "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
       "s": 0
-  }
+  },
   "dt": "2020-08-01T12:20:05.123456+00:00"
 }
 ```
 
 ##### Backered ACDC Revocation Message Body
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -1036,7 +1121,7 @@ A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' 
       "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
       "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
       "s": 0
-  }
+  },
   "dt": "2020-08-01T12:20:05.123456+00:00"
 }
 ```
@@ -1131,6 +1216,8 @@ The derivation of the `d` and `i` fields is special. Both the `d` and `i` fields
 When the AID is not self-addressing, i.e.., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which  is the standard SAID algorithm.
 
 Inception event message body
+
+https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
@@ -1317,6 +1404,14 @@ There are about 3600 * 24 * 365 = 313,536,000 = 2<sup>log<sub>2</sub>313536000</
 ### Information theoretic security and perfect-security
 
 The highest level of cryptographic security with respect to a cryptographic secret (seed, salt, or private key) is called  information-theoretic security. A cryptosystem that has this level of security cannot be broken algorithmically even if the adversary has nearly unlimited computing power including quantum computing. It must be broken by brute force if at all. Brute force means that in order to guarantee success the adversary must search for every combination of key or seed. A special case of information-theoretic security is called perfect-security.  Perfect-security means that the ciphertext provides no information about the key. There are two well-known cryptosystems that exhibit perfect-security. The first is a one-time-pad (OTP) or Vernum Cipher;  the other is secret splitting, a type of secret sharing that uses the same technique as a one-time-pad.
+
+## Reconcilable duplicity
+
+https://github.com/trustoverip/tswg-keri-specification/issues/34
+
+## Validator
+
+https://github.com/trustoverip/tswg-keri-specification/issues/40
 
 [//]: # (\newpage)
 
