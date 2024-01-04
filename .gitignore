@@ -21,3 +21,4 @@ report.xml
 /versioned/
 /.vscode/
 !requirements.txt
+.DS_Store
