@@ -20,7 +20,9 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
+::: issue Issue Notice
 https://github.com/trustoverip/specification-template/issues/51
+:::
 
 [//]: # (\maketitle)
 
@@ -36,7 +38,9 @@ https://github.com/trustoverip/specification-template/issues/51
 
 The foreword goes here.
 
+::: issue Issue Notice
 https://github.com/trustoverip/specification-template/issues/47
+:::
 
 [//]: # (:::)
 
@@ -48,11 +52,15 @@ https://github.com/trustoverip/specification-template/issues/47
 
 [//]: # (:::)
 
+::: issue Issue Notice
 https://github.com/trustoverip/specification-template/issues/48
+:::
 
 This document presents identity system-based secure overlay for the Internet is presented. This system is based on a Key Event Receipt Infrastructure (KERI) or the KERI protocol. The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme as the background for the acronym KERI. [@DAD]
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/29
+:::
 
 The identity system-based secure overlay for the Internet, based on KERI includes a primary root-of-trust in Self-certifying identifiers (SCIDs) [@UIT] [@SCPK] [@SFS] [@SCPN] [@SCURL]. This root-of-trust  presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs). These are part of an Autonomic Identity System (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the internet. Associated with this system is a decentralized key management infrastructure (DKMI). 
 
@@ -101,7 +109,9 @@ IN NO EVENT WILL ANY ToIP PARTY BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR
 
 ## Scope
 
-https://github.com/trustoverip/specification-template/issues/49
+::: issue Issue Notice
+https://github.com/trustoverip/tswg-keri-specification/issues/49
+:::
 
 The identity system-based secure overlay for the Internet, based on KERI, includes a primary root-of-trust in Self-certifying identifiers (SCIDs). This root-of-trust presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs), which are part of an Autonomic identity system (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the Internet. Associated with this system is a Decentralized key management infrastructure (DKMI). 
 
@@ -116,7 +126,6 @@ The KA2CE approach may be much more performant and scalable than more complex ap
 
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.
 
-
 [//]: # (::: { #nrm:osi .normref label="ISO/IEC 7498-1:1994" })
 
 [//]: # (ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model)
@@ -126,7 +135,9 @@ The following documents are referred to in the text in such a way that some or a
 
 ## Terms and Definitions
 
-https://github.com/trustoverip/specification-template/issues/50
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/50
+:::
 
 For the purposes of this document, the following terms and definitions apply.
 
@@ -205,7 +216,9 @@ Verifiable
 
 End-verifiability
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/35
+:::
 
 : todo
 
@@ -235,7 +248,9 @@ Key event receipt
 
 List  list of terms to be defined:
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/36
+:::
 
 Self-addressing identifiers (SAIDs)
 SAD (Self-Addressed Data)
@@ -255,15 +270,21 @@ Current threshold
 Next threshold
 Ricardian contracts (RC)
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/18
+:::
 
 [//]: # (KERI foundational overview {#sec:content})
 
 ## KERI foundational overview
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/44
+:::
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/30
+:::
 
 ### KERI’s identifier system security overlay
 
@@ -300,7 +321,6 @@ A Cryptographic primitive is a serialization of a value associated with a crypto
 
 When qualified, a Cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive. All Cryptographic primitives expressed in either Text or Binary CESR are qualified by definition. Qualification is an essential property of CESR. The CESR protocol supports several different types of encoding tables for different types of derivation codes. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e.,  Blake3-256, when expressed in Text domain CESR is 44 Base64 characters long and begins with the one character derivation code `E`, such as, `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation is 33 bytes long. Unless otherwise indicated, all Cryptographic primitives in this specification are qualified Primitives using CESR’s Text domain.
 
-
 ### Basic fractionally weighted threshold 
 
 This partial Rotation feature for either reserve or Custodial rotation authority is best employed with thresholds that are fractionally weighted. The exact syntax for fractionally weighted thresholds is provided in the partial pre-rotation and Custodial rotation sections and a summary is provided here. A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of legal rational fractions ( i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A weight list of clauses orders a set of rational fraction weights. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that correspond to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures exactness and universality of threshold satisfaction computations.
@@ -311,7 +331,6 @@ The order of appearance of the public key in a given key list and its associated
 
 Fractionally weighted thresholds become more interesting when the weights are not all equal or include multiple clauses. Consider the following five-element single clause fractionally weighted threshold list, [1/2, 1/2, 1/2, 1/4, 1/4] and its corresponding public key list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>].  Satisfaction would be met given signatures from any two or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> because each of these keys has a weight of 1/2 and the combination of any two or more sums to 1 or more. Alternatively, satisfaction would be met with signatures from any one or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> and both of A<sup>3</sup>, and A<sup>4</sup> because any of those combinations would sum to 1 or more. Because participation of A<sup>3</sup> and A<sup>4</sup> is not required as long as at least two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are available then A<sup>3</sup> and A<sup>4</sup> may be treated as reserve members of the controlling set of keys. These reserve members only need to participate in the event that only one of the other three is available. The flexibility of a fractionally weighted threshold enables redundancy in the combinations of keys needed to satisfice for both day-to-day and reserve contingency use cases.
 
-
 ### KERI’s secure bindings
 
 In simple form , an identifier-system security-overlay binds together a triad consisting of the identifier, keypairs, and Controllers, the set of entities whose members control a private key from the given set of keypairs. The set of Controllers is bound to the set of keypairs, the set of keypairs is bound to the identifier, and the identifier is bound to the set of Controllers. This binding triad can be diagrammed as a triangle where the sides are the bindings and the vertices are the identifier, the set of Controllers, and the set of keypairs. This triad provides verifiable control authority for the identifier.
@@ -320,7 +339,9 @@ When these bindings are strong, then the overlay is highly unvunerable to attack
 
 The bound triad is created as follows:
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/33
+:::
 
 Each Controller in the set of Controllers creates an asymmetric `(public, private)` keypair. The public key is derived from the private key or seed using a one-way derivation that must have a minimum cryptographic strength of approximately 128 bits. Depending on the crypto-suite used to derive a keypair, the private key or seed may itself have a length larger than 128 bits. A Controller may use a cryptographic strength pseudo-random number generator (CSPRNG) to create the private key or seed material.
 
@@ -401,7 +422,9 @@ The primary field labels are compact in that they use only one or two characters
 
 ##### Version string field
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/20
+:::
 
 The Version string, `v`, field must be the first field in any top-level KERI field map in which it appears. Typically the Version string, `v`, field appears as the first top-level field in a KERI Message body. This enables a RegEx stream parser to consistently find the Version string in any of the supported serialization formats for KERI Messages. The `v` field provides a regular expression target for determining the serialization format and size (character count) of a serialized KERI Message body. A stream parser may use the Version string to extract and deserialize (deterministically) any serialized KERI Message body in a stream of serialized KERI Messages. Each KERI Message in a stream may use a different serialization type.
 
@@ -427,7 +450,9 @@ In this context, `i` is short for `ai`, which is short for the Autonomic identif
 ###### Namespaced AIDs 
 Because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. The examples below use the W3C DID namespace specification with the `did:keri` method {{DIDK-ID}}. But the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/19
+:::
 
 Because AIDs may be namespaced, the essential component of an AID is the cryptographically derived Controller identifier prefix.  An AID must be the Controller identifier prefix.  part of a W3C Decentralized Identifier (DID) {{W3C_DID}} or other namespace convention.
 
@@ -445,7 +470,9 @@ Common normalized ACDC and KERI labels
 
 ###  Seals
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/21
+:::
 
 #### Digest seal
 
@@ -499,9 +526,13 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Inception Event Message Body
 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
+::: issue Issue Notice
+https://github.com/trustoverip/tswg-keri-specification/issues/42
+:::
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/39
+:::
 
 ```json
 {
@@ -540,7 +571,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/39
 
 ##### Rotation Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -575,7 +608,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Interaction Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -603,7 +638,9 @@ ToDo in delegation section below. Delegated custodial example with partial rotat
 
 ##### Delegated Inception Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -644,7 +681,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Delegated Rotation Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -685,7 +724,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -702,7 +743,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -724,7 +767,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Query Message Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -743,7 +788,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -765,7 +812,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Reply Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -783,7 +832,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -804,7 +855,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Prod Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -829,7 +882,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
 A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -851,7 +906,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Exchange Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -871,7 +928,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Key State Notice (KSN)
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -905,7 +964,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -947,7 +1008,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Transaction State Notice (TSN)
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -976,7 +1039,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1015,7 +1080,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Inception Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1034,7 +1101,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Rotation Event Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1052,7 +1121,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Issuance Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1068,7 +1139,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Revocation Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1085,7 +1158,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Issuance Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1106,7 +1181,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Revocation Message Body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1217,7 +1294,9 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
 
 ```json
 {
@@ -1407,11 +1486,15 @@ The highest level of cryptographic security with respect to a cryptographic secr
 
 ## Reconcilable duplicity
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/34
+:::
 
 ## Validator
 
+::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/40
+:::
 
 [//]: # (\newpage)
 
