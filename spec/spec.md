@@ -20,8 +20,8 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
-::: issue Issue Notice
-https://github.com/trustoverip/specification-template/issues/51
+::: issue 
+https://github.com/trustoverip/tswg-keri-specification/issues/51
 :::
 
 [//]: # (\maketitle)
@@ -38,8 +38,8 @@ https://github.com/trustoverip/specification-template/issues/51
 
 The foreword goes here.
 
-::: issue Issue Notice
-https://github.com/trustoverip/specification-template/issues/47
+::: issue 
+https://github.com/trustoverip/tswg-keri-specification/issues/47
 :::
 
 [//]: # (:::)
@@ -52,13 +52,13 @@ https://github.com/trustoverip/specification-template/issues/47
 
 [//]: # (:::)
 
-::: issue Issue Notice
-https://github.com/trustoverip/specification-template/issues/48
+::: issue 
+https://github.com/trustoverip/tswg-keri-specification/issues/48
 :::
 
 This document presents identity system-based secure overlay for the Internet is presented. This system is based on a Key Event Receipt Infrastructure (KERI) or the KERI protocol. The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme as the background for the acronym KERI. [@DAD]
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/29
 :::
 
@@ -76,11 +76,9 @@ Thus, KERI addresses major flaw in the original design of the Internet Protocol 
 
 ## Status of This Memo
 
-This document contains a template specification for `ToIP`!.
-
 Information about the current status of this document, any errata,
 and how to provide feedback on it, may be obtained at
-[https://github.com/trustoverip/specification-template](https://github.com/trustoverip/specification-template).
+[https://github.com/trustoverip/tswg-keri-specification](https://github.com/trustoverip/tswg-keri-specification).
 
 ## Copyright Notice
 
@@ -109,7 +107,7 @@ IN NO EVENT WILL ANY ToIP PARTY BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR
 
 ## Scope
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/49
 :::
 
@@ -146,112 +144,114 @@ ISO and IEC maintain terminological databases for use in standardization at the 
  - ISO Online browsing platform: available at <https://www.iso.org/obp>
  - IEC Electropedia: available at <http://www.electropedia.org/>
 
-Primitive
+[[def: Primitive]]:
+~ a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR  [@CESR-ID].
 
-: a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR  [@CESR-ID].
+[[def: Cryptographic Primitive]]
 
-Cryptographic Primitive
+~ the serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. 
 
-: the serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. 
+[[def: Cryptonym]]
 
-Cryptonym
+~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [@OWF][@COWF][@TMCrypto][@QCHC]. A Cryptonym is a type of Primitive . Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must  be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
 
-: a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [@OWF][@COWF][@TMCrypto][@QCHC]. A Cryptonym is a type of Primitive . Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must  be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
+[[def: Self-certifying identifier (SCID)]]
 
-Self-certifying identifier (SCID)
+~ a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`. 
 
-: a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`. 
+[[def: Autonomic identifier (AID)]]
 
-Autonomic identifier (AID)
+~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive. 
 
-: a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive. 
+[[def: Key state]]
 
-Key state
+~ includes the set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID.
 
-: includes the set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID.
+[[def: Key event]]
 
-Key event
+~ concretely, the serialized data structure of an entry in the Key event log (KEL) for an AID. Abstractly, the data structure itself. Key events come in different types and are used primarily to establish or change the authoritative set of keypairs and/or anchor other data to the authoritative set of keypairs at the point in the KEL actualized by a particular entry.
 
-: concretely, the serialized data structure of an entry in the Key event log (KEL) for an AID. Abstractly, the data structure itself. Key events come in different types and are used primarily to establish or change the authoritative set of keypairs and/or anchor other data to the authoritative set of keypairs at the point in the KEL actualized by a particular entry.
+[[def: Establishment event]]
 
-Establishment event
+~ a Key event that establishes or changes the Key state which includes the current set of authoritative keypairs (Key state) for an AID.
 
-: a Key event that establishes or changes the Key state which includes the current set of authoritative keypairs (Key state) for an AID.
+[[def: Non-establishment event]]
 
-Non-establishment event
+~ a Key event that does not change the current Key state for an AID. Typically the purpose of a Non-establishment event is to anchor external data to a given Key state as established by the most recent prior Establishment event for an AID.
 
-: a Key event that does not change the current Key state for an AID. Typically the purpose of a Non-establishment event is to anchor external data to a given Key state as established by the most recent prior Establishment event for an AID.
+[[def: Inception event]]
 
-Inception event
+~ an Establishment event that provides the incepting information needed to derive an AID and establish its initial Key state.
 
-: an Establishment event that provides the incepting information needed to derive an AID and establish its initial Key state.
+[[def: Inception]]
 
-Inception
+~ the operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and Duplicity evident upon acceptance as the Inception event that begins the AID's KEL.
 
-: the operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and Duplicity evident upon acceptance as the Inception event that begins the AID's KEL.
+[[def: Rotation event]]
 
-Rotation event
+~ an Establishment Event that provides the information needed to change the Key state which includes a change to the set of authoritative keypairs for an AID.
 
-: an Establishment Event that provides the information needed to change the Key state which includes a change to the set of authoritative keypairs for an AID.
+[[def: Rotation]]
 
-Rotation
+~ the operation of revoking and replacing the set of authoritative keypairs for an AID. This operation is made verifiable and Duplicity evident upon acceptance as a Rotation event that is appended to the AID's KEL.
 
-: the operation of revoking and replacing the set of authoritative keypairs for an AID. This operation is made verifiable and Duplicity evident upon acceptance as a Rotation event that is appended to the AID's KEL.
+[[def: Interaction event]]
 
-Interaction event
+~ a Non-establishment event that anchors external data to the Key state as established by the most recent prior Establishment event.
 
-: a Non-establishment event that anchors external data to the Key state as established by the most recent prior Establishment event.
+[[def: Key event log (KEL)]]
 
-Key event log (KEL)
+~ a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.
 
-: a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.
+[[def: Version]]
 
-Version
+~ more than one Version of a KEL for an AID exists when for any two instances of a KEL at least one event is unique between the two instances.
 
-: more than one Version of a KEL for an AID exists when for any two instances of a KEL at least one event is unique between the two instances.
+[[def: Verifiable]]
 
-Verifiable
+~ a KEL is verifiable means all content in a KEL including the digests and the signatures on that content is verifiably compliant with respect to the KERI protocol. In other words, the KEL is internally consistent and has integrity vis-a-vis its backward and forward chaining digests and authenticity vis-a-vis its non-repudiable signatures. As a Verifiable data structure, the KEL satisfies the KERI protocol-defined rules for that verifiability. This includes the cryptographic verification of any digests or signatures on the contents so digested or signed. These characteristics result in a property in KERI called End-verifiability.
 
-: a KEL is verifiable means all content in a KEL including the digests and the signatures on that content is verifiably compliant with respect to the KERI protocol. In other words, the KEL is internally consistent and has integrity vis-a-vis its backward and forward chaining digests and authenticity vis-a-vis its non-repudiable signatures. As a Verifiable data structure, the KEL satisfies the KERI protocol-defined rules for that verifiability. This includes the cryptographic verification of any digests or signatures on the contents so digested or signed. These characteristics result in a property in KERI called End-verifiability.
+[[def: End-verifiability]]
 
-End-verifiability
+~ todo
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/35
 :::
 
-: todo
+[[def: Duplicity]]
 
-Duplicity
+~ the existence of more than one Version of a Verifiable KEL for a given AID. Because every event in a KEL must be signed with non-repudiable signatures any inconsistency between any two instances of the KEL for a given AID is provable evidence of Duplicity on the part of the signers with respect to either or both the Key state of that AID and/or any anchored data at a given Key state.  A shorter KEL that does not differ in any of its events with respect to another but longer KEL is not duplicitous but merely incomplete.  To clarify, Duplicity evident means that Duplicity is provable via the presentation of a set of two or more mutually inconsistent but independently verifiable instances of a KEL.
 
-: the existence of more than one Version of a Verifiable KEL for a given AID. Because every event in a KEL must be signed with non-repudiable signatures any inconsistency between any two instances of the KEL for a given AID is provable evidence of Duplicity on the part of the signers with respect to either or both the Key state of that AID and/or any anchored data at a given Key state.  A shorter KEL that does not differ in any of its events with respect to another but longer KEL is not duplicitous but merely incomplete.  To clarify, Duplicity evident means that Duplicity is provable via the presentation of a set of two or more mutually inconsistent but independently verifiable instances of a KEL.
+[[def: Verifier]]
 
-Verifier
+~ any entity or agent that cryptographically verifies the signature(s) and/or digests on an event Message. In order to verify a signature, a Verifier must first determine which set of keys are or were the controlling set for an identifier when an event was issued. In other words, a Verifier must first establish control authority for an identifier. For identifiers that are declared as non-transferable at inception, this control establishment merely requires a copy of the Inception event for the identifier. For identifiers that are declared transferable at Inception, this control establishment requires a complete copy of the sequence of Establishment events (Inception event and all Rotations) for the identifier up to the time at which the statement was issued.
 
-: any entity or agent that cryptographically verifies the signature(s) and/or digests on an event Message. In order to verify a signature, a Verifier must first determine which set of keys are or were the controlling set for an identifier when an event was issued. In other words, a Verifier must first establish control authority for an identifier. For identifiers that are declared as non-transferable at inception, this control establishment merely requires a copy of the Inception event for the identifier. For identifiers that are declared transferable at Inception, this control establishment requires a complete copy of the sequence of Establishment events (Inception event and all Rotations) for the identifier up to the time at which the statement was issued.
+[[def: Validator]]
 
-Validator
+~ any entity or agent that evaluates whether or not a given signed statement as attributed to an identifier is valid at the time of its issuance.  A valid statement must be Verifiable, that is, has a Verifiable signature from the current controlling keypair(s) at the time of its issuance. Therefore a Validator must first act as a Verifier in order to establish the root authoritative set of keys. Once verified, the Validator may apply other criteria or constraints to the statement in order to determine its validity for a given use case. When that statement is part of a Verifiable data structure then the cryptographic verification includes verifying digests and any other structural commitments or constraints.  To elaborate, with respect to an AID, for example, a Validator first evaluates one or more KELs in order to determine if it can rely on (trust) the Key state (control authority) provided by any given KEL. A necessary but insufficient condition for a valid KEL is it is Verifiable i.e., is internally inconsistent with respect to compliance with the KERI protocol. An invalid KEL from the perspective of a Validator may be either unverifiable or may be Verifiable but duplicitous with respect to some other Verifiable Version of that KEL.  Detected Duplicity by a given Validator means that the Validator has seen more than one Verifiable Version of a KEL for a given AID. Reconciliable Duplicity means that one and only one Version of a KEL as seen by a Validator is accepted as the authoritative Version for that Validator. Irreconcilable Duplicity means that none of the Versions of a KEL as seen by a Validator are accepted as the authoritative one for that Validator. The conditions for reconcilable Duplicity are described later in Annex [.  ].
 
-: any entity or agent that evaluates whether or not a given signed statement as attributed to an identifier is valid at the time of its issuance.  A valid statement must be Verifiable, that is, has a Verifiable signature from the current controlling keypair(s) at the time of its issuance. Therefore a Validator must first act as a Verifier in order to establish the root authoritative set of keys. Once verified, the Validator may apply other criteria or constraints to the statement in order to determine its validity for a given use case. When that statement is part of a Verifiable data structure then the cryptographic verification includes verifying digests and any other structural commitments or constraints.  To elaborate, with respect to an AID, for example, a Validator first evaluates one or more KELs in order to determine if it can rely on (trust) the Key state (control authority) provided by any given KEL. A necessary but insufficient condition for a valid KEL is it is Verifiable i.e., is internally inconsistent with respect to compliance with the KERI protocol. An invalid KEL from the perspective of a Validator may be either unverifiable or may be Verifiable but duplicitous with respect to some other Verifiable Version of that KEL.  Detected Duplicity by a given Validator means that the Validator has seen more than one Verifiable Version of a KEL for a given AID. Reconciliable Duplicity means that one and only one Version of a KEL as seen by a Validator is accepted as the authoritative Version for that Validator. Irreconcilable Duplicity means that none of the Versions of a KEL as seen by a Validator are accepted as the authoritative one for that Validator. The conditions for reconcilable Duplicity are described later in Annex [.  ].
+[[def: Message]]
 
-Message
+~ a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.
 
-: a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.
+[[def: Key event message]]
 
-Key event message
+~ message whose body is a Key event and whose attachments may include signatures on its body.
 
-: message whose body is a Key event and whose attachments may include signatures on its body.
+[[def: Key event receipt]]
 
-Key event receipt
+~ message whose body references a Key event and whose attachments must include one or more signatures on that Key event.
 
-: message whose body references a Key event and whose attachments must include one or more signatures on that Key event.
+[[def: Self-addressing identifiers (SAIDs)]]
 
-List  list of terms to be defined:
+~ todo
 
-::: issue Issue Notice
-https://github.com/trustoverip/tswg-keri-specification/issues/36
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/54
 :::
 
+<<<<<<< HEAD
 Self-addressing identifiers (SAIDs)
 SAD (Self-Addressed Data)
 Autonomic namespaces (ANs)
@@ -269,8 +269,141 @@ Seals/Anchors
 Current threshold
 Next threshold
 Ricardian contracts (RC)
+=======
+[[def: SAD (Self-Addressed Data)]]
+>>>>>>> toip/revised-format
 
-::: issue Issue Notice
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/55
+:::
+
+[[def: Autonomic namespaces (ANs)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/56
+:::
+
+[[def: Autonomic identity system (AIS)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/57
+:::
+
+[[def: Decentralized key management infrastructure (DPKI/DKMI)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/58
+:::
+
+[[def: Key event receipt log (KERL)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/59
+:::
+
+[[def: KERI’s Agreement Algorithm for Control Establishment (KA2CE)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/60
+:::
+
+[[def: Controller]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/61
+:::
+
+[[def: Witness]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/62
+:::
+
+[[def: Watcher]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/63
+:::
+
+[[def: Key state notice]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/64
+:::
+
+[[def: Backer]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/65
+:::
+
+[[def: Configuration traits, Modes]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/66
+:::
+
+[[def: Seals]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/67
+:::
+
+[[def: Anchors]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/68
+:::
+
+[[def: Current threshold]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/69
+:::
+
+[[def: Next threshold]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/70
+:::
+
+[[def: Ricardian contracts (RC)]]
+
+~ todo
+
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/18
 :::
 
@@ -278,11 +411,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/18
 
 ## KERI foundational overview
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/44
 :::
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/30
 :::
 
@@ -339,7 +472,7 @@ When these bindings are strong, then the overlay is highly unvunerable to attack
 
 The bound triad is created as follows:
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/33
 :::
 
@@ -424,7 +557,7 @@ The primary field labels are compact in that they use only one or two characters
 
 The version string, `v`, field MUST be the first field in any top-level KERI field map. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) that constitutes a KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies in a set of KERI field maps. Each KERI message body in a stream may use a different serialization type.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/20
 :::
 
@@ -448,7 +581,7 @@ In this context, `i` is short for `ai`, which is short for the Autonomic identif
 ###### Namespaced AIDs 
 Because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. The examples below use the W3C DID namespace specification with the `did:keri` method {{DIDK-ID}}. But the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/19
 :::
 
@@ -468,7 +601,7 @@ Common normalized ACDC and KERI labels
 
 ###  Seals
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/21
 :::
 
@@ -524,11 +657,11 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/42
 :::
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/39
 :::
 
@@ -569,7 +702,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/39
 
 ##### Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -606,7 +739,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Interaction Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -636,7 +769,7 @@ ToDo in delegation section below. Delegated custodial example with partial rotat
 
 ##### Delegated Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -679,7 +812,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Delegated Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -722,7 +855,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -741,7 +874,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -765,7 +898,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Query Message Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -786,7 +919,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -810,7 +943,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Reply Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -830,7 +963,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -853,7 +986,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Prod Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -880,7 +1013,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
 A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -904,7 +1037,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Exchange Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -926,7 +1059,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Key State Notice (KSN)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -962,7 +1095,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1006,7 +1139,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Transaction State Notice (TSN)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1037,7 +1170,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1078,7 +1211,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1099,7 +1232,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1119,7 +1252,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Issuance Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1137,7 +1270,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Revocation Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1156,7 +1289,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Issuance Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1179,7 +1312,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Revocation Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1292,7 +1425,7 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1485,17 +1618,32 @@ The highest level of cryptographic security with respect to a cryptographic secr
 #### KERI Security Properties
 
 Every operation in this protocol is expressed via cryptographically verifiable events. Successful exploitation, therefore, must attack and compromise the availability and/or consistency of events. Security analysis, therefore, is focused on characterizing the nature and timing of these attacks and how well the protocol preserves the availability and consistency of events when subject to attack. We, therefore, describe potential exploits in terms of these properties.
-The first property concerns live versus dead event exploits. A live exploit involves attacks on current or recent events. Protection from live exploits is essential to maintaining operational security in the present. Protection from live exploits focuses on providing sufficient availability of current events as well as ensuring their consistency (non-duplicity). A dead exploit, in contrast, involves attacks on past events. Protection from dead exploits is primarily provided by duplicity detection (consistency). One verifiable copy of a KEL (KERL) is enough to detect duplicity in any other verifiable but inconsistent copy. Attacks on the availability of past events are relatively easily mitigated by archiving redundant copies. The eventuality of dead exploits of compromised signing keys must be mitigated because digital signatures may become less secure as computing and cryptographic technology advance over time (quantum or otherwise). Eventually, their keys may become compromised via a direct attack on their cryptographic scheme. 
-The second property is a direct versus indirect operational mode exploit. The protocol may operate in two basic modes, called direct and indirect. The availability and consistency of attack surfaces are different for the two modes, and hence, the mitigation properties of the protocol are likewise mode-specific.
-The third property is a malicious third party versus a malicious controller exploit. In the former, the attack comes from an external malicious attacker, but the controller is honest. In the latter, the controller may also be malicious and, in some ways, may be indistinguishable from a successful malicious third party. The incentive structure for the two exploit types is somewhat different, and this affects the mitigation properties of the protocol. We find it helpful in both the design and analysis of protection to consider these two kinds of attacks separately.
-The main participants in the protocol are controllers and validators. The other participants, such as witnesses, watchers, jurors, judges, and resolvers, provide support to and may be under the the control of either or both of the two main participants. The analysis of protection against an attack can be further decomposed into three properties of each protection mechanism with respect to an attack: susceptibility to being attacked, vulnerability to harmfulness given an attack, and recoverability given a harmful attack. Security design involves making trade-offs between these three properties of protection mechanisms. Harm from a successful exploit may arise in either or both of the following two cases: - A controller may suffer harm due to the loss or encumberment of some or all of its control authority such that the malicious entity may produce consistent, verifiable events contrary to the desires of the controller and/or impede the ability of the controller to promulgate new key events.- A validator may suffer harm due to its acceptance of inconsistent verifiable events produced by a malicious entity (controller and/or third party). 
-Protection consists of either prevention or mitigation of both of the harm cases. The primary protection mechanisms for the controller include best practice key management techniques for maintaining root control authority, redundant confirmation of events by supporting components, and duplicity detection on the behavior of designated supporting components. The primary protection mechanism for the validator is duplicity detection on the behavior of supporting components. 
+
+The first property concerns live versus dead event exploits. A live exploit involves attacks on current or recent events. Protection from live exploits is essential to maintaining operational security in the present. Protection from live exploits focuses on providing sufficient availability of current events as well as ensuring their consistency (non-duplicity). A dead exploit, in contrast, involves attacks on past events. Protection from dead exploits is primarily provided by duplicity detection (consistency). One verifiable copy of a KEL (KERL) is enough to detect duplicity in any other verifiable but inconsistent copy. Attacks on the availability of past events are relatively easily mitigated by archiving redundant copies. The eventuality of dead exploits of compromised signing keys must be mitigated because digital signatures may become less secure as computing and cryptographic technology advance over time (quantum or otherwise). Eventually, their keys may become compromised via a direct attack on their cryptographic scheme. 
+
+The second property is a direct versus indirect operational mode exploit. The protocol may operate in two basic modes, called direct and indirect. The availability and consistency of attack surfaces are different for the two modes, and hence, the mitigation properties of the protocol are likewise mode-specific.
+
+The third property is a malicious third party versus a malicious controller exploit. In the former, the attack comes from an external malicious attacker, but the controller is honest. In the latter, the controller may also be malicious and, in some ways, may be indistinguishable from a successful malicious third party. The incentive structure for the two exploit types is somewhat different, and this affects the mitigation properties of the protocol. We find it helpful in both the design and analysis of protection to consider these two kinds of attacks separately.
+
+The main participants in the protocol are controllers and validators. The other participants, such as witnesses, watchers, jurors, judges, and resolvers, provide support to and may be under the the control of either or both of the two main participants. 
+The analysis of protection against an attack can be further decomposed into three properties of each protection mechanism with respect to an attack: susceptibility to being attacked, vulnerability to harmfulness given an attack, and recoverability given a harmful attack. Security design involves making trade-offs between these three properties of protection mechanisms. Harm from a successful exploit may arise in either or both of the following two cases: 
+- A controller may suffer harm due to the loss or encumberment of some or all of its control authority such that the malicious entity may produce consistent, verifiable events contrary to the desires of the controller and/or impede the ability of the controller to promulgate new key events.
+- A validator may suffer harm due to its acceptance of inconsistent verifiable events produced by a malicious entity (controller and/or third party). 
+
+Protection consists of either prevention or mitigation of both of the harm cases. The primary protection mechanisms for the controller include best practice key management techniques for maintaining root control authority, redundant confirmation of events by supporting components, and duplicity detection on the behavior of designated supporting components. The primary protection mechanism for the validator is duplicity detection on the behavior of supporting components. 
 
 
 ### Validation and Superseding Recovery
+<<<<<<< HEAD
 #### VerifierA verifier is an entity or component that cryptographically verifies an event message's structure and its signature(s). Structure verification includes verifying the event's said, the appearance of fields, and prior event digests. In order to verify signatures, a verifier must first determine which set of keys are or were the controlling set for the AID of that event when the event was issued. In other words, a verifier must also establish the control authority for the event at issuance. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to and including the issued event. Signature verification includes verifying signatures from both current signing and exposed prior rotation (if any) public keys for the event. This includes verifying threshold satisfaction for both current and prior rotation thresholds. Without loss of generality, any reference to the verification of an event or verification of an event's signatures refers to the complete process described above.#### ValidatorIn contrast, a validator is an entity or component that determines that a given signed event associated with an AID was valid at the time of its issuance. Validation first requires that the event itself is verifiable; that is, it has verifiable structure and signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the event in order to determine its validity. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
 
 #### Duplicity
+=======
+
+A verifier is an entity or component that cryptographically verifies an event message's signature(s). In order to verify a signature, a verifier must first determine which set of keys are or were the controlling set for an identifier when an event was issued. In other words, a verifier must first establish control authority for an identifier. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to the time at which the statement was issued.
+
+In contrast, a validator is an entity or component that determines that a given signed statement associated with an identifier was valid at the time of its issuance. Validation first requires that the statement is verifiable; that is, it has verifiable signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the statement in order to determine its validity for a given use case. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
+>>>>>>> toip/revised-format
 
 A duplicitous event is defined as a verified but different version of an event at the same location. The possession of a KEL for any AID enables duplicity detection by a validator for any set of events with respect to that KEL. Indeed, this property of KERI enables duplicity evident processing of events. This forms a basis for evaluating trust in the controller of an AID. A validator can decide to trust or not based on the evidence or lack thereof of duplicity. A validator may choose to trust when there is no evidence of duplicity. A validator should choose not to trust when there is evidence of duplicity. In some cases, as will be described forthwith, the controller may perform a recovery operation that enables a validator to reconcile that duplicity and allow the validator to once again trust the controller.
 
@@ -1588,12 +1736,20 @@ Diagram Here
 ### KERI's Algorithm for Witness Agreement (KAWA)
 
 #### Introduction
+<<<<<<< HEAD
 
 A controller may provide a highly available promulgation service for its events via a set or pool of N designated witnesses. This witness pool may also provide enhanced security for the controller over its events. Even though the witnesses are explicitly designated by the controller, they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event. The purpose of the witness set is to better protect the service from faults including Byzantine faults {{36}}. Thus, the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of KAWA is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attacks. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
 The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events, by and large, are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency, especially to merely prove the consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single-phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms {{[16; 39; 43; 48; 61; 115; 123; 144]}}. Indeed, the security guarantees from KAWA may approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover, because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
+=======
+the controller’s promulgation service is provided by a set of N designated witnesses. Although the witnesses are explicitly designated by the controller they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event.The purpose of the witness set is to better protect the service from faults including Byzantine faults [36]. Thus the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of the KAWA algorithm is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attack. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
+The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events by in large are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency especially to merely prove consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms [16; 39; 43; 48; 61; 115; 123; 144]. Indeed the security guarantees of an implementation of KAWA may be designed to approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
+>>>>>>> toip/revised-format
 
 #### Advantages
-The reliance on a designated set of witnesses provides several advantages. The first is that the identifier’s trust basis is not locked to any given witness or set of witnesses but may be transferred at the controller’s choosing. This provides portability. The second is that the number and composition of witnesses is also at the controller’s choosing. The controller may change this in order to make trade-offs between performance, scalability, and security. This provides flexibility and adaptability. Thirdly the witnesses need not provide much more than verification and logging. This means that even highly cost or performance constrained applications may take advantage of this approach. Likewise, given any guarantees of accountability the controller may declare, a validator may provide itself with any degree of protection it deems necessary by designating a set of observers (watchers, jurors, and judges) . Specifically, a validator may be protected by maintaining a copy of the key event history as first seen (received) by the validator or any other component trusted by the validator (watcher, juror, judge). This copy may be used to detect any alternate inconsistent (duplicitous) copies of the key event history. The validator may then choose how to best respond in the event of a detected duplicitous copy to protect itself from harm. A special case is a malicious controller that intentionally produces alternate key event histories. Importantly, observer components that maintain copies of the key event history such as watchers, jurors, and judges, may be under the control of validators not controllers. As a result a malicious alternate (duplicitous) event history may be eminently detectable by any validator. We call this ambient duplicity detection (which stems from ambient verifiability). In this case, a validator may still be protected because it may still hold such a malicious controller accountable given a duplicitous copy (trust or not trust). It is at the validator’s discretion whether or not to treat its original copy as the authoritative one with respect to any other copy and thereby continue trusting or not that original copy. A malicious controller may not therefore later substitute with impunity any alternate copy it may produce. Furthermore, as discussed above, a malicious controller that creates an alternative event history imperils any value it may wish to preserve in the associated identifier. It is potentially completely self-destructive with respect to the identifier. A malicious controller producing a detectably duplicitous event history is tantamount to a detectable total exploit of its authoritative keys and the keys of its witness set. This is analogous to a total but detectable exploit of any BFT ledger such as a detectable 51% attack on a proof-of-work ledger. A detectable total exploit destroys any value in that ledger after the point of exploit. To restate a controller may designate its witness set in such a way as to provide any arbitrary degree of protection from external exploit. Nonetheless in the event of such an exploit a validator may choose either to hold that controller accountable as duplicitous and therefore stop trusting the identifier or to treat the validator’s copy of the key event history as authoritative (ignoring the exploited copy) and therefore continue trusting the identifier. This dependence on the validator’s choice in the event of detected duplicity both imperils any potential malicious controller and protects the validator. 
+
+The reliance on a designated set of witnesses provides several advantages. The first is that the identifier’s trust basis is not locked to any given witness or set of witnesses but may be transferred at the controller’s choosing. This provides portability. The second is that the number and composition of witnesses is also at the controller’s choosing. The controller may change this in order to make trade-offs between performance, scalability, and security. This provides flexibility and adaptability. Thirdly the witnesses need not provide much more than verification and logging. This means that even highly cost or performance constrained applications may take advantage of this approach. 
+Likewise, given any guarantees of accountability the controller may declare, a validator may provide itself with any degree of protection it deems necessary by designating a set of observers (watchers, jurors, and judges) . Specifically, a validator may be protected by maintaining a copy of the key event history as first seen (received) by the validator or any other component trusted by the validator (watcher, juror, judge). This copy may be used to detect any alternate inconsistent (duplicitous) copies of the key event history. The validator may then choose how to best respond in the event of a detected duplicitous copy to protect itself from harm. A special case is a malicious controller that intentionally produces alternate key event histories. Importantly, observer components that maintain copies of the key event history such as watchers, jurors, and judges, may be under the control of validators not controllers. As a result a malicious alternate (duplicitous) event history may be eminently detectable by any validator. We call this ambient duplicity detection (which stems from ambient verifiability). In this case, a validator may still be protected because it may still hold such a malicious controller accountable given a duplicitous copy (trust or not trust). It is at the validator’s discretion whether or not to treat its original copy as the authoritative one with respect to any other copy and thereby continue trusting or not that original copy. A malicious controller may not therefore later substitute with impunity any alternate copy it may produce. Furthermore, as discussed above, a malicious controller that creates an alternative event history imperils any value it may wish to preserve in the associated identifier. It is potentially completely self-destructive with respect to the identifier. A malicious controller producing a detectably duplicitous event history is tantamount to a detectable total exploit of its authoritative keys and the keys of its witness set. This is analogous to a total but detectable exploit of any BFT ledger such as a detectable 51% attack on a proof-of-work ledger. A detectable total exploit destroys any value in that ledger after the point of exploit. 
+To restate a controller may designate its witness set in such a way as to provide any arbitrary degree of protection from external exploit. Nonetheless in the event of such an exploit a validator may choose either to hold that controller accountable as duplicitous and therefore stop trusting the identifier or to treat the validator’s copy of the key event history as authoritative (ignoring the exploited copy) and therefore continue trusting the identifier. This dependence on the validator’s choice in the event of detected duplicity both imperils any potential malicious controller and protects the validator. 
 
 KERI’s Algorithm for Witness Agreement (KAWA) or the algorithm is run by the controller of an identifier in concert with a set of N witnesses designated by the controller to provide as a service the key event history of that identifier via a KERL (Key Event Receipt Log) in a highly available and fault-tolerant manner. One motivation for using key event logs is that the operation of redundant immutable (deletion proof) event logs may be parallelizable and hence highly scalable. A KERL is an immutable event log that is made deletion proof by virtue of it being provided by the set of witnesses of which only a subset of F witnesses may at any time be faulty. In addition to designating the witness set, the controller also designates a threshold number, M, of witnesses for accountability. To clarify, the controller accepts accountability for an event when any subset M of the N witnesses confirms that event. The threshold M indicates the minimum number of confirming witnesses the controller deems sufficient given some number F of potentially faulty witnesses. The objective of the service is to provide a verifiable KERL to any validator on demand. Unlike direct mode where a validator may be viewed as an implicit witness, with indirect mode, a validator may not be one of the N explicitly designated witnesses that provide the service. 
 
@@ -1605,8 +1761,10 @@ The controller designates both the witness tally number and the initial set of w
 In this approach, the controller of a given identifier creates and disseminates associated key event messages to the set of N witnesses. Each witness verifies the signatures, content, and consistency of each key event it receives. When a verified key event is also the first seen version of that event the witness has received, then it witnesses that event by signing the event message to create a receipt, storing the receipt in its log (KERL), and returning the receipt as an acknowledgment to the controller. Depending on its dissemination policy, a witness may also send its receipt to other witnesses. This might be with a broadcast or gossip protocol or not at all. 
 
 In general, the witnessing policy is that the first seen version of an event always wins; that is, the first verified version is witnessed (signed, stored, acknowledged, and maybe disseminated), and all other versions are discarded. The exception to this general rule is that a rotation event may provide a superseding recovery. The recovery process may fork off a branch from the recovered trunk. This disputed branch has the disputed exploited events, and the main trunk has the recovered events. The operational mode and the threshold of accountable duplicity determine which events in the disputed branch are accountable to the controller.
-Later messages or receipts from other witnesses may not change any existing entry in the log (the log is append-only, i.e., immutable) unless they are correctly reconcilable superseding events. Each witness also adds to its log any verified signatures from consistent receipts it receives from other witnesses. A consistent receipt is a receipt for the same version of the event already in its log at a location. Excepting superseding recovery, inconsistent receipts, i.e., for different event versions at the same location, are discarded (not kept in the log). However, as an option, a controller may choose to run a juror (in concert with a witness) that keeps a duplicitous event log (DEL) of the inconsistent or duplicitous receipts that a witness receives. To clarify, a witness’ key event receipt log (KERL) is by construction, an immutable log. This log includes the events with attached verified signatures, which are the receipts from the controller, the witness, and other witnesses.
-Initial dissemination of receipts to the N witnesses by the controller may be implemented extremely efficiently with respect to network bandwidth using a round-robin protocol of exchanges between the controller and each of the witnesses in turn. Each time the controller connects to a witness to send new events and collect the new event receipts, it also sends the receipts it has received so far from other witnesses. This round-robin protocol may require the controller to perform at most two passes through the entire set of witnesses in order to fully disseminate a receipt from each witness to every other witness for a given event. This means that at most 2·N acknowledged exchanges are needed for each event to create a fully witnessed key event receipt log (KERL) at every witness and controller. Network load, therefore, scales linearly with the number of witnesses. 
+
+Later messages or receipts from other witnesses may not change any existing entry in the log (the log is append-only, i.e., immutable) unless they are correctly reconcilable superseding events. Each witness also adds to its log any verified signatures from consistent receipts it receives from other witnesses. A consistent receipt is a receipt for the same version of the event already in its log at a location. Excepting superseding recovery, inconsistent receipts, i.e., for different event versions at the same location, are discarded (not kept in the log). However, as an option, a controller may choose to run a juror (in concert with a witness) that keeps a duplicitous event log (DEL) of the inconsistent or duplicitous receipts that a witness receives. To clarify, a witness’ key event receipt log (KERL) is by construction, an immutable log. This log includes the events with attached verified signatures, which are the receipts from the controller, the witness, and other witnesses.
+
+Initial dissemination of receipts to the N witnesses by the controller may be implemented extremely efficiently with respect to network bandwidth using a round-robin protocol of exchanges between the controller and each of the witnesses in turn. Each time the controller connects to a witness to send new events and collect the new event receipts, it also sends the receipts it has received so far from other witnesses. This round-robin protocol may require the controller to perform at most two passes through the entire set of witnesses in order to fully disseminate a receipt from each witness to every other witness for a given event. This means that at most 2·N acknowledged exchanges are needed for each event to create a fully witnessed key event receipt log (KERL) at every witness and controller. Network load, therefore, scales linearly with the number of witnesses. 
 
 When network bandwidth is less constrained, a gossip protocol might provide full dissemination with lower latency than a round-robin protocol but with higher bandwidth usage. Gossip protocols scale with N · log(N) (where N is the number of witnesses) instead of 2·N. A directed acyclic graph or other data structure can be used to determine what needs to be gossiped. 
 
@@ -1622,19 +1780,26 @@ In order to be deemed proper, an agreement must have been verified as consistent
 #### Security Properties
 
 The continuing promulgation of key events assumes a sufficiently responsive controller. Lack of responsiveness is primarily a threat to the controller, not a validator. Consequently, providing sufficient controller responsiveness is the controller's responsibility, not of KAWA. In contrast, a responsive but dishonest (or compromised) controller may pose a live threat to a validator with respect to new events never before seen by the validator. The validation process must provide means for the validator to protect itself from such threats. When the controller is responsive but dishonest, it may create inconsistent versions of an event that are first seen by different subsets of its witnesses. In the case where only F of the witnesses is faulty despite a dishonest controller, the validator may protect itself by requiring a large enough sufficient agreement or threshold of accountable duplicity, M, that guarantees that either only one satisfying agreement or none at all, e.g., makes the service immune. To restate, the validator may select its M to ensure the the service is immune such that the service will either provide one and only one proper key event receipt log (KERL) or none at all. This protects the validator.
-A greater threat to a validator may be that of a dishonest controller that may collude with its witnesses to promulgate alternative (divergent) event version agreements, each with sufficient agreement. But this would violate the assumption of at most F faulty witnesses. In this case, the witness consensus process, i.e., the KAWA algorithm, may not protect the validator. Protection must come from some other process under the validator’s control. In this case, a validator may protect itself with duplicity detection via a set of observers (validators, watchers, jurors, judges). In such a case, in order to undetectably promulgate alternate but sufficiently accountable event version agreements, a dishonest controller with dishonest witnesses must prevent any validator from communicating with any other observer who may have seen any alternate event version agreement. This attack may be made practically unfeasible given a large and diverse enough set of observers. Indeed, once duplicity is detected, that identifier loses all its value to any detecting validator. This imperils any dishonest controller who attempts such an attack.
-The final threat is the threat of dead exploit where, sometime in the future, the exposed key pairs used to sign past events in a KERL may be compromised. The compromised keys may then be used to create an alternate or divergent verifiable event history. Recall, however, that a proper KERL enables validation of the controlling keys of the associated identifier over the time frame of the events in the log. Once produced, a proper KERL may be provided by any observer (validator, watcher, juror, or judge) that has retained a copy of it not merely the witnesses. Subsequent compromise of a controller’s keys and a compromise of witnesses may not invalidate any of the events in a pre-existent proper KERL. 
-Therefore, in order to fool a validator into accepting an erroneous or compromised divergent key event history, a successful exploiter must forge a proper KERL but with a different sequence of key events. To do this the exploiter must not only exploit the controller’s signing keys that were authoritative at some event but also exploit M of the N designated witnesses at that event as well. The exploiter must also prevent that validator from accessing any other but alternate proper KERL from any other observer (validator, watcher, juror, judger) that may have a copy as a check against such an attack. The combination of these tasks makes such an exploit extremely difficult to achieve.
-Consequently, even in the extreme case that sometime in the future, a complete and total dead exploit of the controller keys and at least M of the witnesses occurs such that they forge a seemingly proper but divergent KERL, any prior copy of a proper KERL will enable detection and proof of accountable duplicity of that dead exploit. In this case, the validator may choose to use the prior copy from some set of jurors it trusts to determine which of the divergent KERLs is authoritative. This is similar to how certificate transparency works. In order for such a dead attack to succeed, the attacker must prevent a targeted validator from accessing any other copies of an alternate KERL. 
+
+A greater threat to a validator may be that of a dishonest controller that may collude with its witnesses to promulgate alternative (divergent) event version agreements, each with sufficient agreement. But this would violate the assumption of at most F faulty witnesses. In this case, the witness consensus process, i.e., the KAWA algorithm, may not protect the validator. Protection must come from some other process under the validator’s control. In this case, a validator may protect itself with duplicity detection via a set of observers (validators, watchers, jurors, judges). In such a case, in order to undetectably promulgate alternate but sufficiently accountable event version agreements, a dishonest controller with dishonest witnesses must prevent any validator from communicating with any other observer who may have seen any alternate event version agreement. This attack may be made practically unfeasible given a large and diverse enough set of observers. Indeed, once duplicity is detected, that identifier loses all its value to any detecting validator. This imperils any dishonest controller who attempts such an attack.
+
+The final threat is the threat of dead exploit where, sometime in the future, the exposed key pairs used to sign past events in a KERL may be compromised. The compromised keys may then be used to create an alternate or divergent verifiable event history. Recall, however, that a proper KERL enables validation of the controlling keys of the associated identifier over the time frame of the events in the log. Once produced, a proper KERL may be provided by any observer (validator, watcher, juror, or judge) that has retained a copy of it not merely the witnesses. Subsequent compromise of a controller’s keys and a compromise of witnesses may not invalidate any of the events in a pre-existent proper KERL. 
+
+Therefore, in order to fool a validator into accepting an erroneous or compromised divergent key event history, a successful exploiter must forge a proper KERL but with a different sequence of key events. To do this the exploiter must not only exploit the controller’s signing keys that were authoritative at some event but also exploit M of the N designated witnesses at that event as well. The exploiter must also prevent that validator from accessing any other but alternate proper KERL from any other observer (validator, watcher, juror, judger) that may have a copy as a check against such an attack. The combination of these tasks makes such an exploit extremely difficult to achieve.
+
+Consequently, even in the extreme case that sometime in the future, a complete and total dead exploit of the controller keys and at least M of the witnesses occurs such that they forge a seemingly proper but divergent KERL, any prior copy of a proper KERL will enable detection and proof of accountable duplicity of that dead exploit. In this case, the validator may choose to use the prior copy from some set of jurors it trusts to determine which of the divergent KERLs is authoritative. This is similar to how certificate transparency works. In order for such a dead attack to succeed, the attacker must prevent a targeted validator from accessing any other copies of an alternate KERL. 
 
 The idea of ambient verifiability mentioned above comes from the fact that the original KERL may be distributed among any number of watchers from whom a validator may obtain a copy. At some point, the degree of accessibility to an original copy becomes essentially ubiquitous, at which point verifiability may be considered ambient. Given ambient verifiability, then, duplicity detection becomes likewise ambient. 
 
 To elaborate, a successful dead attack requires the isolation of a validator from ambient sources of the KERL. In general, isolation from ambient sources may be prohibitively expensive. Consequently, ambient verifiability provides asymmetry between the attacker and the defender in favor of the defender. Indeed, the end goal of KERI is to achieve ambient security in the sense that nearly anyone, anywhere, at any time, can become a verifiable controller of a verifiable identity that is protected by ambient verifiability and hence duplicity detection of the associated KERL. 
-Furthermore, any mutual interaction events between a validator and controller may provide proof of priority. In a mutual interaction, the validator includes a copy or digest of an interaction event sourced by the controller in an event sourced by the validator. A total compromise of the controller and all witnesses would not be able to forge the validator’s signature on the mutual interaction event. Thus, the existence of any mutual interaction events may then be used to prove priority even in the extremely unlikely case of a complete and total dead exploit of a controller and all of its witnesses. 
-Alternatively, in the case of a complete and total dead exploit, the validator and controller may jointly agree to use some other, more formal mechanism to resolve the priority of divergent KERLs. This may be the median of the astronomical time of the original reception of a receipt by a mutually trusted set of observers. This may be through the use of anchor transactions on a distributed consensus ledger. This later approach would only require minimal use of a distributed consensus ledger in order to resolve the most extreme and unlikely case of total dead exploit.
-Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
 
-::: issue Issue Notice
+Furthermore, any mutual interaction events between a validator and controller may provide proof of priority. In a mutual interaction, the validator includes a copy or digest of an interaction event sourced by the controller in an event sourced by the validator. A total compromise of the controller and all witnesses would not be able to forge the validator’s signature on the mutual interaction event. Thus, the existence of any mutual interaction events may then be used to prove priority even in the extremely unlikely case of a complete and total dead exploit of a controller and all of its witnesses. 
+
+Alternatively, in the case of a complete and total dead exploit, the validator and controller may jointly agree to use some other, more formal mechanism to resolve the priority of divergent KERLs. This may be the median of the astronomical time of the original reception of a receipt by a mutually trusted set of observers. This may be through the use of anchor transactions on a distributed consensus ledger. This later approach would only require minimal use of a distributed consensus ledger in order to resolve the most extreme and unlikely case of total dead exploit.
+
+Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
+
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/40
 :::
 
@@ -1837,7 +2002,7 @@ These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
 
 ## Reconcilable duplicity
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
