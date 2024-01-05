@@ -1316,6 +1316,209 @@ There are about 3600 * 24 * 365 = 313,536,000 = 2<sup>log<sub>2</sub>313536000</
 
 The highest level of cryptographic security with respect to a cryptographic secret (seed, salt, or private key) is called  information-theoretic security. A cryptosystem that has this level of security cannot be broken algorithmically even if the adversary has nearly unlimited computing power including quantum computing. It must be broken by brute force if at all. Brute force means that in order to guarantee success the adversary must search for every combination of key or seed. A special case of information-theoretic security is called perfect-security.  Perfect-security means that the ciphertext provides no information about the key. There are two well-known cryptosystems that exhibit perfect-security. The first is a one-time-pad (OTP) or Vernum Cipher;  the other is secret splitting, a type of secret sharing that uses the same technique as a one-time-pad.
 
+### Validation
+
+
+
+### Native CESR Encodings of KERI Messages
+
+By native CESR encoding we mean that the field maps of fields and values in a KERI message body may be represented in pure CESR instead of JSON, CBOR, or MGPK. Because the top level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for the sake of comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK. The second column provides the field value format, and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict. 
+
+####  Key Event Messages
+These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
+
+##### Inception `icp`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `Y&&&&###` e.g. `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `X&&&` e.g. `Xicp` | Packet Type (inception)  |
+| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `M&&&` e.g. `MAAA` | Sequence Number of Event  |
+| `kt` | `M&&&` e.g. `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
+| `nt` | `M&&&` e.g. `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
+| `bt` | `M&&&` e.g. `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `b` | `-I##` or `-I#####` | Count code for Backer AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  0 |
+|  1th  element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1  |
+|  2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer  2 |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_&` e.g. `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+##### Rotation `rot`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xrot` | Packet Type (inception)  |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAB` | Sequence Number of Event  |
+| `p` |  `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  cut 0 |
+| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List  |
+|  0th  element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0  |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+##### Interaction `ixn`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`,  `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xixn` | Packet Type (inception)  |
+| `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAC` | Sequence Number of Event  |
+| `p` |  `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Prior event SAID |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+
+##### Delegated Inception `dip`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`, `di`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xdip` | Packet Type (inception)  |
+| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAA` | Sequence Number of Event  |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `b` | `-I##` or `-I#####` | Count code for Backer AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  0 |
+|  1th  element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1  |
+|  2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer  2 |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller  |
+
+
+##### Delegated Rotation `drt`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`, `di`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xdrt` | Packet Type (inception)  |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAB` | Sequence Number of Event  |
+| `p` |  `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  cut 0 |
+| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List  |
+|  0th  element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0  |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller  |
+
+##### Receipt Message
+This message has packet type `rct`
+
+#### KERI support Messages
+These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
+
+#### Query Message
+
+#### Reply Message
+
+#### Prod Message
+
+#### Bare Message
+
+#### Exchange Message
+
+
+
 [//]: # (\newpage)
 
 [//]: # (\makebibliography)
