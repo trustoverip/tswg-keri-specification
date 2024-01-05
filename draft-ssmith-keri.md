@@ -23,8 +23,8 @@ author:
 normative:
 
   KERI-ID:
-    target: https://github.com/WebOfTrust/ietf-keri
-    title: IETF KERI (Key Event Receipt Infrastructure) Internet Draft
+    target: https://github.com/trustoverip/tswg-keri-specification
+    title: ToIP KERI (Key Event Receipt Infrastructure) Internet Draft
     date: 2022
     author:
       ins: S. Smith
@@ -32,8 +32,8 @@ normative:
       org: ProSapien LLC
 
   CESR-ID:
-    target: https://github.com/WebOfTrust/ietf-cesr
-    title: IETF CESR (Composable Event Streaming Representation) Internet Draft
+    target: https://github.com/trustoverip/tswg-cesr-specification
+    title: ToIP CESR (Composable Event Streaming Representation) Internet Draft
     date: 2022
     author:
       ins: S. Smith
@@ -41,8 +41,8 @@ normative:
       org: ProSapien LLC
 
   SAID-ID:
-    target: https://github.com/WebOfTrust/ietf-said
-    title: IETF SAID (Self-Addressing IDentifier) Internet Draft
+    target: https://github.com/trustoverip/tswg-said-specification
+    title: ToIP SAID (Self-Addressing IDentifier) Internet Draft
     date: 2022
     author:
       ins: S. Smith
@@ -51,8 +51,8 @@ normative:
     date: 2022
 
   OOBI-ID:
-    target: https://github.com/WebOfTrust/ietf-oobi
-    title: IETF OOBI (Out-Of-Band-Introduction) Internet Draft
+    target: https://github.com/trustoverip/tswg-oobi-specification
+    title: ToIP OOBI (Out-Of-Band-Introduction) Internet Draft
     author:
       ins: S. Smith
       name: Samuel M. Smith
