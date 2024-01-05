@@ -296,9 +296,9 @@ An authenticatable (Verifiable) internet message (packet) or data item includes 
 
 KERI overcomes  two major system security overlay flaws. The first major flaw  is that the mapping between the identifier (domain name) and the controlling keypair(s) is merely asserted by a trusted entity e.g., certificate authority (CA) via a certificate. Because the mapping is merely asserted, a Verifier can not verify cryptographically the mapping between the identifier and the controlling keypair(s) but must trust the operational processes of the trusted entity making that assertion, i.e.,  the CA who issued and signed the certificate. As is well known, a successful attack upon those operational processes may fool a Verifier into trusting an invalid mapping i.e., the certificate is issued to the wrong keypair(s) albeit with a Verifiable signature from a valid CA. Noteworthy is that the signature on the certificate is not made with the controlling keypairs of the identifier but made with keypairs controlled by the issuer i.e.,  the CA. The fact that the certificate is signed by the CA means that the mapping itself is not Verifiable but merely that the CA asserted the mapping between keypair(s) and identifier. The certificate merely provides evidence of the authenticity of the assignment of the mapping but not evidence of the veracity of the mapping.
 
-The second major flaw is that when rotating the valid signing keys there is no cryptographically Verifiable way to link the new (rotated in) controlling/signing key(s) to the prior (rotated out) controlling/signing key(s). Key rotation is  asserted merely and implicitly by a trusted entity (CA) by issuing a new certificate with new controlling/signing keys.  Key rotation is necessary because over time the controlling keypair(s) of an identifier becomes weak due to exposure when used to sign Messages and must be replaced. An explicit Rotation mechanism first revokes the old keys and then replaces them with new keys. Even a certificate revocation list (CRL) as per RFC5280, with an online status protocol (OCSP) registration as per RFC6960, does not provide a cryptographically Verifiable connection between the old and new keys; This merely  is asserted. The lack of a single universal CRL or registry means that multiple potential replacements may be valid. From a cryptographic verifiability perspective, Rotation by assertion with a new certificate that either implicitly or explicitly provides revocation and replacement is essentially the same as starting over by creating a brand new independent mapping between a given identifier and the controlling keypair(s). This start-over style of Key rotation may well be one of the main reasons that other encryption methods, such as Pretty Good Privacy (PGP's) web-of-trust failed. Without a universally Verifiable revocation mechanism, then any Rotation (revocation and replacement) assertions either explicit or implicit are mutually independent of each other. This lack of universal cryptographic verifiability of a Rotation fosters ambiguity at any point in time as to the actual valid mapping between the identifier and its controlling keypair(s). In other words, for a given identifier, any or all assertions made by some set of CAs may be potentially valid.
+The second major flaw is that when rotating the valid signing keys there is no cryptographically Verifiable way to link the new (rotated in) controlling/signing key(s) to the prior (rotated out) controlling/signing key(s). Key rotation is  asserted merely and implicitly by a trusted entity (CA) by issuing a new certificate with new controlling/signing keys.  Key rotation is necessary because over time the controlling keypair(s) of an identifier becomes weak due to exposure when used to sign Messages and must be replaced. An explicit Rotation mechanism first revokes the old keys and then replaces them with new keys. Even a certificate revocation list (CRL) as per RFC5280, with an online status protocol (OCSP) registration as per RFC6960, does not provide a cryptographically Verifiable connection between the old and new keys; This merely  is asserted. The lack of a single universal CRL or registry means that multiple potential replacements may be valid. From a cryptographic verifiability perspective, Rotation by assertion with a new certificate that either implicitly or explicitly provides revocation and replacement is essentially the same as starting over by creating a brand new independent mapping between a given identifier and the controlling keypair(s). This start-over style of Key rotation may well be one of the main reasons that other key assignment methods, such as Pretty Good Privacy (PGP's) web-of-trust failed. Without a universally Verifiable revocation mechanism, any Rotation (revocation and replacement) assertion by some certificate authority, either explicit or implicit, is mutually independent of any other. This lack of universal cryptographic verifiability of a Rotation fosters ambiguity as to the actual valid mapping at any point in time between the identifier and its controlling keypair(s). In other words, for a given identifier, any or all assertions made by some set of CAs may be potentially valid.
 
-The KERI protocol fixes both of these flaws using a combination of AIDs, key pre-rotation and a Verifiable data structure, the KEL, as verifiable proof of Key state, and duplicity-evident mechanisms for evaluating and reconciling Key state by Validators. Unlike certificate transparency, KERI enables the detection of Duplicity in the Key state via non-repudiable cryptographic proofs of Duplicity not merely the detection of inconsistency in the Key state that may or may not be duplicitous.
+The KERI protocol fixes both of these flaws using a combination of AIDs, key pre-rotation, and a Verifiable data structure, the KEL, as verifiable proof of Key state and duplicity-evident mechanisms for evaluating and reconciling Key state by Validators. Unlike certificate transparency, KERI enables the detection of Duplicity in the Key state via non-repudiable cryptographic proofs of Duplicity not merely the detection of inconsistency in the Key state that may or may not be duplicitous.
 
 ### Self-certifying identifier (SCID)
 
@@ -317,13 +317,13 @@ An important innovation of KERI is that it solves the key Rotation problem of PK
 
 A Cryptographic primitive is a serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol. CESR supports round trip lossless conversion between its Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a string value of a field or array element as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64 which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
 
-### Qualified Cryptographic Primitive
+### Qualified Cryptographic Primitives using CESR
 
-When qualified, a Cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive. All Cryptographic primitives expressed in either Text or Binary CESR are qualified by definition. Qualification is an essential property of CESR. The CESR protocol supports several different types of encoding tables for different types of derivation codes. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e.,  Blake3-256, when expressed in Text domain CESR is 44 Base64 characters long and begins with the one character derivation code `E`, such as, `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation is 33 bytes long. Unless otherwise indicated, all Cryptographic primitives in this specification are qualified Primitives using CESR’s Text domain.
+KERI represents all cryptographic primitives with CESR (Composable Event Streaming Representation) {{CESR}}. When qualified using CESR, a Cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive. All Cryptographic primitives expressed in either Text or Binary CESR are qualified by definition. Qualification is an essential property of CESR. The CESR protocol supports several different types of encoding tables for different types of derivation codes. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e.,  Blake3-256, when expressed in Text domain CESR, consists of 44 Base64 characters that begin with the one character derivation code `E`, such as `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation consists of 33 bytes. Unless otherwise indicated, all Cryptographic primitives in this specification are qualified Primitives using CESR’s Text domain.
 
 ### Basic fractionally weighted threshold 
 
-This partial Rotation feature for either reserve or Custodial rotation authority is best employed with thresholds that are fractionally weighted. The exact syntax for fractionally weighted thresholds is provided in the partial pre-rotation and Custodial rotation sections and a summary is provided here. A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of legal rational fractions ( i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A weight list of clauses orders a set of rational fraction weights. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that correspond to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures exactness and universality of threshold satisfaction computations.
+This partial Rotation feature for either reserve or Custodial rotation authority is best employed with thresholds that are fractionally weighted. The exact syntax for fractionally weighted thresholds is provided in the partial pre-rotation and Custodial rotation sections and a summary is provided here. A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of legal rational-fractions ( i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A weight list of clauses orders a set of rational fraction weights. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that corresponds to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures the exactness and universality of threshold satisfaction computations.
 
 For example, consider the following simple single clause fractionally weighted threshold, [1/2, 1/2, 1/2].  Three weights mean there must be exactly three corresponding key pairs. Let the three keypairs in one-to-one order be denoted by the list of indexed public keys, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]. The threshold is satisfied if any two of the public keys sign because 1/2 + 1/2 = 1. This is exactly equivalent to an integer-valued ‘2 of 3’ threshold.
 
@@ -422,17 +422,15 @@ The primary field labels are compact in that they use only one or two characters
 
 ##### Version string field
 
+The version string, `v`, field MUST be the first field in any top-level KERI field map. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) that constitutes a KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies in a set of KERI field maps. Each KERI message body in a stream may use a different serialization type.
+
 ::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/20
 :::
 
-The Version string, `v`, field must be the first field in any top-level KERI field map in which it appears. Typically the Version string, `v`, field appears as the first top-level field in a KERI Message body. This enables a RegEx stream parser to consistently find the Version string in any of the supported serialization formats for KERI Messages. The `v` field provides a regular expression target for determining the serialization format and size (character count) of a serialized KERI Message body. A stream parser may use the Version string to extract and deserialize (deterministically) any serialized KERI Message body in a stream of serialized KERI Messages. Each KERI Message in a stream may use a different serialization type.
+The format of the version string is `KERIvvSSSShhhhhh_`. The first four characters `KERI` indicate the protocol. The CESR encoding standard supports multiple protocols, `KERI` being one of them.  The next two characters, `vv` provide the lowercase hexadecimal notation for the major and minor version numbers of the version of the KERI protocol specification. The first `v` provides the major version number and the second `v` provides the minor version number. For example, `01` indicates major version 0 and minor version 1 or in dotted-decimal notation `0.1`. Likewise `1c` indicates major version 1 and minor version decimal 12 or in dotted-decimal notation `1.12`. The next four characters `SSSS` indicate the serialization kind in uppercase. The four supported serialization kinds are `JSON`, `CBOR`, `MGPK`, and `CESR` for the JSON, CBOR, MessagePack, and CESR serialization standards, respectively {{JSON}}{{RFC4627}}{{CBOR}}{{RFC8949}}{{MGPK}}{{CESR_ID}}. The next six characters provide in lowercase hexadecimal notation the total length of the serialization inclusive of the version string an any prefixed characters or bytes. This length is total number of characters in the serialization of the KERI message body. The maximum length of a given KERI message body is thereby constrained to be *2<sup>24</sup> = 16,777,216* characters in length. The final character `_` is the version string terminator. This enables later versions of KERI to change the total version string size and thereby enable versioned changes to the composition of the fields in the version string while preserving deterministic regular expression extractability of the version string. 
 
-The format of the Version string is `KERIvvSSSShhhhhh_`. The first four characters `KERI` indicate the enclosing field map serialization. The next two characters, `vv` provide the lowercase hexadecimal notation for the major and minor Version numbers of the Version of the KERI specification used for the serialization. The first `v` provides the major Version number and the second `v` provides the minor Version number. For example, `01` indicates major Version 0 and minor Version 1 or in dotted-decimal notation `0.1`. Likewise `1c` indicates major Version 1 and minor Version decimal 12 or in dotted-decimal notation `1.12`. 
-
-The next four characters `SSSS` indicate the serialization type in uppercase. The four supported serialization types are `JSON`, `CBOR`, `MGPK`, and `CESR` for the JSON, CBOR, MessagePack, and CESR serialization standards respectively. The next six characters provide in lowercase hexadecimal notation the total number of characters in the serialization of the KERI Message body. The maximum length of a given KERI Message body is thereby constrained to be 2<sup>24</sup> = 16,777,216 characters in length. The final character `-` is the Version string terminator. This enables later Versions of Authentic Chained Data Containers (ACDCs) to change the total Version string size and thereby enable versioned changes to the composition of the fields in the Version string while preserving deterministic regular expression extractability of the Version string. 
-
-Although a given KERI serialization type may use field map delimiters or Framing code characters that appear before (i.e,  prefix) the Version string field in a serialization, the set of possible prefixes is sufficiently constrained by the allowed serialization protocols to guarantee that a regular expression can determine unambiguously the start of any ordered field map serialization that includes the Version string as the first field value. Given the Version string, a parser may then determine the end of the serialization so that it can extract the full serialization (KERI Message body) from the Stream without first deserializing it or parsing it field-by-field. This enables performant Stream parsing and off-loading of KERI Message Streams that include any or all of the supported serialization types interleaved in a single Stream.
+Although a given KERI message body serialization kind may have characters or bytes such as field map delimiters or framing codes that appear before i.e., prefix the version string field in a serialization, the set of possible prefixes for each of the supported serialization kinds is sufficiently constrained by the allowed serialization protocols to guarantee that a regular expression can determine unambiguously the start of any ordered field map serialization that includes the version string as the first field value. Given the length from the version string, a parser may then determine the end of the serialization so that it can extract the full KERI message body from the stream without first deserializing it. This enables performant stream parsing and off-loading of KERI streams that include any or all of the supported serialization types.
 
 ##### SAID (Self-Addressing identifier) fields
 
@@ -1484,17 +1482,215 @@ There are about 3600 * 24 * 365 = 313,536,000 = 2<sup>log<sub>2</sub>313536000</
 
 The highest level of cryptographic security with respect to a cryptographic secret (seed, salt, or private key) is called  information-theoretic security. A cryptosystem that has this level of security cannot be broken algorithmically even if the adversary has nearly unlimited computing power including quantum computing. It must be broken by brute force if at all. Brute force means that in order to guarantee success the adversary must search for every combination of key or seed. A special case of information-theoretic security is called perfect-security.  Perfect-security means that the ciphertext provides no information about the key. There are two well-known cryptosystems that exhibit perfect-security. The first is a one-time-pad (OTP) or Vernum Cipher;  the other is secret splitting, a type of secret sharing that uses the same technique as a one-time-pad.
 
+### Validation
+
+::: issue Issue Notice
+https://github.com/trustoverip/tswg-keri-specification/issues/40
+:::
+
+### Native CESR Encodings of KERI Messages
+
+By native CESR encoding we mean that the field maps of fields and values in a KERI message body may be represented in pure CESR instead of JSON, CBOR, or MGPK. Because the top level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for the sake of comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK. The second column provides the field value format, and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict. 
+
+####  Key Event Messages
+These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
+
+##### Inception `icp`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `Y&&&&###` e.g. `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `X&&&` e.g. `Xicp` | Packet Type (inception)  |
+| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `M&&&` e.g. `MAAA` | Sequence Number of Event  |
+| `kt` | `M&&&` e.g. `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
+| `nt` | `M&&&` e.g. `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
+| `bt` | `M&&&` e.g. `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `b` | `-I##` or `-I#####` | Count code for Backer AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  0 |
+|  1th  element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1  |
+|  2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer  2 |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_&` e.g. `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+##### Rotation `rot`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xrot` | Packet Type (inception)  |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAB` | Sequence Number of Event  |
+| `p` |  `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  cut 0 |
+| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List  |
+|  0th  element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0  |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+##### Interaction `ixn`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`,  `a`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xixn` | Packet Type (inception)  |
+| `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAC` | Sequence Number of Event  |
+| `p` |  `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Prior event SAID |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+
+
+##### Delegated Inception `dip`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`, `di`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xdip` | Packet Type (inception)  |
+| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAA` | Sequence Number of Event  |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `b` | `-I##` or `-I#####` | Count code for Backer AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  0 |
+|  1th  element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1  |
+|  2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer  2 |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller  |
+
+
+##### Delegated Rotation `drt`
+
+Field order by label:  `v`,  `t`, `d`, `i` , `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`, `di`.
+
+| Field Label | Value  | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native  top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xdrt` | Packet Type (inception)  |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
+| `s` | `MAAB` | Sequence Number of Event  |
+| `p` |  `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
+| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1)  |
+| `k` | `-I##` or `-I#####` | Count code for Signing Key List  |
+|  0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0  |
+| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string  (1) |
+| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List  |
+|  0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
+| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2)  |
+| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List  |
+|  0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer  cut 0 |
+| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List  |
+|  0th  element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0  |
+| `c` | `-I##` or `-I#####` | Count code for Config Trait List  |
+|  0th element | `XDND` | Config trait 0  `DND` |
+| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List  |
+|  0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
+|  0.0th label  | `0J_i` |  Label of field 0 of Seal 0 `i`   |
+|  0.0th value  | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
+|  0.1th label  | `0J_s` |  Label of field 1 of Seal 0 `s`   |
+|  0.1th value  | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
+|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
+| 0.2th value  | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
+|  1th element | `-R## or `-R#####`  | Count code for value  of Seal 1 (event seal triple) |
+|  1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
+| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller  |
+
+##### Receipt Message
+This message has packet type `rct`
+
+#### KERI support Messages
+These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
+
+#### Query Message
+
+#### Reply Message
+
+#### Prod Message
+
+#### Bare Message
+
+#### Exchange Message
+
 ## Reconcilable duplicity
 
 ::: issue Issue Notice
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
-## Validator
-
-::: issue Issue Notice
-https://github.com/trustoverip/tswg-keri-specification/issues/40
-:::
 
 [//]: # (\newpage)
 
