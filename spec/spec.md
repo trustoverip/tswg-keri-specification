@@ -66,9 +66,9 @@ The identity system-based secure overlay for the Internet, based on KERI include
 
 The primary root-of-trust are SCIDs  that are strongly bound at issuance to a cryptographic signing (public, private) keypair which is self-contained until/unless control needs to be transferred to a new keypair. In that event, an append-only chained Key event log (KEL) of signed transfer statements provides end-verifiable control provenance. This makes intervening operational infrastructure replaceable because the event logs may be served up by any infrastructure including ambient infrastructure. End-verifiable logs on ambient infrastructure enable ambient verifiability (Verifiable by anyone, anywhere, at any time).
 
-The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme [@DAD]. Two primary trust modalities motivated the design, these are a direct (one-to-one) mode and an indirect (one-to-any) mode. The indirect mode depends on witnessed Key event receipt logs (KERL) as a secondary root-of-trust for validating events, which is the background for the acronym KERI, Key Event Receipt Infrastructure. In the direct mode, the identity Controller establishes control via verified signatures of the controlling keypair. The indirect mode extends that trust basis with witnessed Key event receipt logs (KERLs) for validating events. The security and accountability guarantees of indirect mode are provided by KERI’s Agreement Algorithm for Control Establishment (KA2CE) among a set of Witnesses.
+The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme [@DAD]. Two primary trust modalities motivated the design, these are a direct (one-to-one) mode and an indirect (one-to-any) mode. The indirect mode depends on witnessed Key event receipt logs (KERL) as a secondary root-of-trust for validating events, which is the background for the acronym KERI, Key Event Receipt Infrastructure. In the direct mode, the identity Controller establishes control via verified signatures of the controlling keypair. The indirect mode extends that trust basis with witnessed Key event receipt logs (KERLs) for validating events. The security and accountability guarantees of indirect mode are provided by KERI’s Algorithm for Witness Agreement (KAWA) among a set of Witnesses.
 
-The KA2CE approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. The KERI approach to DKMI allows for more granular composition. Moreover, because KERI is event streamed it enables DKMI that operates in-stride with data events streaming applications such as web 3.0, IoT, and others where performance and scalability are more important. The core KERI engine is identifier namespace independent. This makes KERI a candidate for a universal portable DKMI.
+The KAWA approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. The KERI approach to DKMI allows for more granular composition. Moreover, because KERI is event streamed, it enables DKMI to operate in-stride with data events streaming applications such as web 3.0, IoT, and others where performance and scalability are more important. The core KERI engine is identifier namespace independent. This makes KERI a candidate for a universal portable DKMI.
 
 The main motivation for this work is to provide a secure decentralized foundation of attributional trust for the Internet as a trustable spanning layer in the form of an identifier system security overlay. This identifier system security overlay provides verifiable authorship (authenticity) of any message or data item via secure (Cryptographically verifiable) attribution to a cryptonymous (cryptographic strength pseudonymous) SCID [@KERI][@UIT][@SCPK][@SFS][@SCPN][@SCURL][@PKI].
 
@@ -115,9 +115,9 @@ The identity system-based secure overlay for the Internet, based on KERI, includ
 
 The primary root-of-trust are SCIDs that are strongly bound at issuance to a cryptographic signing (public, private) keypair, which is self-contained until/unless control needs to be transferred to a new keypair. In that event, an append-only chained key-event log of signed transfer statements provides end-verifiable control provenance. This makes intervening operational infrastructure replaceable because the event logs may be served up by any infrastructure including ambient infrastructure. End verifiable logs on ambient infrastructure enable ambient verifiability (verifiable by anyone, anywhere, at any time).
 
-The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme. Two primary trust modalities motivated the design, a direct (one-to-one) mode and an indirect (one-to-any) mode. The indirect mode depends on witnessed Key event receipt logs (KERL) as a secondary root-of-trust for validating events., which is the background for the acronym KERI, Key event receipt infrastructure. In the direct mode, the identity Controller establishes control via verified signatures of the controlling keypair. The indirect mode extends that trust basis with witnessed KERL for validating events. The security and accountability guarantees of indirect mode are provided by KERI’s Agreement Algorithm for Control Establishment (KA2CE) among a set of Witnesses.
+The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme. Two primary trust modalities motivated the design, a direct (one-to-one) mode and an indirect (one-to-any) mode. The indirect mode depends on witnessed Key event receipt logs (KERL) as a secondary root-of-trust for validating events., which is the background for the acronym KERI, Key event receipt infrastructure. In the direct mode, the identity Controller establishes control via verified signatures of the controlling keypair. The indirect mode extends that trust basis with witnessed KERL for validating events. The security and accountability guarantees of indirect mode are provided by KERI’s Algorithm for Witness Agreement (KAWA) among a set of Witnesses.
 
-The KA2CE approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. The KERI approach to DKMI allows for a more granular composition. Moreover, because KERI is event streamed it enables DKMI that operates in-stride with data events streaming applications such as web 3.0, IoT, and others where performance and scalability are more important. The core KERI engine is identifier namespace independent. This makes KERI a candidate for a universal portable DKMI.
+The KAWA approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. The KERI approach to DKMI allows for a more granular composition. Moreover, because KERI is event streamed, it enables DKMI to operate in-stride with data events streaming applications such as web 3.0, IoT, and others where performance and scalability are more important. The core KERI engine is identifier namespace independent. This makes KERI a candidate for a universal portable DKMI.
 
 
 ## Normative references
@@ -251,7 +251,27 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 https://github.com/trustoverip/tswg-keri-specification/issues/54
 :::
 
+<<<<<<< HEAD
+Self-addressing identifiers (SAIDs)
+SAD (Self-Addressed Data)
+Autonomic namespaces (ANs)
+Autonomic identity system (AIS)
+Decentralized key management infrastructure (DPKI/DKMI)
+Key event receipt log (KERL)
+KERI’s Algorithm for Witness Agreement (KAWA)  (formerly known as KA2CE)
+Controller
+Witness
+Watcher
+Key state notice
+Backer
+Configuration traits, Modes
+Seals/Anchors
+Current threshold
+Next threshold
+Ricardian contracts (RC)
+=======
 [[def: SAD (Self-Addressed Data)]]
+>>>>>>> toip/revised-format
 
 ~ todo
 
@@ -1614,12 +1634,20 @@ Protection consists of either prevention or mitigation of both of the harm cases
 
 
 ### Validation and Superseding Recovery
+<<<<<<< HEAD
+#### VerifierA verifier is an entity or component that cryptographically verifies an event message's structure and its signature(s). Structure verification includes verifying the event's said, the appearance of fields, and prior event digests. In order to verify signatures, a verifier must first determine which set of keys are or were the controlling set for the AID of that event when the event was issued. In other words, a verifier must also establish the control authority for the event at issuance. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to and including the issued event. Signature verification includes verifying signatures from both current signing and exposed prior rotation (if any) public keys for the event. This includes verifying threshold satisfaction for both current and prior rotation thresholds. Without loss of generality, any reference to the verification of an event or verification of an event's signatures refers to the complete process described above.#### ValidatorIn contrast, a validator is an entity or component that determines that a given signed event associated with an AID was valid at the time of its issuance. Validation first requires that the event itself is verifiable; that is, it has verifiable structure and signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the event in order to determine its validity. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
+
+#### Duplicity
+=======
 
 A verifier is an entity or component that cryptographically verifies an event message's signature(s). In order to verify a signature, a verifier must first determine which set of keys are or were the controlling set for an identifier when an event was issued. In other words, a verifier must first establish control authority for an identifier. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to the time at which the statement was issued.
 
 In contrast, a validator is an entity or component that determines that a given signed statement associated with an identifier was valid at the time of its issuance. Validation first requires that the statement is verifiable; that is, it has verifiable signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the statement in order to determine its validity for a given use case. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
+>>>>>>> toip/revised-format
 
 A duplicitous event is defined as a verified but different version of an event at the same location. The possession of a KEL for any AID enables duplicity detection by a validator for any set of events with respect to that KEL. Indeed, this property of KERI enables duplicity evident processing of events. This forms a basis for evaluating trust in the controller of an AID. A validator can decide to trust or not based on the evidence or lack thereof of duplicity. A validator may choose to trust when there is no evidence of duplicity. A validator should choose not to trust when there is evidence of duplicity. In some cases, as will be described forthwith, the controller may perform a recovery operation that enables a validator to reconcile that duplicity and allow the validator to once again trust the controller.
+
+#### Event Types and Classes
 
 In validation, in addition to the version, the type and/or class of event may matter. The are five types of events, inception, `icp`, rotation, `rot`, interaction, `ixn`, delegated inception `dip`, and delegated rotation, `drt`. 
 
@@ -1629,180 +1657,93 @@ There are two main classes of events these are:
 
 There is one sub-class, delegated establishment, which consists of the types of delegated inception and delegated rotation.
 
+#### Validator Roles and Event Locality
+
 Each controller must accept events into its own copy of its KEL. In that sense, every controller is also a validator for its own AID. Controllers, as validators, play different roles for different types and classes of events. The validation logic for acceptance of an event into a given controller's KEL depends on the role that the controller plays for that type or class of event. 
 
 The possible roles that a given validator may play for any given event are as follows: controller, witness, delegator, delegatee, or none of the above. For the sake of clarity, let us call validators that act in different roles with respect to a given event
 the parties to the event. When the context makes it clear, a party that is not one of a controller, witness, delegator, or delegatee is called simply a validator. Otherwise, the role of the validator is qualified. We can then more simply express the roles as controller, witness, validator, delegator, and delegatee. It may be referred to as a validator when it does not matter what role a party plays. To clarify, all the parties perform validation, but the validation rules are different for each role.
 A given controller may also act as a delegator or delegatee for a given event. A given event for an AID may both delegate other AIDs and be delegated by yet other AIDs. An event is processed differently by each party depending on its respective role or roles.
 
-Moreover, events are also processed as either local (protected, tustable) or remote (unprotected, untrustable). The validator of a local event may assume that the event came from a protected, trustable source, such as the device upon which the validation code is running or from a protected transmission path from some trustable source. The validator of a remote (nonlocal) event must assume that the event may have come from a malicious, untrustable source.  To elaborate, an event is deemed local when the event is sourced locally on a device under the supervision of the validator or was received via some protected channel using some form of MFA (multi-factor authentication) that the validator trusts. Am event is deemed remote (nonlocal) when it is received in an unprotected (untrustable) manner. The purpose of local versus remote is to enable increased security when processing local events where a threshold structure may be imposed, such as a threshold of accountable duplicity for a witness pool.
+Moreover, events are also processed as either local (protected, tustable) or nonlocal, i.e, remote (unprotected, untrustable). The validator of a local event may assume that the event came from a protected, trustable source, such as the device upon which the validation code is running or from a protected transmission path from some trustable source. The validator of a remote (nonlocal) event must assume that the event may have come from a malicious, untrustable source.  To elaborate, an event is deemed local when the event is sourced locally on a device under the supervision of the validator or was received via some protected channel using some form of MFA (multi-factor authentication) that the validator trusts. Am event is deemed remote (nonlocal) when it is received in an unprotected (untrustable) manner. The purpose of local versus remote is to enable increased security when processing local events where a threshold structure may be imposed, such as a threshold of accountable duplicity for a witness pool.
 
 To elaborate, a witness pool may act as a threshold structure for enhanced security when each witness only accepts local events that are protected by a unique authentication factor in addition to the controller's signatures on the event, thereby making the set of controller signature(s) the primary factor and the set of unique witness authentication factors a secondary thresholded multifactor. In this case, an attacker would have to compromise not merely the controller's set of private key(s) but also the unique second factor on each of a threshold number of witnesses.
 
-Likewise, a delegator may act as a threshold structure for enhanced security when the delegator only accepts local events for delegation that are protected by a unique authentication factor, thereby making the set of controller signature(s) the primary factor, the set of unique witness authentication factors a secondary thresholded multifactor and the delegator's unique authentication factor as a tertiary factor. An attacker therefore has to compromise not merely the controller's
-private key(s) as the primary factor, but also the unique secondary factor on each of a threshold number of witnesses and the unique tertiary factor for the delegator. This layered set of multifactor authentication mechanisms can make exploit practically infeasible.
+Likewise, a delegator may act as a threshold structure for enhanced security when the delegator only accepts local events for delegation that are protected by a unique authentication factor, thereby making the set of controller signature(s) the primary factor, the set of unique witness authentication factors a secondary thresholded multifactor and the delegator's unique authentication factor as a tertiary factor. An attacker, therefore, has to compromise not merely the controller's
+private key(s) as the primary factor but also the unique secondary factor on each of a threshold number of witnesses and the unique tertiary factor for the delegator. This layered set of multifactor authentication mechanisms can make exploit practically infeasible.
+
+#### Validation Rules
 
 The validation rules are as follows:
 
-A controller (non-delegatee) may accept its own locally sourced event into its own KEL when signed by itself prior to full witnessing by signing the event. This acceptance then triggers the logic to request witness receipts. A remote sourced event must not be accepted by its own controller into its own controller's KEL.
+- Given a local event, the event's controller (non-delegatee) can sign and accept that event into its copy of that event's KEL. The controller should then propagate that event with attached controller signatures to the event's witnesses for receipting. Given a remote event, the event's controller (non-delegatee) should not sign or otherwise accept that event into its copy of that event's KEL. The controller should not propagate that event to the event's witnesses for receipting.
 
-A witness  may accept an event  prior to full witnessing by signing the event. This acceptance then triggers the logic to request witness receipts. This means a local (protected) event may be accepted its controller's KEL when fully signed by that controller but before it is fully receipted by its witnesses.
+- Given a local event, the event's witness must first verify the event's controller signatures before it can sign (witness) and accept that event into its copy of that event's KEL. The witness should then create a receipt of the event with the attached controller and witness signatures and can then propagate that event to other validators. Given a remote event, the event's witness should not sign or otherwise accept that event into its copy of that event's KEL. The witness should not propagate that event to other validators including witnesses.
 
-A delegatee must accept its own delegated event prior to full witnessing or delegator approval (via an anchored seal) by signing the event. This acceptance then triggers the logic to request witness receipts and subsequently delegator approval. This means a local (protected) event may be accepted its KEL when fully signed by controller but before it is fully receipted by its witnesses and before it has been approved by its delegator via an anchoring seal in the delegator's KEL.
+- Given a local delegated event, the event's delegatee can sign and accept that event into its copy of that event's KEL. The delegatee should then propagate that event with attached signatures to the event's witnesses for receipting. The delegatee should also propagate that event with attached controller signatures and attached witness signatures (if witnessed) to the event's delegator for approval via an anchored seal. Given a remote event, the event's delegatee should not sign or otherwise accept that event into its copy of that event's KEL. The delegatee should not propagate that event to the event's witnesses for receipting or to the event's delegator for approval.
 
-Witness must accept a controller's delegated event it witnesses prior to
-full witnessing or delegator approval in order to trigger its
-witnessing logic. This means a local (protected) event may be
-accepted into  a witness' KEL when fully signed by its controller.
+- Given a local delegated event, the event's delegator must first verify the event's delegatee signatures and witness signatures (if witnessed) before it can accept that event into its copy of that event's KEL. The delegator can then decide to approve that event by sealing (anchoring the event's seal) the event in the delegator's own KEL. Given it sealed the event, the delegator can then propagate a receipt of the sealing (anchoring) event to the event's delegatee and to the event's witnesses (if any).  Given a remote delegated event, the event's delegator should not approve (seal) or otherwise accept that event into its copy of that event's KEL. A malicious attacker that compromises the pre-rotated keys of the delegatee may issue a malicious but verifiable rotation that changes its witness pool in order to bypass the local security logic of the witness pool. The approval logic of the delegator should choose not to automatically approve a delegable rotation event unless that event's change to the witness pool is below the witness pool's prior threshold.
 
-Delegator may accept a delegated event prior to it anchoring
-a seal of the event in its KEL in order to trigger its approval logic.
-Alternatively the approval logic may be triggered immediately after
-it is received and authenticated on it its local (protected) channel
-but before it is submitted to its local Kevery for processing.
-The delegator MUST NOT accept a delegable event unless it is locally
-sourced, fully signed by its controller, and fully witnessed by its
-controller's designated witness pool.
-A Delegator may impose additional validation logic prior to approval.
-The approval logic may be handled by an escrow that only runs if
-the delegable event is sourced as local. This may require a
-sandboxed kel for the delegatee in order to not corrupt its pristine
-copy of the delegatee's KEL with a valid delegable event from a
-malicious source. The sandboxing logic may create a virtual
-delegation event with seal for the purpose of checking the delegated
-event superseding logic prior to acceptance.
+- Given a local or remote event, a non-controller, non-witness, non-delegator validator must first verify the event's controller signatures, witness signatures (if witnessed), and delegator anchoring seal (if delegated) before it can accept that event into its copy of that event's KEL.
 
-A malicious attacker that compromises the pre-rotated keys of the
-delegatee may issue a rotation that changes its witness pool in order
-to bypass the local security logic of the witness pool. The approval
-logic of the delegator may choose to not automatically approve a
-delegable rotation event unliess the change to the witness pool is
-below the threshold.
+- Given either a local or remote receipt any validator must first verify the witness signatures or delegator seals attached to that receipt and then can attach those signatures or seals to its copy of the event.
 
-The logic for superseded events is NOT a requirement for acceptance in
-either a delegated event controller's KEL or its witness' KEL. The
-delegator's kel creates a virtual (provisional) delegating interaction
-event in order to evaluate correct superseding logic so as not to
-accept an invalid supderseding delegated event into its local copy
-of the delegated KEL. This virtual event is needed because superseding
-logic requires an anchoring seal be present before the rules can
-be fully evaluated.
+### Superseding Recovery and Reconciliation
 
-Should the actual anchor be via a superseding rotation in the
-delegator's KEL not via an interaction event then the delegator must
-check the logic for a virtual delegating rotation instead.
-In either case the delegated event does not change so the virtual
-delegating checks are sufficient to accept the delegated event
-into the delegator's local copy of the delegatee's KEL.
+#### First Seen Policy
+
+Once a given version of an event at a location has been accepted, it is considered "first seen" for that KEL. Once an event has been first seen, it is always seen and can't be unseen. This rule is succinctly expressed as "first seen, always seen, never unseen." This first-seen property enables duplicity detection of different versions of an event. Although an event can never be unseen, in some special cases, it may be superseded by a different version of an event at the same location. Although never explicitly represented in an event message itself, each event belonging to a KEL is also assigned a strictly monotonically increasing integer ordinal called the first-seen number, `fn`, which is stored alongside the event in the KEL database. This allows any copy of a KEL to keep track of the ordering of when each event was first-seen independent of the event's location given by its sequence number, `sn`. Different copies of a KEL may have different first-seen numbers, `fn` for given versions of events at a location, `sn`, but consistent copies of the KEL will have the same version of the event at every location. Events that are superseded are essentially forked. A KEL is essentially a directed acyclic graph (DAG) of events. When an event is superseded, a branch in the DAG is created. There may be only one undisputed path through the DAG called the trunk. All the superseded branches are considered disputed. 
+
+#### Reconciliation
+
+Reconciliation is the process of determining the undisputed path, i.e., the trunk. If every validator of a KEL cannot universally find the same undisputed path (trunk) through a KEL, then the KEL is irreconcilable. Reconciliation happens by applying the superseding validation acceptance (reconciliation) rules to different versions of events that are received for the same location in a KEL. Superseding events provide a universal reconciliation process to enable recovery from key compromises where such key compromises resulted in the first acceptance of compromised events into a KEL. Recovery happens with superseding rotation events that both rotate out the compromised keys and dispute the events signed by those compromised keys. Because events are signed nonrepudiably, any key compromise is still the responsibility of the controller. That controller may still be held accountable for any harm that resulted from the compromise. However, recovery enables the KEL to be repaired so that future validators of the KEL will not see the compromised events after recovery. The events will only be seen by the validators who first saw the events before recovery.
+
+The superseding validation acceptance rules for events at a given location may involve some combination of the location, version, type, and class of the event as well as the role of the validator, such as controller, witness, delegator, delegatee, or none of the above.
 
 
-Any of delegated controller, delegated witness, or delegator
-of delegated event may after the fact fully validate event by
-processing it as a remote event.
-Then the logic applied is same as validator below.
+#### Superseding Recovery
 
-A validator of a delegated event that is not the event's controller,
-witness, or delegator must not accept the event until is is fully
-signed by the controller (threshold), fully witnessed by the witness
-pool (threshold) and its seal anchored in the delegator's KEL. The
-rules for event superseding in the delegated controller's kel must
-also be satisfied. The logic should be the same for both local and
-remote event because the validator is not one of the protected parties
-to the event.
+To supersede an event means that after an event has already been accepted as first seen into a KEL, a different event at the same location (same sequence number) is accepted that supersedes that pre-existing event. The new event becomes part of the trunk (undisputed path), and the old event is the first event in a fork (branch) that includes all the subsequent events to the superseded event. This enables the recovery over the control of a KEl in spite of events signed by compromised keys. The result of superseded recovery is that the KEL is forked at the `sn` (location) of the superseding event. The compromised events are shunted to the disputed branch, and new events to the KEL are attached to the new end of the trunk formed by the superseding event. To clarify, all events in the superseded branch of the fork still exist but, by virtue of being superseded, are disputed. The set of superseding events in the superseding fork forms the authoritative branch of the KEL, i.e., its trunk or undisputed path. All the already-seen but superseded events in the superseded fork still remain in the KEL. They may be viewed or replayed in order of their original acceptance because the database stores all accepted events in order of acceptance and denotes this order using the first seen ordinal number, `fn`. The `fn` is not the same as the `sn` (sequence number). Each event accepted into a KEL has a unique `fn` but multiple events due to recovery forks may share the same `sn`.  Events with the same `sn` in different copies of the same KEL may have different `fns` because the events may have been first seen or accepted into that KEL in a different order. Notably, an event that may not supersede, according to the rules below, another event at the same location cannot be first seen at all by that KEL. This effectively protects the KEL from later compromise for any downstream recipients of that KEL.
 
 
-Event acceptance rules. signing and witnessing.
+#### Superseding Rules for Recovery at a given location, SN (sequence number).
+
+A.
+  A0. Any rotation event may supersede an interaction event at the same `sn` where that interaction event is not before any other rotation event.
+  A1. A non-delegated rotation may not supersede another rotation.
+  A2. An interaction event may not supersede any event.
+
+B.  A delegated rotation may supersede the latest-seen delegated rotation at the same `sn` under either of the following conditions:
+  B1.  The superseding rotation's delegating event is later than the superseded rotation's delegating event in the delegator's KEL, i.e., the `sn` of the superseding event's delegation is higher than the `sn` of the superseded event's delegation.
+  
+  B2. The superseding rotation's delegating event is the exact same delegating event as the superseded rotation's delegating event in the delegator's KEL, and the anchoring seal of the superseding rotation's delegated event appears later in the seal list than the anchoring seal of the superseded rotation's delegated event. i.e., both superseded and superseding event delegations appear in the same delegating event, and the anchoring seal of the superseding rotation's event appears later in the seal list than the anchoring event seal of the superseded rotation's event.
+
+  B3. The `sn` of the superseding rotation's delegating event is the same as the `sn` of the superseded rotation's delegating event in the delegator's KEL, and the superseding rotation's delegating event is a rotation, and the superseded rotation's delegating event is an interaction, i.e., the superseding rotation's delegating event is itself a superseding rotation of the superseded rotation's delegating interaction event in its delegator's KEL.
+
+C. IF Neither A nor B is satisfied, then recursively apply rules A. and B. to the delegating events of those delegating events and so on until either  A. or B. is satisfied, or the root KEL of the delegation which must be undelegated has been reached.
+
+  C1. If neither A. nor B. is satisfied by the recursive application of C. to each delegator's KEL in turn, i.e., the root KEL of the delegation has been reached without satisfaction, then the superseding rotation is discarded. The terminal case of the recursive application of C. will occur at the root KEL, which by definition must be non-delegated therefore either A. or B. must be satisfied, or else the superseding rotation must be discarded.
+
+The latest-seen delegated rotation constraint in B means that any earlier delegated rotations can NOT be superseded. This greatly simplifies the validation logic and avoids a potentially infinite regress of forks in the delegated identifier's KEL. However, this means recovery can happen for any compromise of pre-rotated keys, only the latest-seen. In order to unrecoverably capture control of a delegated identifier, the attacker must issue a delegated rotation that rotates to keys under the control of the attacker that the delegator must approve and then issue and get approved by the delegator another rotation that follows but does not supersede the compromising rotation. At that point, recovery is no longer possible because the delegate would no longer control the private pre-rotated keys needed to sign a recovery rotation as the latest-seen rotation verifiably. Recovery is possible after the first compromised rotation by superseding it but not after the subsequent compromised rotation.
+
+For example, in the diagram below, a rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events. 
+
+Diagram Here
 
 
 
-Once a given version of an event at a location has been accepted, it is considered "first seen" by that KEL. Once an event has been first seen, it is always seen and can't be unseen. This rule is succinctly expressed as first seen, always seen, never unseen. This first-seen property enables duplicity detection of different versions of an event. Although an event can never be unseen, in some special cases, it may be superseded by a different version of an event at the same location. Although never explicitly represented in an event message itself, each event belonging to a KEL is also assigned a strictly monotonically increasing integer ordinal called the first-seen number, `fn`, which is stored alongside the event in the KEL database. This allows any copy of a KEL to keep track of the ordering of when each event was first-seen independent of the event's location given by its sequence number, `sn`. Different copies of a KEL may have different first-seen numbers, `fn` for given versions of events at a location, `sn`, but consistent copies of the KEL will have the same version of the event at every location. Events that are superseded are essentially forked. A KEL is essentially a directed acyclic graph (DAG) of events. When an event is superseded, a branch in the DAG is created. There may be only one undisputed path through the DAG. All the superseded branches are considered disputed. 
 
-Reconciliation is the process of determining the undisputed path. If an undisputed path cannot be universally found by every validator, then the KEL is irreconcilable. In other words, the reconciliation happens by applying the superseding validation acceptance (reconciliation) rules to different versions of events that are recieved for the same location in a KEL. Superseding events provide a universal reconciliation process to enable recovery from key compromises where such key compromises resulted in the first acceptance of compromised events into a KEL. Recovery happens with superseding rotation events that both rotate out the compromised keys and dispute the events signed by those compromised keys. Because events are signed nonrepudiably, any key compromise is still the responsibility of the controller. That controller may still be held accountable for any harm that resulted from the compromise. However, recovery enables the KEL to be repaired so that future validators of the KEL will not see the compromised events after recovery. The events will only be seen by the validators who first saw the events before recovery.
-
-The superseding validation acceptance rules for events at a given location may involve some combination of the location, version, type, and class of the event as well as the role of the validator, such as controller, witness, delegator, delegatee, or non-of the above.
-
-
-##### Superseding Recovery:
-
-Supersede means that after an event has already been accepted as first seen
-into a KEL that a different event with the same sequence number is accepted
-that supersedes the pre-existing event at that sn. This enables the recovery of
-events signed by compromised keys. The result of superseded recovery is that
-the KEL is forked at the sn of the superseding event. All events in the
-superseded branch of the fork still exist but, by virtue of being superseded,
-are disputed. The set of superseding events in the superseding fork forms the authoritative
-branch of the KEL. All the already seen superseded events in the superseded fork
-still remain in the KEL and may be viewed in order of their original acceptance
-because the database stores all accepted events in order of acceptance and
-denotes this order using the first seen ordinal number, fn.
-The fn is not the same as the sn (sequence number).
-Each event accepted into a KEL has a unique fn but multiple events due to
-recovery forks may share the same sn.
-
-
-Superseding Rules for Recovery at given SN (sequence number)
-
-A0. Any rotation event may supersede an interaction event at the same sn.
-    where that interaction event is not before any other rotation event.
-    (existing rule)
-A1. A non-delegated rotation may not supersede another rotation at the
-    same sn.  (modified rule)
-A2. An interaction event may not supersede any event. ( existing rule).
-
-(B. and C. below provide the new rules)
-
-B.  A delegated rotation may supersede the latest seen delegated rotation
-    at the same sn under either of the following conditions:
-
-    B1.  The superseding rotation's delegating event is later than
-    the superseded rotation's delegating event in the delegator's KEL, i.e. the
-    sn of the superseding event's delegation is higher than the superseded event's
-    delegation.
-
-    B2. The sn of the superseding rotation's delegating event is the same as
-    the sn of the superseded rotation's delegating event in the delegator's KEL
-    and the superseding rotation's delegating event is a rotation and the
-    superseded rotation's delegating event is an interaction,
-    i.e. the superseding rotation's delegating event is itself a superseding
-    rotation of the superseded rotations delegating interaction event in the
-    delgator's KEL
-
-C. IF Neither A nor B is satisfied, then recursively apply rules A. and B. to
-    the delegating events of those delegating events and so on until
-    either  A. or B. is satisfied, or the root KEL of the delegation
-    which must be undelegated has been reached.
-
-    C1. If neither A. nor B. is satisfied by recursive application on the
-    delegator's KEL (i.e. the root KEL of the delegation has been reached
-    without satisfaction) then the superseding rotation is discarded.
-    The terminal case of the recursive application will occur at the
-    root KEL which by defintion is non-delegated wherefore either
-    A. or B. must be satisfied, or else the superseding rotation must
-    be discarded.
-
-Note: The latest seen deleagated rotation constraint means that any earlier
-delegated rotations can NOT be superseded. This greatly simplifies the
-validation logic and avoids a potential infinite regress of forks in the
-delegated identifier's KEL.
-
-In order to capture control of a delegated identifier the attacker must
-issue a delegated rotation that rotates to keys under the control of the
-attacker that must be approved by the delegator. A recovery rotation must
-therefore superseded the compromised rotation. If the attacker is able
-to issue and get approved by the delegator a second rotation
-that follows but does not supersede the compromising rotation then
-recovery is no longer possible because the delegatee would no longer
-control the privete keys needed to verifiably sign a recovery rotation.
-
-
-
-For example, a dia rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The specific details of this recovery are explained later. In general, the witnessing policy is that the first seen version of an event always wins, that is the first verified version is witnessed (signed, stored, acknowledged, and maybe disseminated) and all other versions are discarded. The exception to this general rule is that an establishment event may recover following a set of exploited non-establishment events. The recovery process may fork off a branch from the recovered trunk. This disputed branch has the disputed exploited events and the main trunk has the recovered events. The operational mode (see Section 10.) and the threshold of accountable duplicity determine which events in the disputed branch are accountable to the controller (see Section  11.6).
-
-### KERI's Algorithm of Witness Agreement (KAWA)
+### KERI's Algorithm for Witness Agreement (KAWA)
 
 #### Introduction
+<<<<<<< HEAD
+
+A controller may provide a highly available promulgation service for its events via a set or pool of N designated witnesses. This witness pool may also provide enhanced security for the controller over its events. Even though the witnesses are explicitly designated by the controller, they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event. The purpose of the witness set is to better protect the service from faults including Byzantine faults {{36}}. Thus, the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of KAWA is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attacks. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
+The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events, by and large, are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency, especially to merely prove the consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single-phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms {{[16; 39; 43; 48; 61; 115; 123; 144]}}. Indeed, the security guarantees from KAWA may approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover, because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
+=======
 the controller’s promulgation service is provided by a set of N designated witnesses. Although the witnesses are explicitly designated by the controller they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event.The purpose of the witness set is to better protect the service from faults including Byzantine faults [36]. Thus the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of the KAWA algorithm is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attack. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
 The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events by in large are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency especially to merely prove consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms [16; 39; 43; 48; 61; 115; 123; 144]. Indeed the security guarantees of an implementation of KAWA may be designed to approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
+>>>>>>> toip/revised-format
 
 #### Advantages
 
@@ -1810,7 +1751,7 @@ The reliance on a designated set of witnesses provides several advantages. The f
 Likewise, given any guarantees of accountability the controller may declare, a validator may provide itself with any degree of protection it deems necessary by designating a set of observers (watchers, jurors, and judges) . Specifically, a validator may be protected by maintaining a copy of the key event history as first seen (received) by the validator or any other component trusted by the validator (watcher, juror, judge). This copy may be used to detect any alternate inconsistent (duplicitous) copies of the key event history. The validator may then choose how to best respond in the event of a detected duplicitous copy to protect itself from harm. A special case is a malicious controller that intentionally produces alternate key event histories. Importantly, observer components that maintain copies of the key event history such as watchers, jurors, and judges, may be under the control of validators not controllers. As a result a malicious alternate (duplicitous) event history may be eminently detectable by any validator. We call this ambient duplicity detection (which stems from ambient verifiability). In this case, a validator may still be protected because it may still hold such a malicious controller accountable given a duplicitous copy (trust or not trust). It is at the validator’s discretion whether or not to treat its original copy as the authoritative one with respect to any other copy and thereby continue trusting or not that original copy. A malicious controller may not therefore later substitute with impunity any alternate copy it may produce. Furthermore, as discussed above, a malicious controller that creates an alternative event history imperils any value it may wish to preserve in the associated identifier. It is potentially completely self-destructive with respect to the identifier. A malicious controller producing a detectably duplicitous event history is tantamount to a detectable total exploit of its authoritative keys and the keys of its witness set. This is analogous to a total but detectable exploit of any BFT ledger such as a detectable 51% attack on a proof-of-work ledger. A detectable total exploit destroys any value in that ledger after the point of exploit. 
 To restate a controller may designate its witness set in such a way as to provide any arbitrary degree of protection from external exploit. Nonetheless in the event of such an exploit a validator may choose either to hold that controller accountable as duplicitous and therefore stop trusting the identifier or to treat the validator’s copy of the key event history as authoritative (ignoring the exploited copy) and therefore continue trusting the identifier. This dependence on the validator’s choice in the event of detected duplicity both imperils any potential malicious controller and protects the validator. 
 
-KERI’s Algorithm for Witness Agreement (KAWA) or the algorithm, (formerly known as KERI’s Agreement Algorithm for Consensus Control establishment or KA2C2E) is run by the controller of an identifier in concert with a set of N witnesses designated by the controller to provide as a service the key event history of that identifier via a KERL (Key Event Receipt Log) in a highly available and fault-tolerant manner. One motivation for using key event logs is that the operation of redundant immutable (deletion proof) event logs may be parallelizable and hence highly scalable. A KERL is an immutable event log that is made deletion proof by virtue of it being provided by the set of witnesses of which only a subset of F witnesses may at any time be faulty. In addition to designating the witness set, the controller also designates a threshold number, M, of witnesses for accountability. To clarify, the controller accepts accountability for an event when any subset M of the N witnesses confirms that event. The threshold M indicates the minimum number of confirming witnesses the controller deems sufficient given some number F of potentially faulty witnesses. The objective of the service is to provide a verifiable KERL to any validator on demand. Unlike direct mode where a validator may be viewed as an implicit witness, with indirect mode, a validator may not be one of the N explicitly designated witnesses that provide the service. 
+KERI’s Algorithm for Witness Agreement (KAWA) or the algorithm is run by the controller of an identifier in concert with a set of N witnesses designated by the controller to provide as a service the key event history of that identifier via a KERL (Key Event Receipt Log) in a highly available and fault-tolerant manner. One motivation for using key event logs is that the operation of redundant immutable (deletion proof) event logs may be parallelizable and hence highly scalable. A KERL is an immutable event log that is made deletion proof by virtue of it being provided by the set of witnesses of which only a subset of F witnesses may at any time be faulty. In addition to designating the witness set, the controller also designates a threshold number, M, of witnesses for accountability. To clarify, the controller accepts accountability for an event when any subset M of the N witnesses confirms that event. The threshold M indicates the minimum number of confirming witnesses the controller deems sufficient given some number F of potentially faulty witnesses. The objective of the service is to provide a verifiable KERL to any validator on demand. Unlike direct mode where a validator may be viewed as an implicit witness, with indirect mode, a validator may not be one of the N explicitly designated witnesses that provide the service. 
 
 #### Witness Designation
 The controller designates both the witness tally number and the initial set of witnesses in the inception event configuration. The purpose of the tally is to provide a threshold of accountability for the number of witnesses confirming an event. Subsequent rotation operations may amend the set of witnesses and change the tally number. This enables the controller to replace faulty witnesses and/or change the threshold of accountability of the witness set. When a rotation amends the witnesses it includes the new tally, the set of pruned (removed) witnesses and the set of newly grafted (added) witnesses. 
@@ -1836,7 +1777,7 @@ TABLE HERE
 Given the immune constraint is satisfied, the service may not produce multiple divergent but proper key event receipt logs (KERLs). 
 In order to be deemed proper, an agreement must have been verified as consistent with all prior events by every non-faulty witness who is a party to that agreement. Thus, any user of the service, be it a validator, watcher, juror, or judge, will be able to obtain either a proper event agreement on demand from some witness or none at all. Any non-faulty witness with a proper agreement will keep that agreement in its KERL and provide it on demand. Consequently, the availability of a proper event at a witness is tantamount to the availability of a proper log (KERL) of all prior events consistent with that event at that witness, and thereby, high availability of the service is assured.
 
-#### Security Properties of KAWA
+#### Security Properties
 
 The continuing promulgation of key events assumes a sufficiently responsive controller. Lack of responsiveness is primarily a threat to the controller, not a validator. Consequently, providing sufficient controller responsiveness is the controller's responsibility, not of KAWA. In contrast, a responsive but dishonest (or compromised) controller may pose a live threat to a validator with respect to new events never before seen by the validator. The validation process must provide means for the validator to protect itself from such threats. When the controller is responsive but dishonest, it may create inconsistent versions of an event that are first seen by different subsets of its witnesses. In the case where only F of the witnesses is faulty despite a dishonest controller, the validator may protect itself by requiring a large enough sufficient agreement or threshold of accountable duplicity, M, that guarantees that either only one satisfying agreement or none at all, e.g., makes the service immune. To restate, the validator may select its M to ensure the the service is immune such that the service will either provide one and only one proper key event receipt log (KERL) or none at all. This protects the validator.
 
