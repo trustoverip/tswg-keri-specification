@@ -13,7 +13,7 @@ All Trust Over IP Foundation Technical Stack Working Group contributions are don
 
 #### Licensing
 
-All Trust Over IP Foundation deliverables are published under the following licenses:
+All Trust Over IP Foundation Technical Stack Working Group deliverables are published under the following licenses:
 
 * [Patent and Copyright Grants](LICENSE.md)
 * [Source Code](SOURCE_CODE.md)
