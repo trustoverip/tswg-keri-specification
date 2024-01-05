@@ -251,27 +251,8 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 https://github.com/trustoverip/tswg-keri-specification/issues/54
 :::
 
-<<<<<<< HEAD
-Self-addressing identifiers (SAIDs)
-SAD (Self-Addressed Data)
-Autonomic namespaces (ANs)
-Autonomic identity system (AIS)
-Decentralized key management infrastructure (DPKI/DKMI)
-Key event receipt log (KERL)
-KERI’s Algorithm for Witness Agreement (KAWA)  (formerly known as KA2CE)
-Controller
-Witness
-Watcher
-Key state notice
-Backer
-Configuration traits, Modes
-Seals/Anchors
-Current threshold
-Next threshold
-Ricardian contracts (RC)
-=======
 [[def: SAD (Self-Addressed Data)]]
->>>>>>> toip/revised-format
+
 
 ~ todo
 
@@ -311,7 +292,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/58
 https://github.com/trustoverip/tswg-keri-specification/issues/59
 :::
 
-[[def: KERI’s Agreement Algorithm for Control Establishment (KA2CE)]]
+[[def: KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE)]]
 
 ~ todo
 
@@ -1634,16 +1615,11 @@ Protection consists of either prevention or mitigation of both of the harm cases
 
 
 ### Validation and Superseding Recovery
-<<<<<<< HEAD
+
 #### VerifierA verifier is an entity or component that cryptographically verifies an event message's structure and its signature(s). Structure verification includes verifying the event's said, the appearance of fields, and prior event digests. In order to verify signatures, a verifier must first determine which set of keys are or were the controlling set for the AID of that event when the event was issued. In other words, a verifier must also establish the control authority for the event at issuance. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to and including the issued event. Signature verification includes verifying signatures from both current signing and exposed prior rotation (if any) public keys for the event. This includes verifying threshold satisfaction for both current and prior rotation thresholds. Without loss of generality, any reference to the verification of an event or verification of an event's signatures refers to the complete process described above.#### ValidatorIn contrast, a validator is an entity or component that determines that a given signed event associated with an AID was valid at the time of its issuance. Validation first requires that the event itself is verifiable; that is, it has verifiable structure and signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the event in order to determine its validity. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
 
 #### Duplicity
-=======
 
-A verifier is an entity or component that cryptographically verifies an event message's signature(s). In order to verify a signature, a verifier must first determine which set of keys are or were the controlling set for an identifier when an event was issued. In other words, a verifier must first establish control authority for an identifier. This control establishment requires a copy of the inception event for identifiers that are declared as non-transferable at inception. For identifiers that are declared transferable at inception, this control establishment requires a complete copy of the sequence of key operation events (inception and all rotations) for the identifier up to the time at which the statement was issued.
-
-In contrast, a validator is an entity or component that determines that a given signed statement associated with an identifier was valid at the time of its issuance. Validation first requires that the statement is verifiable; that is, it has verifiable signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the statement in order to determine its validity for a given use case. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event. 
->>>>>>> toip/revised-format
 
 A duplicitous event is defined as a verified but different version of an event at the same location. The possession of a KEL for any AID enables duplicity detection by a validator for any set of events with respect to that KEL. Indeed, this property of KERI enables duplicity evident processing of events. This forms a basis for evaluating trust in the controller of an AID. A validator can decide to trust or not based on the evidence or lack thereof of duplicity. A validator may choose to trust when there is no evidence of duplicity. A validator should choose not to trust when there is evidence of duplicity. In some cases, as will be described forthwith, the controller may perform a recovery operation that enables a validator to reconcile that duplicity and allow the validator to once again trust the controller.
 
@@ -1736,14 +1712,9 @@ Diagram Here
 ### KERI's Algorithm for Witness Agreement (KAWA)
 
 #### Introduction
-<<<<<<< HEAD
 
 A controller may provide a highly available promulgation service for its events via a set or pool of N designated witnesses. This witness pool may also provide enhanced security for the controller over its events. Even though the witnesses are explicitly designated by the controller, they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event. The purpose of the witness set is to better protect the service from faults including Byzantine faults {{36}}. Thus, the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of KAWA is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attacks. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
 The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events, by and large, are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency, especially to merely prove the consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single-phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms {{[16; 39; 43; 48; 61; 115; 123; 144]}}. Indeed, the security guarantees from KAWA may approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover, because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
-=======
-the controller’s promulgation service is provided by a set of N designated witnesses. Although the witnesses are explicitly designated by the controller they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event.The purpose of the witness set is to better protect the service from faults including Byzantine faults [36]. Thus the service employs a type of Byzantine Fault Tolerant (BFT) algorithm. We call this KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of the KAWA algorithm is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attack. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand. 
-The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events by in large are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency especially to merely prove consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms [16; 39; 43; 48; 61; 115; 123; 144]. Indeed the security guarantees of an implementation of KAWA may be designed to approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure then so may be KAWA. Moreover because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability. 
->>>>>>> toip/revised-format
 
 #### Advantages
 
