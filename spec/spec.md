@@ -76,11 +76,9 @@ Thus, KERI addresses major flaw in the original design of the Internet Protocol 
 
 ## Status of This Memo
 
-This document contains a template specification for `ToIP`!.
-
 Information about the current status of this document, any errata,
 and how to provide feedback on it, may be obtained at
-[https://github.com/trustoverip/specification-template](https://github.com/trustoverip/specification-template).
+[https://github.com/trustoverip/tswg-keri-specification](https://github.com/trustoverip/tswg-keri-specification).
 
 ## Copyright Notice
 
