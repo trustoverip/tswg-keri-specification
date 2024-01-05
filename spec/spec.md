@@ -20,7 +20,7 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/51
 :::
 
@@ -38,7 +38,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/51
 
 The foreword goes here.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/47
 :::
 
@@ -52,13 +52,13 @@ https://github.com/trustoverip/tswg-keri-specification/issues/47
 
 [//]: # (:::)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/48
 :::
 
 This document presents identity system-based secure overlay for the Internet is presented. This system is based on a Key Event Receipt Infrastructure (KERI) or the KERI protocol. The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme as the background for the acronym KERI. [@DAD]
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/29
 :::
 
@@ -107,7 +107,7 @@ IN NO EVENT WILL ANY ToIP PARTY BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR
 
 ## Scope
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/49
 :::
 
@@ -213,11 +213,11 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: End-verifiability]]
 
-::: issue Issue Notice
+~ todo
+
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/35
 :::
-
-: todo
 
 [[def: Duplicity]]
 
@@ -243,31 +243,147 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 ~ message whose body references a Key event and whose attachments must include one or more signatures on that Key event.
 
-List  list of terms to be defined:
+[[def: Self-addressing identifiers (SAIDs)]]
 
-::: issue Issue Notice
-https://github.com/trustoverip/tswg-keri-specification/issues/36
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/54
 :::
 
-Self-addressing identifiers (SAIDs)
-SAD (Self-Addressed Data)
-Autonomic namespaces (ANs)
-Autonomic identity system (AIS)
-Decentralized key management infrastructure (DPKI/DKMI)
-Key event receipt log (KERL)
-KERI’s Agreement Algorithm for Control Establishment (KA2CE)
-Controller
-Witness
-Watcher
-Key state notice
-Backer
-Configuration traits, Modes
-Seals/Anchors
-Current threshold
-Next threshold
-Ricardian contracts (RC)
+[[def: SAD (Self-Addressed Data)]]
 
-::: issue Issue Notice
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/55
+:::
+
+[[def: Autonomic namespaces (ANs)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/56
+:::
+
+[[def: Autonomic identity system (AIS)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/57
+:::
+
+[[def: Decentralized key management infrastructure (DPKI/DKMI)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/58
+:::
+
+[[def: Key event receipt log (KERL)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/59
+:::
+
+[[def: KERI’s Agreement Algorithm for Control Establishment (KA2CE)]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/60
+:::
+
+[[def: Controller]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/61
+:::
+
+[[def: Witness]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/62
+:::
+
+[[def: Watcher]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/63
+:::
+
+[[def: Key state notice]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/64
+:::
+
+[[def: Backer]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/65
+:::
+
+[[def: Configuration traits, Modes]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/66
+:::
+
+[[def: Seals]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/67
+:::
+
+[[def: Anchors]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/68
+:::
+
+[[def: Current threshold]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/69
+:::
+
+[[def: Next threshold]]
+
+~ todo
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/70
+:::
+
+[[def: Ricardian contracts (RC)]]
+
+~ todo
+
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/18
 :::
 
@@ -275,11 +391,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/18
 
 ## KERI foundational overview
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/44
 :::
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/30
 :::
 
@@ -336,7 +452,7 @@ When these bindings are strong, then the overlay is highly unvunerable to attack
 
 The bound triad is created as follows:
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/33
 :::
 
@@ -421,7 +537,7 @@ The primary field labels are compact in that they use only one or two characters
 
 The version string, `v`, field MUST be the first field in any top-level KERI field map. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) that constitutes a KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies in a set of KERI field maps. Each KERI message body in a stream may use a different serialization type.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/20
 :::
 
@@ -445,7 +561,7 @@ In this context, `i` is short for `ai`, which is short for the Autonomic identif
 ###### Namespaced AIDs 
 Because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. The examples below use the W3C DID namespace specification with the `did:keri` method {{DIDK-ID}}. But the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/19
 :::
 
@@ -465,7 +581,7 @@ Common normalized ACDC and KERI labels
 
 ###  Seals
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/21
 :::
 
@@ -521,11 +637,11 @@ Originally all Messages included an `i` field but that is not true anymore. So t
 
 ##### Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/42
 :::
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/39
 :::
 
@@ -566,7 +682,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/39
 
 ##### Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -603,7 +719,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Interaction Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -633,7 +749,7 @@ ToDo in delegation section below. Delegated custodial example with partial rotat
 
 ##### Delegated Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -676,7 +792,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Delegated Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -719,7 +835,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -738,7 +854,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -762,7 +878,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Query Message Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -783,7 +899,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -807,7 +923,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Reply Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -827,7 +943,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -850,7 +966,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Prod Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -877,7 +993,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
 A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -901,7 +1017,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Exchange Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -923,7 +1039,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Key State Notice (KSN)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -959,7 +1075,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1003,7 +1119,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Transaction State Notice (TSN)
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1034,7 +1150,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Embedded in Reply
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1075,7 +1191,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Inception Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1096,7 +1212,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Registry Rotation Event Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1116,7 +1232,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Issuance Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1134,7 +1250,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backerless ACDC Revocation Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1153,7 +1269,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Issuance Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1176,7 +1292,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ##### Backered ACDC Revocation Message Body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1289,7 +1405,7 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
@@ -1742,7 +1858,7 @@ Alternatively, in the case of a complete and total dead exploit, the validator a
 
 Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/40
 :::
 
@@ -1945,7 +2061,7 @@ These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
 
 ## Reconcilable duplicity
 
-::: issue Issue Notice
+::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
