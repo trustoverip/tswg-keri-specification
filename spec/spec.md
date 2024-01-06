@@ -416,12 +416,12 @@ The KERI protocol fixes both of these flaws using a combination of AIDs, key pre
 
 ### Self-certifying identifier (SCID)
 
-The KERI identifier system overlay leverages the properties of cryptonymous Self-certifying identifiers (SCIDs) which are based on asymmetric public-key cryptography (PKI) to provide end-verifiable secure attribution of any message or data item without needing to trust in any intermediary. A SCID is uniquely cryptographically derived from the public key of an asymmetric keypair, `(public, private)`. The identifier is self-certifying in the sense that does not rely on a trusted entity. Any non-repudiable signature made with the private key may be verified by extracting the public key from either the identifier itself or incepting information uniquely associated with the cryptographic derivation process for the identifier. In a basic SCID, the mapping between an identifier and its controlling public key is self-contained in the identifier itself. A basic SCID is ephemeral i.e., it does not support Rotation of its keypairs in the event of key weakness or compromise and therefore must be abandoned once the controlling private key becomes weakened or compromised from exposure. The class of identifiers that generalize SCIDs with enhanced properties such as persistence is called Autonomic identifiers (AIDs).
+The KERI identifier system overlay leverages the properties of cryptonymous Self-certifying identifiers (SCIDs) which are based on asymmetric public-key cryptography (PKI) to provide end-verifiable secure attribution of any message or data item without needing to trust in any intermediary. A SCID is uniquely cryptographically derived from the public key of an asymmetric keypair, (public, private). The identifier is self-certifying in the sense that does not rely on a trusted entity. Any non-repudiable signature made with the private key may be verified by extracting the public key from either the identifier itself or incepting information uniquely associated with the cryptographic derivation process for the identifier. In a basic SCID, the mapping between an identifier and its controlling public key is self-contained in the identifier itself. A basic SCID is ephemeral i.e., it does not support Rotation of its keypairs in the event of key weakness or compromise and therefore must be abandoned once the controlling private key becomes weakened or compromised from exposure. The class of identifiers that generalize SCIDs with enhanced properties such as persistence is called Autonomic identifiers (AIDs).
 
 
 ### Autonomic identifier (AID) 
 
-Use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because the SCID ‘s keys may be refreshed or updated via Rotation allowing secure control over the identifier in spite of key weakness or even compromise. This family of generalized enhanced SCIDs is called AIDs. Autonomic means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing properties of this class of identifier. An AID may exhibit other self-managing properties such as transferable control using key pre-rotation which enables control over such an AID to persist in spite of key weakness or compromise due to exposure. Authoritative control over the identifier persists in spite of the evolution of the Key state.
+Use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because the SCID‘s keys may be refreshed or updated via Rotation, allowing secure control over the identifier in spite of key weakness or even compromise. This family of generalized enhanced SCIDs is called AIDs. Autonomic means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing properties of this class of identifier. An AID may exhibit other self-managing properties, such as transferable control using key pre-rotation, which enables control over such an AID to persist in spite of key weakness or compromise due to exposure. Authoritative control over the identifier persists in spite of the evolution of the Key state.
 
 ### Key rotation/pre-rotation
 
@@ -1321,85 +1321,93 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 In order to make key event expressions both clearer and more concise, a keypair labeling convention is used. When an AID's Key state is dynamic, i.e., the set of controlling keypairs is transferable, then the keypair labels are indexed in order to represent the successive sets of keypairs that constitute the Key state at any position in the KEL. Specifically, indexes on the labels for AIDs that are transferable to indicate which set of keypairs is associated with the AID at any given point in its Key state or KEL. In contrast, when the Key state is static, i.e., the set of controlling keypairs is non-transferable, then no indexes are needed because the Key state never changes.
 
-Recall that a keypair is a two tuple, (public, private), of the respective public and private keys in the keypair. For a given AID, the labeling convention uses an uppercase letter label to represent that AID. When the Key state is dynamic, a superscripted index on that letter is used to indicate which keypair is used at a given Key state. Alternatively, the index may be omitted when the context defines which keypair and which Key state, such as, for example, the latest or current Key state. To reiterate, when the Key state is static no index is needed.
+Recall that a keypair is a two tuple (public, private) of the respective public and private keys in the keypair. For a given AID, the labeling convention uses an uppercase letter label to represent that AID. When the Key state is dynamic, a superscripted index on that letter is used to indicate which keypair is used at a given Key state. Alternatively, the index may be omitted when the context defines which keypair and which Key state, such as, for example, the latest or current Key state. To reiterate, when the Key state is static, no index is needed.
 
-In general, without loss of specificity, an uppercase letter label is used to represent both an AID and when indexed to represent its keypair or keypairs that are authoritative at a given Key state for that AID. In addition, when expressed in tuple form, the uppercase letter also represents the public key and the lowercase letter represents the private key for a given keypair. For example, let ‘A’ denote and AID, then let ‘A’ also denote a keypair which may be also expressed in tuple form as (A, a). Therefore, when referring to the keypair itself as a pair and not the individual members of the pair, either the uppercase label, ‘A’, or the tuple, ‘(A, a)’, may be used to refer to the keypair itself. When referring to the individual members of the keypair then the uppercase letter, ‘A’, refers to the public key, and the lowercase letter, ‘a’, refers to the private key.
+In general, without loss of specificity, an uppercase letter label is used to represent both an AID and, when indexed, to represent its keypair or keypairs that are authoritative at a given Key state for that AID. In addition, when a keypair is expressed in tuple form `(A, a)`, the uppercase letter represents the public key, and the lowercase letter represents the private key. For example, let `A` denote the AID as a shorthand, let `A` also denote the current keypair, and finally, let the tuple `(A, a)` also denote the current keypair. Therefore, when referring to the keypair itself as a pair and not the individual members of the pair, either the uppercase label, `A`, or the tuple, `(A, a)`, may be used to refer to the keypair itself. When referring to the individual members of the keypair then the uppercase letter `A`, refers to the public key, and the lowercase letter `a`, refers to the private key.
 
-The sequence of keypairs that are authoritative (i.e., establish control authority) for an AID should be indexed by the zero-based integer-valued, strictly increasing by one, variable ‘I’. Furthermore, as described above, an Establishment event may change the Key state. The sequence of Establishment events should be indexed by the zero-based integer-valued, strictly increasing by one, variable ‘j’. When the set of controlling keypairs that are authoritative for a given Key state includes only one member, then ‘i = j’ for every keypair, and only one index is needed. But when the set of keypairs used at any time for a given Key state includes more than one member, then *’ != j’ for every keypair, and both indices are needed.
+The sequence of keypairs that are authoritative (i.e., establish control authority) for an AID should be indexed by the zero-based integer-valued, strictly increasing by one, variable 'i'. The associated indexed keypair is denoted (A<sup>i</sup>, a<sup>i</sup>). Furthermore, as described above, an Establishment event may change the Key state. The sequence of Establishment events should be indexed by the zero-based integer-valued, strictly increasing by one, variable `j`. the associated key pair is denoted (A<sup>i,j</sup>, a<sup>i,j</sup>) When the set of controlling keypairs that are authoritative for a given Key state includes only one member, then `i = j` for every keypair, and only one index is needed. But when the set of keypairs used at any time for a given Key state includes more than one member, then `i != j` for every keypair, and both indices are needed.
 
 #### Case in which only one index is needed
 
-Because i = j, the indexed keypair for AID, A, is denoted by A<sup>i</sup> or in tuple form by (A<sup>i</sup>, a<sup>i</sup>) where the keypair that is indexed uses the i<sup>th</sup> keypair from the sequence of all keypairs.  
+Because `i = j`, the indexed keypair for AID, A, is denoted by A<sup>i</sup> or in tuple form by (A<sup>i</sup>, a<sup>i</sup>) where the keypair that is indexed uses the i<sup>th</sup> keypair from the sequence of all keypairs.  
 
-Example of the keypair sequence – one index:
+Example of the keypair sequence - one index where each keypair is represented only by its public key:
 
 Expressed as the list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, ...]
 
-Where:
-A<sup>0</sup>                			is the zero element in this sequence;
-(A<sup>0</sup>, a<sup>0</sup>)         	is the tuple form.
+Where: 
+A<sup>0</sup> is the zero element in this sequence; (A<sup>0</sup>, a<sup>0</sup>) is the tuple form.
 
 #### Case in which both indexes are needed
 
-Because i!= j, the indexed keypair for AID, ‘A’, is denoted by A<sup>i</sup> or in tuple form by (A<sup>i</sup>, a<sup>i</sup>) where the keypair that is  indexed is authoritative or potentially authoritative for i<sup>th</sup> keypair from the sequence of all keypairs that is authoritative in the j<sup>th</sup> Key state. 
+Because `i != j`, the indexed keypair for AID, `A`, is denoted by A<sup>i,j</sup> or in tuple form by (A<sup>i,j</sup>, a<sup>i,j</sup>) where the keypair that is indexed is authoritative or potentially authoritative as the i<sup>th</sup> keypair from the sequence of all keypairs that is authoritative in the j<sup>th</sup> Key state. 
 
-Example of the keypair sequence – using three keypairs to control authority
-Expressed as the list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>2,0</sup>, A<sup>3,1</sup>, A<sup>4,1</sup>,  A<sup>5,1</sup>].
+Example of the keypair sequence – two indices using three keypairs at each key state where each keypair is represented only by its public key:
+Expressed as the list, [A<sup>0,0</sup>, A<sup>1,0</sup>, A<sup>2,0</sup>, A<sup>3,1</sup>, A<sup>4,1</sup>,  A<sup>5,1</sup>].
 
-Where:
-the first two Key states will consume the first six keypairs of the list.
+Where: the first two Key states will consume the first six keypairs of the list.
 
 #### Labelling the digest of the public key  
 
-In the latter case, where both indices are needed because *i != j*, let the indexed keypair for AID, *A*, be denoted by *A<sup>i,j</sup>* or in tuple form by *(A<sup>i,j</sup>, a<sup>i,j</sup>)* where the keypair so indexed is authoritative or potentially authoritative for *i<sup>th</sup>* keypair from the sequence of all keypairs that is authoritative in the the *j<sup>th</sup>* key state. Suppose, for example, that for a given AID labeled *A* each key state uses three keypairs to establish control authority, then the sequence of the first two key states will consume the first six keypairs as given by the following list, *[A<sup>0,0</sup>, A<sup>1,0</sup>, A<sup>2,0</sup>, A<sup>3,1</sup>,  A<sup>4,1</sup>,  A<sup>5,1</sup>]*.
-W
-Furthermore, with pre-rotation, each public key from the set of pre-rotated keypairs may be hidden as a qualified cryptographic digest of that public key. The digest of the public key labeled *A* is represented using the functional notation *H(A)* for hash (digest). 
+With pre-rotation, each public key from the set of pre-rotated keypairs may be hidden as a qualified cryptographic digest of that public key. The digest of the public key labeled `A` is represented using the functional notation `H(A)` for hash (digest). 
 
-Example of a singly indexed digest -  A<sup>i</sup> is denoted by H(A</u><sup>i</sup>)
+Example of a singly indexed digest -  A<sup>i</sup> is denoted by H(A<sup>i</sup>)
 
 Example of a doubly indexed digest - A<sup>i,j</sup> is denoted by H(A<sup>i,j</sup>}
 
-Where:
-The digest of the public key labeled ‘A’ is represented using the functional notation ’(A)’ for hash (digest).
+Where: 
 
-A pre-rotated keypair is potentially authoritative for the next or subsequent Establishment event after the Establishment event when the digest of the pre-rotated keypair first appears. Therefore, its j<sup>th</sup> index value is one greater than the j<sup>th</sup> index value of the Establishment event in which its digest first appears. As explained in more detail for partial Rotation of a pre-rotated set, a pre-rotated keypair from a set of two or more pre-rotated keypairs is only potentially authoritative so that its actual authoritative j<sup>th</sup>  index may change when it is actually rotated in, if ever.
+The digest of the public key labeled `A` is represented using the functional notation `H(A)` for hash (digest).
+
+A pre-rotated keypair is potentially authoritative for the next or subsequent Establishment event after the Establishment event when the digest of the pre-rotated keypair first appears. Therefore, its j<sup>th</sup> index value is one greater than the j<sup>th</sup> index value of the Establishment event in which its digest first appears. Let `j` represent the index of the j<sup>th</sup> Establishment event, then the prerotated digests appearing in that Establishment event have index `j+1`. As explained in more detail for partial Rotation of a prerotated set, a prerotated keypair from a set of two or more prerotated keypairs is only potentially authoritative so that its actual authoritative j<sup>th</sup>  index may change when it is actually rotated in, if ever.
+
+Example of public key and the prerotated digest of the next  public key - [A<sup>0,0</sup>], [H(A<sup>1,1</sup>)]
 
 #### Labelling key events in a KEL
 
-Finally, each Key event in a KEL must have a zero-based integer-valued, strictly increasing by one, sequence number. Abstractly, the variable ‘k’ can be used as an index on any keypair label to denote the sequence number of an event for which that keypair is authoritative. Usually, this appears as a subscript.  Thus any given keypair label could have three indices, namely, ‘i,j,k’ .
+Finally, each Key event in a KEL must have a zero-based integer-valued, strictly increasing by one, sequence number represented by the variable `k`. Abstractly, the variable `k` can be used as an index on any keypair label to denote the sequence number of an event for which that keypair is authoritative. Usually, this appears as a subscript.  Thus any given keypair label could have three indices, namely, `i,j,k`. A public key would appear as A <sup>i,j</sup><sub>k</sub>.
 
-Example of labelleing key events in a KEL- <sup>i,j</sup><sub>k</sub>
+Example of labeling key events in a KEL - A<sup>i,j</sup><sub>k</sub> 
 
 Where:
 
-‘i’ denotes the <sup>th</sup> keypair from the sequence of all keypairs;
-‘j’ denotes the j<sup>th</sup> Establishment event in which the keypair is authoritative;
- and ‘k’ represents the k<sup>th</sup> Key event in which the keypair is authoritative. 
+`i` denotes the i<sup>th</sup> keypair from the sequence of all keypairs;
+`j` denotes the j<sup>th</sup> Establishment event in which the keypair is authoritative;
+ and `k` denotes the sequence number of k<sup>th</sup> Key event in which the keypair is authoritative. 
+ 
+Expressed as a sequence of lists of two public keys per event:
+ 
+[A<sup>0,0</sup><sub>0</sub>, A<sup>1,0</sup><sub>0</sub>], [A<sup>0,0</sup><sub>1</sub>, A<sup>1,0</sup><sub>1</sub>], [A<sup>0,0</sup><sub>2</sub>, A<sup>1,0</sup><sub>2</sub>], [A<sup>2,1</sup><sub>3</sub>, A<sup>3,1</sup><sub>3</sub>], [A<sup>2,1</sup><sub>4</sub>, A<sup>3,1</sup><sub>4</sub>]
 
-When a KEL has only Establishment events, then j = k.
+When a KEL has only Establishment events, then `j = k`. In that case, either `j` or `k` is redundant. 
+
+Example of public keys from KEL with only establishment events - Expressed as a sequence of lists of two public keys per event where `j` is omitted because `j = k`:
+
+[A<sup>0</sup><sub>0</sub>, A<sup>1</sup><sub>0</sub>], [A<sup>2</sup><sub>1</sub>, A<sup>3</sup><sub>1</sub>]
+
 
 ### Pre-rotation 
 
 Each Establishment event involves two sets of keys that each play a role that together establishes complete control authority over the AID associated at the location of that event in the KEL. To clarify, control authority is split between keypairs that hold signing authority and keypairs that hold rotation authority. A Rotation revokes and replaces the keypairs that hold signing authority as well as replacing the keypairs that hold rotation authority. The two set sets of keys are labeled current and next. Each Establishment event designates both sets of keypairs. The first (current) set consists of the authoritative signing keypairs bound to the AID at the location in the KEL where the Establishment event occurs. The second (next) set consists of the pre-rotated authoritative rotation keypairs that will be actualized in the next (ensuing) Establishment event. Each public key in the set of next (ensuing) pre-rotated public keys is hidden in or blinded by a digest of that key. When the Establishment event is the Inception event then the current set is the initial set. The pre-rotated next set of Rotation keypairs are one-time use only rotation keypairs, but may be repurposed as signing keypairs after their one time use to rotate.
 
-In addition, each Establishment event designates two threshold expressions, one for each set of keypairs (current and next). The current threshold determines the needed satisficing subset of signatures from the associated current set of keypairs for signing authority to be considered valid. The next threshold determines the needed satisficing subset of signatures from the associated next set of hidden keypairs for rotation authority to be considered valid. The simplest type of threshold expression for either threshold is an integer that is no greater than nor no less than the number of members in the set. An integer threshold acts as an ‘M of N’ threshold where ‘M’ is the threshold and ‘N’ is the total number of keypairs represented by the public keys in the key list. If any set of ‘M’ of the ‘N’ private keys belonging to the public keys in the key list verifiably signs the event, then the threshold is satisfied by the Contoller exercising its control authority role (signing or rotating) associated with the given key list and threshold.
+In addition, each Establishment event designates two threshold expressions, one for each set of keypairs (current and next). The current threshold determines the needed satisficing subset of signatures from the associated current set of keypairs for signing authority to be considered valid. The next threshold determines the needed satisficing subset of signatures from the associated next set of hidden keypairs for rotation authority to be considered valid. The simplest type of threshold expression for either threshold is an integer that is no greater than nor no less than the number of members in the set. An integer threshold acts as an `M of N` threshold where `M` is the threshold and `N` is the total number of keypairs represented by the public keys in the key list. If any set of `M` of the `N` private keys belonging to the public keys in the key list verifiably signs the event, then the threshold is satisfied by the Controller exercising its control authority role (signing or rotating) associated with the given key list and threshold.
 
-To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs), a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must  also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
+To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs), a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
 
 Each Non-establishment event must be signed by a threshold-satisficing subset of private keys from the current set of keypairs from the most recent Establishment event. The following sections detail the requirements for a valid set of signatures for each type of Establishment event.
 
 ### Inception event pre-rotation
 
-The creator of the Inception event must create two sets of keypairs, the current (initial) set, and the next set. The private keys from the current set are kept as secrets. The public keys from the current set are exposed via inclusion in the Inception event. Both the public and private keys from the next set are kept as secrets and only the cryptographic digests of the public keys from the next set are exposed via inclusion in the event. The public keys from the next set are only exposed in a subsequent Establishment event, if any.  Both thresholds are exposed via inclusion in the event.
+The creator of the Inception event must create two sets of keypairs, the current (initial) set and the next set. The private keys from the current set are kept as secrets. The public keys from the current set are exposed via inclusion in the Inception event. Both the public and private keys from the next set are kept as secrets, and only the cryptographic digests of the public keys from the next set are exposed via inclusion in the event. The public keys from the next set are only exposed in a subsequent Establishment event, if any.  Both thresholds are exposed via inclusion in the event.
 
-Upon emittance of the Inception event, the current (initial) set of keypairs becomes the current set of Verifiable authoritative signing keypairs for the AID. Emittance of the Inception event also issues the identifier. Moreover, to be verifiably authoritative, the Inception event must be signed by a threshold satisficing subset of the current (initial) set of private keys. The Inception event may be verified against the attached signatures using the included current (initial) list of public keys. When self-addressing, a digest of the serialization of the Inception event provides the AID itself as derived by the SAID protocol [@SAID-ID].
+Upon emittance of the Inception event, the current (initial) set of keypairs becomes the current set of Verifiable authoritative signing keypairs for the AID. Emittance of the Inception event also issues the identifier. Moreover, to be verifiably authoritative, the Inception event must be signed by a threshold-satisficing subset of the current (initial) set of private keys. The Inception event may be verified against the attached signatures using the included current (initial) list of public keys. When self-addressing, a digest of the serialization of the Inception event provides the AID itself as derived by the SAID protocol [@SAID-ID].
 
-There must be only one Establishment event that is an Inception event.. All subsequent Establishment events must be Rotation events.
+There must be only one Establishment event that is an Inception event. All subsequent Establishment events must be Rotation events.
 
 Inception event message example:
 
 When the AID in the `i` field is SAID, the new Inception event has two
-qualified digest fields. In this case both the `d` and `i` fields must have the same value. This means the digest suite's derivation code, used for the `i` field must be the same for the `d` field.
+qualified digest fields. In this case, both the `d` and `i` fields must have the same value. This means the digest suite's derivation code, used for the `i` field must be the same for the `d` field.
 The derivation of the `d` and `i` fields is special. Both the `d` and `i` fields are replaced with dummy `#` characters of the length of the digest to be used. The digest of the Inception event is then computed and both the `d` and `i` fields are replaced with the qualified digest value. Validation of an Inception event requires examining the `i` field's derivation code and if it is a digest-type then the `d` field must be identical otherwise the Inception event is invalid.
 
 When the AID is not self-addressing, i.e.., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which  is the standard SAID algorithm.
@@ -1459,7 +1467,7 @@ In essence, each key set follows a Rotation lifecycle where it changes its role 
 
 Pre-Rotation example:
 
-Recall that the keypairs for a given AID may be represented by the indexed letter label such as A<sup>i,j</sup><sub>k</sub> where ‘i' denotes the i<sup>th</sup> keypair from the sequence of all keypairs, ‘j’ denotes the j<sup>th</sup> Establishment event in which the keypair is authoritative, and ‘k’ represents the k<sup>th</sup> Key event in which the keypair is authoritative. When a KEL has only Establishment events, then j = k. When only one keypair is authoritative at any given Key state then i = j.
+Recall that the keypairs for a given AID may be represented by the indexed letter label such as A<sup>i,j</sup><sub>k</sub> where 'i' denotes the i<sup>th</sup> keypair from the sequence of all keypairs, 'j’ denotes the j<sup>th</sup> Establishment event in which the keypair is authoritative, and 'k’ represents the k<sup>th</sup> Key event in which the keypair is authoritative. When a KEL has only Establishment events, then j = k. When only one keypair is authoritative at any given Key state then i = j.
 
 Also, recall that a pre-rotated keypair is designated by the digest of its public key appearing in an Establishment event. The digest is denoted as H(A) or H(A<sup>i,j</sup><sub>k</sub>) in indexed form. The appearance of the digest makes a forward Verifiable cryptographic commitment that may be realized in the future when and if that public key is exposed and listed as a current authoritative signing key in a subsequent Establishment event.
 
