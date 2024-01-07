@@ -70,13 +70,13 @@ https://github.com/trustoverip/tswg-keri-specification/issues/47
 https://github.com/trustoverip/tswg-keri-specification/issues/48
 :::
 
-This document presents identity system-based secure overlay for the Internet is presented. This system is based on a Key Event Receipt Infrastructure (KERI) or the KERI protocol. The primary key management operation is key Rotation (transference) via a novel key pre-rotation scheme as the background for the acronym KERI. [[ref: DAD]]
+This document presents a decentralized identifier-system-based security overlay for the Internet. This overlay is called the Key Event Receipt Infrastructure (KERI) protocol. KERI is an innovative type of decentralized key management infrastructure that benefits from a novel key rotation scheme called key prerotation [[ref: DAD]]. This fixes the foundational flaw in exiting PKI (public key infrastructure), which is insecure key rotation. KERI enables decentralized public key infrastructure (DPKI) that is more secure and more portable.  KERI may be viewed as a viable reboot of the Web-of-Trust concept for DPKI because KERI fixes the hard problem of DPKI which is key rotation. 
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/29
 :::
 
-The identity system-based secure overlay for the Internet, based on KERI includes a primary root-of-trust in Self-certifying identifiers (SCIDs) [[ref: UIT]] [[ref: SCPK]] [[ref: SFS]] [[ref: SCPN]] [[ref: SCURL]]. This root-of-trust  presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs). These are part of an Autonomic Identity System (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the internet. Associated with this system is a decentralized key management infrastructure (DKMI). 
+KERI's identifier system-based security overlay for the Internet, provides to each identifier a primary root-of-trust from Self-certifying identifiers (SCIDs) [[ref: UIT]] [[ref: SCPK]] [[ref: SFS]] [[ref: SCPN]] [[ref: SCURL]]. This root-of-trust provides a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs) that provide the basis for a universal Autonomic Identity System (AIS). This system uses the design principle of minimally sufficient means for appropriate levels of security, performance, and adoptability to be a viable candidate as the DKMI that underpins a trust-spanning-layer for the internet. 
 
 The primary root-of-trust are SCIDs  that are strongly bound at issuance to a cryptographic signing (public, private) keypair which is self-contained until/unless control needs to be transferred to a new keypair. In that event, an append-only chained Key event log (KEL) of signed transfer statements provides end-verifiable control provenance. This makes intervening operational infrastructure replaceable because the event logs may be served up by any infrastructure including ambient infrastructure. End-verifiable logs on ambient infrastructure enable ambient verifiability (Verifiable by anyone, anywhere, at any time).
 
@@ -380,12 +380,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/18
 ## KERI foundational overview
 
 ::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/44
-:::
-
-::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/30
 :::
+
+### Ecosystem and infrastructure overview
+
 
 ### KERI’s identifier system security overlay
 
@@ -414,13 +413,23 @@ Use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not e
 
 An important innovation of KERI is that it solves the key Rotation problem of PKI (including that of simple SCIDs) via a novel but elegant mechanism called key pre-rotation. This pre-rotation mechanism enables an entity to persistently maintain or regain control over an identifier in spite of the exposure-related weakening over time or even compromise of the current set of controlling (signing) keypairs. With key pre-rotation, control over the identifier can be re-established by rotating to a one-time use set of unexposed but pre-committed rotation keypairs that then become the current signing keypairs. Each Rotation in turn cryptographically commits to a new set of rotation keys but without exposing them. Because the pre-rotated keypairs need never be exposed prior to their one-time use, their attack surface may be optimally minimized. The current Key state is maintained via a KEL , an append-only Verifiable data structure .  Cryptographic verifiability of the Key state over time is essential to remove this ambiguity over the mapping between the identifier (domain name) and the controlling keypair(s). Without this verifiability, the detection of potential ambiguity requires yet another bolt-on security overlay such as the certificate transparency system.
 
-### Cryptographic Primitives
+### Qualified Cryptographic Primitives
 
-A Cryptographic primitive is a serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol. CESR supports round trip lossless conversion between its Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a string value of a field or array element as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64 which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
+A Cryptographic primitive is a serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol  [[ref: CESR]].  A property of CESR is that all cryptographic primitives so expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
 
-### Qualified Cryptographic Primitives using CESR
 
-KERI represents all cryptographic primitives with CESR (Composable Event Streaming Representation) [[ref: CESR]]. When qualified using CESR, a Cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive. All Cryptographic primitives expressed in either Text or Binary CESR are qualified by definition. Qualification is an essential property of CESR. The CESR protocol supports several different types of encoding tables for different types of derivation codes. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e.,  Blake3-256, when expressed in Text domain CESR, consists of 44 Base64 characters that begin with the one character derivation code `E`, such as `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation consists of 33 bytes. Unless otherwise indicated, all Cryptographic primitives in this specification are qualified Primitives using CESR’s Text domain.
+
+::: issue 
+https://github.com/trustoverip/tswg-keri-specification/issues/44
+:::
+
+
+### CESR Encoding
+
+As stated previously, KERI represents all cryptographic primitives with CESR (Composable Event Streaming Representation) [[ref: CESR]]. CESR supports round-trip lossless conversion between its Text, Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a string value of a field or array element as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64 which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
+
+The CESR protocol supports several different types of encoding tables for different types of derivation codes used to qualify primitives. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e.,  Blake3-256, when expressed in Text domain CESR, consists of 44 Base64 characters that begin with the one character derivation code `E`, such as `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation consists of 33 bytes. Unless otherwise indicated, all Cryptographic primitives used in this specification are qualified Primitives expressed in CESR’s Text domain. This includes serializations that are signed, hashed, or encrypted.
+
 
 ### Basic fractionally weighted threshold 
 
