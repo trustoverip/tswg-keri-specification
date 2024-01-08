@@ -570,7 +570,7 @@ The primary purpose of an autonomic identity (identifier) system (AIS) is to ena
 
 ## KERI data structures and labels
 
-### KERI data structures
+### KERI data structure format
 
 A KERI data structure such as a Key event Message body may be abstractly modelled as a nested key: value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead to refer to a mapping pair and the terms field label and field value for each member of a pair. These pairs can be represented by two tuples e.g.,(label, value). When necessary, this terminology is qualifed by using the term field map to reference such a mapping. Field maps may be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short. 
 
@@ -578,7 +578,7 @@ A field may be represented by a framing code or block delimited serialization.  
 
 Most programming languages now support ordered dictionaries or hash tables that provide reproducible iteration over a list of ordered field (label, value) pairs where the ordering is the insertion or field creation order. This enables reproducible round trip serialization/deserialization of field maps. Serialized KERI data structures depend on insertion-ordered field maps for their canonical serialization/deserialization. KERI data structures support multiple serialization types, namely JSON, CBOR, MGPK, and CESR but for the sake of simplicity, JSON only will be used for examples. The basic set of normative field labels in KERI field maps is defined in the table in the following section.
 
-### KERI field labels for data structures
+#### KERI field labels for data structures
 
 [//]: # (: KERI field labels for data structures {#tbl:field-lables})
 
@@ -649,7 +649,7 @@ Some fields, such as the `i` and `di` fields, must each have an AID as its value
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
 ###### Namespaced AIDs 
-Because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. The examples below use the W3C DID namespace specification with the `did:keri` method [[ref: DIDK-ID]]. But the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
+As explained above, because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. Only the fully qualified CESR encoded AID prefix is used by KERI to process messages. Interoperability is assured by extracting the prefix from any namespaced identifier. Some of the examples below may use the W3C DID namespace specification with the `did:keri` method [[ref: DIDK-ID]]. However, the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/19
@@ -668,6 +668,7 @@ Common normalized ACDC and KERI labels
 `d` is the SAID of the enclosing block or map
 `i` is a KERI identifier AID
 `a` is the data attributes or data anchors depending on the message type
+
 
 ###  Seals
 
@@ -719,13 +720,18 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 }
 ```
 
-#### Key event messages (Non-delegated)
+### Signing Messages
+
+ToDo explain CESR attachments, group codes. with indexed signatures controller and witness for (transferable and non-transferable AIDs) and  ase well as non-indexed transferable and non-transferable indexed signatures and finally attached event seals
+
+
+### Key event messages (Non-delegated)
 
 Because adding the `d` field SAID to every Key event Message type will break all the explicit test vectors. Its no additional effort to normalize the field ordering across all Message types and Seals.
 
 Originally all Messages included an `i` field but that is not true anymore. So the changed field ordering is to put the fields that are common to all Message types first in order followed by fields that are not common. The common fields are `v`, `t`, `d`.
 
-##### Inception Event Message Body
+#### Inception Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/42
@@ -770,7 +776,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/39
 }
 ```
 
-##### Rotation Event Message Body
+#### Rotation Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -807,7 +813,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Interaction Event Message Body
+#### Interaction Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -833,11 +839,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 ```
 
 
-#### Delegated Key Event Messages
+### Delegated Key Event Messages
 
 ToDo in delegation section below. Delegated custodial example with partial rotation and using 0 fraction signing weights on exposed pre-rotated keys
 
-##### Delegated Inception Event Message Body
+#### Delegated Inception Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -880,7 +886,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 ```
 
 
-##### Delegated Rotation Event Message Body
+#### Delegated Rotation Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -919,7 +925,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 ```
 
 
-#### Receipt Messages
+### Receipt Messages
 
 #### Non-Transferable Prefix Signer Receipt Message Body
 
@@ -939,7 +945,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Transferable Prefix Signer Receipt Message Body
+#### Transferable Prefix Signer Receipt Message Body
 
 
 For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
@@ -964,9 +970,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-#### Other Messages
+### Other Messages
 
-##### Query Message Message Body
+#### Query Message Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1011,7 +1017,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Reply Message Body
+#### Reply Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1054,7 +1060,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Prod Message Body
+#### Prod Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1078,7 +1084,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Bare Message Body
+#### Bare Message Body
 
 Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
 A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
@@ -1105,7 +1111,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 ```
 
 
-##### Exchange Message Body
+#### Exchange Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1125,9 +1131,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-#### Notices Embedded in Reply Messages
+### Notices Embedded in Reply Messages
 
-##### Key State Notice (KSN)
+#### Key State Notice (KSN)
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1207,7 +1213,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Transaction State Notice (TSN)
+#### Transaction State Notice (TSN)
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1277,9 +1283,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-#### Transaction Event Log Messages
+### Transaction Event Log Messages
 
-##### Registry Inception Event Message Body
+#### Registry Inception Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1300,7 +1306,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```
 
-##### Registry Rotation Event Message Body
+#### Registry Rotation Event Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1320,7 +1326,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Backerless ACDC Issuance Message Body
+#### Backerless ACDC Issuance Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1338,7 +1344,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Backerless ACDC Revocation Message Body
+#### Backerless ACDC Revocation Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1357,7 +1363,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Backered ACDC Issuance Message Body
+#### Backered ACDC Issuance Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1380,7 +1386,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-##### Backered ACDC Revocation Message Body
+#### Backered ACDC Revocation Message Body
 
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/43
