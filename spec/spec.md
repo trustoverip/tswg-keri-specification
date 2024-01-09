@@ -722,10 +722,54 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 
 ### Signing and sealing KERI data structures
 
-ToDo explain CESR attachments, group codes. with indexed signatures controller and witness for (transferable and non-transferable AIDs) and  ase well as non-indexed transferable and non-transferable indexed signatures and finally attached event seals wich is a form of indirect signing, i.e. sealing is indirect signing since the event in which the seals appear are signed.
+#### Indexed Signatures
 
-##### CESR Path signatures go here
+Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached {{(see CESR spec)}}. Indexed signatures may be attached to both key event messages and non key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
 
+There are two types of attached indexed signatures: controller-indexed and witnessed-indexed. Other information may be required with the attachment the type the the type of event to which the signature is attached to which AID the indexed signature belongs.
+
+Controller-indexed signatures index into either or both the signing key list from the latest Establishment event (inception, delegated inception, rotation, delegated rotation) and the rotating key digest list from the Establishment event immediately prior to the latest Establishment event (prior next key digest list) if any. Both of these lists are strictly ordered so that only the index is needed to determine the public key. Depending on the event and the key lists, a controller-indexed signature may require one or two indices.  Controller-indexed signatures attached to Interaction events and non-key-event messages need only one index into the current signing key list from the most recent prior establishment event. Controller-indexed signatures attached to Inception events (delegated or not) need only one index into the current signing key list in the Inception event. Controller-indexed signatures attached to Rotation events (delegated or not) may need two indices, one into the signing key list of the rotation event itself and the other into the rotation key digest list from the immediately priorEstablishment Event (Inception or Rotation), i.e., the prior next key digest list.
+
+Witness-indexed signatures index into the effective witness list as established by the latest Establishment event (interaction or rotation). To clarify, witness-indexed signatures attached to any type of key event (inception, rotation, interaction, delegated inception, delegated rotation) need only one index into the current list of witnesses that is in effect as of the latest establishment event, which may or may not be the event to which the witness signature is attached. Witnesses shall use only nontransferable identifiers, which include the controlling public key. Consequently, the public key needed for witness signature verification can be extracted from the witness identifier given by the effective witness list.
+
+CESR codes for indexed signatures support up to two indices so that, at most, one copy of an indexed signature needs to be attached. The first index is into the signing list when it's controller-indexed or into the witness list when it's witness-indexed. The second index is into the prior next key digest list when it's controller-indexed.  The CESR group code used to attach the indexed signature may vary depending on the type of event, key-event or not, and type of key event, 
+
+Recall that a prior next key digest shall be exposed as a public key in the succeeding rotation event signing key list when used to sign. Therefore, when the second index is present, it is used to look up the public key digest from the prior next key digest list, then the first index is used to look up the exposed public key from the signing key list, then the digest is verified against the exposed public key, and finally, the doubly indexed signature is verified using the exposed public key.  Verification of the digest means digesting the exposed public key using the same digest type as the prior next key digest and comparing the digests. 
+
+A set of controller-indexed signatures on an interaction or inception event (delegated or not) shall at least satisfy the current signing threshold in order for that event to be accepted as valid. 
+
+A set of controller-indexed signatures on a non-key event message (see below) shall at least satisfy the signing threshold for the establishment event indicated by the event reference in the attachment group (which may or may not be the current signing threshold) to be accepted as valid. 
+
+A set of controller-indexed signatures on a rotation event (delegated or not) shall at least satisfy both the current signing threshold and the prior next rotation threshold in order for that event to be accepted as valid. 
+
+A set of witness-indexed signatures on an interaction, inception, or rotation (delegated or not) for which the effective witness list is not empty may need to satisfy the current witness threshold ( of accountable duplicity) for that event to be accepted as valid.  
+
+Events that have a non-empty set of attached signatures which set does not satisfy the required thresholds may escrow the event while waiting for other signatures to arrive either as attachments to the same version of the event or to a receipt of that event (see next section). A Validator that receives a key event or non-key-event message that does not have attached at least one verifiable Controller signature shall drop that message (i.e., not escrow or otherwise accept it). This protects the Validator from a DDoS attack with spurious unsigned messages.
+
+Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures {{ see CESR Spec}}. Given an indexed signature, a Validator looks up the associate public key from the index 
+into the appropriate table.
+
+#### Non-indexed signatures
+
+CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. {{see CESR Spec}}
+
+#### Endorsements
+
+Other entities, as identified by their AID, may wish to attach signatures on key events for a KEL where the signer's AID is neither the controlling AID of that KEL nor a witness AID of that event in that KEL. These non-controller, non-witness signatures may be called Endorsements. For example, a Watcher, when replaying events from a KEL its watches may choose to attach its own signature to the event in order to endorse or otherwise commit to that version of the event as the one the Watcher has seen. In this case, the attachment shall include at least the AID of the endorser as well as any other information needed by the Validator to securely attribute the signature to its source and key state. CESR provides group codes for attaching signature Endorsements for both transferable and non-transferable AIDs with indexed and non-indexed signatures as applicable (see CESR table).
+
+#### Sealing
+
+Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD (Self-Addressed Data) {{see CESR spec}}. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions. 
+
+One primary use case for sealing in KERI is delegated AIDs. The Delegator (AID) approves (endorses) the associated delegation of a delegated event in the Delegatee's KEL by sealing the SAID of that delegated event in the Delegator's KEL. Because the Delegator signs the sealing event, the presence of the delegated event's SAID (cryptographic digest) in the Delegator's KEL is equivalent cryptographically to a signed endorsement by the Delegator of the delegated event itself but with the added advantage that the validity of that delegation persists in spite of changes to the key state of the Delegator.  A validator need only receive an attached reference to the delegating event that includes the seal in order to look up the seal and verify its presence. CESR provides codes for attached event seal references as well as codes for event seals.
+
+#### Receipt Signatures
+
+Receipt message data structures are not key events but merely reference key events (see below). A signature attached to a Receipt is not a signature on the serialized receipt data structure but is a signature on a serialization of the referenced key event. This enables the asynchronous receipt and processing of any type of signature, including controller-indexed and witness-indexed signatures. The Validator first looks up an already received copy of the referenced serialized key event and then verifies the signatures as if they had been attached to the event. Because Receipts may be more compact than the full event, they allow more efficient asynchronous distribution of signatures for events. A Validator that receives a Receipt for an event that the Validator has not yet received may escrow the Receipt and its attached signatures. This escrow, however, may be vulnerable to a DDoS attack due to spurious event references.
+
+#### Receipt Seals
+
+Similarly to attached signatures a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. {{see CESR spec}}
 
 
 ### Key event messages (Non-delegated)
@@ -1738,11 +1782,16 @@ To supersede an event means that after an event has already been accepted as fir
 #### Superseding Rules for Recovery at a given location, SN (sequence number).
 
 A.
+
   A0. Any rotation event may supersede an interaction event at the same `sn` where that interaction event is not before any other rotation event.
+  
   A1. A non-delegated rotation may not supersede another rotation.
+  
   A2. An interaction event may not supersede any event.
+  
 
 B.  A delegated rotation may supersede the latest-seen delegated rotation at the same `sn` under either of the following conditions:
+
   B1.  The superseding rotation's delegating event is later than the superseded rotation's delegating event in the delegator's KEL, i.e., the `sn` of the superseding event's delegation is higher than the `sn` of the superseded event's delegation.
   
   B2. The superseding rotation's delegating event is the exact same delegating event as the superseded rotation's delegating event in the delegator's KEL, and the anchoring seal of the superseding rotation's delegated event appears later in the seal list than the anchoring seal of the superseded rotation's delegated event. i.e., both superseded and superseding event delegations appear in the same delegating event, and the anchoring seal of the superseding rotation's event appears later in the seal list than the anchoring event seal of the superseded rotation's event.
