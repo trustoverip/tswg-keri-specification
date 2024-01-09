@@ -720,9 +720,12 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 }
 ```
 
-### Signing Messages
+### Signing and sealing KERI data structures
 
-ToDo explain CESR attachments, group codes. with indexed signatures controller and witness for (transferable and non-transferable AIDs) and  ase well as non-indexed transferable and non-transferable indexed signatures and finally attached event seals
+ToDo explain CESR attachments, group codes. with indexed signatures controller and witness for (transferable and non-transferable AIDs) and  ase well as non-indexed transferable and non-transferable indexed signatures and finally attached event seals wich is a form of indirect signing, i.e. sealing is indirect signing since the event in which the seals appear are signed.
+
+##### CESR Path signatures go here
+
 
 
 ### Key event messages (Non-delegated)
@@ -1280,133 +1283,6 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
       ],
       "c": []
     }
-}
-```
-
-### Transaction Event Log Messages
-
-#### Registry Inception Event Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "vcp",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "ii": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
-  "s" : "0",
-  "bt": "1",
-  "b" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
-  "c" : ["NB"]
-}
-
-```
-
-#### Registry Rotation Event Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "vrt",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-  "s" : "2",
-  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "bt": "1",
-  "br" : ["BbIg_3-11d3PYxSInLN-Q9_T2axD6kkXd3XRgbGZTm6s"],
-  "ba" : []
-}
-```
-
-#### Backerless ACDC Issuance Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "iss",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-  "s" : "0",
-  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "dt": "2020-08-01T12:20:05.123456+00:00"
-}
-```
-
-#### Backerless ACDC Revocation Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "rev",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-  "s" : "1",
-  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "dt": "2020-08-01T12:20:05.123456+00:00"
-}
-```
-
-#### Backered ACDC Issuance Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "bis",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-  "s" : "0",
-  "ri" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "ra" : {
-      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
-      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
-      "s": 0
-  },
-  "dt": "2020-08-01T12:20:05.123456+00:00"
-}
-```
-
-#### Backered ACDC Revocation Message Body
-
-::: issue 
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v" : "KERI10JSON00011c_",
-  "t" : "brv",
-  "d" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "i" : "E_D0eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqA7BxL",
-  "s" : "1",
-  "p" : "ELh3eYC2W_Su1izlvm0xxw01n3XK8bdV2Zb09IqlXB7A",
-  "ri" : "EvxMACzQxU2rDj-X5SPDZYtUn56i4fjjH8yDRFRzaMfI",
-  "ra" : {
-      "d": "E8ipype17kJlQfYp3gcF3F1PNKfdX6vpOLXU8YyykB5o",
-      "i": "EFvQCx4-O9bb9fGzY7KgbPeUtjtU0M4OBQWsiIk8za24",
-      "s": 0
-  },
-  "dt": "2020-08-01T12:20:05.123456+00:00"
 }
 ```
 
