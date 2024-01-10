@@ -676,7 +676,15 @@ Common normalized ACDC and KERI labels
 https://github.com/trustoverip/tswg-keri-specification/issues/21
 :::
 
+The dictionary definition of the seal is "evidence of authenticity". Seals make a verifiable, nonrepudiable commitment to an external serialized data item without disclosing the item and also enable that commitment to the external data to be bound to the key state of a KEL at the location of the seal. This provides evidence of authenticity while maintaining confidentiality. This also enables the validity of the commitment to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions. Seals enable authenticatable transactions that happen externally to the KEL.
+
+The collision resistance of a cryptographic strength digest makes it computationally infeasible for any other serialized data to have the same digest. Thus, a non-repudiable signature on a digest of serialized data is equivalent to such a signature on the serialized data itself. Because all key events in a KEL are signed by the controller of that KEL, the inclusion of a seal in a key event is equivalent to signing the external data but without revealing that data. When given the external data, a Validator can verify that the seal is a digest of that data and hence verify the equivalent nonredudiable commitment. A seal, at a minimum, includes a cryptographic digest of the serialized external data, usually its SAID. The external data may itself be composed of digests of other data. 
+
+Seals may also be used as attachments to events to provide a reference for looking up the key state to be used for signatures on that event. The semantics of a given seal are also modified by the context in which the seal appears, such as appearing in the seal list of a key event in a KEL as opposed to appearing as an attachment to an event or receipt of an event.
+
 #### Digest seal
+
+The value of this seal's `d` field is an undifferentiated digest of some external data item.  If the data is a SAD, then the value is its SAID. This is the JSON version. There is also a native CESR version.
 
 ```json
 {
@@ -686,22 +694,18 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 
 #### Merkle Tree root digest seal
 
+The value of this seal's `d` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  The JSON version is shown. There is also a native CESR version of the seal.
+
 ```json
 {
   "rd": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
 }
 ```
 
-#### Backer seal
-
-```json
-{
-  "bi": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "d" : "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
-}
-```
-
 #### Event seal
+
+Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
+
 ```json
 {
 
@@ -712,7 +716,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 ```
 
 
-#### Last Establishment event seal (6.3.5)
+#### Lastest establishment event seal
+
+The latest establishment event seal's function is similar to the event seal above except that it does not designate a specific event but merely designates that latest establishment event in the external KEL for the AID given as its `i` field value. 
+This seal endorses or approves or commits to the key state of the latest establishment event of the external KEL. This is useful for endorsing a message
+The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
@@ -720,12 +728,62 @@ https://github.com/trustoverip/tswg-keri-specification/issues/21
 }
 ```
 
+#### Backer seal
+
+When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is required. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer must also include a configuration trait (see below) of `RB` for registrar backers. This indicates that the KEL is ledger registrar backed instead of witness pool backed. The designating establishment event must also have attached 
+
+The  `bi` field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose `bi` field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same `bi` value).
+The `d` field value in the seal shall be the SAID of the associated metadata SAD that provides the backer registrar metadat. The SAD may appear as the value of the seal data, `sd` field is an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message shall be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
+
+To reiterate, the seal must appear in the same establishment event that designates the registrar backer identifier as a backer identifier in the event's backer's list along with the config trait `RB`. 
+
+The JSON version is shown. There is also a native CESR version of the seal.
+
+
+```json
+{
+  "bi": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "d" : "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+}
+```
+
+Attached bare, `bar` message.
+
+
+```json
+{ 
+  "v": "KERI10JSON00011c_",
+  "t": "bar",
+  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "r": "process/registrar/bitcoin",
+  "a":
+  {
+    "d" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "s" : "5",
+    "bi", "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+    "sd":  
+    {
+       "d": "EaAoTNZH3ULvYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8J",
+       "stuff": "meta data field"
+     }  
+  }
+}
+```
+
+### Configuration Traits
+
+Todo Define configuration traits here
+
+EstOnly: str = 'EO'  # Only allow establishment events
+    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers
+    NoBackers: str = 'NB'  # Do not allow any registrar backers
+    Backers: str = 'RB' # Registrar backer provided in Registrar seal
+
 
 ### Key event messages (Non-delegated)
 
-Because adding the `d` field SAID to every Key event Message type will break all the explicit test vectors. Its no additional effort to normalize the field ordering across all Message types and Seals.
-
-Originally all Messages included an `i` field but that is not true anymore. So the changed field ordering is to put the fields that are common to all Message types first in order followed by fields that are not common. The common fields are `v`, `t`, `d`.
+The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, `d` in that order.
 
 #### Inception Event Message Body
 
