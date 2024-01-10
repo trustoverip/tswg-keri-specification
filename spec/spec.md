@@ -285,7 +285,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/61
 
 [[def: Witness]]
 
-~ todo
+~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex [Witness](#witness).
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/62
@@ -534,22 +534,15 @@ The essence of the KERI protocol is a strongly bound tetrad of identifier, keypa
 
 ### Autonomic Namespaces
 
-<<<<<<< HEAD
 A namespace groups symbols or identifiers for a set of related objects [[ref: Namespace]]. In an identity system, an identifier can be generalized as belonging to a namespace that provides a systematic way of organizing related identifiers with their resources and attributes. 
-=======
-A namespace groups symbols or identifiers for a set of related objects {{[108]}}. In an identity system, an identifier can be generalized as belonging to a namespace that provides a systematic way of organizing related identifiers with their resources and attributes. 
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
+
 To elaborate, a namespace employs some scheme for assigning identifiers to the elements of the namespace. A simple name-spacing scheme uses a prefix or prefixes in a hierarchical fashion to compose identifiers. The following is an example of a namespace scheme for addresses within the USA that uses a hierarchy of prefixes:
 	state.county.city.zip.street.number.	
 An example element in this namespace may be identified with the following:
 	utah.wasatch.heber.84032.main.150S.	
 where each prefix location has been replaced with the actual value of the element of the address. Namespaces provide a systematic way of organizing related elements and are widely used in computing. 
 
-<<<<<<< HEAD
 An autonomic namespace (AN) is defined as a namespace with a fully qualified CESR encoded autonomic identifier (AID) cryptographic primitive as a prefix. As defined above, autonomic identifiers (AIDs) are uniquely (strongly) cryptographically bound to their incepting controlling keypair(s) at issuance. They are, hence, self-certifying. In addition, AIDs are also bound to other key management information, such as the hashes of the next pre-rotated rotation keys and their witnesses. This makes them self-managing. 
-=======
-An autonomic namespace (AN) is defined as a namespace with a fully qualified CESR encoded autonomic identifier (AID) cryptographic primitive as a prefix. As defined above, autonomic identifiers (AIDs) are uniquely (strongly) cryptographically bound to their incepting controlling keypair(s) at issuance. They are, hence, self-certifying. In addition, AIDs are also bound to other key management information, such as the hashes of the next prerotated rotation keys and their witnesses. This makes them self-managing. 
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
 
 To clarify, each identifier from an autonomic namespace (AN) includes as a prefix an identifier encoded in CESR that either is the public key or is uniquely cryptographically derived from the public key(s) of the incepting (public, private) key pair. The associated private key(s) may then be used by the controller to authoritatively (nonrepudiably) sign statements that authenticate and authorize the use of the identifier. These statements include responses to challenges to prove control over the identifier. Thus, self-certification enables both self-authentication and self-authorization capabilities as well as self-management of cryptographic signing keypairs. Together, these properties make the namespace self-administering. 
 
@@ -1596,11 +1589,7 @@ Delegating Event Diagram
 
 Delegated Event Seal Diagram
 
-<<<<<<< HEAD
 Likewise, the inception event of the delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the delegatee's KEL and provides a way to recover from pre-rotated key compromise.
-=======
-Likewise, the inception event of the delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the delegatee's KEL and provides a way to recover from prerotated key compromise.
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
 
 Delegated Event with Delegator AID Diagram
 
@@ -1618,24 +1607,15 @@ A common use case of delegation would be to delegate signing authority to a new 
 
 ### Security Properties of Pre-rotation
 
-<<<<<<< HEAD
 For many exploits, the likelihood of success is a function of exposure to continued monitoring or probing. Narrowly restricting the exposure opportunities for exploitation in terms of time, place, and method, especially if the time and place happen only once, makes exploitation extremely difficult. The exploiter has to either predict the one-time and place of that exposure or has to have continuous universal monitoring of all exposures. By declaring the very first pre-rotation in the inception event, the window for its exploit is as narrow as possible. Likewise, each subsequent rotation event is a one-time and place signing exposure of the former next (pre-rotated) rotation key. 
 
 Because each pre-rotation makes a cryptographic future commitment to a set of one-time first-time rotation keys, later exploit of the current authoritative signing key(s) may not capture key rotation authority as it has already been transferred via the pre-commitment to a new unexposed set of keys. To elaborate, The next (ensuing) pre-rotated keypairs in an inception event serve as first-time, one-time, and only-time rotation keys in the next rotation operation. Thereafter, those keypairs may be activated as the new current (root) authoritative signing key(s) but no longer have rotation authority. Likewise, the next (ensuing) pre-rotated keypairs in each rotation event serve as first-time, one-time, and only-time rotation keys in the next rotation operation. Thereafter, those keypairs may be activated as the new current (root) authoritative signing key(s) but likewise no longer have rotation authority. 
-=======
-For many exploits, the likelihood of success is a function of exposure to continued monitoring or probing. Narrowly restricting the exposure opportunities for exploitation in terms of time, place, and method, especially if the time and place happen only once, makes exploitation extremely difficult. The exploiter has to either predict the one-time and place of that exposure or has to have continuous universal monitoring of all exposures. By declaring the very first pre-rotation in the inception event, the window for its exploit is as narrow as possible. Likewise, each subsequent rotation event is a one-time and place signing exposure of the former next (prerotated) rotation key. 
 
-Because each prerotation makes a cryptographic future commitment to a set of one-time first-time rotation keys, later exploit of the current authoritative signing key(s) may not capture key rotation authority as it has already been transferred via the pre-commitment to a new unexposed set of keys. To elaborate, The next (ensuing) prerotated keypairs in an inception event serve as first-time, one-time, and only-time rotation keys in the next rotation operation. Thereafter, those keypairs may be activated as the new current (root) authoritative signing key(s) but no longer have rotation authority. Likewise, the next (ensuing) prerotated keypairs in each rotation event serve as first-time, one-time, and only-time rotation keys in the next rotation operation. Thereafter, those keypairs may be activated as the new current (root) authoritative signing key(s) but likewise no longer have rotation authority. 
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
 In administrative identity (identifier) systems, the binding between keys, controller, and identifier may be established by administrative fiat. As a result, administrative fiat may be used as a recovery mechanism for compromised administrative keys. This may make those administrative keys relatively more exposed through multiple use of each key. In contrast, when the binding between keys, controller, and identifier is purely cryptographic (decentralized), such as is the case with this (KERI) protocol, there is no recovery mechanism once the keys for the root control authority have been fully captured. Therefore, security over those keys is more critical. As a result, in this protocol, administrative (establishment operation) keys are first-time, one-time, and only-time use as administrative keys. 
 
 #### Dead-Attacks
 
-<<<<<<< HEAD
 By definition, a Dead-attack on a given establishment event occurs after the Key-state for that event has become stale because a later establishment event has rotated the sets of signing and pre-rotated keys to new sets. There are two types of Dead-attacks. The first is a compromise of the stale signing keys from a stale establishment event needed to sign non-establishment events, such as an interaction event. This is denoted as a non-establishment Dead-Attack. The second is a compromise of the stale pre-rotated keys from a stale establishment event needed to sign a subsequent establishment event, such as a rotation event. This is denoted as an establishment Dead-attack.
-=======
-By definition, a Dead-attack on a given establishment event occurs after the Key-state for that event has become stale because a later establishment event has rotated the sets of signing and prerotated keys to new sets. There are two types of Dead-attacks. The first is a compromise of the stale signing keys from a stale establishment event needed to sign non-establishment events, such as an interaction event. This is denoted as a non-establishment Dead-Attack. The second is a compromise of the stale prerotated keys from a stale establishment event needed to sign a subsequent establishment event, such as a rotation event. This is denoted as an establishment Dead-attack.
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
 
 ##### Non-establishment Dead-attack
 
@@ -1674,15 +1654,9 @@ A successful non-establishment Live-Attack means that the attacker is able to ve
 
 #### Establishment Live-attack
 
-<<<<<<< HEAD
 A successful establishment Live-Attack means that the attacker somehow compromises the unexposed next (pre-rotated) set of keys from the latest rotation event before that event has been propagated. This means compromise must occur at or before the time of the first use of the keys to sign the establishment event itself. Such a compromise is extremely difficult and the primary reason for pre-rotation is to mitigate the possibility of an establishment Live-attack in the first place.  In an establishment live attack, the witness pool provides no additional security because the compromised rotation event can rotate in new witnesses under the control of the attacker. One way to mitigate establishment Live-attack is to use a thresholded multi-sig set of pre-rotated keys.
 
 Notwithstanding any mitigations, assuming a successful compromise of the pre-rotated keys, duplicity detection with or without witness protection may not protect against a resulting establishment live attack. This is because such a Live-attack would be able to create a new verifiable rotation event with next keys and new witnesses under the attacker's control and propagate that event in advance of a new rotation event created by the original controller. Such a successful Live-attack exploit may effectively and irreversibly capture control of the identifier. Moreover, in the case of a successful Live-attack exploit, new rotation events from the original controller would appear as duplicitous to any validator or other component that already received the exploited rotation event and accepted it as the First-seen version of that event. Consequently, protection from establishment Live-attack exploits comes exclusively from the difficulty of compromising a set of pre-rotated keys before or at the time of their first use (exposure).
-=======
-A successful establishment Live-Attack means that the attacker somehow compromises the unexposed next (pre-rotated) set of keys from the latest rotation event before that event has been propagated. This means compromise must occur at or before the time of the first use of the keys to sign the establishment event itself. Such a compromise is extremely difficult and the primary reason for prerotation is to mitigate the possibility of an establishment Live-attack in the first place.  In an establishment live attack, the witness pool provides no additional security because the compromised rotation event can rotate in new witnesses under the control of the attacker. One way to mitigate establishment Live-attack is to use a thresholded multi-sig set of prerotated keys.
-
-Notwithstanding any mitigations, assuming a successful compromise of the prerotated keys, duplicity detection with or without witness protection may not protect against a resulting establishment live attack. This is because such a Live-attack would be able to create a new verifiable rotation event with next keys and new witnesses under the attacker's control and propagate that event in advance of a new rotation event created by the original controller. Such a successful Live-attack exploit may effectively and irreversibly capture control of the identifier. Moreover, in the case of a successful Live-attack exploit, new rotation events from the original controller would appear as duplicitous to any validator or other component that already received the exploited rotation event and accepted it as the First-seen version of that event. Consequently, protection from establishment Live-attack exploits comes exclusively from the difficulty of compromising a set of prerotated keys before or at the time of their first use (exposure).
->>>>>>> ef7a63f (adds watcher definition. Closes #63.)
 
 To elaborate, a successful live exploit must compromise the unexposed next set of private keys from the public-keys declared in the latest rotation. Assuming the private keys remain secret, a compromise must come either by brute force inversion of the one-way digest function protecting the public keys and then by brute force inversion of the one-way scalar multiplication function that generates the public key from the private keys or by a side-channel attack at the first-use of the private keys to sign the rotation event. By construction, no earlier signing side-channel attack is possible. This makes successful Live-attack exploits from such side-channel attacks extremely difficult. 
 
@@ -2502,13 +2476,10 @@ To Nullify set the `url` to the empty string `""`.
 
 ~~~
 
-
-
 ::: issue 
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
-<<<<<<< HEAD
 ### Seal 
 
 A seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence [[ref: Merkle tree]]. According to the dictionary, a seal provides evidence of authenticity. A key event sequence provides a verifiable proof of current control authority at the location of each event in the key event sequence. In this sense therefore, a seal included in an event provides prove of current control authority i.e. authenticity of the data anchored at the location of the seal in the event sequence. A seal is an ordered self-describing data structure. Abstractly this means each element of the seal has a tag or label that describes the associated element’s value. So far there are four normative types of seals, these are digest, root, event, and location seals.
@@ -2551,6 +2522,12 @@ Context independent extensibility means that KERI itself is not a locus of coord
 
 A watcher is an entity or component that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the controller thereof as one of its witnesses. To clarify, a watcher is not designat- ed in the associated identifier’s key events. A watcher is the controller of its own self-referential identifier which may not be the same as the identifier to which it is a watcher. An identifier watcher may be part of the trust basis of a validator and may also be controlled (but not neces- sarily so) by the validator’s controlling entity. A watcher may sign copies of its [[ref: KERL]] or parts of its [[ref: KERL]] but because a watcher is not a designated [[ref: witness]] these are not witnessed receipts. They may be considered watcher receipts or ersatz receipts.
 >>>>>>> 2722d6c (adds watcher definition. Closes #63.)
+=======
+### Witness
+
+A witness is an entity or component designated (trusted) by the controller of an identifier. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A witness is the controller of its own self-referential identifier which may or may not be the same as the identifier to which it is a witness. As a special case a controller may serve as its own witness. Witness designations are included in key (establishment) events. As a result the role of a witness may be verified using the identifier’s rotation history. When designated, a witness becomes part of the supporting infrastructure establishing and maintaining control authority over an identifier. An identifier witness therefore is part of its trust basis and may be controlled (but not necessarily so) by its controller. The purpose of a pool of witnesses is to protect the controller from external exploit of its identifier. A witness may use the controlling key-pairs of its own self-referential identifier to create digital signatures on event messages it has received but are associated with identifiers not necessarily under its control. To clarify, a witness controls its own self-referential identifier and acts as a witness of event messages for some identifier not necessarily under its control. A witness may receive, verify, and store an event on an identifier. Verify means verify the signature attached to the event using the current controlling key-pairs for the event at the time of event issuance. Thus a witness first acts as an event verifier. It determines current control authority of the event’s identifier with respect to the sequence of key (establishment) events it has so far received for that identifier. The witness follows a policy explained in more detail later for how it treats different versions of an event it may receive. Simply, it always gives priority to the first version of an event it receives (first seen). The witness signifies this by only signing and keeping the first successfully verified version of an event it receives. To restate a witness will never sign any other conflicting version of the same event in an event sequence. The event se- quence kept by a witness for an identifier must therefore be internally consistent.
+
+>>>>>>> 0025032 (adds witness definition. Closes #62.)
 
 [//]: # (\newpage)
 
