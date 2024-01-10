@@ -669,6 +669,15 @@ Common normalized ACDC and KERI labels
 `i` is a KERI identifier AID
 `a` is the data attributes or data anchors depending on the message type
 
+##### Configuration traits field
+
+Todo Define configuration traits here
+
+EstOnly: str = 'EO'  # Only allow establishment events
+    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers
+    NoBackers: str = 'NB'  # Do not allow any registrar backers
+    Backers: str = 'RB' # Registrar backer provided in Registrar seal
+
 
 ###  Seals
 
@@ -770,15 +779,6 @@ Attached bare, `bar` message.
   }
 }
 ```
-
-### Configuration Traits
-
-Todo Define configuration traits here
-
-EstOnly: str = 'EO'  # Only allow establishment events
-    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers
-    NoBackers: str = 'NB'  # Do not allow any registrar backers
-    Backers: str = 'RB' # Registrar backer provided in Registrar seal
 
 
 ### Key event messages (Non-delegated)
