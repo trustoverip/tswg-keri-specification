@@ -293,7 +293,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/62
 
 [[def: Watcher]]
 
-~ a watcher is an _entity_ or _component_ that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the _controller_ of the identifier as one of its witnesses.
+~ a watcher is an _entity_ or _component_ that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the _controller_ of the identifier as one of its witnesses. See annex [watcher](#watcher)
 
 [[def: Key state notice]]
 
@@ -2508,6 +2508,7 @@ To Nullify set the `url` to the empty string `""`.
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
+<<<<<<< HEAD
 ### Seal 
 
 A seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence [[ref: Merkle tree]]. According to the dictionary, a seal provides evidence of authenticity. A key event sequence provides a verifiable proof of current control authority at the location of each event in the key event sequence. In this sense therefore, a seal included in an event provides prove of current control authority i.e. authenticity of the data anchored at the location of the seal in the event sequence. A seal is an ordered self-describing data structure. Abstractly this means each element of the seal has a tag or label that describes the associated element’s value. So far there are four normative types of seals, these are digest, root, event, and location seals.
@@ -2545,6 +2546,11 @@ To elaborate, the provider of the data understands the purpose and semantics and
 This approach follows the design principle of context independent extensibility. Because the seals are context agnostic, the context is external to KERI. Therefore the context extensibility is external to and hence independent of KERI. This is in contrast to context dependent extensibility or even independently extensible contexts that use extensible context mechanisms such as linked data or tag registries [[ref: JSONLD]] [[ref: TagModel]] [[ref: Independently extensibile contexts]] [[spec: did-core]]. 
 
 Context independent extensibility means that KERI itself is not a locus of coordination between contexts for anchored data. This maximizes decentralization and portability. Extensibility is provided instead at the application layer above KERI though context specific external APIs that reference KERI seals in order to establish control authority and hence authenticity of the anchored (digested) data. Each API provides the context not KERI. This means that interoperability within KERI is focused solely on interoperability of control establishment. But that interoperability is total and complete and is not dependent on anchored data context. This approach further reflects KERI’s minimally sufficient means design aesthetic.
+=======
+### Watcher
+
+A watcher is an entity or component that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the controller thereof as one of its witnesses. To clarify, a watcher is not designat- ed in the associated identifier’s key events. A watcher is the controller of its own self-referential identifier which may not be the same as the identifier to which it is a watcher. An identifier watcher may be part of the trust basis of a validator and may also be controlled (but not neces- sarily so) by the validator’s controlling entity. A watcher may sign copies of its [[ref: KERL]] or parts of its [[ref: KERL]] but because a watcher is not a designated [[ref: witness]] these are not witnessed receipts. They may be considered watcher receipts or ersatz receipts.
+>>>>>>> 2722d6c (adds watcher definition. Closes #63.)
 
 [//]: # (\newpage)
 
