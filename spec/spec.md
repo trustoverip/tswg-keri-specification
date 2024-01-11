@@ -232,20 +232,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 [[def: Self-addressing identifiers (SAIDs)]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/54
-:::
+~ special type of content-addressable identifier based on encoded cryptographic digest that is self-referential. 
 
 [[def: SAD (Self-Addressed Data)]]
 
-
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/55
-:::
+~ a data container utilizing a [[ref: SAID]]
 
 [[def: Autonomic namespaces (ANs)]]
 
