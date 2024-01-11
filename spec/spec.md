@@ -349,6 +349,21 @@ https://github.com/trustoverip/tswg-keri-specification/issues/69
 https://github.com/trustoverip/tswg-keri-specification/issues/70
 :::
 
+[[def: Dead-Attack]]
+
+~ See (Security Properties of Prerotation)[#dead-attacks]
+
+[[def: Live-Attack]]
+
+~ See (Security Properties of Prerotation)[#live-attacks]
+
+[[def: First-Seen]]
+
+~ refers to the first instance of a [[ref: message]] recieved by any [[ref: witness]] or [[ref: watcher]]. The first-seen event is always seen, and can never be unseen. It forms the basis for [[ref: duplicity detection]] in KERI based systems.
+
+[[def: Key-State]]
+
+~ intitially key-state is establised through an inception event, containing information about the current keys, next keys, current and next thresholds and configutation information. Subsequent events alter the key-state.
 
 [//]: # (KERI foundational overview {#sec:content})
 
