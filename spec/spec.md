@@ -289,7 +289,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/60
 
 [[def: Controller]]
 
-~ todo
+~ a person or entity who controls a KERI identifier, i.e. has the private keys.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/61
