@@ -1,4 +1,4 @@
-Key Event Receipt Infrastructure (KERI)
+I know there are some issues with it.Key Event Receipt Infrastructure (KERI)
 ==================
 
 **Specification Status**: v1.0 Draft
@@ -142,31 +142,31 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [[ref: OWF]] [[ref: COWF]] [[ref: TMCrypto]] [[ref: QCHC]]. A Cryptonym is a type of Primitive . Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must  be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
 
-[[def: Self-certifying identifier (SCID)]]
+[[def: Self-certifying Identifier (SCID)]]
 
 ~ a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`. 
 
-[[def: Autonomic identifier (AID)]]
+[[def: Autonomic Identifier (AID)]]
 
 ~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive. 
 
-[[def: Key state]]
+[[def: Key State]]
 
 ~ includes the set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID.
 
-[[def: Key event]]
+[[def: Key Event]]
 
 ~ concretely, the serialized data structure of an entry in the Key event log (KEL) for an AID. Abstractly, the data structure itself. Key events come in different types and are used primarily to establish or change the authoritative set of keypairs and/or anchor other data to the authoritative set of keypairs at the point in the KEL actualized by a particular entry.
 
-[[def: Establishment event]]
+[[def: Establishment Event]]
 
 ~ a Key event that establishes or changes the Key state which includes the current set of authoritative keypairs (Key state) for an AID.
 
-[[def: Non-establishment event]]
+[[def: Non-establishment Event]]
 
 ~ a Key event that does not change the current Key state for an AID. Typically the purpose of a Non-establishment event is to anchor external data to a given Key state as established by the most recent prior Establishment event for an AID.
 
-[[def: Inception event]]
+[[def: Inception Event]]
 
 ~ an Establishment event that provides the incepting information needed to derive an AID and establish its initial Key state.
 
@@ -174,7 +174,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ the operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and Duplicity evident upon acceptance as the Inception event that begins the AID's KEL.
 
-[[def: Rotation event]]
+[[def: Rotation Event]]
 
 ~ an Establishment Event that provides the information needed to change the Key state which includes a change to the set of authoritative keypairs for an AID.
 
@@ -182,11 +182,11 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ the operation of revoking and replacing the set of authoritative keypairs for an AID. This operation is made verifiable and Duplicity evident upon acceptance as a Rotation event that is appended to the AID's KEL.
 
-[[def: Interaction event]]
+[[def: Interaction Event]]
 
 ~ a Non-establishment event that anchors external data to the Key state as established by the most recent prior Establishment event.
 
-[[def: Key event log (KEL)]]
+[[def: Key Event Log (KEL)]]
 
 ~ a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.
 
@@ -222,15 +222,15 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 ~ a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.
 
-[[def: Key event message]]
+[[def: Key Event Message]]
 
 ~ message whose body is a Key event and whose attachments may include signatures on its body.
 
-[[def: Key event receipt]]
+[[def: Key Event Receipt]]
 
 ~ message whose body references a Key event and whose attachments must include one or more signatures on that Key event.
 
-[[def: Self-addressing identifiers (SAIDs)]]
+[[def: Self-addressing Identifiers (SAIDs)]]
 
 ~ todo
 
@@ -247,7 +247,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/54
 https://github.com/trustoverip/tswg-keri-specification/issues/55
 :::
 
-[[def: Autonomic namespaces (ANs)]]
+[[def: Autonomic Namespaces (ANs)]]
 
 ~ todo
 
@@ -255,7 +255,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/55
 https://github.com/trustoverip/tswg-keri-specification/issues/56
 :::
 
-[[def: Autonomic identity system (AIS)]]
+[[def: Autonomic Identity System (AIS)]]
 
 ~ todo
 
@@ -263,7 +263,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/56
 https://github.com/trustoverip/tswg-keri-specification/issues/57
 :::
 
-[[def: Decentralized key management infrastructure (DPKI/DKMI)]]
+[[def: Decentralized Key Management Infrastructure (DPKI/DKMI)]]
 
 ~ todo
 
@@ -271,7 +271,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/57
 https://github.com/trustoverip/tswg-keri-specification/issues/58
 :::
 
-[[def: Key event receipt log (KERL)]]
+[[def: Key Event Receipt Log (KERL)]]
 
 ~ todo
 
@@ -311,7 +311,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/62
 https://github.com/trustoverip/tswg-keri-specification/issues/63
 :::
 
-[[def: Key state notice]]
+[[def: Key State Notice]]
 
 ~ todo
 
@@ -327,7 +327,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/64
 https://github.com/trustoverip/tswg-keri-specification/issues/65
 :::
 
-[[def: Configuration traits, Modes]]
+[[def: Configuration Traits, Modes]]
 
 ~ todo
 
@@ -351,7 +351,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/67
 https://github.com/trustoverip/tswg-keri-specification/issues/68
 :::
 
-[[def: Current threshold]]
+[[def: Current Threshold]]
 
 ~ todo
 
@@ -359,7 +359,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/68
 https://github.com/trustoverip/tswg-keri-specification/issues/69
 :::
 
-[[def: Next threshold]]
+[[def: Next Threshold]]
 
 ~ todo
 
