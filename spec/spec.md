@@ -670,12 +670,26 @@ Common normalized ACDC and KERI labels
 
 ##### Configuration traits field
 
-Todo Define configuration traits here
+The configuration traits, `c` field is a list of specially defined strings. Each string represents a configuration trait for the KEL. The following table defines the configuration traits. Some configuration traits may only appear in the Inception (delegated or not) for the KEL. Others may appear in either the inception event and rotation events (delegated or not). This is indicated in the third column. A Validator of an event shall invalidate  i.e., drop any events that do not satisfy the constraints imposed by their configuration traits. If two conflicting configuration traits appear in the same list, then the latter trait supersedes the earlier one.
 
-EstOnly: str = 'EO'  # Only allow establishment events
-    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers
-    NoBackers: str = 'NB'  # Do not allow any registrar backers
-    Backers: str = 'RB' # Registrar backer provided in Registrar seal
+|Trait|Title|Inception Only|Description|
+|:---:|:---|:---:|:---|
+|`EO`| Establishment Only | True |Only establishment events shall appear in this KEL | 
+|`DND`| Do Not Delegate | True | This KEL shall not act as a delegator of delegated AIDs| 
+|`NRB`| No Registrar Backers | True | This KEL shall not allow any registrar backers | 
+|`RB`| Registrar Backers | False | The backer list provides registrar backer AIDs | 
+
+The "Establishment Only", `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events must be signed by first-time, one-time pre-rotated keys. There is no possibility of
+key compromise due to repeated exposure of signing keys on interaction events. A Validator shall invalidate, i.e., drop any non-establishment events.
+
+The "Do Not Delegate", `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal may appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator shall invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
+
+The "No Registrar Backer," `NRB` config trait enables the Controller to protect itself from an attempt to change from a witnessed secondary root of trust to a ledger secondary root of trust via a ledger registrar backer.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use the Registrar Backer, `RB` configuration trait.
+
+The "Registrar Backer," `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event must also include Registar Backer Seal for each registrar backer in the list.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
+
+
+
 
 
 ###  Seals
@@ -736,9 +750,9 @@ The JSON version is shown. There is also a native CESR version of the seal.
 }
 ```
 
-#### Backer seal
+#### Registrar backer seal
 
-When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is required. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer must also include a configuration trait (see below) of `RB` for registrar backers. This indicates that the KEL is ledger registrar backed instead of witness pool backed. The designating establishment event must also have attached 
+When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is required. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer must also include a configuration trait (see below) of `RB` for registrar backers. This indicates that the KEL is ledger registrar-backed instead of witness pool-backed. 
 
 The  `bi` field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose `bi` field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same `bi` value).
 The `d` field value in the seal shall be the SAID of the associated metadata SAD that provides the backer registrar metadat. The SAD may appear as the value of the seal data, `sd` field is an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message shall be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
