@@ -257,7 +257,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/55
 
 [[def: Decentralized key management infrastructure (DKMI)]]
 
-~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier.
+~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier [[ref: DPKI]].
 
 [[def: Key event receipt log (KERL)]]
 
@@ -2761,5 +2761,8 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 [[def: Namespace]]
 
 ~ https://en.wikipedia.org/wiki/Namespace
+
+[[def: DPKI]]
+~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
 
 [[spec]]
