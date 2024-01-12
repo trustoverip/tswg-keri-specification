@@ -247,29 +247,17 @@ https://github.com/trustoverip/tswg-keri-specification/issues/54
 https://github.com/trustoverip/tswg-keri-specification/issues/55
 :::
 
-[[def: Autonomic namespaces (ANs)]]
+[[def: Autonomic namespace (AN)]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/56
-:::
+~ a namespace that is self-certifying and hence self-administrating. An AN has a self-certifying prefix that provides cryptographic verification of root control authority over its namespace. All derived autonomic identifiers (AIDs) in the same autonomic namespace (AN) share the same root-of-trust, source-of-truth, and locus-of-control (RSL). The governance of the namespace is therefore unified into one entity, that is, the controller who is/holds the root authority over the namespace. 
 
 [[def: Autonomic identity system (AIS)]]
 
-~ todo
+~ an identity system that includes a primary root-of-trust in self-certifying identifiers that are strongly bound at issuance to a cryptographic signing (public, private) key pair. An AIS enables any entity to establish control over an autonomic namespace (AN) in an independent, interoperable, and portable way.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/57
-:::
+[[def: Decentralized key management infrastructure (DKMI)]]
 
-[[def: Decentralized key management infrastructure (DPKI/DKMI)]]
-
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/58
-:::
+~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier [[ref: DPKI]].
 
 [[def: Key event receipt log (KERL)]]
 
@@ -2770,5 +2758,8 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 [[def: Namespace]]
 
 ~ https://en.wikipedia.org/wiki/Namespace
+
+[[def: DPKI]]
+~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
 
 [[spec]]
