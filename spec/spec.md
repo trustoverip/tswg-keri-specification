@@ -232,7 +232,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 [[def: Self-addressing identifiers (SAIDs)]]
 
-~ special type of content-addressable identifier based on encoded cryptographic digest that is self-referential. 
+~ an identifier that is content-addressable and self-referential. A SAID is uniquely and cryptographically bound to a serialization of data that includes the SAID as a component in that serialization [[ref: SAID]].
 
 [[def: SAD (Self-Addressed Data)]]
 
