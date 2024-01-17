@@ -353,7 +353,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/68
 
 [[def: Current threshold]]
 
-~ represents the number of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
+~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/69
