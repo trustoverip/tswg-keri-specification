@@ -341,13 +341,15 @@ https://github.com/trustoverip/tswg-keri-specification/issues/68
 
 [[def: Current threshold]]
 
-~ todo
+~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/69
 :::
 
 [[def: Next threshold]]
+
+~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
 ~ todo
 
