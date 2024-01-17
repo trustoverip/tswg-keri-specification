@@ -289,7 +289,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/60
 
 [[def: Controller]]
 
-~ a person or entity who controls a KERI identifier, i.e. has the private keys.
+~ an entity that can cryptographically prove the control authority over an AID and make changes on the associated KEL. A controller of a multi-sig AID may consist of multiple controlling entities.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/61
