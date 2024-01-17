@@ -236,7 +236,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 [[def: SAD (Self-Addressed Data)]]
 
-~ a data container utilizing a [[ref: SAID]]
+~ a representation of data content from which a SAID is derived. The SAID is both cryptographically bound to (content-addressable) and encapsulated by (self-referential) its SAD [[ref: SAID]].
 
 [[def: Autonomic namespaces (ANs)]]
 
