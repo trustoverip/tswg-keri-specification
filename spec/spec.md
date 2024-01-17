@@ -361,7 +361,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/69
 
 [[def: Next threshold]]
 
-~ represents the number of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
+~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
 ~ todo
 
