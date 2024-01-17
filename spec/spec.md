@@ -323,9 +323,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/65
 https://github.com/trustoverip/tswg-keri-specification/issues/66
 :::
 
-[[def: Seals]]
+[[def: Seal]]
 
-~ todo
+~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See annex (Seal)[#seal].
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/67
@@ -2482,6 +2482,43 @@ To Nullify set the `url` to the empty string `""`.
 https://github.com/trustoverip/tswg-keri-specification/issues/34
 :::
 
+### Seal 
+
+A seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence [[ref: Merkle tree]]. According to the dictionary, a seal provides evidence of authenticity. A key event sequence provides a verifiable proof of current control authority at the location of each event in the key event sequence. In this sense therefore, a seal included in an event provides prove of current control authority i.e. authenticity of the data anchored at the location of the seal in the event sequence. A seal is an ordered self-describing data structure. Abstractly this means each element of the seal has a tag or label that describes the associated element’s value. So far there are four normative types of seals, these are digest, root, event, and location seals.
+
+A digest seal include a digest of external data. This minimal seal has an element whose label indicates that the value is a digest. The value is fully qualified Base64 with a prepended derivation code that indicates the type of hash algorithm used to create the digest.
+
+::: issue
+need image - KERI Digest Seal
+:::
+
+A root seal is provides the hash tree root of external data. This minimal seal has an element whose label indicates that the value is the root of a hash tree. The value is fully qualified Base64 with a prepended derivation code that indicates the type of hash algorithm used to create the hash root. In order to preclude second pre-image attacks, hash trees used for hash trees roots in KERI seals must be sparse and of known depth similar to certificate transparency [47; 70; 95– 97]. One simple way to indicate depth is that internal nodes in a sparse tree include a depth prefix that decrements with each level and must remain non-negative at a leaf [[ref: Efficient sparse merkle trees]].
+
+::: issue
+need image - KERI Root Seal
+:::
+
+An event seal includes the identifier prefix, sequence number, and digest of an event in a key event log [[ref: KEL]]. The prefix, sequence number, and digest allow locating the event in an event log database. The digest also allows confirmation of the anchored event contents. An event seal anchors one event to another event. The two events may be either in the same key event sequence in two different key event sequences with different identifier prefixes. Thus a seal may provide a cryptographic commitment to some key event from some other key event.
+
+::: issue
+need image - KERI Event Seal
+:::
+
+An event location seal is similar to an event seal. A location seal includes the prefix, sequence number, ilk and prior digest from an event. These four values together uniquely identify the location of an event in a key event log [[ref: KEL]]. A location event is useful when two seals in two different events are cross-anchoring each other. This provides a cross reference of one event to another where the other event’s digest must include the seal in the event contents so it cannot contain the first event’s digest but the digest of the preceding event. To clarify, digest creation means that only one of the cross anchors can include a complete digest of the other event. The other cross anchor must use a unique subset of data such as the unique location of the event. The ilk is required in the location because of the special case of recovery where a rotation event supersedes an interaction event. This is described in detail later under recovery. Location seals are also useful in external data that is anchored to an event log. The location seal allows the external data to include a reference to the event that is anchoring the external data’s contents. Because the anchoring event includes a seal with the digest of the external data, it is another form of cross anchor.
+
+::: issue
+need image - KERI Event Location Seal
+:::
+
+The data structure that provides the elements of a seal must have a canonical order so that it may be reproduced in a digest of elements of a event. Different types of serialization encodings may provide different types of ordered mapping data structures. One universal canonical ordering data structure is a list of lists (array or arrays) of (label, value) pairs. The order of appearance in each list of each (label, value) pair is standardized and may be used to produce a serialization of the associated values.
+
+The interpretation of the data associated with the digest or hash tree root in the seal is independent of KERI. This allows KERI to be agnostic about anchored data semantics. Another way of saying this is that seals are data agnostic; they don’t care about the semantics of its associated data. This better preserves privacy because the seal itself does not leak any information about the purpose or specific content of the associated data. Furthermore, because digests are a type of content address, they are self-discoverable. This means there is no need to provide any sort of context or content specific tag or label for the digests. Applications that use KERI may provide discovery of a digest via a hash table (mapping) whose indexes (hash keys) are the digests and the values in the table are the location of the digest in a specific event. To restate, the semantics of the digested data are not needed for discovery of the digest within a key event sequence.
+
+To elaborate, the provider of the data understands the purpose and semantics and may disclose those as necessary, but the act of verifying authoritative control does not depend on the data semantics merely the inclusion of the seal in an event. It’s up to the provider of the data to declare or disclose the semantics when used in an application. This may happen independently of verifying the authenticity of the data via the seal. This declaration may be provided by some external application programmer interface (API) that uses KERI. In this way, KERI provides support to applications that satisfies the spanning layer maxim of minimally sufficient means. Seals merely provide evidence of authenticity of the associated (anchored) data whatever that may be.
+
+This approach follows the design principle of context independent extensibility. Because the seals are context agnostic, the context is external to KERI. Therefore the context extensibility is external to and hence independent of KERI. This is in contrast to context dependent extensibility or even independently extensible contexts that use extensible context mechanisms such as linked data or tag registries [[ref: JSONLD]] [[ref: TagModel]] [[ref: Independently extensibile contexts]] [[spec: did-core]]. 
+
+Context independent extensibility means that KERI itself is not a locus of coordination between contexts for anchored data. This maximizes decentralization and portability. Extensibility is provided instead at the application layer above KERI though context specific external APIs that reference KERI seals in order to establish control authority and hence authenticity of the anchored (digested) data. Each API provides the context not KERI. This means that interoperability within KERI is focused solely on interoperability of control establishment. But that interoperability is total and complete and is not dependent on anchored data context. This approach further reflects KERI’s minimally sufficient means design aesthetic.
 
 [//]: # (\newpage)
 
@@ -2760,6 +2797,23 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 ~ https://en.wikipedia.org/wiki/Namespace
 
 [[def: DPKI]]
+
 ~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
+
+[[def: TagModel]]
+
+~ https://project-haystack.org/doc/TagModel
+
+[[def: Independently extensibile contexts]]
+
+~ https://link.springer.com/chapter/10.1007/978-3-642-15114-9_25
+
+[[def: Merkle tree]]
+
+~ https://en.wikipedia.org/wiki/Merkle_tree
+
+[[def: Efficient sparse merkle trees]]
+
+~ https://eprint.iacr.org/2016/683.pdf
 
 [[spec]]
