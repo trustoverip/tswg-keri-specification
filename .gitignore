@@ -22,4 +22,4 @@ report.xml
 /.vscode/
 !requirements.txt
 .DS_Store
-./.idea
+.idea
