@@ -150,10 +150,6 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive. 
 
-[[def: Key state]]
-
-~ includes the set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID.
-
 [[def: Key event]]
 
 ~ concretely, the serialized data structure of an entry in the Key event log (KEL) for an AID. Abstractly, the data structure itself. Key events come in different types and are used primarily to establish or change the authoritative set of keypairs and/or anchor other data to the authoritative set of keypairs at the point in the KEL actualized by a particular entry.
@@ -363,7 +359,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/70
 
 [[def: Key-State]]
 
-~ intitially key-state is establised through an inception event, containing information about the current keys, next keys, current and next thresholds and configutation information. Subsequent events alter the key-state.
+~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, next keys, current thresholds, next thresholds, and configuration. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
 
 [//]: # (KERI foundational overview {#sec:content})
 
