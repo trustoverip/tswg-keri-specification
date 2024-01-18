@@ -186,7 +186,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a Non-establishment event that anchors external data to the Key state as established by the most recent prior Establishment event.
 
-[[def: Key event log (KEL)]]
+[[def: Key event log, KEL]]
 
 ~ a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.
 
@@ -259,13 +259,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/55
 
 ~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier [[ref: DPKI]].
 
-[[def: Key event receipt log (KERL)]]
+[[def: Key event receipt log KERL, KERL]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/59
-:::
+~ a key event receipt log is a [[ref: KEL]] that also includes all the consistent key event receipt [[ref: message]]s created by the associated set of witnesses. See annex [Key event receipt log](#key-event-receipt-log)
 
 [[def: KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE)]]
 
@@ -1589,7 +1585,11 @@ Delegating Event Diagram
 
 Delegated Event Seal Diagram
 
+<<<<<<< HEAD
 Likewise, the inception event of the delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the delegatee's KEL and provides a way to recover from pre-rotated key compromise.
+=======
+Likewise, the inception event of the delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the delegatee's KEL and provides a way to recover from prerotated key compromise.
+>>>>>>> 7d6d263 (adds KERL definition. Closes #59)
 
 Delegated Event with Delegator AID Diagram
 
@@ -1654,9 +1654,15 @@ A successful non-establishment Live-Attack means that the attacker is able to ve
 
 #### Establishment Live-attack
 
+<<<<<<< HEAD
 A successful establishment Live-Attack means that the attacker somehow compromises the unexposed next (pre-rotated) set of keys from the latest rotation event before that event has been propagated. This means compromise must occur at or before the time of the first use of the keys to sign the establishment event itself. Such a compromise is extremely difficult and the primary reason for pre-rotation is to mitigate the possibility of an establishment Live-attack in the first place.  In an establishment live attack, the witness pool provides no additional security because the compromised rotation event can rotate in new witnesses under the control of the attacker. One way to mitigate establishment Live-attack is to use a thresholded multi-sig set of pre-rotated keys.
 
 Notwithstanding any mitigations, assuming a successful compromise of the pre-rotated keys, duplicity detection with or without witness protection may not protect against a resulting establishment live attack. This is because such a Live-attack would be able to create a new verifiable rotation event with next keys and new witnesses under the attacker's control and propagate that event in advance of a new rotation event created by the original controller. Such a successful Live-attack exploit may effectively and irreversibly capture control of the identifier. Moreover, in the case of a successful Live-attack exploit, new rotation events from the original controller would appear as duplicitous to any validator or other component that already received the exploited rotation event and accepted it as the First-seen version of that event. Consequently, protection from establishment Live-attack exploits comes exclusively from the difficulty of compromising a set of pre-rotated keys before or at the time of their first use (exposure).
+=======
+A successful establishment Live-Attack means that the attacker somehow compromises the unexposed next (pre-rotated) set of keys from the latest rotation event before that event has been propagated. This means compromise must occur at or before the time of the first use of the keys to sign the establishment event itself. Such a compromise is extremely difficult and the primary reason for prerotation is to mitigate the possibility of an establishment Live-attack in the first place.  In an establishment live attack, the witness pool provides no additional security because the compromised rotation event can rotate in new witnesses under the control of the attacker. One way to mitigate establishment Live-attack is to use a thresholded multi-sig set of prerotated keys.
+
+Notwithstanding any mitigations, assuming a successful compromise of the prerotated keys, duplicity detection with or without witness protection may not protect against a resulting establishment live attack. This is because such a Live-attack would be able to create a new verifiable rotation event with next keys and new witnesses under the attacker's control and propagate that event in advance of a new rotation event created by the original controller. Such a successful Live-attack exploit may effectively and irreversibly capture control of the identifier. Moreover, in the case of a successful Live-attack exploit, new rotation events from the original controller would appear as duplicitous to any validator or other component that already received the exploited rotation event and accepted it as the First-seen version of that event. Consequently, protection from establishment Live-attack exploits comes exclusively from the difficulty of compromising a set of prerotated keys before or at the time of their first use (exposure).
+>>>>>>> 7d6d263 (adds KERL definition. Closes #59)
 
 To elaborate, a successful live exploit must compromise the unexposed next set of private keys from the public-keys declared in the latest rotation. Assuming the private keys remain secret, a compromise must come either by brute force inversion of the one-way digest function protecting the public keys and then by brute force inversion of the one-way scalar multiplication function that generates the public key from the private keys or by a side-channel attack at the first-use of the private keys to sign the rotation event. By construction, no earlier signing side-channel attack is possible. This makes successful Live-attack exploits from such side-channel attacks extremely difficult. 
 
@@ -2531,6 +2537,10 @@ A witness is an entity or component designated (trusted) by the controller of an
 [//]: # (\makebibliography)
 
 [//]: # (# Bibliography)
+
+### Key Event Receipt Log (KERL)
+
+A key event receipt log (KERL) is a [[ref: KEL]] that also includes all the consistent key event receipt messages created by the associated set of witnesses. Witnesses keep a separate KERL for each of the identifiers for which they create receipts. Each witnesses’s KERL for an identifier is an ap- pend only event log of first seen verified consistent events. The events are chained in that each event message besides the inception event includes a cryptographic strength content digest of the preceding event message. A witness will only keep consistent events and receipts of those consistent events. A witness may cache out of order events or incompletely signed events until such time as they may be verified as consistent or inconsistent. Because a proper event message in- cludes the signature(s) of the controller(s) it may be thought of as a special type of self-signed [[ref: receipt]]. In this same way a [[ref: KEL]] may be thought of as a special type of KERL. A verifier may establish current control authority by replaying the subsequence of establishment events in a valid KERL. A KERL may be part of the trust basis for an identifier and may act as a secondary root-of-trust.
 
 ## Bibliography
 
