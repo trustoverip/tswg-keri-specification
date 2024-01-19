@@ -223,20 +223,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 [[def: Self-addressing identifiers (SAIDs)]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/54
-:::
+~ an identifier that is content-addressable and self-referential. A SAID is uniquely and cryptographically bound to a serialization of data that includes the SAID as a component in that serialization [[ref: SAID]].
 
 [[def: SAD (Self-Addressed Data)]]
 
-
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/55
-:::
+~ a representation of data content from which a SAID is derived. The SAID is both cryptographically bound to (content-addressable) and encapsulated by (self-referential) its SAD [[ref: SAID]].
 
 [[def: Autonomic namespace (AN)]]
 
