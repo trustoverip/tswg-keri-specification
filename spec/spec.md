@@ -292,7 +292,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/64
 
 [[def: Backer]]
 
-~ todo
+~ an alternative to a traditional KERI based [[ref: witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/65
