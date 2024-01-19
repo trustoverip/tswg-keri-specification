@@ -351,7 +351,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/70
 
 [[def: Live-Attack]]
 
-~ See (Security Properties of Prerotation)[#live-attacks]
+~ an attack that compromises either the current signing keys used to sign non-establishment events or he current pre-rotated keys needed to sign a subsequent establishment event. See (Security Properties of Prerotation)[#live-attacks].
 
 [[def: First-Seen]]
 
