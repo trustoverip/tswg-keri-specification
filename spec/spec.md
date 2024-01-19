@@ -359,7 +359,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/70
 
 [[def: Key-State]]
 
-~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, next keys, current thresholds, next thresholds, and configuration. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
+~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
 
 [//]: # (KERI foundational overview {#sec:content})
 
