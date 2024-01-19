@@ -145,10 +145,6 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive. 
 
-[[def: Key state]]
-
-~ includes the set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID.
-
 [[def: Key event]]
 
 ~ concretely, the serialized data structure of an entry in the Key event log (KEL) for an AID. Abstractly, the data structure itself. Key events come in different types and are used primarily to establish or change the authoritative set of keypairs and/or anchor other data to the authoritative set of keypairs at the point in the KEL actualized by a particular entry.
@@ -344,6 +340,21 @@ https://github.com/trustoverip/tswg-keri-specification/issues/69
 https://github.com/trustoverip/tswg-keri-specification/issues/70
 :::
 
+[[def: Dead-Attack]]
+
+~ an attack on an establishment event that occurs after the Key-state for that event has become stale because a later establishment event has rotated the sets of signing and pre-rotated keys to new sets. See (Security Properties of Prerotation)[#dead-attacks].
+
+[[def: Live-Attack]]
+
+~ an attack that compromises either the current signing keys used to sign non-establishment events or he current pre-rotated keys needed to sign a subsequent establishment event. See (Security Properties of Prerotation)[#live-attacks].
+
+[[def: First-Seen]]
+
+~ refers to the first instance of a [[ref: message]] recieved by any [[ref: witness]] or [[ref: watcher]]. The first-seen event is always seen, and can never be unseen. It forms the basis for [[ref: duplicity detection]] in KERI based systems.
+
+[[def: Key-State]]
+
+~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
 
 [//]: # (KERI foundational overview {#sec:content})
 
