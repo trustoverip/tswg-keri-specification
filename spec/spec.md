@@ -1,4 +1,4 @@
-zKey Event Receipt Infrastructure (KERI)
+Key Event Receipt Infrastructure (KERI)
 ==================
 
 **Specification Status**: v1.0 Draft
