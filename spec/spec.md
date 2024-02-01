@@ -20,10 +20,6 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/51
-:::
-
 [//]: # (\maketitle)
 
 [//]: # (\newpage)
@@ -82,10 +78,6 @@ The KERI approach to Decentralized key management infrastructure (DKMI) allows f
 
 ## Scope
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/49
-:::
-
 Implementation design of a protocol-based decentralized key management infrastructure that enables secure attribution of data to a cryptographically derived identifier with strong (cryptographically verifiable) bindings between each of the identifier, a set of asymmetric signing key pairs that are the key state, a controlling entity that holds the private keys, and a cryptographically verifiable data structure that enables changes to that key state. Thus, security over secure attribution is reduced to key management. This key management includes, for the first time, a practical solution to the hard problem of public key rotation. There is no reliance on trusted third parties. The resulting secure attribution is fully end-to-end verifiable.
 Because of the reliance on asymmetric (public, private) digital signing key pairs, this may be viewed as a type of decentralized public key infrastructure (DPKI)  The protocol supports cryptographic agility for both pre and post-quantum attack resistance. The application scope includes any electronically transmitted information. The implementation dependency scope assumes no more than cryptographic libraries that provide cryptographic strength pseudo-random number generators, cryptographic strength digest algorithms, and cryptographic strength digital signature algorithms. 
 
@@ -102,10 +94,6 @@ The following documents are referred to in the text in such a way that some or a
 
 
 ## Terms and Definitions
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/50
-:::
 
 For the purposes of this document, the following terms and definitions apply.
 
@@ -179,11 +167,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: End-verifiability]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/35
-:::
+~ a data item or statement may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control.
 
 [[def: Duplicity]]
 
@@ -233,29 +217,17 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 ~ a key event receipt log is a [[ref: KEL]] that also includes all the consistent key event receipt [[ref: message]]s created by the associated set of witnesses. See annex [Key event receipt log](#key-event-receipt-log)
 
-[[def: KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE)]]
+[[def: KERI’s Algorithm for Witness Agreement, KAWA, KA2CE]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/60
-:::
+~ a type of Byzantine Fault Tolerant (BFT) algorithm
 
 [[def: Controller]]
 
 ~ an entity that can cryptographically prove the control authority over an AID and make changes on the associated KEL. A controller of a multi-sig AID may consist of multiple controlling entities.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/61
-:::
-
 [[def: Witness]]
 
 ~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex [Witness](#witness).
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/62
-:::
 
 [[def: Watcher]]
 
@@ -263,61 +235,31 @@ https://github.com/trustoverip/tswg-keri-specification/issues/62
 
 [[def: Key state notice]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/64
-:::
+~ a data structure representing the current key state of a given [[ref: AID]]
 
 [[def: Backer]]
 
 ~ an alternative to a traditional KERI based [[ref: witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/65
-:::
-
 [[def: Configuration traits, Modes]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/66
-:::
+~ a list of specially defined strings representing a configuration of a KEL. See (Configuration traits field)[#configuration-traits-field].
 
 [[def: Seal]]
 
 ~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See annex (Seal)[#seal].
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/67
-:::
-
 [[def: Anchors]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/68
-:::
+~ data in the anchoring KEL event, for example the `{i, s, d}` dict that points to an approved delegation event.
 
 [[def: Current threshold]]
 
 ~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/69
-:::
-
 [[def: Next threshold]]
 
 ~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
-
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/70
-:::
 
 [[def: Dead-Attack]]
 
@@ -450,11 +392,6 @@ An important innovation of KERI is that it solves the key Rotation problem of PK
 ### Qualified Cryptographic Primitives
 
 A Cryptographic primitive is a serialization of a value associated with a cryptographic operation, including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[ref: CESR]].  A property of CESR is that all cryptographic primitives expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/44
-:::
-
 
 ### CESR Encoding
 
@@ -589,10 +526,6 @@ The primary field labels are compact in that they use only one or two characters
 
 The top-level fields of each message type shall appear in a specific order. All top-level fields are required. These are defined for each message type below.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/20
-:::
-
 ##### Version string field
 
 The version string, `v`, field shall be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[ref: CBOR]] [[ref: RFC8949]] [[ref: MGPK]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream may use a different serialization type. The format for the version string field value is defined in the CESR specification [[ref: CESR]].
@@ -662,7 +595,6 @@ In the simple case, given a threshold value `M` together with a total of `N` val
 
 In the complex case, the field value is a list of weights that are strict decimal-encoded rational fractions. Fractionally weight thresholds are best suited for Partial, Reserve, or Custodial rotation applications. The exact syntax and satisfaction properties of fractionally weighted threshold values are described below in the section on Partial, Reserve, and Custodial rotations.
 
-
 ##### Key list field
 
 The Key, `k` field value is a list of strings that are each a fully qualified public key. These provide the current signing keys for the AID associated with a KEL. The Key, `k` field value shall not be empty.
@@ -714,17 +646,11 @@ The No Registrar Backer, `NRB` config trait enables the Controller to protect it
 
 The Registrar Backer, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event must also include Registrar Backer Seal for each registrar backer in the list.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
 
-
 ##### Seal list field
 
 The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seal Section below.
 
-
 ### Seals
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/21
-:::
 
 The dictionary definition of the seal is "evidence of authenticity". Seals make a verifiable, nonrepudiable commitment to an external serialized data item without disclosing the item and also enable that commitment to the external data to be bound to the key state of a KEL at the location of the seal. This provides evidence of authenticity while maintaining confidentiality. This also enables the validity of the commitment to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions. Seals enable authenticatable transactions that happen externally to the KEL.
 
@@ -830,14 +756,6 @@ The convention for field ordering is to put the fields that are common to all Me
 
 The top-level fields of an Inception, `icp`, event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/42
-:::
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/39
-:::
-
 Inception event example:
 
 ```json
@@ -879,11 +797,6 @@ Inception event example:
 
 The top-level fields of a Rotation, `rot` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Rotation event example:
 
 ```json
@@ -920,12 +833,7 @@ Rotation event example:
 
 #### Interaction Event Message Body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 The top-level fields of an Interaction, `ixn` event message body shall appear in the following order: `[ v, t, d, i, s, p, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
-
 
 ```json
 {
@@ -950,11 +858,6 @@ The top-level fields of an Interaction, `ixn` event message body shall appear in
 #### Delegated Inception Event Message Body
 
 The top-level fields of a Delegated Inception, `dip` event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes. 
-
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 ```json
 {
@@ -997,11 +900,6 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 The top-level fields of a Delegated Rotation, `drt` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes . Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 ```json
 {
   "v": "KERICAAJSONAACd_",
@@ -1027,7 +925,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
       "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
     ],
   "bt": "1",
-  "ba"  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
+  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
   "c":[],
   "a":[]
@@ -1046,10 +944,6 @@ The SAID, `d` field value is the SAID of a key event from a KEL, i.e., the key e
 The Identifier AID, `i` field value is the Controller AID of the KEL for the key event being receipted. 
 
 The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 Receipt example:
 
@@ -1128,15 +1022,7 @@ The Attribute, `a` field value is a field map (block). Its fields provide the at
 
 The top-level fields of a Query, `qry` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Example Query Message
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 ```json
 {
@@ -1160,15 +1046,6 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 The top-level fields of a Reply, `rpy` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Reply message example:
 
 ```json
@@ -1189,10 +1066,6 @@ Reply message example:
 ```
 
 #### Prod Message Body
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 The top-level fields of a Prod, `pro` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
 
@@ -1220,10 +1093,6 @@ Prod message example:
 
 The top-level fields of a Reply, `bar` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 Bare message example:
 
@@ -1269,10 +1138,6 @@ Exchange transaction inception message example:
 
 
 #### Exchange Message Body
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
@@ -1344,9 +1209,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. {{see CESR specification}}
-
-
+Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[ref: CESR]]
 
 ## KERI key management
 
@@ -1424,7 +1287,7 @@ Each Establishment event involves two sets of keys that each play a role that to
 
 In addition, each Establishment event designates two threshold expressions, one for each set of keypairs (current and next). The current threshold determines the needed satisficing subset of signatures from the associated current set of keypairs for signing authority to be considered valid. The next threshold determines the needed satisficing subset of signatures from the associated next set of hidden keypairs for rotation authority to be considered valid. The simplest type of threshold expression for either threshold is an integer that is no greater than nor no less than the number of members in the set. An integer threshold acts as an `M of N` threshold where `M` is the threshold and `N` is the total number of keypairs represented by the public keys in the key list. If any set of `M` of the `N` private keys belonging to the public keys in the key list verifiably signs the event, then the threshold is satisfied by the Controller exercising its control authority role (signing or rotating) associated with the given key list and threshold.
 
-To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs), a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
+To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs, a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
 
 Each Non-establishment event must be signed by a threshold-satisficing subset of private keys from the current set of keypairs from the most recent Establishment event. The following sections detail the requirements for a valid set of signatures for each type of Establishment event.
 
@@ -1445,10 +1308,6 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 ```json
 {
   "v": "KERI10JSON0001ac_",
@@ -1463,7 +1322,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
       "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
       "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
     ],
-  "nt": "3",  / 3 of 5
+  "nt": "3",  // 3 of 5
   "n":
     [
       "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
@@ -1643,8 +1502,6 @@ To reiterate, because the delegating event seal includes a digest of the full de
 
 A common use case of delegation would be to delegate signing authority to a new identifier prefix. The signing authority may be exercised by a sequence of revokable signing keys distinct from the keys used for the delegating identifier. This enables horizontal scalability of signing operations. The other major benefit of a cooperative delegation is that any exploiter that merely compromises only the delegate’s authoritative keys may not capture the control authority of the delegate. A successful exploiter must also compromise the delegator’s authoritative keys. Any exploit of the Delegatee is recoverable by the delegator. Conversely, merely compromising the delegator’s signing keys may not enable a delegated rotation without also compromising the Delegatee's pre-rotated keys. Both sets of keys must be compromised simultaneously. This joint compromise requirement is a distinctive security feature of cooperative delegation. Likewise, as explained later, this cooperative feature also enables recovery of a joint compromise of a delegation at any set of delegation levels by a recovery at the next higher delegation level.
 
-
-
 ### Security Properties of Pre-rotation
 
 For many exploits, the likelihood of success is a function of exposure to continued monitoring or probing. Narrowly restricting the exposure opportunities for exploitation in terms of time, place, and method, especially if the time and place happen only once, makes exploitation extremely difficult. The exploiter has to either predict the one-time and place of that exposure or has to have continuous universal monitoring of all exposures. By declaring the very first pre-rotation in the inception event, the window for its exploit is as narrow as possible. Likewise, each subsequent rotation event is a one-time and place signing exposure of the former next (pre-rotated) rotation key.
@@ -1681,8 +1538,9 @@ To summarize, an alternate but verifiable version of a rotation event would be d
 
 As a special case, to even better protect the initial keypairs in an inception event from a Dead-attack, a controller may coincidently create both the inception event and an immediately following rotation event and then emit them together as one. The initial (original incepting) keypairs may be discarded (including removing all traces from signing infrastructure) after creation but before emission of the coincident events, thereby minimizing the exposure to Dead Attack of these initial keypairs.
 
-
+::: issue
 Diagram Dead-Attack Exploit
+:::
 
 #### Live-Attacks
 
@@ -1755,9 +1613,6 @@ The analysis of protection against an attack can be further decomposed into thre
 - A validator may suffer harm due to its acceptance of inconsistent verifiable events produced by a malicious entity (controller and/or third party).
 
 Protection consists of either prevention or mitigation of both of the harm cases. The primary protection mechanisms for the controller include best practice key management techniques for maintaining root control authority, redundant confirmation of events by supporting components, and duplicity detection on the behavior of designated supporting components. The primary protection mechanism for the validator is duplicity detection on the behavior of supporting components.
-
-
-
 
 ### Validation
 
@@ -1858,8 +1713,6 @@ For example, in the diagram below, a rotation event at the same location may sup
 Diagram Here
 
 
-
-
 ### KERI's Algorithm for Witness Agreement (KAWA)
 
 #### Introduction
@@ -1879,6 +1732,7 @@ To restate, a controller may designate its witness set in such a way as to provi
 KERI’s KAWA or the algorithm is run by the controller of an identifier in concert with a set of N witnesses designated by the controller to provide as a service the key event history of that identifier via a KERL in a highly available and fault-tolerant manner. One motivation for using key event logs is that the operation of redundant immutable (deletion proof) event logs may be parallelizable and hence highly scalable. A KERL is an immutable event log that is made deletion proof by virtue of it being provided by the set of witnesses of which only a subset of F witnesses may at any time be faulty. In addition to designating the witness set, the controller also designates a threshold number, M, of witnesses for accountability. To clarify, the controller accepts accountability for an event when any subset M of the N witnesses confirms that event. The threshold M indicates the minimum number of confirming witnesses the controller deems sufficient given some number F of potentially faulty witnesses. The objective of the service is to provide a verifiable KERL to any validator on demand. Unlike direct mode where a validator may be viewed as an implicit witness, with indirect mode, a validator may not be one of the N explicitly designated witnesses that provide the service.
 
 #### Witness Designation
+
 The controller designates both the witness tally number and the initial set of witnesses in the inception event configuration. The purpose of the tally is to provide a threshold of accountability for the number of witnesses confirming an event. Subsequent rotation operations may amend the set of witnesses and change the tally number. This enables the controller to replace faulty witnesses and/or change the threshold of accountability of the witness set. When a rotation amends the witnesses it includes the new tally, the set of pruned (removed) witnesses and the set of newly grafted (added) witnesses.
 
 #### Witnessing Policy
@@ -1930,10 +1784,6 @@ Furthermore, any mutual interaction events between a validator and controller ma
 Alternatively, in the case of a complete and total dead exploit, the validator and controller may jointly agree to use some other, more formal mechanism to resolve the priority of divergent KERLs. This may be the median of the astronomical time of the original reception of a receipt by a mutually trusted set of observers. This may be through the use of anchor transactions on a distributed consensus ledger. This later approach would only require minimal use of a distributed consensus ledger in order to resolve the most extreme and unlikely case of total dead exploit.
 
 Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/40
-:::
 
 ### Native CESR Encodings of KERI Messages
 
