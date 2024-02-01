@@ -1165,7 +1165,7 @@ Exchange message example:
 
 #### Indexed Signatures
 
-Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached {{(see CESR spec)}}. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
+Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[ref: CESR]]. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
 
 There are two types of attached indexed signatures: controller-indexed and witnessed-indexed. Other information may be required with the attachment the type the type of event to which the signature is attached to which AID the indexed signature belongs.
 
@@ -2106,17 +2106,15 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 ### Out-Of-Band-Introduction (OOBI)
 
-#### Introduction
+An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or [[ref: SAID]]. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols [[ref: ACDC]] [[ref: OOBI]]. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory [[ref: IPT]][[ref: DOMIP]][[ref: PT]][[ref: FPP]]. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
 
-An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or SAID {{KERI_ID}}{{KERI}}{{SAID_ID}}{{OOBI_ID}}. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI {{KERI_ID}}{{KERI}}. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols {{KERI_ID}}{{ACDC_ID}}{{OOBI_ID}}. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory {{IPT}}{{DOMIP}{{PT}}{{FPP}}. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
-
-Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID {{KERI_ID}}{{KERI}}{{SAID_ID}}{{OOBI_ID}}{{URL}}. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host {{RFC3986}}{{URL}}. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
+Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[ref: URL]]. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[ref: RFC3986]] [[ref: URL]]. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
 
 Moreover, because IP infrastructure is not trusted by KERI, a KERI OOBI by itself is considered insecure with respect to KERI, and any OOBI must, therefore, be later verified using a KERI BADA mechanism. The principal use case for an OOBI is to jump-start or bootstrap the discovery of a service endpoint for a given AID. To reiterate, the OOBI by itself is not sufficient for discovery because the OOBI itself is insecure. The OOBI merely jump-starts or bootstraps the authenticated discovery.
 
 OOBIs enable a KERI implementation to leverage existing IP and DNS infrastructure to introduce KERI AIDs and discover service endpoints, which may then be securely attributed. KERI does not, therefore, need its own dedicated discovery network; OOBIs with URLs will do.
 
-A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID. A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol {{see CESR SAID Annex }} provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
+A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[ref: CESR]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
 
 #### Basic OOBI
 
@@ -2134,7 +2132,7 @@ In concrete tuple form, an OOBI is as follows:
 
 An OOBI itself is not signed or otherwise authenticatable by KERI but may employ some other Out-Of-Band-Authentication (OOBA) mechanism, i.e., non-KERI.
 
-The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix {{QR}}{{DM}}.
+The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix [[ref: QR]] [[ref: DM]].
 
 
 #### OOBI URL (IURL)
@@ -2170,7 +2168,7 @@ To clarify, the minimum information in an OOBI is the pair, `(URL, AID)`. The co
 
 #### Well-Known OOBI
 
-An OOBI may be returned as the result of a ‘GET’ request to an {{IETF RFC-5785}}  well-known URL.
+An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC5785]] well-known URL.
 
 For example,
 
@@ -2293,7 +2291,7 @@ An OOBI may be augmented with one or more OOBAs to minimize the likelihood of a 
 
 #### SPED (Speedy Percolated Endpoint Discovery)
 
-All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) {{PT}}{{FPP}}{{IPT}}{{DOMIP}}. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
+All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) [[ref: PT]][[ref: FPP]][[ref: IPT]][[ref: DOMIP]]. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
 
 #### JIT/NTK Discovery
 
@@ -2320,7 +2318,7 @@ KERI follows a "zero-trust" security model for authentic or securely attributabl
 
 To elaborate, there are two primary types of attacks on authentic or authenticatable data-at-rest. The first is a replay attack. The second is a deletion attack. In a replay attack, an adversary keeps a copy of an authentic message or data together with its verifiable signature that has already been created and used by the controller of a KERI AID and then sometime later replays that same message with the signature. A verifier may thereby be fooled into believing that the replay is actually a new message and not a stale message. There are both interactive and non-interactive mitigations to replay attacks. Interactive mitigations use some type of nonce or salt exchanged between Updater and Updatee. The nonce exchange introduces latency, scalability, and synchronization limitations. Non-interactive mitigations require a monotonic ordering mechanism. Typically, monotonic ordering is based on logic rooted in a sequence number or date-time stamp. Because non-interactive mitigations are asynchronous, however, they do not have the latency and scalability limitations of interactive mitigations and are therefore preferred.
 
-The KEL of a KERI AID provides such a monotonic ordering mechanism as it employs both a sequence number and digest chaining. For authentic data directly anchored to or determined by a KEL, the relative KEL location determines the monotonic order. This ordering determination includes TELs , which themselves are monotonically ordered with respect to anchoring seals in the associated KEL {{PTEL_ID}}.  For authentic data not directly anchored or included in a KEL, the relative key state (which is determined by the KEL) may be used in combination with a date-time stamp to ensure monotonic ordering. Finally, for any AID whose key state is fixed, a date-time stamp may be used with appropriate update logic to ensure monotonic ordering. The logic that ensures monotonic ordering is called BADA and is described later in this section.
+The KEL of a KERI AID provides such a monotonic ordering mechanism as it employs both a sequence number and digest chaining. For authentic data directly anchored to or determined by a KEL, the relative KEL location determines the monotonic order. This ordering determination includes TELs , which themselves are monotonically ordered with respect to anchoring seals in the associated KEL [[ref: ACDC]].  For authentic data not directly anchored or included in a KEL, the relative key state (which is determined by the KEL) may be used in combination with a date-time stamp to ensure monotonic ordering. Finally, for any AID whose key state is fixed, a date-time stamp may be used with appropriate update logic to ensure monotonic ordering. The logic that ensures monotonic ordering is called BADA and is described later in this section.
 
 A deletion attack is related to a replay attack. Once erased or deleted, a verifier may not be able to detect a replay attack of the deleted data because it has lost a record of the prior play to compare against. To elaborate, once erased, any stale authenticated data acting as authorization may be replayed without detection. This exposes a problem with the GPDR (General Data Protection Regulation) right-to-erasure, which, if naively implemented as total erasure, exposes the data controller to a replay attack of erased data.
 
@@ -2561,6 +2559,10 @@ To Nullify set the `url` to the empty string `""`.
 
 ~ https://en.wikipedia.org/wiki/Collision_resistance
 
+[[def: IPT, Invasion Percolation]]
+
+~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+
 [[def: ITPS]]
 
 ~ https://en.wikipedia.org/wiki/Information-theoretic_security
@@ -2775,5 +2777,69 @@ To Nullify set the `url` to the empty string `""`.
 [[def: Eclipse Attack]]
 
 ~ https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin 
+
+[[def: RFC3986, Uniform Resource Identifier (URI): Generic Syntax]]
+
+~ https://datatracker.ietf.org/doc/html/rfc3986
+
+[[def: PT, Percolation Theory]]
+
+~ https://en.wikipedia.org/wiki/Percolation_theory
+
+[[def: FPP, First Passage Percolation]]
+
+~ https://en.wikipedia.org/wiki/First_passage_percolation
+
+[[def: IPT, Invasion Percolation]]
+
+~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+
+[[def: DOMIP, Dynamic Opinion Model and Invasion Percolation]]
+
+~ https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.103.018701
+
+[[def: PTEL_ID, IETF PTEL (Public Transaction Event Log) Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-ptel
+
+[[def: Proof_ID, IETF CESR-Proof Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-cesr-proof
+
+[[def: IPEX_ID, IPEX (Issuance and Presentation EXchange) Internet Draft]]
+
+~ https://github.com/WebOfTrust/keripy/blob/master/ref/Peer2PeerCredentials.md
+
+[[def: DIDK_ID, IETF DID-KERI Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-did-keri
+
+[[def: JSON, JavaScript Object Notation Delimeters]]
+
+~ https://www.json.org/json-en.html
+
+[[def: RFC8259, JSON (JavaScript Object Notation)]]
+
+~ https://datatracker.ietf.org/doc/html/rfc8259
+
+[[def: RFC4627, The application/json Media Type for JavaScript Object Notation (JSON)]]
+
+~ https://datatracker.ietf.org/doc/rfc4627/
+
+[[def: URL, URL]]
+
+~ https://en.wikipedia.org/wiki/URL
+
+[[def: QR, QR Code]]
+
+~ https://en.wikipedia.org/wiki/QR_code
+
+[[def: DM, Data Matrix]]
+
+~ https://en.wikipedia.org/wiki/Data_Matrix
+
+[[def: RTE, GDPR Right to Erasure]]
+
+~ https://gdpr-info.eu/art-17-gdpr/
 
 [[spec]]
