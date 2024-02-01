@@ -1187,11 +1187,11 @@ A set of witness-indexed signatures on an interaction, inception, or rotation (d
 
 Events that have a non-empty set of attached signatures which set does not satisfy the required thresholds may escrow the event while waiting for other signatures to arrive either as attachments to the same version of the event or to a receipt of that event (see next section). A Validator that receives a key event or non-key-event message that does not have attached at least one verifiable Controller signature shall drop that message (i.e., not escrow or otherwise accept it). This protects the Validator from a DDoS attack with spurious unsigned messages.
 
-Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures {{see CESR Specification}}. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
+Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures [[ref: CESR]]. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
 
 #### Non-indexed signatures
 
-CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. {{see CESR Specification}}
+CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. [[ref: CESR]]
 
 #### Endorsements
 
@@ -1199,7 +1199,7 @@ Other entities, as identified by their AIDs, may wish to attach signatures on ke
 
 #### Sealing
 
-Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD{{see CESR specification}}. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
+Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD [[ref: CESR]]. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
 
 One primary use case for sealing in KERI is delegated AIDs. The Delegator (AID) approves (endorses) the associated delegation of a delegated event in the Delegatee's KEL by sealing the SAID of that delegated event in the Delegator's KEL. Because the Delegator signs the sealing event, the presence of the delegated event's SAID (cryptographic digest) in the Delegator's KEL is equivalent cryptographically to a signed endorsement by the Delegator of the delegated event itself but with the added advantage that the validity of that delegation persists in spite of changes to the key state of the Delegator.  A validator need only receive an attached reference to the delegating event that includes the seal in order to look up the seal and verify its presence. CESR provides codes for attached event seal references as well as codes for event seals.
 
@@ -1516,7 +1516,7 @@ By definition, a Dead-attack on a given establishment event occurs after the Key
 
 ##### Non-establishment Dead-attack
 
-A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an eclipse attack on a validator {{eclispe attack}}. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
+A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
 
 The one exception would be the case where the event's key state has only a single signing key and a single prior pre-rotated key that has been repurposed as the single signing key, which the signing key has been compromised. In this case, the attacker could then attempt an establishment Dead-attack by creating a compromised state rotation event using the stale compromised signing key as a compromised rotation key in order to compromise the immediately prior establishment event. The attacker can then rotate in a set of witnesses under its control so that witness compromise is not needed. Notwithstanding this exploit, as the next paragraphs explain, the controller is still protected against an establishment Dead-attack as long as the original event has had time to propagate as First-seen to any component, such as a watcher the Validator chooses to consult.
 
@@ -1528,7 +1528,7 @@ To elaborate, compromising a set of keys after the first use, given best practic
 
 In any case, a validator or other component may still be protected as long as the original version of the event has had time to propagate as First-Seen to that validator or other component (such as witness, watcher, juror, judge) that the validator may access. Therefore, in order to successfully detect duplicity and thereby be protected, any validator needs merely to compare any later copy of the event with any copy of the original event as propagated to any component it may consult. The attacker, therefore, must get ahead of the propagation of a past rotation event. A later surprise quantum attack provides no advantage in this case since the event has already propagated and is already First-seen. The compromised event would be detectable as duplicitous and dropped.
 
-To restate, as already described above, this type of attack looks like what is commonly known as an eclipse attack on a validator {{eclispe attack}}. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
+To restate, as already described above, this type of attack looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
 
 To further elaborate, recall that the original version of the event is the one that first exposes the keys to potential compromise. This may only allow a very narrow window of time for an attacker to get ahead of that event’s propagation. In other words, in order for a Dead-Attack to be successful, it must completely avoid detection as duplicitous. To do this, it must either prevent the validator from gaining access to any original copy of the key event history, i.e., an eclipse attack or, equivalently, must first destroy all extant copies of the original key event history accessible to the validator, i.e., some type of deletion attack. This may be very difficult given a sufficiently widespread watcher network.
 
@@ -1710,7 +1710,9 @@ The latest-seen delegated rotation constraint in B. means that any earlier deleg
 
 For example, in the diagram below, a rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events.
 
+::: issue
 Diagram Here
+:::
 
 
 ### KERI's Algorithm for Witness Agreement (KAWA)
@@ -2224,11 +2226,11 @@ For example,
 ~~~json
 {
   "v": "KERI10JSON00011c_",
-  "t"  "rpy",
+  "t":  "rpy",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
   "dt": "2020-08-22T17:50:12.988921+00:00",
   "r": "/oobi/witness",
-  "a :
+  "a" :
   {
     "urls":
     [
@@ -2257,8 +2259,6 @@ A service endpoint location reply message could also be re-purposed as an OOBI b
   }
 }
 ~~~
-
-
 
 #### Self (Blind) OOBI (SOOBI)
 
@@ -2492,12 +2492,6 @@ To Nullify set the `url` to the empty string `""`.
 }
 
 ~~~
-
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/34
-:::
-
 
 [//]: # (\newpage)
 
@@ -2777,5 +2771,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 
 [[def: DPKI]]
 ~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
+
+[[def: Eclipse Attack]]
+
+~ https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin 
 
 [[spec]]
