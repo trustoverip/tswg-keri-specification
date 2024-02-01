@@ -1711,6 +1711,7 @@ For example, in the diagram below, a rotation event at the same location may sup
 ::: issue
 Diagram Here
 :::
+
 ### KERI's Algorithm for Witness Agreement (KAWA)
 
 #### Introduction
