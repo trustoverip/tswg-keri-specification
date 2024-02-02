@@ -1,4 +1,4 @@
-zKey Event Receipt Infrastructure (KERI)
+Key Event Receipt Infrastructure (KERI)
 ==================
 
 **Specification Status**: v1.0 Draft
@@ -86,8 +86,8 @@ The KERI approach to Decentralized key management infrastructure (DKMI) allows f
 https://github.com/trustoverip/tswg-keri-specification/issues/49
 :::
 
-The purpose of this document is to describe an identity system-based secure overlay for the Internet, based on KERI, which includes a primary root-of-trust in Self-certifying identifiers (SCIDs). This root-of-trust presents a formalism for Autonomic identifiers (AIDs) and Autonomic namespaces (ANs), which are part of an Autonomic identity system (AIS). This system uses the design principle of minimally sufficient means to provide a candidate trust spanning layer for the Internet. Associated with this system is a Decentralized key management infrastructure (DKMI).
-
+Implementation design of a protocol-based decentralized key management infrastructure that enables secure attribution of data to a cryptographically derived identifier with strong (cryptographically verifiable) bindings between each of the identifier, a set of asymmetric signing key pairs that are the key state, a controlling entity that holds the private keys, and a cryptographically verifiable data structure that enables changes to that key state. Thus, security over secure attribution is reduced to key management. This key management includes, for the first time, a practical solution to the hard problem of public key rotation. There is no reliance on trusted third parties. The resulting secure attribution is fully end-to-end verifiable.
+Because of the reliance on asymmetric (public, private) digital signing key pairs, this may be viewed as a type of decentralized public key infrastructure (DPKI)  The protocol supports cryptographic agility for both pre and post-quantum attack resistance. The application scope includes any electronically transmitted information. The implementation dependency scope assumes no more than cryptographic libraries that provide cryptographic strength pseudo-random number generators, cryptographic strength digest algorithms, and cryptographic strength digital signature algorithms. 
 
 
 ## Normative references
@@ -430,15 +430,15 @@ The KERI identifier system overlay leverages the properties of cryptonymous SCID
 
 ### Autonomic identifier (AID)
 
-Use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because the SCID‘s keys may be refreshed or updated via Rotation, allowing secure control over the identifier in spite of key weakness or even compromise. This family of generalized enhanced SCIDs is called AIDs. Autonomic means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing properties of this class of identifier. An AID may exhibit other self-managing properties, such as transferable control using key pre-rotation, which enables control over such an AID to persist in spite of key weakness or compromise due to exposure. Authoritative control over the identifier persists in spite of the evolution of the Key state.
+The use of a KEL gives rise to an enhanced class of SCIDs that are persistent, not ephemeral, because the SCID‘s keys may be refreshed or updated via Rotation, allowing secure control over the identifier in spite of key weakness or even compromise. Members of this family of generalized enhanced SCIDs are called AIDs. Autonomic means self-governing, self-regulating, or self-managing and is evocative of the self-certifying, self-managing, and self-administering properties of this class of identifier. An AID may exhibit other self-managing properties, such as transferable control using key pre-rotation, which enables control over such an AID to persist in spite of key weakness or compromise due to exposure. Authoritative control over the identifier persists in spite of the evolution of the Key state.
 
 ### Key rotation/pre-rotation
 
-An important innovation of KERI is that it solves the key Rotation problem of PKI (including that of simple SCIDs) via a novel but elegant mechanism called key pre-rotation. This pre-rotation mechanism enables an entity to persistently maintain or regain control over an identifier in spite of the exposure-related weakening over time or even compromise of the current set of controlling (signing) keypairs. With key pre-rotation, control over the identifier can be re-established by rotating to a one-time use set of unexposed but pre-committed rotation keypairs that then become the current signing keypairs. Each Rotation in turn cryptographically commits to a new set of rotation keys but without exposing them. Because the pre-rotated keypairs need never be exposed prior to their one-time use, their attack surface may be optimally minimized. The current Key state is maintained via a KEL, an append-only Verifiable data structure.  Cryptographic verifiability of the Key state over time is essential to remove this ambiguity over the mapping between the identifier (domain name) and the controlling keypair(s). Without this verifiability, the detection of potential ambiguity requires yet another bolt-on security overlay such as the certificate transparency system.
+An important innovation of KERI is that it solves the key Rotation problem of PKI (including that of simple SCIDs) via a novel but elegant mechanism called key pre-rotation. This pre-rotation mechanism enables an entity to persistently maintain or regain control over an identifier in spite of the exposure-related weakening over time or even compromise of the current set of controlling (signing) keypairs. With key pre-rotation, control over the identifier can be re-established by rotating to a one-time use set of unexposed but pre-committed rotation keypairs that then become the current signing keypairs. Each Rotation, in turn, cryptographically commits to a new set of rotation keys but without exposing them. Because the pre-rotated keypairs need never be exposed prior to their one-time use, their attack surface may be optimally minimized. The current Key state is maintained via a KEL, an append-only Verifiable data structure.  Cryptographic verifiability of the Key state over time is essential to remove this ambiguity over the mapping between the identifier (domain name) and the controlling keypair(s). Without this verifiability, the detection of potential ambiguity requires yet another bolt-on security overlay, such as the certificate transparency system.
 
 ### Qualified Cryptographic Primitives
 
-A Cryptographic primitive is a serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[ref: CESR]].  A property of CESR is that all cryptographic primitives so expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
+A Cryptographic primitive is a serialization of a value associated with a cryptographic operation, including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[ref: CESR]].  A property of CESR is that all cryptographic primitives expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/44
@@ -447,26 +447,16 @@ https://github.com/trustoverip/tswg-keri-specification/issues/44
 
 ### CESR Encoding
 
-As stated previously, KERI represents all cryptographic primitives with CESR  [[ref: CESR specification]]. CESR supports round-trip lossless conversion between its Text, Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a string value of a field or array element as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64 which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
+As stated previously, KERI represents all cryptographic primitives with CESR  [[ref: CESR specification]]. CESR supports round-trip lossless conversion between its Text, Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a field or array element string value as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64, which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
 
 The CESR protocol supports several different types of encoding tables for different types of derivation codes used to qualify primitives. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e., Blake3-256, when expressed in Text domain CESR, consists of 44 Base64 characters that begin with the one-character derivation code `E`, such as `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation consists of 33 bytes. Unless otherwise indicated, all Cryptographic primitives used in this specification are qualified Primitives expressed in CESR’s Text domain. This includes serializations that are signed, hashed, or encrypted.
 
 
-### Basic fractionally weighted threshold
-
-This partial Rotation feature for either reserve or Custodial rotation authority is best employed with thresholds that are fractionally weighted. The exact syntax for fractionally weighted thresholds is provided in the partial pre-rotation and Custodial rotation sections and a summary is provided here. A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of legal rational-fractions (i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A weight list of clauses orders a set of rational fraction weights. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that corresponds to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures the exactness and universality of threshold satisfaction computations.
-
-For example, consider the following simple single clause fractionally weighted threshold, [1/2, 1/2, 1/2].  Three weights mean there must be exactly three corresponding key pairs. Let the three keypairs in one-to-one order be denoted by the list of indexed public keys, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]. The threshold is satisfied if any two of the public keys sign because 1/2 + 1/2 = 1. This is exactly equivalent to an integer-valued ‘2 of 3’ threshold.
-
-The order of appearance of the public key in a given key list and its associated threshold weight list must be the same.
-
-Fractionally weighted thresholds become more interesting when the weights are not all equal or include multiple clauses. Consider the following five-element single clause fractionally weighted threshold list, [1/2, 1/2, 1/2, 1/4, 1/4] and its corresponding public key list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>].  Satisfaction would be met given signatures from any two or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> because each of these keys has a weight of 1/2 and the combination of any two or more sums to 1 or more. Alternatively, satisfaction would be met with signatures from any one or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> and both of A<sup>3</sup>, and A<sup>4</sup> because any of those combinations would sum to 1 or more. Because participation of A<sup>3</sup> and A<sup>4</sup> is not required as long as at least two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are available then A<sup>3</sup> and A<sup>4</sup> may be treated as reserve members of the controlling set of keys. These reserve members only need to participate in the event that only one of the other three is available. The flexibility of a fractionally weighted threshold enables redundancy in the combinations of keys needed to satisfice for both day-to-day and reserve contingency use cases.
-
 ### KERI’s secure bindings
 
-In simple form, an identifier-system security-overlay binds together a triad consisting of the identifier, keypairs, and Controllers, the set of entities whose members control a private key from the given set of keypairs. The set of Controllers is bound to the set of keypairs, the set of keypairs is bound to the identifier, and the identifier is bound to the set of Controllers. This binding triad can be diagrammed as a triangle where the sides are the bindings and the vertices are the identifier, the set of Controllers, and the set of keypairs. This triad provides verifiable control authority for the identifier.
+In simple form, an identifier-system security overlay binds together a triad consisting of the identifier, keypairs, and Controllers, the set of entities whose members control a private key from the given set of keypairs. The set of Controllers is bound to the set of keypairs, the set of keypairs is bound to the identifier, and the identifier is bound to the set of Controllers. This binding triad can be diagrammed as a triangle where the sides are the bindings and the vertices are the identifier, the set of Controllers, and the set of key pairs. This triad provides verifiable control authority for the identifier.
 
-When these bindings are strong, then the overlay is highly invulnerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See the Annex A on cryptographic strength for more detail.
+When these bindings are strong, then the overlay is highly invulnerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI, all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See Annex A on cryptographic strength for more detail.
 
 The bound triad is created as follows:
 
@@ -476,94 +466,99 @@ https://github.com/trustoverip/tswg-keri-specification/issues/33
 
 Each Controller in the set of Controllers creates an asymmetric (public, private) keypair. The public key is derived from the private key or seed using a one-way derivation that must have a minimum cryptographic strength of approximately 128 bits. Depending on the crypto-suite used to derive a keypair, the private key or seed may itself have a length larger than 128 bits. A Controller may use a cryptographic strength pseudo-random number generator (CSPRNG) to create the private key or seed material.
 
-Because the private key material must be kept secret, typically in a secure data store, the management of those secrets may be an important consideration. One approach to minimize the size of secrets is to create private keys or seeds from a secret salt. The salt must have an entropy of approximately 128 bits. Then the salt may be stretched to meet the length requirements for the crypto suite's private key size. In addition, a hierarchical deterministic derivation function may be used to further minimize storage requirements by leveraging a single salt for a set or sequence of private keys.
+Because the private key material must be kept secret, typically in a secure data store, the management of those secrets may be an important consideration. One approach to minimize the size of secrets is to create private keys or seeds from a secret salt. The salt must have an entropy of approximately 128 bits. Then, the salt may be stretched to meet the length requirements for the crypto suite's private key size. In addition, a hierarchical deterministic derivation function may be used to further minimize storage requirements by leveraging a single salt for a set or sequence of private keys.
 
-Because each Controller is the only entity in control (custody) of the private key, and the public key is universally uniquely derived from the private key using a cryptographic strength one-way function, then the binding between each Controller and their keypair is as strong as the ability of the Controller to keep that key private. The degree of protection is up to each Controller to determine. For example, a Controller could choose to store their private key in a safe, at the bottom of a coal mine, air-gapped from any network, with an ex-special forces team of guards. Or the Controller could choose to store it in an encrypted data store (key chain) on a secure boot mobile device with a biometric lock, or simply write it on a piece of paper and store it in a safe place. The important point is that the strength of the binding between Controller and keypair does not need to be dependent on any trusted entity.
+Because each Controller is the only entity in control (custody) of the private key, and the public key is universally uniquely derived from the private key using a cryptographic strength one-way function, then the binding between each Controller and their keypair is as strong as the ability of the Controller to keep that key private. The degree of protection is up to each Controller to determine. For example, a Controller could choose to store their private key in a safe at the bottom of a coal mine, air-gapped from any network, with an ex-special forces team of guards. Or the Controller could choose to store it in an encrypted data store (key chain) on a secure boot mobile device with a biometric lock or simply write it on a piece of paper and store it in a safe place. The important point is that the strength of the binding between the Controller and keypair does not need to be dependent on any trusted entity.
 
-The identifier is derived universally and uniquely from the set of public keys using a one-way derivation function. It is therefore an AID (qualified SCID). Associated with each identifier (AID) is incepting information that must include a list of the set of qualified public keys from the controlling keypairs. In the usual case, the identifier is a qualified cryptographic digest of the serialization of all the incepting information for the identifier. Any change to even one bit of the incepting information changes the digest and hence changes the derived identifier. This includes any change to any one of the qualified public keys including its qualifying derivation code. To clarify, a qualified digest as identifier includes a derivation code as proem that indicates the cryptographic algorithm used for the digest. Thus, a different digest algorithm results in a different identifier. In this usual case, the identifier is bound strongly and cryptographically to not only the public keys but also any other incepting information from which the digest was generated.
+The identifier is derived universally and uniquely from the set of public keys using a one-way derivation function. It is, therefore, an AID (qualified SCID). Associated with each identifier (AID) is incepting information that must include a list of the set of qualified public keys from the controlling keypairs. In the usual case, the identifier is a qualified cryptographic digest of the serialization of all the incepting information for the identifier. Any change to even one bit of the incepting information changes the digest and hence changes the derived identifier. This includes any change to any one of the qualified public keys, including its qualifying derivation code. To clarify, a qualified digest as an identifier includes a derivation code as a proem that indicates the cryptographic algorithm used for the digest. Thus, a different digest algorithm results in a different identifier. In this usual case, the identifier is bound strongly and cryptographically to the public keys and any other incepting information from which the digest was generated.
 
-A special case may arise when the set of public keys has only one member, i.e., there is only one controlling keypair. In this case, the Controller of the identifier may choose to use only the qualified public key as the identifier instead of a qualified digest of the incepting information. In this case, the identifier still is bound strongly to the public key but is not so strongly bound to any other incepting information.  A variant of this single keypair special case is an identifier that cannot be rotated. Another way of describing an identifier that cannot be rotated is that it is a non-transferable identifier because control over the identifier cannot be transferred to a different set of controlling keypairs. In contrast, a rotatable keypair is transferable because control may be transferred via rotation to a new set of keypairs. Essentially, when non-transferable, the identifier's lifespan is ephemeral, not persistent, because any weakening or compromise of the controlling keypair means that the identifier must be abandoned. Nonetheless, there are important use cases for an ephemeral SCID.  In all cases, the derivation code in the identifier indicates the type of identifier, whether it be a digest of the incepting information (multiple or single keypair) or a single member special case derived from only the public key (both ephemeral or persistent).
+A special case may arise when the set of public keys has only one member, i.e., there is only one controlling keypair. In this case, the Controller of the identifier may choose to use only the qualified public key as the identifier instead of a qualified digest of the incepting information. In this case, the identifier is still strongly bound to the public key but not to any other incepting information.  A variant of this single keypair special case is an identifier that cannot be rotated. Another way of describing an identifier that cannot be rotated is that it is a non-transferable identifier because control over the identifier cannot be transferred to a different set of controlling keypairs. In contrast, a rotatable keypair is transferable because control may be transferred via rotation to a new set of keypairs. Essentially, when non-transferable, the identifier's lifespan is ephemeral, not persistent, because any weakening or compromise of the controlling keypair means that the identifier must be abandoned. Nonetheless, there are important use cases for an ephemeral AID.  In all cases, the derivation code in the identifier indicates the type of identifier, whether it be a digest of the incepting information (multiple or single keypair) or a single member special case derived from only the public key (both ephemeral or persistent).
 
-Each Controller in a set of Controllers may prove its contribution to the control authority over the identifier in either an interactive or non-interactive fashion. One form of interactive proof is to satisfy a challenge of that control. The challenger creates a unique challenge Message. The Controller responds by nonrepudiably signing that challenge with the private key from the keypair under its control. The challenger can then cryptographically verify the signature using the public key from the Controller's keypair. One form of non-interactive proof is to periodically contribute to a monotonically increasing sequence of nonrepudiably signed updates of some data item. Each update includes a monotonically increasing sequence number or date-time stamp. Any Verifier then can verify cryptographically the signature using the public key from the Controller's keypair and verify that the update was made by the Controller. In general, only members of the set of Controllers can create verifiable non-repudiable signatures using their keypairs. Consequently, the identifier is strongly bound to the set of Controllers via provable control over the keypairs.
+Each Controller in a set of Controllers may prove its contribution to the control authority over the identifier in either an interactive or non-interactive fashion. One form of interactive proof is to satisfy a challenge of that control. The challenger creates a unique challenge Message. The Controller responds by nonrepudiably signing that challenge with the private key from the keypair under its control. The challenger can then cryptographically verify the signature using the public key from the Controller's keypair. One form of non-interactive proof is the periodic contribution to a monotonically increasing sequence of nonrepudiably signed updates of some data item. Each update includes a monotonically increasing sequence number or date-time stamp. Any Verifier then can cryptographically verify the signature using the public key from the Controller's keypair and verify that the update was made by the Controller. In general, only members of the set of Controllers can create verifiable, nonrepudiable signatures using their keypairs. Consequently, the identifier is strongly bound to the set of Controllers via provable control over the keypairs.
 
 #### Tetrad bindings
 
-At Inception, the triad of identifier, keypairs, and Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[ref: KERI-WP]] [[ref: VDS]].  The KEL is not necessary for identifiers that are non-transferable and do not need to persist control via key Rotation in spite of key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL, non-transferable (ephemeral) identifiers do not.
+At Inception, the triad of an identifier, a set of keypairs, and a set of Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[ref: KERI-WP]] [[ref: VDS]].  The KEL is not necessary for non-transferable identifiers and do not need to persist control via key Rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL; non-transferable (ephemeral) identifiers do not.
 
-For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event which is a serialization of the incepting information associated with the identifier mentioned previously.
+For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event, a serialization of the incepting information associated with the previously mentioned identifier.
 
-The Inception event must include the list of controlling public keys and also must include a signature threshold and must be signed by a set of private keys from the controlling keypairs that satisfy that threshold. Additionally, for transferability (persistence across Rotation) the Inception event also must include a list of digests of the set of pre-rotated public keys and a pre-rotated signature threshold that will become the controlling (signing) set of keypairs and threshold after a Rotation.  A non-transferable identifier may have a trivial KEL that only includes an Inception event but with a null set (empty list) of pre-rotated public keys.
+The Inception event must include the list of controlling public keys and also must include a signature threshold and must be signed by a set of private keys from the controlling keypairs that satisfy that threshold. Additionally, for transferability (persistence across Rotation), the Inception event must also include a list of digests of the set of pre-rotated public keys and a pre-rotated signature threshold that will become the controlling (signing) set of key keypairs and threshold after a Rotation.  A non-transferable identifier may have a trivial KEL that only includes an Inception event but with a null set (empty list) of pre-rotated public keys.
 
-A Rotation is performed by appending a Rotation event to the KEL. A Rotation event must include a list of the set of pre-rotated public keys (not their digests) thereby exposing them and must be signed by a set of private keys from these newly exposed newly controlling but pre-rotated keypairs that satisfy the pre-rotated threshold. The Rotation event also must include a list of the digests of a new set of pre-rotated keys as well as the signature threshold for the set of pre-rotated keypairs. At any point in time, the transferability of an identifier can be removed via a Rotation event that rotates to a null set (empty list) of pre-rotated public keys.
+A Rotation is performed by appending a Rotation event to the KEL. A Rotation event must include a list of the set of pre-rotated public keys (not their digests), thereby exposing them, and must be signed by a set of private keys from these newly exposed newly controlling but pre-rotated keypairs that satisfy the pre-rotated threshold. The Rotation event also must include a list of the digests of a new set of pre-rotated keys as well as the signature threshold for the set of pre-rotated keypairs. At any point in time, the transferability of an identifier can be removed via a Rotation event that rotates to a null set (empty list) of pre-rotated public keys.
 
-Each event in a KEL must include an integer sequence number that is one greater than the previous event. Each event after the Inception event also must include a cryptographic digest of the previous event. This digest means that a given event is bound cryptographically to the previous event in the sequence. The list of digests or pre-rotated keys in the Inception event cryptographically binds the Inception event to a subsequent Rotation event, essentially making a forward commitment that forward chains together the events. The only valid Rotation event that may follow the Inception event must include the pre-rotated keys. But only the Controller who created those keys and created the digests may verifiably expose them. Each Rotation event in turn makes a forward commitment (chain) to the following Rotation event via its list of pre-rotated key digests.   This makes the KEL a doubly (backward and forward) hash (digest) chained nonrepudiably signed append-only Verifiable data structure.
+Each event in a KEL must include an integer sequence number that is one greater than the previous event. Each event after the Inception event also must include a cryptographic digest of the previous event. This digest means that a given event is bound cryptographically to the previous event in the sequence. The list of digests or pre-rotated keys in the Inception event cryptographically binds the Inception event to a subsequent Rotation event, essentially making a forward commitment that forward chains together the events. The only valid Rotation event that may follow the Inception event must include the pre-rotated keys. But only the Controller who created those keys and created the digests may verifiably expose them. Each Rotation event, in turn, makes a forward commitment (chain) to the following Rotation event via its list of pre-rotated key digests.   This makes the KEL a doubly (backward and forward) hash (digest) chained nonrepudiably signed append-only Verifiable data structure.
 
-Because the signatures on each event are non-repudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there may be at most one valid KEL for any identifier or none at all. Any Validator of a KEL may enforce this one valid KEL rule before relying on the KEL as proof of the current key state for the identifier which protects the Validator. Any unreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed In section [  ]. From a Validator's perspective, either there is one-and-only-one valid KEL or none at all which also protects the Validator by removing any potential ambiguity about Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL or not at all. This in turn binds the identifier to the Controllers of the current keypairs given by the KEL thus completing the tetrad.
+Because the signatures on each event are nonrepudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there shall be at most one valid KEL for any identifier or none at all. Any Validator of a KEL may enforce this one valid KEL rule that protects the Validator before relying on the KEL as proof of the current key state for the identifier. Any unreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed below In section {{[  ]}}. From a Validator's perspective, either there is one-and-only-one valid KEL or none at all, which also protects the Validator by removing any potential ambiguity about the Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL (or not at all). This, in turn, binds the identifier to the Controllers of the current keypairs given by the KEL, thus completing the tetrad.
 
-At Inception, the KEL may be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in not only the original controlling keys pairs but also the pre-rotated keypairs or any other incepting information included in the Inception event will result in a different identifier.
+At Inception, the KEL may be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in any of the incepting information included in the Inception event will result in a different identifier (including not only the original controlling keys pairs but also the pre-rotated keypairs).
 
-The essence of the KERI protocol is a strongly bound tetrad of identifier, keypairs, Controllers, and the KEL that forms the basis of its identifier system security overlay. The KERI protocol introduces the concept of Duplicity evident programming via Duplicity evident Verifiable data structures.
+The essence of the KERI protocol is a strongly bound tetrad of an identifier, set of keypairs, set if Controllers, and the KEL that forms the basis of its identifier system security overlay. The KERI protocol introduces the concept of Duplicity evident programming via Duplicity evident Verifiable data structures.
 
 ### Autonomic Namespaces (ANs)
 
 A namespace groups symbols or identifiers for a set of related objects [[ref: Namespace]]. In an identity system, an identifier can be generalized as belonging to a namespace that provides a systematic way of organizing related identifiers with their resources and attributes.
+
 To elaborate, a namespace employs some scheme for assigning identifiers to the elements of the namespace. A simple name-spacing scheme uses a prefix or prefixes in a hierarchical fashion to compose identifiers. The following is an example of a namespace scheme for addresses within the USA that uses a hierarchy of prefixes:
+
 	state.county.city.zip.street.number.
+	
 An example element in this namespace may be identified with the following:
+
 	utah.wasatch.heber.84032.main.150S.
+	
 where each prefix location has been replaced with the actual value of the element of the address. Namespaces provide a systematic way of organizing related elements and are widely used in computing.
 
-An AN is defined as a namespace with a fully qualified CESR encoded AID cryptographic primitive as a prefix. As defined above, AIDs are uniquely (strongly) cryptographically bound to their incepting controlling keypair(s) at issuance. They are, hence, self-certifying. In addition, AIDs are also bound to other key management information, such as the hashes of the next pre-rotated rotation keys and their witnesses. This makes them self-managing.
+An autonomic namespace, AN, is defined as a namespace with an AID as a prefix, i.e., a fully qualified CESR-encoded cryptographic primitive. As defined above, AIDs are uniquely (strongly) cryptographically bound to their incepting controlling keypair(s) at issuance. They are, hence, self-certifying. In addition, AIDs are also bound to other key management information, such as the hashes of the next pre-rotated rotation keys and their witnesses. This makes them self-managing.
 
-To clarify, each identifier from an AN includes as a prefix an identifier encoded in CESR that either is the public key or is uniquely cryptographically derived from the public key(s) of the incepting (public, private) key pair. The associated private key(s) may then be used by the controller to authoritatively (nonrepudiably) sign statements that authenticate and authorize the use of the identifier. These statements include responses to challenges to prove control over the identifier. Thus, self-certification enables both self-authentication and self-authorization capabilities as well as self-management of cryptographic signing keypairs. Together, these properties make the namespace self-administering.
+To clarify, each identifier from an AN includes as a prefix an identifier encoded in CESR that either is the public key or is uniquely cryptographically derived from the public key(s) of the incepting (public, private) key pair. The controller may then use the associated private key(s) to authoritatively (nonrepudiably) sign statements that authenticate and authorize the use of the identifier. These statements include responses to challenges to prove control over the identifier. Thus, self-certification enables both self-authentication and self-authorization capabilities as well as self-management of cryptographic signing keypairs. Together, these properties make the namespace self-administering.
 
-An AN is self-certifying and self-administrating. These self-administering properties of an AN mean that the resources identified by that namespace may also be governed by the controller of the key pair(s) that are authoritative for its AID prefix. Essentially, a namespace of identifiers may be imbued with the secure attributability properties of an AID as its prefix. When secure attribution arises solely from the AID as the prefix, then the other elements in the namespace syntax do not matter. From a security perspective, this makes the prefix agnostic about the syntax of any ANs in which it appears. The same AID can be used to control multiple disparate namespaces. This provides opportunities for AIDs to interoperate with many existing namespaces. The AID prefix from any autonomically namespaced identifier merely needs to be extracted to use the prefix with a KERI protocol library.
+To restate, An AN is self-administrating. The self-administering properties of an AN mean that the resources identified by that namespace may also be governed by the controller of the key pair(s) that are authoritative for its AID prefix. Essentially, a namespace of identifiers may be imbued with the secure attributability properties of an AID when used as its prefix. When secure attribution arises solely from the AID as the prefix, then the other elements in the namespace syntax are immaterial with respect to secure attribution. This makes the prefix agnostic about the syntax of any ANs in which it appears. The same AID can be used to control multiple disparate namespaces. This provides opportunities for AIDs to interoperate with many existing namespaces. The AID prefix from any autonomically namespaced identifier merely needs to be extracted to use the prefix with a KERI protocol library.
 
-In general, a fully qualified AID primitive and an identifier from an AN with that primitive as a prefix may both be referred to as AIDs with the understanding that any cryptographic operations only apply to the prefix portion of the namespaced identifier.
+In general, a fully qualified AID primitive and an identifier from an AN based on that primitive as a prefix may both be referred to as AIDs with the understanding that any cryptographic operations only apply to the prefix portion of the namespaced identifier.
 
-The primary purpose of an AIS is to enable any entity to establish control over its associated identifier namespace in an independent, interoperable, and portable way. This approach builds on the idea of an identity (identifier) meta-system {{[37; 38; 153]}} that enables interoperability between systems of identity (identifiers) that not only exposes a unified interface but adds decentralized control over their identifiers. This best enables portability, not just interoperability. Given portability in an identity (identifier) meta-system system, transitive trust can occur, that is, the transfer of trust between contexts or domains. Because transitive trust facilitates the transfer of other types of value, a portable decentralized identity meta-system, e.g., an AID system, enables an identity meta-platform for commerce {{[134]}}.
+The primary purpose of an AID is to enable any entity to establish control over its associated identifier namespace in an independent, interoperable, and portable way. This approach builds on the idea of an identity (identifier) meta-system {{[37; 38; 153]}} that enables interoperability between systems of identity (identifiers) that not only exposes a unified interface but adds decentralized control over their identifiers. This enables portability, not just interoperability. Given portability in an identity (identifier) meta-system system, transitive trust can occur, that is, the transfer of trust between contexts or domains. Because transitive trust facilitates the transfer of other types of value, a portable decentralized identity meta-system, e.g., an AID system, enables an identity meta-platform for commerce {{[134]}}.
 
 ## KERI data structures and labels
 
 ### KERI data structure format
 
-A KERI data structure such as a Key event Message body may be abstractly modelled as a nested key: value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead to refer to a mapping pair and the terms field label and field value for each member of a pair. These pairs can be represented by two tuples, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps may be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
+A KERI data structure, such as a Key event Message body, may be abstractly modeled as a nested key: value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead herein to refer to a mapping pair, with the terms field label and field value used to refer to each pair member. Two tuples can represent these pairs, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps may be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
 
-A field may be represented by a framing code or block delimited serialization.  In a block delimited serialization, such as JSON, each field map is represented by an object block with block delimiters such as `{}`. Given this equivalence, the term block or nested block can be used as synonymous with field map or nested field map. In many programming languages, a field map is implemented as a dictionary or hash table in order to enable performant asynchronous lookup of a field value from its field label. Reproducible serialization of field maps requires a canonical ordering of those fields. One such canonical ordering is called insertion or field creation order. A list of (field, value) pairs provides an ordered representation of any field map.
+A field may be represented by a framing code or block delimited serialization.  In a block delimited serialization, such as JSON, each field map is represented by an object block with block delimiters such as `{}`. Given this equivalence, the term block or nested block can be used as synonymous with field map or nested field map. In many programming languages, a field map is implemented as a dictionary or hash table. This enables performant asynchronous lookup of a field value from its field label. Reproducible serialization of field maps requires a canonical ordering of those fields. One such canonical ordering is called insertion or field creation order. A list of (field, value) pairs provides an ordered representation of any field map.
 
-Most programming languages now support ordered dictionaries or hash tables that provide reproducible iteration over a list of ordered field (label, value) pairs where the ordering is the insertion or field creation order. This enables reproducible round-trip serialization/deserialization of field maps. Serialized KERI data structures depend on insertion-ordered field maps for their canonical serialization/deserialization. KERI data structures support multiple serialization types, namely JSON, CBOR, MGPK, and CESR but for the sake of simplicity, JSON only will be used for examples. The basic set of normative field labels in KERI field maps is defined in the table in the following section.
+Most programming languages now support ordered dictionaries or ordered hash tables that provide reproducible iteration over a list of ordered field (label, value) pairs where the ordering is the insertion or field creation order. This enables reproducible round-trip serialization/deserialization of field maps. Serialized KERI data structures depend on insertion-ordered field maps for their canonical serialization/deserialization. KERI data structures support multiple serialization types, namely JSON, CBOR, MGPK, and CESR but for the sake of simplicity, JSON only will be used for examples. The basic set of normative field labels in KERI field maps is defined by the table below (see the next section).
 
 #### KERI field labels for data structures
 
-[//]: # (: KERI field labels for data structures {#tbl:field-lables})
+[//]: # (: KERI field labels for messages {#tbl:field-lables})
 
-|Label|Title|Description|Notes|
-|---|---|---|---|
-|v| Version String | | |
-|i| Identifier Prefix (AID) | | |
-|s| Sequence Number | | |
-|t| Message Type | | |
-|te| Last received Event Message Type in a Key State Notice | | |
-|d| Event SAID | | |
-|p| Prior Event SAID | | |
-|kt| Keys Signing Threshold | | |
-|k| List of Signing Keys (ordered key set) | | |
-|nt| Next Keys Signing Threshold | | |
-|n| List of Next Key Digests (ordered key digest set) | | |
-|bt| Backer Threshold | | |
-|b| List of Backers (ordered backer set of AIDs) | | |
-|br| List of Backers to Remove (ordered backer set of AIDS) | | |
-|ba| List of Backers to Add (ordered backer set of AIDs) | | |
-|c| List of Configuration Traits/Modes | | |
-|a| List of Anchors (seals) | | |
-|di| Delegator Identifier Prefix (AID) | | |
-|rd| Merkle Tree Root Digest (SAID) | | |
-|ee| Last Establishment Event Map | | |
-|vn| Version Number ("major.minor")  |  | |
+Reserved field labels in Keri messages:
+
+|Label|Title|Description|
+|---|---|---|
+|`v`| Version String | enables regex parsing of field map in CESR stream |
+|`t`| Message Type | three character string|
+|`d`| Digest SAID | fully qualified digest of block in which it appears|
+|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID|
+|`s`| Sequence Number | strictly monotonically increasing integer encoded in hex |
+|`p`| Prior SAID | fully qualified digest, prior message SAID |
+|`kt`| Keys Signing Threshold | hex encoded integer or fractional weight list |
+|`k`| List of Signing Keys (ordered key set) | list of fully qualified primitives|
+|`nt`| Next Keys Signing Threshold | hex encoded integer or fractional weight list  | 
+|`n`| List of Next Key Digests (ordered key digest set) | list of fully qualified primitives digests |
+|`bt`| Backer Threshold | hex encoded integer | 
+|`b`| List of Backers (ordered backer set of AIDs) | list of fully qualified primitives |
+|`br`| List of Backers to Remove (ordered backer set of AIDS) | list of fully qualified primitives | 
+|`ba`| List of Backers to Add (ordered backer set of AIDs) | list of fully qualified primitives | 
+|`c`| List of Configuration Traits/Modes | list of strings | 
+|`a`| List of Anchors (seals) | list of field maps |
+|`di`| Delegator Identifier Prefix (AID) | fully qualified primitive, Delegator AID| 
+
 
 A field label may have different values in different contexts but must not have a different field value type. This requirement makes it easier to implement in strongly typed languages with rigid data structures. Notwithstanding the former, some field value types may be a union of elemental value types.
 
-Because the order of appearance of fields is enforced in all KERI data structures, whenever a field appears (in a given Message or block in a Message) the message in which a label appears must provide the necessary context to fully determine the meaning of that field and hence the field value type and associated semantics.
+Because the order of appearance of fields is enforced in all KERI data structures, whenever a field appears (in a given Message or block in a Message) the message in which a label appears must provide the necessary context to determine the meaning of that field fully and hence the field value type and associated semantics.
+
 
 #### Compact KERI field labels
 
@@ -571,6 +566,7 @@ The primary field labels are compact in that they use only one or two characters
 
 #### Special label ordering requirements
 
+The top-level fields of each message type shall appear in a specific order. All top-level fields are required. These are defined for each message type below.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/20
@@ -587,6 +583,26 @@ The protocol field, `PPPP` value in the version string shall be `KERI` for the K
 
 Compliant KERI version 2.XX implementations shall support the old KERI version 1.x version string format to properly verify message bodies created with 1.x format events. The old version 1.x version string format is defined in the CESR specification [[ref: CESR]]. The protocol field, `PPPP` value in the version string shall be `KERI` for the KERI protocol. The version field, `vv`, shall encode the old version of the KERI protocol [[ref: CESR]].
 
+##### Message type  field
+
+The message type, `t` field value shall be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types that are not part of a KEL but are useful for managing the information associated with an AID.  
+
+The message types in KERI are detailed in the table below:
+
+| Type | Title | Class| Description |
+|---|---|---|
+|`icp`| Inception | Establishment Key Event | Incepts an AID and initializes its keystate |
+|`rot`| Rotation | Establishment Key Event | Rotates the AID's key state |
+|`ixn`| Interaction | Non-Establishment Key Event | Seals interaction data to the current key state|
+|`dip`| Delegated Inception | Establishment Event | Incepts a Delegated AID and initializes its keystate  |
+|`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
+|`rct`| Receipt | Receipt Event | Associates a proof such as signature or seal to a key event |
+|`qry`| Query | Other Event | Query information associated with an AID |
+|`rpy`| Reply | Other Event | Reply with information associated with an AID either solicited by Query or unsolicited |
+|`pro`| Prod | Other Event | Prod (request) information associated with a Seal |
+|`bar`| Bare | Other Event | Bare (response) with information associate with a Seal either solicted by Prod or unsolicited |
+|`exn`| Exchange | Other Event | Generic exchange of information associated with an AID usually as part of a multi-message transaction |
+
 
 #####  SAID fields
 
@@ -596,36 +612,70 @@ Each SAID provides a stable universal cryptographically verifiable and agile ref
 
 A cryptographic commitment (such as a digital signature or cryptographic digest) on a given digest with sufficient cryptographic strength including collision resistance is equivalent to a commitment to the block from which the given digest was derived. Specifically, a digital signature on a SAID makes a Verifiable cryptographic non-repudiable commitment that is equivalent to a commitment on the full serialization of the associated block from which the SAID was derived. This enables reasoning about KERI data structures in whole or in part via their SAIDS in a fully interoperable, Verifiable, compact, and secure manner. This also supports the well-known bow-tie model of Ricardian Contracts [[ref: RC]]. This includes reasoning about the whole KERI data structure given by its top-level SAID, `d`, field as well as reasoning about any nested or attached data structures using their SAIDS.
 
+The SAID, `d` field is the SAID of its enclosing block (field map); when it appears at the top level of the message, it is the SAID of the message itself.
+
+The prior, `p` field is the SAID of a prior event message. When the prior `p` field appears in a key event message, then its value shall be the SAID of the key event message whose sequence number is one less than the sequence number of its own key event message. Only key event messages have sequence numbers. Other messages do not. When the prior, `p` field appears in an Exchange, `exn` message then its value is the SAID of the prior exchange message in the associated exchange transaction.
+
+
+
 ##### AID fields
 
-Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified SCID as described above [[ref: KERI]] [[ref: KERI-WP]]. An AID must be self-certifying.
+Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[ref: KERI-WP]]. 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
-###### Namespaced AIDs
-
-As explained above, because KERI is agnostic about the namespace for any particular AID, different namespace standards may be used to express KERI AIDs within AID fields in an ACDC. Only the fully qualified CESR encoded AID prefix is used by KERI to process messages. Interoperability is assured by extracting the prefix from any namespaced identifier. Some of the examples below may use the W3C DID namespace specification with the `did:keri` method [[ref: DIDK-ID]]. However, the examples would have the same validity from a KERI perspective if some other supported namespace was used or no namespace was used at all. The latter case consists of a bare KERI AID (identifier prefix).
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/19
-:::
-
-Because AIDs may be namespaced, the essential component of an AID is the cryptographically derived Controller identifier prefix.  An AID must be the Controller identifier prefix.  part of a W3C Decentralized Identifier (DID) [[spec: did-core]] or other namespace convention.
+The Controller identifier AID, `i` field value that appears in all key events and receipts is the AID that controls the associated KEL.
+The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID the Delegator.
 
 
-##### Next Threshold field
+##### Sequence number field
 
-The `nt` field is next threshold for the Next establishment event.
+The Sequence Number, `s` field value is a hex encoded (no leading zeros) non-negative strictly monotonically increasing integer.  The Sequence Number, `s` field value in Inceptions, `icp` and Delegated Inception, `dip` events shall be `0` (hex encoded 0). The Sequence number value of all subsequent key events in a KEL shall be 1 greater than the previous event. The maximum value of a sequence number shall be `ffffffffffffffffffffffffffffffff` which is the hex encoding of `2^128 - 1 = 340282366920938463463374607431768211455'. This is large enough to be deemed computationally infeasible for a KEL ever to reach the maximum.
 
-Common normalized ACDC and KERI labels
 
-`v` is the Version string
-`d` is the SAID of the enclosing block or map
-`i` is a KERI identifier AID
-`a` is the data attributes or data anchors depending on the message type
+##### Key and key digest threshold fields
+
+The Key Threshold, `kt` and Next Key Digest Threshold, `nt` field values each provide signing and rotation thresholds, respectively, for the key and next key digest lists. The threshold value may be either the simple case of a hex-encoded non-negative integer or the complex case of a list of clauses of fractional weights. The latter is called a fractionally weighted threshold.
+
+In the simple case, given a threshold value `M` together with a total of `N` values in a key or key digest list, then the satisfaction threshold is an `M of N` threshold. This means that any set of `M` valid signatures from the keys in the list satisfies such a threshold. 
+
+In the complex case, the field value is a list of weights that are strict decimal-encoded rational fractions. Fractionally weight thresholds are best suited for Partial, Reserve, or Custodial rotation applications. The exact syntax and satisfaction properties of fractionally weighted threshold values are described below in the section on Partial, Reserve, and Custodial rotations.
+
+
+##### Key list field
+
+The Key, `k` field value is a list of strings that are each a fully qualified public key. These provide the current signing keys for the AID associated with a KEL. The Key, `k` field value shall not be empty.
+
+
+##### Next key digest list field
+
+The Next Key Digest, `n` field value is a list of strings that are each a fully qualified digest of a public key. These provide the next rotation keys for the AID associated with a KEL. When the Next, `n` field value in an Inception or Delegated Inception event is an empty list, then the associated AID shall be deemed non-transferable, and no more key events shall be allowed in that KEL. When the Next, `n` field value in a Rotation or Delegated Rotation Event event is an empty list, then the associated AID shall be deemed abandoned, and no more key events shall be allowed in its KEL.
+
+
+##### Backer threshold field
+
+The Backer threshold, `bt` field value is a hex-encoded non-negative integer. This is the number of backers in the backer list that must support a key event for it to be valid. Witness Backers express support via a signature (endorsement) of the key event that may be conveyed via a Receipt message.  Ledger Registrar backers may express support by anchoring the key event or the SAID of the key event on the associated ledger.
+
+Given a threshold value `M` together with a total of `N` values in the Backer list, then the satisfaction threshold is an `M of N` threshold. This means that any set of `M` valid endorsements (signatures or other) from the `N` Backers in the Backer list satisfies the threshold. The KAWA (Keri Algorithm of Witness Agreement) section provides a formula for determining a sufficient `M` to ensure agreement in spite of a number of `F` faulty backers.
+
+When the Backer, `b` field value is an empty list, then the Backer Threshold, bt, field value shall be `0` (hex-encoded 0).
+
+##### Backer list
+
+The Backer, `b` field value is a list of strings that each is the fully qualified AID of a Backer. A given AID shall not appear more than once in any Backer list. These provide the current AIDs of the backers of a KEL. The list may be empty. When the Backers are Witnesses, then the AIDs themselves shall be non-transferable, fully qualified public keys. As a result, a Validator can verify a witness signature given the Witness AID as public key. Consequently, the Witness does not need a KEL because its key state is fixed and is given by its AID. Although a Witness does not need a KEL, it may have one that consists of a trivial Inception event with an empty Next, `n` field list (making it non-transferable). 
+
+
+##### Backer remove list
+
+The Backer Remove, `br` field value is a list of strings that each is the fully qualified AID of a Backer to be removed from the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID shall not appear more than once in any Backer Remove list. The Backer Remove, `br` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by removing the AIDs in the Backer Remove, `br` list. The AIDs in the Backer Remove, `br` list shall be removed before any AIDs in the Backer Add, `ba` list are appended.
+
+##### Backer add list
+
+The Backer Add, `ba` field value is a list of strings that each is the fully qualified AID of a Backer to be appended to the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID shall not appear more than once in any Backer Add list. The Backer Add, `ba` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by appending in order the AIDs from the Backer Add, `ba` list except for any AIDs that already appear in the current Backer list. The AIDs in the Backer Add, `ba` list shall not be appended until all AIDs in the Backer Add, `ba` list have been removed. 
+
 
 ##### Configuration traits field
 
-The configuration traits, `c` field is a list of specially defined strings. Each string represents a configuration trait for the KEL. The following table defines the configuration traits. Some configuration traits may only appear in the Inception (delegated or not) for the KEL. Others may appear in either the inception event and rotation events (delegated or not). This is indicated in the third column. A Validator of an event shall invalidate i.e., drop any events that do not satisfy the constraints imposed by their configuration traits. If two conflicting configuration traits appear in the same list, then the latter trait supersedes the earlier one.
+The Configuration Traits, `c` field value is a list of strings. These are specially defined strings. Each string represents a configuration trait for the KEL. The following table defines the configuration traits. Some configuration traits may only appear in the Inception (delegated or not) for the KEL. Others may appear in either the inception event or rotation events (delegated or not). This is indicated in the third column. A Validator of an event shall invalidate, i.e., drop any events that do not satisfy the constraints imposed by their configuration traits. If two conflicting configuration traits appear in the same list, then the latter trait supersedes the earlier one.
 
 |Trait|Title|Inception Only|Description|
 |:---:|:---|:---:|:---|
@@ -634,17 +684,18 @@ The configuration traits, `c` field is a list of specially defined strings. Each
 |`NRB`| No Registrar Backers | True | This KEL shall not allow any registrar backers |
 |`RB`| Registrar Backers | False | The backer list provides registrar backer AIDs |
 
-The "Establishment Only", `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events must be signed by first-time, one-time pre-rotated keys. There is no possibility of
-key compromise due to repeated exposure of signing keys on interaction events. A Validator shall invalidate, i.e., drop any non-establishment events.
+The Establishment Only, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events must be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator shall invalidate, i.e., drop any non-establishment events.
 
-The "Do Not Delegate", `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal may appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator shall invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
+The Do Not Delegate, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal may appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator shall invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
 
-The "No Registrar Backer," `NRB` config trait enables the Controller to protect itself from an attempt to change from a witnessed secondary root of trust to a ledger secondary root of trust via a ledger registrar backer.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use the Registrar Backer, `RB` configuration trait.
+The No Registrar Backer, `NRB` config trait enables the Controller to protect itself from an attempt to change from a witnessed secondary root of trust to a ledger secondary root of trust via a ledger registrar backer.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use the Registrar Backer, `RB` configuration trait.
 
-The "Registrar Backer," `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event must also include Registrar Backer Seal for each registrar backer in the list.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
-
+The Registrar Backer, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event must also include Registrar Backer Seal for each registrar backer in the list.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
 
 
+##### Seal list field
+
+The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seal Section below.
 
 
 ### Seals
@@ -749,11 +800,13 @@ Attached bare, `bar` message.
 ```
 
 
-### Key event messages (Non-delegated)
+### Key event messages
 
-The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, `d` in that order.
+The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator may drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
 
 #### Inception Event Message Body
+
+The top-level fields of an Inception, `icp`, event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/42
@@ -763,9 +816,11 @@ https://github.com/trustoverip/tswg-keri-specification/issues/42
 https://github.com/trustoverip/tswg-keri-specification/issues/39
 :::
 
+Inception event example:
+
 ```json
 {
-  "v": "KERI10JSON0001ac_",
+  "v": "KERICAAJSONAACd_",
   "t": "icp",
   "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
@@ -800,13 +855,18 @@ https://github.com/trustoverip/tswg-keri-specification/issues/39
 
 #### Rotation Event Message Body
 
+The top-level fields of a Rotation, `rot` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
+
+
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+Rotation event example:
+
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "rot",
   "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -831,6 +891,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
   "bt": "1",
   "ba": ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+  "c": [],
   "a : []
 }
 ```
@@ -841,9 +902,12 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+The top-level fields of an Interaction, `ixn` event message body shall appear in the following order: `[ v, t, d, i, s, p, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
+
+
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "isn",
   "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -861,11 +925,10 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 ```
 
 
-### Delegated Key Event Messages
-
-ToDo in delegation section below. Delegated custodial example with partial rotation and using 0 fraction signing weights on exposed pre-rotated keys
-
 #### Delegated Inception Event Message Body
+
+The top-level fields of a Delegated Inception, `dip` event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes. 
+
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -910,13 +973,16 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 #### Delegated Rotation Event Message Body
 
+The top-level fields of a Delegated Rotation, `drt` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes . Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
+
+
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "drt",
   "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -941,25 +1007,33 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
   "bt": "1",
   "ba"  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-  "a":[],
-  "di": "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+  "c":[],
+  "a":[]
 }
 ```
 
 
 ### Receipt Messages
 
-#### Non-Transferable Prefix Signer Receipt Message Body
+#### Receipt Message Body
 
-For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
+The top-level fields of a Receipt, `rct` message body shall appear in the following order: `[ v, t, d, i, s]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The Signatures or Seals are on the key event indicated by the top-level fields of the Receipt, not the Receipt message body itself.
+
+The SAID, `d` field value is the SAID of a key event from a KEL, i.e., the key event being receipted, not the receipt message itself. 
+
+The Identifier AID, `i` field value is the Controller AID of the KEL for the key event being receipted. 
+
+The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+Receipt example:
+
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "rct",
   "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
   "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -967,55 +1041,62 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 }
 ```
 
-#### Transferable Prefix Signer Receipt Message Body
-
-
-For receipts, the `d` field is the SAID of the associated event, not the receipt message itself.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v": "KERI10JSON00011c_",
-  "t": "vrc",
-  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-  "s": "1",
-  "a":
-    {
-      "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-      "i": "AYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8JZAoTNZH3ULv",
-      "s": "4"
-    }
-}
-```
-
 ### Other Messages
+
+#### Reserved field labels in other messages
+
+Reserved field labels in other KERI message body types:
+
+|Label|Title|Description|
+|---|---|---|
+|`v`| Version String | enables regex parsing of field map in CESR stream |
+|`t`| Message Type | three character string|
+|`d`| Digest SAID | fully qualified digest of block in which it appears|
+|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID|
+|`p`| Prior SAID | fully qualified digest, prior message SAID |
+|`dt`| Issuer relative ISO date/time string |
+|`r`| Route | delimited path string for routing message|
+|`rr`| Return Route | delimited path string for routing a response (reply or bare) message |
+|`q`| Query Map | field map of query parameters |
+|`a`| Attribute Map  | field map of message attributes | 
+
+The definitions of the `[v, t, d, i, p]' field values may be found above in the key event message body section. They have equivalent definitions.
+
+##### Datetime, `dt` field
+The datetime, `dt` field value, if any, shall be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
+
+ An example datetime string in this format is as follows:
+
+`2020-08-22T17:50:09.988921+00:00`
+
+
+##### Route field
+
+The Route, `r` field value is a '/' delimited string that forms a path. This indicates the target of a given message that includes this field. This enables the message to replicate the function of the path in a ReST resource.
+
+##### Return Route field
+
+The Return Route, `rr` field value is a '/' delimited string that forms a path. This allows a message to indicate how to target the associated response to the message. This enables messages on asynchronous transports to associate a given response with the message that triggered the response.
+
+##### Query field
+
+The Query, `q` field value is a field map (block). Its fields provide the equivalent of query parameters in a ReST resource.
+
+##### Attribute field
+
+The Attribute, `a` field value is a field map (block). Its fields provide the attributes conveyed by the message.
+
+
 
 #### Query Message Message Body
 
+The top-level fields of a Query, `qry` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
-```json
-{
-  "v": "KERI10JSON00011c_",
-  "t": "qry",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "logs",
-  "rr": "log/processor",
-  "q":
-  {
-    "i" : "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "s": "5",
-    "dt": "2020-08-01T12:20:05.123456+00:00",
-  }
-}
-```
+Example Query Message
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
@@ -1023,12 +1104,12 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "qry",
   "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
   "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "logs",
-  "rr": "log/processor",
+  "r": "/logs",
+  "rr": "/log/processor",
   "q":
   {
     "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -1041,29 +1122,18 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 #### Reply Message Body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
+The top-level fields of a Reply, `rpy` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
-```json
-{
-  "v": "KERI10JSON00011c_",
-  "t" : "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "logs/processor",
-  "a":
-  {
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "name": "John Jones",
-    "role": "Founder",
-  }
-}
-```
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
+
+::: issue
+https://github.com/trustoverip/tswg-keri-specification/issues/43
+:::
+
+Reply message example:
 
 ```json
 {
@@ -1071,7 +1141,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
   "t": "rpy",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
   "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r":  "logs/processor",
+  "r":  "/logs/processor",
   "a" :
   {
     "d":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -1088,13 +1158,17 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+The top-level fields of a Prod, `pro` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
+
+Prod message example:
+
 ```json
 {
-  "v": "KERI10JSON00011c_",
-  "t": "prd",
+  "v": "KERICAAJSONAACd_",
+  "t": "pro",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "r": "sealed/data",
-  "rr": "process/sealed/data",
+  "r": "/sealed/data",
+  "rr": "/process/sealed/data",
   "q":
   {
     "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -1108,19 +1182,21 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 #### Bare Message Body
 
-Reference to the anchoring seal is provided as an attachment to the bare, `bre` message.
-A bare, 'bre', message is a SAD item with an associated derived SAID in its 'd' field.
+The top-level fields of a Reply, `bar` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
 
 ::: issue
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+Bare message example:
+
 ```json
 {
-  "v": "KERI10JSON00011c_",
+  "v": "KERICAAJSONAACd_",
   "t": "bre",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "r": "process/sealed/data",
+  "r": "/process/sealed/data",
   "a":
   {
     "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -1139,99 +1215,24 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
+The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
+Exchange message example:
+
 ```json
 {
-  "v": "KERI10JSON00006a_",
+  "v": "KERICAAJSONAACd_",
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
+  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
   "dt": "2021-11-12T19:11:19.342132+00:00",
   "r": "/echo",
-  "rr": "/echo/response",
-  "a": {
+  "q": {},
+  "a": 
+  {
     "msg": "test"
   }
-}
-```
-
-### Notices Embedded in Reply Messages
-
-#### Key State Notice (KSN)
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v": "KERI10JSON0001d9_",
-  "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
-  "i": "E4BsxCYUtUx3d6UkDVIQ9Ke3CLQfqWBfICSmjIzkS1u4",
-  "s": "0",
-  "p": "",
-  "f": "0",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "et": "icp",
-  "kt": "1",
-  "k": [
-    "DqI2cOZ06RwGNwCovYUWExmdKU983IasmUKMmZflvWdQ"
-  ],
-  "n": "E7FuL3Z_KBgt_QAwuZi1lUFNC69wvyHSxnMFUsKjZHss",
-  "bt": "1",
-  "b": [
-    "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-  ],
-  "c": [],
-  "ee": {
-    "s": "0",
-    "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
-    "br": [],
-    "ba": []
-  },
-  "di": ""
-}
-```
-
-##### Embedded in Reply
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-```json
-{
-  "v": "KERI10JSON00011c_",
-  "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/ksn/BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
-  "a":
-    {
-      "v": "KERI10JSON0001d9_",
-      "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
-      "i": "E4BsxCYUtUx3d6UkDVIQ9Ke3CLQfqWBfICSmjIzkS1u4",
-      "s": "0",
-      "p": "",
-      "f": "0",
-      "dt": "2021-01-01T00:00:00.000000+00:00",
-      "et": "icp",
-      "kt": "1",
-      "k": [
-        "DqI2cOZ06RwGNwCovYUWExmdKU983IasmUKMmZflvWdQ"
-      ],
-      "n": "E7FuL3Z_KBgt_QAwuZi1lUFNC69wvyHSxnMFUsKjZHss",
-      "bt": "1",
-      "b": [
-        "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-      ],
-      "c": [],
-      "ee": {
-        "s": "0",
-        "d": "EYk4PigtRsCd5W2so98c8r8aeRHoixJK7ntv9mTrZPmM",
-        "br": [],
-        "ba": []
-      },
-      "di": ""
-    }
 }
 ```
 
@@ -1454,9 +1455,20 @@ Where:
 CT means Current threshold.
 NT means Next threshold.
 
+
+### Fractionally weighted threshold
+
+A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of rational fractions (i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A list of clauses acts to order the set of rational fraction weights that appear in the list of clauses. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that corresponds to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures the exactness and universality of threshold satisfaction computations.
+
+For example, consider the following simple single clause fractionally weighted threshold, [1/2, 1/2, 1/2].  Three weights mean there must be exactly three corresponding key pairs. Let the three keypairs in one-to-one order be denoted by the list of indexed public keys, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]. The threshold is satisfied if any two of the public keys sign because 1/2 + 1/2 = 1. This is exactly equivalent to an integer-valued ‘2 of 3’ threshold.
+
+The public key's appearance order in a given key list and its associated threshold weight list must be the same.
+
+Fractionally weighted thresholds become more interesting when the weights are not all equal or include multiple clauses. Consider the following five-element single clause fractionally weighted threshold list, [1/2, 1/2, 1/2, 1/4, 1/4] and its corresponding public key list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>].  Satisfaction would be met given signatures from any two or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> because each of these keys has a weight of 1/2 and the combination of any two or more sums to 1 or more. Alternatively, satisfaction would be met with signatures from any one or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> and both of A<sup>3</sup>, and A<sup>4</sup> because any of those combinations would sum to 1 or more. Because participation of A<sup>3</sup> and A<sup>4</sup> is not required as long as at least two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are available then A<sup>3</sup> and A<sup>4</sup> may be treated as reserve members of the controlling set of keys. These reserve members only need to participate in the event that only one of the other three is available. The flexibility of a fractionally weighted threshold enables redundancy in the combinations of keys needed to satisfy both day-to-day and reserve contingency use cases.
+
 ### Reserve rotation
 
-The pre-rotation mechanism supports partial pre-rotation or more exactly partial Rotation of pre-rotated keypairs. One important use case for partial Rotation is to enable pre-rotated keypairs designated in one Establishment event to be held in reserve and not exposed at the next (immediately subsequent) Establishment event. This reserve feature enables keypairs held by Controllers as members of a set of pre-rotated keypairs to be used for the purpose of fault tolerance in the case of non-availability by other Controllers while at the same time minimizing the burden of participation by the reserve members. In other words, a reserved pre-rotated keypair contributes to the potential availability and fault tolerance of control authority over the AID without necessarily requiring the participation of the reserve key-pair in a Rotation until and unless it is needed to provide continuity of control authority in the event of a fault (non-availability of a non-reserved member). This reserve feature enables different classes of key Controllers to contribute to the control authority over an AID. This enables provisional key control authority. For example, a key custodial service or key escrow service could hold a keypair in reserve to be used only upon satisfaction of the terms of the escrow agreement. This could be used to provide continuity of service in the case of some failure event. Provisional control authority may be used to prevent types of common-mode failures without burdening the provisional participants in the normal non-failure use cases.
+The pre-rotation mechanism supports partial pre-rotation or, more exactly, partial Rotation of pre-rotated keypairs. One important use case for partial Rotation is to enable pre-rotated keypairs designated in one Establishment event to be held in reserve and not exposed at the next (immediately subsequent) Establishment event. This reserve feature enables keypairs held by Controllers as members of a set of pre-rotated keypairs to be used for the purpose of fault tolerance in the case of non-availability by other Controllers while at the same time minimizing the burden of participation by the reserve members. In other words, a reserved pre-rotated keypair contributes to the potential availability and fault tolerance of control authority over the AID without necessarily requiring the participation of the reserve key-pair in a Rotation until and unless it is needed to provide continuity of control authority in the event of a fault (non-availability of a non-reserved member). This reserve feature enables different classes of key Controllers to contribute to the control authority over an AID. This enables provisional key control authority. For example, a key custodial service or key escrow service could hold a keypair in reserve to be used only upon satisfaction of the terms of the escrow agreement. This could be used to provide continuity of service in the case of some failure event. Provisional control authority may be used to prevent types of common-mode failures without burdening the provisional participants in the normal non-failure use cases.
 
 Reserve rotation example:
 
