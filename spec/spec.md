@@ -585,7 +585,7 @@ Compliant KERI version 2.XX implementations shall support the old KERI version 1
 
 ##### Message type  field
 
-The message type, `t` field value shall be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types that are not part of a KEL but are useful for managing the information associated with an AID.  
+The message type, `t` field value shall be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.  
 
 The message types in KERI are detailed in the table below:
 
@@ -596,12 +596,13 @@ The message types in KERI are detailed in the table below:
 |`ixn`| Interaction | Non-Establishment Key Event | Seals interaction data to the current key state|
 |`dip`| Delegated Inception | Establishment Event | Incepts a Delegated AID and initializes its keystate  |
 |`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
-|`rct`| Receipt | Receipt Event | Associates a proof such as signature or seal to a key event |
-|`qry`| Query | Other Event | Query information associated with an AID |
-|`rpy`| Reply | Other Event | Reply with information associated with an AID either solicited by Query or unsolicited |
-|`pro`| Prod | Other Event | Prod (request) information associated with a Seal |
+|`rct`| Receipt | Receipt Message | Associates a proof such as signature or seal to a key event |
+|`qry`| Query | Other Message | Query information associated with an AID |
+|`rpy`| Reply | Other Message | Reply with information associated with an AID either solicited by Query or unsolicited |
+|`pro`| Prod | Other Message | Prod (request) information associated with a Seal |
 |`bar`| Bare | Other Event | Bare (response) with information associate with a Seal either solicted by Prod or unsolicited |
-|`exn`| Exchange | Other Event | Generic exchange of information associated with an AID usually as part of a multi-message transaction |
+|`xip`| Exchange Inception | Other Message | Incepts multi-exchange message transaction, the first exchange message in a transaction set |
+|`exn`| Exchange | Other Message | Generic exchange of information, may be a member of a multi-message transaction set |
 
 
 #####  SAID fields
@@ -623,8 +624,8 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[ref: KERI-WP]]. 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
-The Controller identifier AID, `i` field value that appears in all key events and receipts is the AID that controls the associated KEL.
-The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID the Delegator.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID that is appropriate for the Route, `r` field value of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID of the Delegator.
 
 
 ##### Sequence number field
@@ -1053,6 +1054,7 @@ Reserved field labels in other KERI message body types:
 |`t`| Message Type | three character string|
 |`d`| Digest SAID | fully qualified digest of block in which it appears|
 |`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID|
+|`x`| Exchange Identifier (SAID) | fully qualified unique identifier for an exchange transaction |
 |`p`| Prior SAID | fully qualified digest, prior message SAID |
 |`dt`| Issuer relative ISO date/time string |
 |`r`| Route | delimited path string for routing message|
@@ -1060,7 +1062,20 @@ Reserved field labels in other KERI message body types:
 |`q`| Query Map | field map of query parameters |
 |`a`| Attribute Map  | field map of message attributes | 
 
-The definitions of the `[v, t, d, i, p]' field values may be found above in the key event message body section. They have equivalent definitions.
+Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field values are the same as found above in the Key Event message body section. 
+
+##### AID fields
+
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID that is appropriate for the Route, `r` field value of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+
+##### Prior event SAID field
+
+The prior, `p` field is the SAID of the prior exchange message in a transaction. When the prior `p` field appears in an exchange message, its value shall be the SAID of the immediately preceding exchange message in that transaction. When an exchange message is not part of a transaction, then the prior `p` field value shall be the empty string. 
+
+##### Exchange identifier field
+
+The Exchange Identifier SAID, `x` field value shall be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message shall be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each of the subsequent exchange messages in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each of the subsequent exchange messages verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, then the Exchange Identifier, `x` field value, shall be the empty string. 
+
 
 ##### Datetime, `dt` field
 The datetime, `dt` field value, if any, shall be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
@@ -1072,7 +1087,7 @@ The datetime, `dt` field value, if any, shall be the ISO-8601 datetime string wi
 
 ##### Route field
 
-The Route, `r` field value is a '/' delimited string that forms a path. This indicates the target of a given message that includes this field. This enables the message to replicate the function of the path in a ReST resource.
+The Route, `r` field value is a '/' delimited string that forms a path. This indicates the target of a given message that includes this field. This enables the message to replicate the function of the path in a ReST resource. When used in an Exchange Transaction Inception, `xip` or Exchange, `exn` message, the Route, `r` field value defines both the type of transaction and a step within that transaction. For example, suppose that the route path head value, `/ipex/` means that the transaction type is an issuance and presentation exchange transaction and the full route path value, `/ipex/offer` means that the message is the `offer` step in such a transaction.
 
 ##### Return Route field
 
@@ -1208,6 +1223,29 @@ Bare message example:
 }
 ```
 
+#### Exchange Transaction Inception Message Body
+
+
+The top-level fields of an Exchange Transaction Inceipt, `xip` message body shall appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
+Exchange transaction inception message example:
+
+```json
+{
+  "v": "KERICAAJSONAACd_",
+  "t": "xip",
+  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
+  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "dt": "2021-11-12T19:11:19.342132+00:00",
+  "r": "/echo/out",
+  "q": {},
+  "a": 
+  {
+    "msg": "test echo"
+  }
+}
+```
+
 
 #### Exchange Message Body
 
@@ -1215,7 +1253,7 @@ Bare message example:
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
-The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
 Exchange message example:
 
@@ -1225,13 +1263,14 @@ Exchange message example:
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
   "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo",
+  "r": "/echo/back",
   "q": {},
   "a": 
   {
-    "msg": "test"
+    "msg": "test echo"
   }
 }
 ```
