@@ -624,7 +624,7 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[ref: KERI-WP]]. 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID that is appropriate for the Route, `r` field value of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
 The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID of the Delegator.
 
 
@@ -1053,7 +1053,7 @@ Reserved field labels in other KERI message body types:
 |`v`| Version String | enables regex parsing of field map in CESR stream |
 |`t`| Message Type | three character string|
 |`d`| Digest SAID | fully qualified digest of block in which it appears|
-|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID|
+|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID |
 |`x`| Exchange Identifier (SAID) | fully qualified unique identifier for an exchange transaction |
 |`p`| Prior SAID | fully qualified digest, prior message SAID |
 |`dt`| Issuer relative ISO date/time string |
@@ -1066,7 +1066,7 @@ Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field va
 
 ##### AID fields
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID that is appropriate for the Route, `r` field value of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
 
 ##### Prior event SAID field
 
@@ -1262,7 +1262,7 @@ Exchange message example:
   "v": "KERICAAJSONAACd_",
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
   "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
   "dt": "2021-11-12T19:11:19.342132+00:00",
@@ -2121,7 +2121,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xqry` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
@@ -2140,7 +2140,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xrpy` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `a` | `-H##` or `-H#####` | Count code for Attribute field map |
@@ -2158,7 +2158,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xpro` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
@@ -2185,19 +2185,41 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 | `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
 
 
+#### Exchange Transaction Inception Message
 
-#### Exchange Message
-
-Field order by label:  `v`, `t`, `d`, `i`, `p`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrpy` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of of associated exchange transaction |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior message SAID |
+| `t` | `Xxip` | Packet Type (inception) |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
+| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
+| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
+| `q` | `-H##` or `-H#####` | Count code for Query field map |
+| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
+| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
+| `d` label | `0J_d` | Label of field `d` in `a` field map   |
+| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+
+
+
+#### Exchange Message
+
+Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
+
+| Field Label | Value | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xexn` | Packet Type (inception) |
+| `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
+| `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
+| `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `q` | `-H##` or `-H#####` | Count code for Query field map |
