@@ -350,23 +350,30 @@ This section provides a high-level overview of the infrastructure components of 
 #### Controller Application
 
 Each KERI AID is controlled by an entity (or entities when multi-sig) that holds the digital signing private keys belonging to the current authoritative key state of the AID. This set of entities is called the AID controller, or controller for short. Each controller has an application or suite or applications called the controller application or application for short. The controller application provides five functions with respect to the digital signing key pairs that control the controller's AID. These five functions manage the associated key state via key events. These functions are:
-- keypair generation,
-- keypair storage,
+- key pair generation,
+- key pair storage,
 - key event generation,
 - key event signing, and
-- key event verification.
+- key event validation.
 
-The execution of these functions, including the associated code and data, must be protected by the controller using best practices. This might, for example, be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller may host encrypted keypair storage and highly available event verification functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession. The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions.  For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
+Key event validation includes everything needed to validate events, including structure validation, chaining digest verification, signature verification, and witness receipt verification. The execution of these functions, including the associated code and data, must be protected by the controller using best practices. This might, for example, be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller may host encrypted keypair storage and highly available key event validation functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession.  The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions.  For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
+
+![Controller Application](../images/ControllerApplicationFunctions.png)
+
+![Controller Application with Agent](../images/ControllerAppAgentSplitFunctions.png)
+
+
+
 
 #### Direct exchange
 
-The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
+The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
 
- The set of key event messages forms an append-only cryptographically verifiable data structure called a key event log or KEL. The events in a KEL are signed and are both forward and backward-chained. The backward chaining commitments are cryptographic digests of the previous event. The forward chaining commitments are cryptographic digests of the next set of public keys that will constitute the next key state after a key rotation. The commitments are nonrepudiably signed with the private keys of the current key state. Each KEL is essentially a dedicated "blockchain" that manages the key state for one and only one AID. In addition to key state, each KEL also manages commitments to external data. These commitments are signed cryptographic digests of external data called seals. When included in a KEL, a seal binds (or anchors) the external data to the key state of the AID at the location in the KEL that the seal appears. This binding enables a controller to make cryptographically verifiable, non-repudiable issuances of external data that are bound to a specific key state of that AID.
+ The set of key event messages forms an append-only cryptographically verifiable data structure called a key event log or KEL. The events in a KEL are signed and are both forward and backward-chained. The backward chaining commitments are cryptographic digests of the previous event. The forward chaining commitments are cryptographic digests of the next set of public keys that will constitute the next key state after a key rotation. The commitments are nonrepudiably signed with the private keys of the current key state. Each KEL is essentially a dedicated "blockchain" that manages the key state for one and only one AID. In addition to key states, each KEL also manages commitments to external data. These commitments are signed cryptographic digests of external data called seals. When included in a KEL, a seal binds (or anchors) the external data to the key state of the AID at the location in the KEL where the seal appears. This binding enables a controller to make cryptographically verifiable, non-repudiable issuances of external data that are bound to a specific key state of that AID.
 
-By exchanging KELs each controller can validate the current key state of the other and therefore, securely attribute (authenticate) any signed statements or any sealed issuances of data. This bootstraps the use of authentic data in any interaction or transaction between the pair of controllers. This is the mission of KERI.
+By exchanging KELs, each controller can validate the current key state of the other and, therefore, securely attribute (authenticate) any signed statements or any sealed issuances of data. This bootstraps the use of authentic data in any interaction or transaction between the pair of controllers. This is the mission of KERI.
 
-Diagram
+![Direct Exchange](../images/ControllerAppAgentDirectExchange.png)
 
 #### Indirect exchange via witnesses and watchers
 
@@ -385,13 +392,13 @@ Watchers may implement different additional features. A watcher could choose to 
 Ultimately, a validator decides whether or not to trust the key state of a given AID based on the evidence or lack thereof of duplicity. A given validator may choose to use Judge and Jury services to aid it in deciding whether or not to trust the key state of a given AID. An honest validator shall trust when there is no evidence of duplicity and shall not trust when there is any evidence of duplicity unless and until the duplicity has been reconciled. KERI provides mechanisms for duplicity reconciliation. These include key compromise recovery mechanisms.
 
 
-Diagram
+![Indirect Exchange](../images/ControllerAppAgentWitnessWatcherIndirectExchange.png)
 
 #### Ecosystem
 
 The open standard KERI protocol fosters an open competitive ecosystem of service providers for the various infrastructure components such as controller applications (wallets, key chains, and agents), witnesses, and watchers (Judges and Juries). Because there is no requirement for shared governance over any of the infrastructure components, each controller and each validator are free to choose their own service providers based on price, performance, ease of usability, etc. This enables competition across the full spectrum of infrastructure components. Thus, existing cloud and web infrastructure can be leveraged at comparable performance and price levels.  KERI, by design, fosters the development of a global watcher network that will eventually result in universal duplicity detectability and ambient verifiability with the goal of providing a universal DKMI in support of a trust-spanning layer for the internet.
 
-Diagram
+![KERI Ecosystem](../images/Ecosystem.png)
 
 
 ### KERI’s identifier system security overlay
@@ -399,6 +406,10 @@ Diagram
 The function of KERI's identifier-system security overlay is to establish the authenticity (or authorship) of the message payload in an IP Packet by verifiably attributing it to a cryptonymous SCID (an AID) via an attached set of one or more asymmetric keypair-based non-repudiable digital signatures. The current valid set of associated asymmetric keypair(s) is proven via a Verifiable data structure called the KEL. The identifier system provides a mapping between the identifier and the keypair(s) that control the identifier, namely, the public key(s) from those keypairs. The private key(s) is secret and is not shared.
 
 An authenticatable (Verifiable) internet message (packet) or data item includes the identifier and data in its payload. Attached to the payload is a digital signature(s) made with the private key(s) from the controlling keypair(s). Given the identifier in a Message, any Verifier of a Message (data item) can use the identifier system mapping to look up the public key(s) belonging to the controlling keypair(s). The Verifier can then verify the attached signature(s) using that public key(s). Because the payload includes the identifier, the signature makes a non-repudiable cryptographic commitment to both the source identifier and the data in the payload.
+
+![Authenticatable Message](../images/AuthenticatableMessage.png)
+
+
 
 ### Overcoming existing security overlay flaws
 
@@ -414,7 +425,7 @@ A data item or statement is end-to-end-verifiable, or end-verifiable for short, 
 
 Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
 
-Diagram of end-to-end verifiability
+![End-to-end Verifiability](../images/End2EndNetwork.png)
 
 End verifiability means that the end destination can verify the source of the data without having to trust the middle. This gives rise to the concept called ambient verifiability, where the source of any data can be verified anywhere, at any time, by anybody. Ambient verifiability removes any need to trust any of the components in the middle, i.e., the whole internet.
 
@@ -456,6 +467,8 @@ The CESR protocol supports several different types of encoding tables for differ
 
 In simple form, an identifier-system security overlay binds together a triad consisting of the identifier, keypairs, and Controllers, the set of entities whose members control a private key from the given set of keypairs. The set of Controllers is bound to the set of keypairs, the set of keypairs is bound to the identifier, and the identifier is bound to the set of Controllers. This binding triad can be diagrammed as a triangle where the sides are the bindings and the vertices are the identifier, the set of Controllers, and the set of key pairs. This triad provides verifiable control authority for the identifier.
 
+![Self-certifying Identifier Binding Triad](../images/SelfCertifyingIdentifierBindingTriad.png)
+
 When these bindings are strong, then the overlay is highly invulnerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI, all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See Annex A on cryptographic strength for more detail.
 
 The bound triad is created as follows:
@@ -472,15 +485,21 @@ Because each Controller is the only entity in control (custody) of the private k
 
 The identifier is derived universally and uniquely from the set of public keys using a one-way derivation function. It is, therefore, an AID (qualified SCID). Associated with each identifier (AID) is incepting information that must include a list of the set of qualified public keys from the controlling keypairs. In the usual case, the identifier is a qualified cryptographic digest of the serialization of all the incepting information for the identifier. Any change to even one bit of the incepting information changes the digest and hence changes the derived identifier. This includes any change to any one of the qualified public keys, including its qualifying derivation code. To clarify, a qualified digest as an identifier includes a derivation code as a proem that indicates the cryptographic algorithm used for the digest. Thus, a different digest algorithm results in a different identifier. In this usual case, the identifier is bound strongly and cryptographically to the public keys and any other incepting information from which the digest was generated.
 
+![AID Identifier Prefix Derivation](../images/PrefixAddressMultisigDerivation.png)
+
 A special case may arise when the set of public keys has only one member, i.e., there is only one controlling keypair. In this case, the Controller of the identifier may choose to use only the qualified public key as the identifier instead of a qualified digest of the incepting information. In this case, the identifier is still strongly bound to the public key but not to any other incepting information.  A variant of this single keypair special case is an identifier that cannot be rotated. Another way of describing an identifier that cannot be rotated is that it is a non-transferable identifier because control over the identifier cannot be transferred to a different set of controlling keypairs. In contrast, a rotatable keypair is transferable because control may be transferred via rotation to a new set of keypairs. Essentially, when non-transferable, the identifier's lifespan is ephemeral, not persistent, because any weakening or compromise of the controlling keypair means that the identifier must be abandoned. Nonetheless, there are important use cases for an ephemeral AID.  In all cases, the derivation code in the identifier indicates the type of identifier, whether it be a digest of the incepting information (multiple or single keypair) or a single member special case derived from only the public key (both ephemeral or persistent).
 
 Each Controller in a set of Controllers may prove its contribution to the control authority over the identifier in either an interactive or non-interactive fashion. One form of interactive proof is to satisfy a challenge of that control. The challenger creates a unique challenge Message. The Controller responds by nonrepudiably signing that challenge with the private key from the keypair under its control. The challenger can then cryptographically verify the signature using the public key from the Controller's keypair. One form of non-interactive proof is the periodic contribution to a monotonically increasing sequence of nonrepudiably signed updates of some data item. Each update includes a monotonically increasing sequence number or date-time stamp. Any Verifier then can cryptographically verify the signature using the public key from the Controller's keypair and verify that the update was made by the Controller. In general, only members of the set of Controllers can create verifiable, nonrepudiable signatures using their keypairs. Consequently, the identifier is strongly bound to the set of Controllers via provable control over the keypairs.
+
+![Self-certifying Identifier Issuance Triad](../images/SelfCertIssuanceTriad.png)
 
 #### Tetrad bindings
 
 At Inception, the triad of an identifier, a set of keypairs, and a set of Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[ref: KERI-WP]] [[ref: VDS]].  The KEL is not necessary for non-transferable identifiers and do not need to persist control via key Rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL; non-transferable (ephemeral) identifiers do not.
 
 For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event, a serialization of the incepting information associated with the previously mentioned identifier.
+
+![Autonomic Identifier Binding Tetrad](../images/AutonomicIdentifierBindingTetrad.png)
 
 The Inception event must include the list of controlling public keys and also must include a signature threshold and must be signed by a set of private keys from the controlling keypairs that satisfy that threshold. Additionally, for transferability (persistence across Rotation), the Inception event must also include a list of digests of the set of pre-rotated public keys and a pre-rotated signature threshold that will become the controlling (signing) set of key keypairs and threshold after a Rotation.  A non-transferable identifier may have a trivial KEL that only includes an Inception event but with a null set (empty list) of pre-rotated public keys.
 
@@ -493,6 +512,8 @@ Because the signatures on each event are nonrepudiable, the existence of an alte
 At Inception, the KEL may be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in any of the incepting information included in the Inception event will result in a different identifier (including not only the original controlling keys pairs but also the pre-rotated keypairs).
 
 The essence of the KERI protocol is a strongly bound tetrad of an identifier, set of keypairs, set if Controllers, and the KEL that forms the basis of its identifier system security overlay. The KERI protocol introduces the concept of Duplicity evident programming via Duplicity evident Verifiable data structures.
+
+![Autonomic Identifier Issuance Tetrad](../images/AutonomicIssuanceTetrad.png)
 
 ### Autonomic Namespaces (ANs)
 
@@ -585,7 +606,7 @@ Compliant KERI version 2.XX implementations shall support the old KERI version 1
 
 ##### Message type  field
 
-The message type, `t` field value shall be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types that are not part of a KEL but are useful for managing the information associated with an AID.  
+The message type, `t` field value shall be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.  
 
 The message types in KERI are detailed in the table below:
 
@@ -596,12 +617,13 @@ The message types in KERI are detailed in the table below:
 |`ixn`| Interaction | Non-Establishment Key Event | Seals interaction data to the current key state|
 |`dip`| Delegated Inception | Establishment Event | Incepts a Delegated AID and initializes its keystate  |
 |`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
-|`rct`| Receipt | Receipt Event | Associates a proof such as signature or seal to a key event |
-|`qry`| Query | Other Event | Query information associated with an AID |
-|`rpy`| Reply | Other Event | Reply with information associated with an AID either solicited by Query or unsolicited |
-|`pro`| Prod | Other Event | Prod (request) information associated with a Seal |
+|`rct`| Receipt | Receipt Message | Associates a proof such as signature or seal to a key event |
+|`qry`| Query | Other Message | Query information associated with an AID |
+|`rpy`| Reply | Other Message | Reply with information associated with an AID either solicited by Query or unsolicited |
+|`pro`| Prod | Other Message | Prod (request) information associated with a Seal |
 |`bar`| Bare | Other Event | Bare (response) with information associate with a Seal either solicted by Prod or unsolicited |
-|`exn`| Exchange | Other Event | Generic exchange of information associated with an AID usually as part of a multi-message transaction |
+|`xip`| Exchange Inception | Other Message | Incepts multi-exchange message transaction, the first exchange message in a transaction set |
+|`exn`| Exchange | Other Message | Generic exchange of information, may be a member of a multi-message transaction set |
 
 
 #####  SAID fields
@@ -623,8 +645,8 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[ref: KERI-WP]]. 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
-The Controller identifier AID, `i` field value that appears in all key events and receipts is the AID that controls the associated KEL.
-The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID the Delegator.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID of the Delegator.
 
 
 ##### Sequence number field
@@ -1052,7 +1074,8 @@ Reserved field labels in other KERI message body types:
 |`v`| Version String | enables regex parsing of field map in CESR stream |
 |`t`| Message Type | three character string|
 |`d`| Digest SAID | fully qualified digest of block in which it appears|
-|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID|
+|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID |
+|`x`| Exchange Identifier (SAID) | fully qualified unique identifier for an exchange transaction |
 |`p`| Prior SAID | fully qualified digest, prior message SAID |
 |`dt`| Issuer relative ISO date/time string |
 |`r`| Route | delimited path string for routing message|
@@ -1060,7 +1083,20 @@ Reserved field labels in other KERI message body types:
 |`q`| Query Map | field map of query parameters |
 |`a`| Attribute Map  | field map of message attributes | 
 
-The definitions of the `[v, t, d, i, p]' field values may be found above in the key event message body section. They have equivalent definitions.
+Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field values are the same as found above in the Key Event message body section. 
+
+##### AID fields
+
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+
+##### Prior event SAID field
+
+The prior, `p` field is the SAID of the prior exchange message in a transaction. When the prior `p` field appears in an exchange message, its value shall be the SAID of the immediately preceding exchange message in that transaction. When an exchange message is not part of a transaction, then the prior `p` field value shall be the empty string. 
+
+##### Exchange identifier field
+
+The Exchange Identifier SAID, `x` field value shall be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message shall be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each of the subsequent exchange messages in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each of the subsequent exchange messages verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, then the Exchange Identifier, `x` field value, shall be the empty string. 
+
 
 ##### Datetime, `dt` field
 The datetime, `dt` field value, if any, shall be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
@@ -1072,7 +1108,7 @@ The datetime, `dt` field value, if any, shall be the ISO-8601 datetime string wi
 
 ##### Route field
 
-The Route, `r` field value is a '/' delimited string that forms a path. This indicates the target of a given message that includes this field. This enables the message to replicate the function of the path in a ReST resource.
+The Route, `r` field value is a '/' delimited string that forms a path. This indicates the target of a given message that includes this field. This enables the message to replicate the function of the path in a ReST resource. When used in an Exchange Transaction Inception, `xip` or Exchange, `exn` message, the Route, `r` field value defines both the type of transaction and a step within that transaction. For example, suppose that the route path head value, `/ipex/` means that the transaction type is an issuance and presentation exchange transaction and the full route path value, `/ipex/offer` means that the message is the `offer` step in such a transaction.
 
 ##### Return Route field
 
@@ -1208,6 +1244,29 @@ Bare message example:
 }
 ```
 
+#### Exchange Transaction Inception Message Body
+
+
+The top-level fields of an Exchange Transaction Inceipt, `xip` message body shall appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
+Exchange transaction inception message example:
+
+```json
+{
+  "v": "KERICAAJSONAACd_",
+  "t": "xip",
+  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
+  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "dt": "2021-11-12T19:11:19.342132+00:00",
+  "r": "/echo/out",
+  "q": {},
+  "a": 
+  {
+    "msg": "test echo"
+  }
+}
+```
+
 
 #### Exchange Message Body
 
@@ -1215,7 +1274,7 @@ Bare message example:
 https://github.com/trustoverip/tswg-keri-specification/issues/43
 :::
 
-The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
 Exchange message example:
 
@@ -1224,14 +1283,15 @@ Exchange message example:
   "v": "KERICAAJSONAACd_",
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
+  "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
   "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo",
+  "r": "/echo/back",
   "q": {},
   "a": 
   {
-    "msg": "test"
+    "msg": "test echo"
   }
 }
 ```
@@ -2082,7 +2142,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xqry` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
@@ -2101,7 +2161,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xrpy` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `a` | `-H##` or `-H#####` | Count code for Attribute field map |
@@ -2119,7 +2179,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
 | `t` | `Xpro` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
@@ -2146,19 +2206,41 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 | `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
 
 
+#### Exchange Transaction Inception Message
 
-#### Exchange Message
-
-Field order by label:  `v`, `t`, `d`, `i`, `p`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrpy` | Packet Type (inception) |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of of associated exchange transaction |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior message SAID |
+| `t` | `Xxip` | Packet Type (inception) |
+| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
+| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
+| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
+| `q` | `-H##` or `-H#####` | Count code for Query field map |
+| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
+| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
+| `d` label | `0J_d` | Label of field `d` in `a` field map   |
+| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+
+
+
+#### Exchange Message
+
+Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
+
+| Field Label | Value | Description |
+|:--------:|:-------|:------|
+| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
+| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
+| `t` | `Xexn` | Packet Type (inception) |
+| `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
+| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
+| `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
+| `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `q` | `-H##` or `-H#####` | Count code for Query field map |
