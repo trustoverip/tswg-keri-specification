@@ -129,7 +129,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`.
 
-[[def: Autonomic identifier (AID)]]
+[[def: Autonomic identifier, AID]]
 
 ~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive.
 
