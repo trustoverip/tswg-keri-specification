@@ -350,23 +350,30 @@ This section provides a high-level overview of the infrastructure components of 
 #### Controller Application
 
 Each KERI AID is controlled by an entity (or entities when multi-sig) that holds the digital signing private keys belonging to the current authoritative key state of the AID. This set of entities is called the AID controller, or controller for short. Each controller has an application or suite or applications called the controller application or application for short. The controller application provides five functions with respect to the digital signing key pairs that control the controller's AID. These five functions manage the associated key state via key events. These functions are:
-- keypair generation,
-- keypair storage,
+- key pair generation,
+- key pair storage,
 - key event generation,
 - key event signing, and
-- key event verification.
+- key event validation.
 
-The execution of these functions, including the associated code and data, must be protected by the controller using best practices. This might, for example, be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller may host encrypted keypair storage and highly available event verification functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession. The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions.  For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
+Key event validation includes everything needed to validate events, including structure validation, chaining digest verification, signature verification, and witness receipt verification. The execution of these functions, including the associated code and data, must be protected by the controller using best practices. This might, for example, be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller may host encrypted keypair storage and highly available key event validation functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession.  The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions.  For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
+
+![Controller Application](../images/ControllerApplicationFunctions.png)
+
+![Controller Application with Agent](../images/ControllerAppAgentSplitFunctions.png)
+
+
+
 
 #### Direct exchange
 
-The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
+The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
 
- The set of key event messages forms an append-only cryptographically verifiable data structure called a key event log or KEL. The events in a KEL are signed and are both forward and backward-chained. The backward chaining commitments are cryptographic digests of the previous event. The forward chaining commitments are cryptographic digests of the next set of public keys that will constitute the next key state after a key rotation. The commitments are nonrepudiably signed with the private keys of the current key state. Each KEL is essentially a dedicated "blockchain" that manages the key state for one and only one AID. In addition to key state, each KEL also manages commitments to external data. These commitments are signed cryptographic digests of external data called seals. When included in a KEL, a seal binds (or anchors) the external data to the key state of the AID at the location in the KEL that the seal appears. This binding enables a controller to make cryptographically verifiable, non-repudiable issuances of external data that are bound to a specific key state of that AID.
+ The set of key event messages forms an append-only cryptographically verifiable data structure called a key event log or KEL. The events in a KEL are signed and are both forward and backward-chained. The backward chaining commitments are cryptographic digests of the previous event. The forward chaining commitments are cryptographic digests of the next set of public keys that will constitute the next key state after a key rotation. The commitments are nonrepudiably signed with the private keys of the current key state. Each KEL is essentially a dedicated "blockchain" that manages the key state for one and only one AID. In addition to key states, each KEL also manages commitments to external data. These commitments are signed cryptographic digests of external data called seals. When included in a KEL, a seal binds (or anchors) the external data to the key state of the AID at the location in the KEL where the seal appears. This binding enables a controller to make cryptographically verifiable, non-repudiable issuances of external data that are bound to a specific key state of that AID.
 
-By exchanging KELs each controller can validate the current key state of the other and therefore, securely attribute (authenticate) any signed statements or any sealed issuances of data. This bootstraps the use of authentic data in any interaction or transaction between the pair of controllers. This is the mission of KERI.
+By exchanging KELs, each controller can validate the current key state of the other and, therefore, securely attribute (authenticate) any signed statements or any sealed issuances of data. This bootstraps the use of authentic data in any interaction or transaction between the pair of controllers. This is the mission of KERI.
 
-Diagram
+![Direct Exchange](../images/ControllerAppAgentDirectExchange.png)
 
 #### Indirect exchange via witnesses and watchers
 
@@ -385,13 +392,13 @@ Watchers may implement different additional features. A watcher could choose to 
 Ultimately, a validator decides whether or not to trust the key state of a given AID based on the evidence or lack thereof of duplicity. A given validator may choose to use Judge and Jury services to aid it in deciding whether or not to trust the key state of a given AID. An honest validator shall trust when there is no evidence of duplicity and shall not trust when there is any evidence of duplicity unless and until the duplicity has been reconciled. KERI provides mechanisms for duplicity reconciliation. These include key compromise recovery mechanisms.
 
 
-Diagram
+![Indirect Exchange](../images/ControllerAppAgentWitnessWatcherIndirectExchange.png)
 
 #### Ecosystem
 
 The open standard KERI protocol fosters an open competitive ecosystem of service providers for the various infrastructure components such as controller applications (wallets, key chains, and agents), witnesses, and watchers (Judges and Juries). Because there is no requirement for shared governance over any of the infrastructure components, each controller and each validator are free to choose their own service providers based on price, performance, ease of usability, etc. This enables competition across the full spectrum of infrastructure components. Thus, existing cloud and web infrastructure can be leveraged at comparable performance and price levels.  KERI, by design, fosters the development of a global watcher network that will eventually result in universal duplicity detectability and ambient verifiability with the goal of providing a universal DKMI in support of a trust-spanning layer for the internet.
 
-Diagram
+![KERI Ecosystem](../images/Ecosystem.png)
 
 
 ### KERI’s identifier system security overlay
@@ -399,6 +406,10 @@ Diagram
 The function of KERI's identifier-system security overlay is to establish the authenticity (or authorship) of the message payload in an IP Packet by verifiably attributing it to a cryptonymous SCID (an AID) via an attached set of one or more asymmetric keypair-based non-repudiable digital signatures. The current valid set of associated asymmetric keypair(s) is proven via a Verifiable data structure called the KEL. The identifier system provides a mapping between the identifier and the keypair(s) that control the identifier, namely, the public key(s) from those keypairs. The private key(s) is secret and is not shared.
 
 An authenticatable (Verifiable) internet message (packet) or data item includes the identifier and data in its payload. Attached to the payload is a digital signature(s) made with the private key(s) from the controlling keypair(s). Given the identifier in a Message, any Verifier of a Message (data item) can use the identifier system mapping to look up the public key(s) belonging to the controlling keypair(s). The Verifier can then verify the attached signature(s) using that public key(s). Because the payload includes the identifier, the signature makes a non-repudiable cryptographic commitment to both the source identifier and the data in the payload.
+
+![Authenticatable Message](../images/AuthenticatableMessage.png)
+
+
 
 ### Overcoming existing security overlay flaws
 
@@ -414,7 +425,7 @@ A data item or statement is end-to-end-verifiable, or end-verifiable for short, 
 
 Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
 
-Diagram of end-to-end verifiability
+![End-to-end Verifiability](../images/End2EndNetwork.png)
 
 End verifiability means that the end destination can verify the source of the data without having to trust the middle. This gives rise to the concept called ambient verifiability, where the source of any data can be verified anywhere, at any time, by anybody. Ambient verifiability removes any need to trust any of the components in the middle, i.e., the whole internet.
 
@@ -456,6 +467,8 @@ The CESR protocol supports several different types of encoding tables for differ
 
 In simple form, an identifier-system security overlay binds together a triad consisting of the identifier, keypairs, and Controllers, the set of entities whose members control a private key from the given set of keypairs. The set of Controllers is bound to the set of keypairs, the set of keypairs is bound to the identifier, and the identifier is bound to the set of Controllers. This binding triad can be diagrammed as a triangle where the sides are the bindings and the vertices are the identifier, the set of Controllers, and the set of key pairs. This triad provides verifiable control authority for the identifier.
 
+![Self-certifying Identifier Binding Triad](../images/SelfCertifyingIdentifierBindingTriad.png)
+
 When these bindings are strong, then the overlay is highly invulnerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI, all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See Annex A on cryptographic strength for more detail.
 
 The bound triad is created as follows:
@@ -472,15 +485,21 @@ Because each Controller is the only entity in control (custody) of the private k
 
 The identifier is derived universally and uniquely from the set of public keys using a one-way derivation function. It is, therefore, an AID (qualified SCID). Associated with each identifier (AID) is incepting information that must include a list of the set of qualified public keys from the controlling keypairs. In the usual case, the identifier is a qualified cryptographic digest of the serialization of all the incepting information for the identifier. Any change to even one bit of the incepting information changes the digest and hence changes the derived identifier. This includes any change to any one of the qualified public keys, including its qualifying derivation code. To clarify, a qualified digest as an identifier includes a derivation code as a proem that indicates the cryptographic algorithm used for the digest. Thus, a different digest algorithm results in a different identifier. In this usual case, the identifier is bound strongly and cryptographically to the public keys and any other incepting information from which the digest was generated.
 
+![AID Identifier Prefix Derivation](../images/PrefixAddressMultisigDerivation.png)
+
 A special case may arise when the set of public keys has only one member, i.e., there is only one controlling keypair. In this case, the Controller of the identifier may choose to use only the qualified public key as the identifier instead of a qualified digest of the incepting information. In this case, the identifier is still strongly bound to the public key but not to any other incepting information.  A variant of this single keypair special case is an identifier that cannot be rotated. Another way of describing an identifier that cannot be rotated is that it is a non-transferable identifier because control over the identifier cannot be transferred to a different set of controlling keypairs. In contrast, a rotatable keypair is transferable because control may be transferred via rotation to a new set of keypairs. Essentially, when non-transferable, the identifier's lifespan is ephemeral, not persistent, because any weakening or compromise of the controlling keypair means that the identifier must be abandoned. Nonetheless, there are important use cases for an ephemeral AID.  In all cases, the derivation code in the identifier indicates the type of identifier, whether it be a digest of the incepting information (multiple or single keypair) or a single member special case derived from only the public key (both ephemeral or persistent).
 
 Each Controller in a set of Controllers may prove its contribution to the control authority over the identifier in either an interactive or non-interactive fashion. One form of interactive proof is to satisfy a challenge of that control. The challenger creates a unique challenge Message. The Controller responds by nonrepudiably signing that challenge with the private key from the keypair under its control. The challenger can then cryptographically verify the signature using the public key from the Controller's keypair. One form of non-interactive proof is the periodic contribution to a monotonically increasing sequence of nonrepudiably signed updates of some data item. Each update includes a monotonically increasing sequence number or date-time stamp. Any Verifier then can cryptographically verify the signature using the public key from the Controller's keypair and verify that the update was made by the Controller. In general, only members of the set of Controllers can create verifiable, nonrepudiable signatures using their keypairs. Consequently, the identifier is strongly bound to the set of Controllers via provable control over the keypairs.
+
+![Self-certifying Identifier Issuance Triad](../images/SelfCertIssuanceTriad.png)
 
 #### Tetrad bindings
 
 At Inception, the triad of an identifier, a set of keypairs, and a set of Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[ref: KERI-WP]] [[ref: VDS]].  The KEL is not necessary for non-transferable identifiers and do not need to persist control via key Rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL; non-transferable (ephemeral) identifiers do not.
 
 For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event, a serialization of the incepting information associated with the previously mentioned identifier.
+
+![Autonomic Identifier Binding Tetrad](../images/AutonomicIdentifierBindingTetrad.png)
 
 The Inception event must include the list of controlling public keys and also must include a signature threshold and must be signed by a set of private keys from the controlling keypairs that satisfy that threshold. Additionally, for transferability (persistence across Rotation), the Inception event must also include a list of digests of the set of pre-rotated public keys and a pre-rotated signature threshold that will become the controlling (signing) set of key keypairs and threshold after a Rotation.  A non-transferable identifier may have a trivial KEL that only includes an Inception event but with a null set (empty list) of pre-rotated public keys.
 
@@ -493,6 +512,8 @@ Because the signatures on each event are nonrepudiable, the existence of an alte
 At Inception, the KEL may be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in any of the incepting information included in the Inception event will result in a different identifier (including not only the original controlling keys pairs but also the pre-rotated keypairs).
 
 The essence of the KERI protocol is a strongly bound tetrad of an identifier, set of keypairs, set if Controllers, and the KEL that forms the basis of its identifier system security overlay. The KERI protocol introduces the concept of Duplicity evident programming via Duplicity evident Verifiable data structures.
+
+![Autonomic Identifier Issuance Tetrad](../images/AutonomicIssuanceTetrad.png)
 
 ### Autonomic Namespaces (ANs)
 
