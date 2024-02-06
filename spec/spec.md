@@ -20,10 +20,6 @@ Key Event Receipt Infrastructure (KERI)
 ~ [GitHub repo](https://github.com/trustoverip/tswg-keri-specification)
 ~ [Commit history](https://github.com/trustoverip/tswg-keri-specification/commits/main)
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/51
-:::
-
 [//]: # (\maketitle)
 
 [//]: # (\newpage)
@@ -82,10 +78,6 @@ The KERI approach to Decentralized key management infrastructure (DKMI) allows f
 
 ## Scope
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/49
-:::
-
 Implementation design of a protocol-based decentralized key management infrastructure that enables secure attribution of data to a cryptographically derived identifier with strong (cryptographically verifiable) bindings between each of the identifier, a set of asymmetric signing key pairs that are the key state, a controlling entity that holds the private keys, and a cryptographically verifiable data structure that enables changes to that key state. Thus, security over secure attribution is reduced to key management. This key management includes, for the first time, a practical solution to the hard problem of public key rotation. There is no reliance on trusted third parties. The resulting secure attribution is fully end-to-end verifiable.
 Because of the reliance on asymmetric (public, private) digital signing key pairs, this may be viewed as a type of decentralized public key infrastructure (DPKI)  The protocol supports cryptographic agility for both pre and post-quantum attack resistance. The application scope includes any electronically transmitted information. The implementation dependency scope assumes no more than cryptographic libraries that provide cryptographic strength pseudo-random number generators, cryptographic strength digest algorithms, and cryptographic strength digital signature algorithms. 
 
@@ -102,10 +94,6 @@ The following documents are referred to in the text in such a way that some or a
 
 
 ## Terms and Definitions
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/50
-:::
 
 For the purposes of this document, the following terms and definitions apply.
 
@@ -129,7 +117,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`.
 
-[[def: Autonomic identifier (AID)]]
+[[def: Autonomic identifier, AID]]
 
 ~ a self-managing cryptonymous identifier that must be self-certifying (self-authenticating) and must be encoded in CESR as a qualified Cryptographic primitive.
 
@@ -179,11 +167,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: End-verifiability]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/35
-:::
+~ a data item or statement may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control.
 
 [[def: Duplicity]]
 
@@ -233,29 +217,17 @@ https://github.com/trustoverip/tswg-keri-specification/issues/35
 
 ~ a key event receipt log is a [[ref: KEL]] that also includes all the consistent key event receipt [[ref: message]]s created by the associated set of witnesses. See annex [Key event receipt log](#key-event-receipt-log)
 
-[[def: KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE)]]
+[[def: KERI’s Algorithm for Witness Agreement, KAWA, KA2CE]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/60
-:::
+~ a type of Byzantine Fault Tolerant (BFT) algorithm
 
 [[def: Controller]]
 
 ~ an entity that can cryptographically prove the control authority over an AID and make changes on the associated KEL. A controller of a multi-sig AID may consist of multiple controlling entities.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/61
-:::
-
 [[def: Witness]]
 
 ~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex [Witness](#witness).
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/62
-:::
 
 [[def: Watcher]]
 
@@ -263,61 +235,31 @@ https://github.com/trustoverip/tswg-keri-specification/issues/62
 
 [[def: Key state notice]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/64
-:::
+~ a data structure representing the current key state of a given [[ref: AID]]
 
 [[def: Backer]]
 
 ~ an alternative to a traditional KERI based [[ref: witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/65
-:::
-
 [[def: Configuration traits, Modes]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/66
-:::
+~ a list of specially defined strings representing a configuration of a KEL. See (Configuration traits field)[#configuration-traits-field].
 
 [[def: Seal]]
 
 ~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See annex (Seal)[#seal].
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/67
-:::
-
 [[def: Anchors]]
 
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/68
-:::
+~ data in the anchoring KEL event, for example the `{i, s, d}` dict that points to an approved delegation event.
 
 [[def: Current threshold]]
 
 ~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/69
-:::
-
 [[def: Next threshold]]
 
 ~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
-
-~ todo
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/70
-:::
 
 [[def: Dead-Attack]]
 
@@ -450,11 +392,6 @@ An important innovation of KERI is that it solves the key Rotation problem of PK
 ### Qualified Cryptographic Primitives
 
 A Cryptographic primitive is a serialization of a value associated with a cryptographic operation, including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[ref: CESR]].  A property of CESR is that all cryptographic primitives expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/44
-:::
-
 
 ### CESR Encoding
 
@@ -589,10 +526,6 @@ The primary field labels are compact in that they use only one or two characters
 
 The top-level fields of each message type shall appear in a specific order. All top-level fields are required. These are defined for each message type below.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/20
-:::
-
 ##### Version string field
 
 The version string, `v`, field shall be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[ref: CBOR]] [[ref: RFC8949]] [[ref: MGPK]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream may use a different serialization type. The format for the version string field value is defined in the CESR specification [[ref: CESR]].
@@ -662,7 +595,6 @@ In the simple case, given a threshold value `M` together with a total of `N` val
 
 In the complex case, the field value is a list of weights that are strict decimal-encoded rational fractions. Fractionally weight thresholds are best suited for Partial, Reserve, or Custodial rotation applications. The exact syntax and satisfaction properties of fractionally weighted threshold values are described below in the section on Partial, Reserve, and Custodial rotations.
 
-
 ##### Key list field
 
 The Key, `k` field value is a list of strings that are each a fully qualified public key. These provide the current signing keys for the AID associated with a KEL. The Key, `k` field value shall not be empty.
@@ -714,17 +646,11 @@ The No Registrar Backer, `NRB` config trait enables the Controller to protect it
 
 The Registrar Backer, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event must also include Registrar Backer Seal for each registrar backer in the list.  A Validator shall invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
 
-
 ##### Seal list field
 
 The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seal Section below.
 
-
 ### Seals
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/21
-:::
 
 The dictionary definition of the seal is "evidence of authenticity". Seals make a verifiable, nonrepudiable commitment to an external serialized data item without disclosing the item and also enable that commitment to the external data to be bound to the key state of a KEL at the location of the seal. This provides evidence of authenticity while maintaining confidentiality. This also enables the validity of the commitment to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions. Seals enable authenticatable transactions that happen externally to the KEL.
 
@@ -830,14 +756,6 @@ The convention for field ordering is to put the fields that are common to all Me
 
 The top-level fields of an Inception, `icp`, event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/42
-:::
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/39
-:::
-
 Inception event example:
 
 ```json
@@ -879,11 +797,6 @@ Inception event example:
 
 The top-level fields of a Rotation, `rot` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Rotation event example:
 
 ```json
@@ -920,12 +833,7 @@ Rotation event example:
 
 #### Interaction Event Message Body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 The top-level fields of an Interaction, `ixn` event message body shall appear in the following order: `[ v, t, d, i, s, p, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
-
 
 ```json
 {
@@ -950,11 +858,6 @@ The top-level fields of an Interaction, `ixn` event message body shall appear in
 #### Delegated Inception Event Message Body
 
 The top-level fields of a Delegated Inception, `dip` event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes. 
-
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 ```json
 {
@@ -997,11 +900,6 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 The top-level fields of a Delegated Rotation, `drt` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes . Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 ```json
 {
   "v": "KERICAAJSONAACd_",
@@ -1027,7 +925,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
       "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
     ],
   "bt": "1",
-  "ba"  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
+  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
   "c":[],
   "a":[]
@@ -1046,10 +944,6 @@ The SAID, `d` field value is the SAID of a key event from a KEL, i.e., the key e
 The Identifier AID, `i` field value is the Controller AID of the KEL for the key event being receipted. 
 
 The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 Receipt example:
 
@@ -1128,15 +1022,7 @@ The Attribute, `a` field value is a field map (block). Its fields provide the at
 
 The top-level fields of a Query, `qry` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Example Query Message
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 ```json
 {
@@ -1160,15 +1046,6 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
 
 The top-level fields of a Reply, `rpy` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 Reply message example:
 
 ```json
@@ -1189,10 +1066,6 @@ Reply message example:
 ```
 
 #### Prod Message Body
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 The top-level fields of a Prod, `pro` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
 
@@ -1220,10 +1093,6 @@ Prod message example:
 
 The top-level fields of a Reply, `bar` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
 
 Bare message example:
 
@@ -1270,10 +1139,6 @@ Exchange transaction inception message example:
 
 #### Exchange Message Body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
 Exchange message example:
@@ -1300,7 +1165,7 @@ Exchange message example:
 
 #### Indexed Signatures
 
-Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached {{(see CESR spec)}}. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
+Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[ref: CESR]]. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
 
 There are two types of attached indexed signatures: controller-indexed and witnessed-indexed. Other information may be required with the attachment the type the type of event to which the signature is attached to which AID the indexed signature belongs.
 
@@ -1322,11 +1187,11 @@ A set of witness-indexed signatures on an interaction, inception, or rotation (d
 
 Events that have a non-empty set of attached signatures which set does not satisfy the required thresholds may escrow the event while waiting for other signatures to arrive either as attachments to the same version of the event or to a receipt of that event (see next section). A Validator that receives a key event or non-key-event message that does not have attached at least one verifiable Controller signature shall drop that message (i.e., not escrow or otherwise accept it). This protects the Validator from a DDoS attack with spurious unsigned messages.
 
-Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures {{see CESR Specification}}. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
+Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures [[ref: CESR]]. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
 
 #### Non-indexed signatures
 
-CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. {{see CESR Specification}}
+CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. [[ref: CESR]]
 
 #### Endorsements
 
@@ -1334,7 +1199,7 @@ Other entities, as identified by their AIDs, may wish to attach signatures on ke
 
 #### Sealing
 
-Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD{{see CESR specification}}. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
+Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD [[ref: CESR]]. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
 
 One primary use case for sealing in KERI is delegated AIDs. The Delegator (AID) approves (endorses) the associated delegation of a delegated event in the Delegatee's KEL by sealing the SAID of that delegated event in the Delegator's KEL. Because the Delegator signs the sealing event, the presence of the delegated event's SAID (cryptographic digest) in the Delegator's KEL is equivalent cryptographically to a signed endorsement by the Delegator of the delegated event itself but with the added advantage that the validity of that delegation persists in spite of changes to the key state of the Delegator.  A validator need only receive an attached reference to the delegating event that includes the seal in order to look up the seal and verify its presence. CESR provides codes for attached event seal references as well as codes for event seals.
 
@@ -1344,9 +1209,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. {{see CESR specification}}
-
-
+Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[ref: CESR]]
 
 ## KERI key management
 
@@ -1424,7 +1287,7 @@ Each Establishment event involves two sets of keys that each play a role that to
 
 In addition, each Establishment event designates two threshold expressions, one for each set of keypairs (current and next). The current threshold determines the needed satisficing subset of signatures from the associated current set of keypairs for signing authority to be considered valid. The next threshold determines the needed satisficing subset of signatures from the associated next set of hidden keypairs for rotation authority to be considered valid. The simplest type of threshold expression for either threshold is an integer that is no greater than nor no less than the number of members in the set. An integer threshold acts as an `M of N` threshold where `M` is the threshold and `N` is the total number of keypairs represented by the public keys in the key list. If any set of `M` of the `N` private keys belonging to the public keys in the key list verifiably signs the event, then the threshold is satisfied by the Controller exercising its control authority role (signing or rotating) associated with the given key list and threshold.
 
-To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs), a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
+To clarify, each Establishment event must include a list (ordered) of the qualified public keys from each of the current (initial) set of keypairs, a threshold for the current set, a list (ordered) of the qualified cryptographic digests of the qualified public keys from the next set of keypairs, and a threshold for the next set. Each event must also include the AID itself as either a qualified public key or a qualified digest of the Inception event.
 
 Each Non-establishment event must be signed by a threshold-satisficing subset of private keys from the current set of keypairs from the most recent Establishment event. The following sections detail the requirements for a valid set of signatures for each type of Establishment event.
 
@@ -1445,10 +1308,6 @@ When the AID is not self-addressing, i.e.., the `i` field derivation code is not
 
 Inception event message body
 
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/43
-:::
-
 ```json
 {
   "v": "KERI10JSON0001ac_",
@@ -1463,7 +1322,7 @@ https://github.com/trustoverip/tswg-keri-specification/issues/43
       "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
       "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
     ],
-  "nt": "3",  / 3 of 5
+  "nt": "3",  // 3 of 5
   "n":
     [
       "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
@@ -1643,8 +1502,6 @@ To reiterate, because the delegating event seal includes a digest of the full de
 
 A common use case of delegation would be to delegate signing authority to a new identifier prefix. The signing authority may be exercised by a sequence of revokable signing keys distinct from the keys used for the delegating identifier. This enables horizontal scalability of signing operations. The other major benefit of a cooperative delegation is that any exploiter that merely compromises only the delegate’s authoritative keys may not capture the control authority of the delegate. A successful exploiter must also compromise the delegator’s authoritative keys. Any exploit of the Delegatee is recoverable by the delegator. Conversely, merely compromising the delegator’s signing keys may not enable a delegated rotation without also compromising the Delegatee's pre-rotated keys. Both sets of keys must be compromised simultaneously. This joint compromise requirement is a distinctive security feature of cooperative delegation. Likewise, as explained later, this cooperative feature also enables recovery of a joint compromise of a delegation at any set of delegation levels by a recovery at the next higher delegation level.
 
-
-
 ### Security Properties of Pre-rotation
 
 For many exploits, the likelihood of success is a function of exposure to continued monitoring or probing. Narrowly restricting the exposure opportunities for exploitation in terms of time, place, and method, especially if the time and place happen only once, makes exploitation extremely difficult. The exploiter has to either predict the one-time and place of that exposure or has to have continuous universal monitoring of all exposures. By declaring the very first pre-rotation in the inception event, the window for its exploit is as narrow as possible. Likewise, each subsequent rotation event is a one-time and place signing exposure of the former next (pre-rotated) rotation key.
@@ -1659,7 +1516,7 @@ By definition, a Dead-attack on a given establishment event occurs after the Key
 
 ##### Non-establishment Dead-attack
 
-A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an eclipse attack on a validator {{eclispe attack}}. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
+A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
 
 The one exception would be the case where the event's key state has only a single signing key and a single prior pre-rotated key that has been repurposed as the single signing key, which the signing key has been compromised. In this case, the attacker could then attempt an establishment Dead-attack by creating a compromised state rotation event using the stale compromised signing key as a compromised rotation key in order to compromise the immediately prior establishment event. The attacker can then rotate in a set of witnesses under its control so that witness compromise is not needed. Notwithstanding this exploit, as the next paragraphs explain, the controller is still protected against an establishment Dead-attack as long as the original event has had time to propagate as First-seen to any component, such as a watcher the Validator chooses to consult.
 
@@ -1671,7 +1528,7 @@ To elaborate, compromising a set of keys after the first use, given best practic
 
 In any case, a validator or other component may still be protected as long as the original version of the event has had time to propagate as First-Seen to that validator or other component (such as witness, watcher, juror, judge) that the validator may access. Therefore, in order to successfully detect duplicity and thereby be protected, any validator needs merely to compare any later copy of the event with any copy of the original event as propagated to any component it may consult. The attacker, therefore, must get ahead of the propagation of a past rotation event. A later surprise quantum attack provides no advantage in this case since the event has already propagated and is already First-seen. The compromised event would be detectable as duplicitous and dropped.
 
-To restate, as already described above, this type of attack looks like what is commonly known as an eclipse attack on a validator {{eclispe attack}}. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
+To restate, as already described above, this type of attack looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
 
 To further elaborate, recall that the original version of the event is the one that first exposes the keys to potential compromise. This may only allow a very narrow window of time for an attacker to get ahead of that event’s propagation. In other words, in order for a Dead-Attack to be successful, it must completely avoid detection as duplicitous. To do this, it must either prevent the validator from gaining access to any original copy of the key event history, i.e., an eclipse attack or, equivalently, must first destroy all extant copies of the original key event history accessible to the validator, i.e., some type of deletion attack. This may be very difficult given a sufficiently widespread watcher network.
 
@@ -1681,8 +1538,9 @@ To summarize, an alternate but verifiable version of a rotation event would be d
 
 As a special case, to even better protect the initial keypairs in an inception event from a Dead-attack, a controller may coincidently create both the inception event and an immediately following rotation event and then emit them together as one. The initial (original incepting) keypairs may be discarded (including removing all traces from signing infrastructure) after creation but before emission of the coincident events, thereby minimizing the exposure to Dead Attack of these initial keypairs.
 
-
+::: issue
 Diagram Dead-Attack Exploit
+:::
 
 #### Live-Attacks
 
@@ -1755,9 +1613,6 @@ The analysis of protection against an attack can be further decomposed into thre
 - A validator may suffer harm due to its acceptance of inconsistent verifiable events produced by a malicious entity (controller and/or third party).
 
 Protection consists of either prevention or mitigation of both of the harm cases. The primary protection mechanisms for the controller include best practice key management techniques for maintaining root control authority, redundant confirmation of events by supporting components, and duplicity detection on the behavior of designated supporting components. The primary protection mechanism for the validator is duplicity detection on the behavior of supporting components.
-
-
-
 
 ### Validation
 
@@ -1855,9 +1710,9 @@ The latest-seen delegated rotation constraint in B. means that any earlier deleg
 
 For example, in the diagram below, a rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events.
 
+::: issue
 Diagram Here
-
-
+:::
 
 
 ### KERI's Algorithm for Witness Agreement (KAWA)
@@ -1879,6 +1734,7 @@ To restate, a controller may designate its witness set in such a way as to provi
 KERI’s KAWA or the algorithm is run by the controller of an identifier in concert with a set of N witnesses designated by the controller to provide as a service the key event history of that identifier via a KERL in a highly available and fault-tolerant manner. One motivation for using key event logs is that the operation of redundant immutable (deletion proof) event logs may be parallelizable and hence highly scalable. A KERL is an immutable event log that is made deletion proof by virtue of it being provided by the set of witnesses of which only a subset of F witnesses may at any time be faulty. In addition to designating the witness set, the controller also designates a threshold number, M, of witnesses for accountability. To clarify, the controller accepts accountability for an event when any subset M of the N witnesses confirms that event. The threshold M indicates the minimum number of confirming witnesses the controller deems sufficient given some number F of potentially faulty witnesses. The objective of the service is to provide a verifiable KERL to any validator on demand. Unlike direct mode where a validator may be viewed as an implicit witness, with indirect mode, a validator may not be one of the N explicitly designated witnesses that provide the service.
 
 #### Witness Designation
+
 The controller designates both the witness tally number and the initial set of witnesses in the inception event configuration. The purpose of the tally is to provide a threshold of accountability for the number of witnesses confirming an event. Subsequent rotation operations may amend the set of witnesses and change the tally number. This enables the controller to replace faulty witnesses and/or change the threshold of accountability of the witness set. When a rotation amends the witnesses it includes the new tally, the set of pruned (removed) witnesses and the set of newly grafted (added) witnesses.
 
 #### Witnessing Policy
@@ -1930,10 +1786,6 @@ Furthermore, any mutual interaction events between a validator and controller ma
 Alternatively, in the case of a complete and total dead exploit, the validator and controller may jointly agree to use some other, more formal mechanism to resolve the priority of divergent KERLs. This may be the median of the astronomical time of the original reception of a receipt by a mutually trusted set of observers. This may be through the use of anchor transactions on a distributed consensus ledger. This later approach would only require minimal use of a distributed consensus ledger in order to resolve the most extreme and unlikely case of total dead exploit.
 
 Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/40
-:::
 
 ### Native CESR Encodings of KERI Messages
 
@@ -2254,17 +2106,15 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 ### Out-Of-Band-Introduction (OOBI)
 
-#### Introduction
+An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or [[ref: SAID]]. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols [[ref: ACDC]] [[ref: OOBI]]. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory [[ref: IPT]][[ref: DOMIP]][[ref: PT]][[ref: FPP]]. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
 
-An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or SAID {{KERI_ID}}{{KERI}}{{SAID_ID}}{{OOBI_ID}}. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI {{KERI_ID}}{{KERI}}. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols {{KERI_ID}}{{ACDC_ID}}{{OOBI_ID}}. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory {{IPT}}{{DOMIP}{{PT}}{{FPP}}. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
-
-Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID {{KERI_ID}}{{KERI}}{{SAID_ID}}{{OOBI_ID}}{{URL}}. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host {{RFC3986}}{{URL}}. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
+Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[ref: URL]]. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[ref: RFC3986]] [[ref: URL]]. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
 
 Moreover, because IP infrastructure is not trusted by KERI, a KERI OOBI by itself is considered insecure with respect to KERI, and any OOBI must, therefore, be later verified using a KERI BADA mechanism. The principal use case for an OOBI is to jump-start or bootstrap the discovery of a service endpoint for a given AID. To reiterate, the OOBI by itself is not sufficient for discovery because the OOBI itself is insecure. The OOBI merely jump-starts or bootstraps the authenticated discovery.
 
 OOBIs enable a KERI implementation to leverage existing IP and DNS infrastructure to introduce KERI AIDs and discover service endpoints, which may then be securely attributed. KERI does not, therefore, need its own dedicated discovery network; OOBIs with URLs will do.
 
-A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID. A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol {{see CESR SAID Annex }} provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
+A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[ref: CESR]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
 
 #### Basic OOBI
 
@@ -2282,7 +2132,7 @@ In concrete tuple form, an OOBI is as follows:
 
 An OOBI itself is not signed or otherwise authenticatable by KERI but may employ some other Out-Of-Band-Authentication (OOBA) mechanism, i.e., non-KERI.
 
-The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix {{QR}}{{DM}}.
+The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix [[ref: QR]] [[ref: DM]].
 
 
 #### OOBI URL (IURL)
@@ -2318,7 +2168,7 @@ To clarify, the minimum information in an OOBI is the pair, `(URL, AID)`. The co
 
 #### Well-Known OOBI
 
-An OOBI may be returned as the result of a ‘GET’ request to an {{IETF RFC-5785}}  well-known URL.
+An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC5785]] well-known URL.
 
 For example,
 
@@ -2374,11 +2224,11 @@ For example,
 ~~~json
 {
   "v": "KERI10JSON00011c_",
-  "t"  "rpy",
+  "t":  "rpy",
   "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
   "dt": "2020-08-22T17:50:12.988921+00:00",
   "r": "/oobi/witness",
-  "a :
+  "a" :
   {
     "urls":
     [
@@ -2407,8 +2257,6 @@ A service endpoint location reply message could also be re-purposed as an OOBI b
   }
 }
 ~~~
-
-
 
 #### Self (Blind) OOBI (SOOBI)
 
@@ -2443,7 +2291,7 @@ An OOBI may be augmented with one or more OOBAs to minimize the likelihood of a 
 
 #### SPED (Speedy Percolated Endpoint Discovery)
 
-All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) {{PT}}{{FPP}}{{IPT}}{{DOMIP}}. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
+All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) [[ref: PT]][[ref: FPP]][[ref: IPT]][[ref: DOMIP]]. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
 
 #### JIT/NTK Discovery
 
@@ -2470,7 +2318,7 @@ KERI follows a "zero-trust" security model for authentic or securely attributabl
 
 To elaborate, there are two primary types of attacks on authentic or authenticatable data-at-rest. The first is a replay attack. The second is a deletion attack. In a replay attack, an adversary keeps a copy of an authentic message or data together with its verifiable signature that has already been created and used by the controller of a KERI AID and then sometime later replays that same message with the signature. A verifier may thereby be fooled into believing that the replay is actually a new message and not a stale message. There are both interactive and non-interactive mitigations to replay attacks. Interactive mitigations use some type of nonce or salt exchanged between Updater and Updatee. The nonce exchange introduces latency, scalability, and synchronization limitations. Non-interactive mitigations require a monotonic ordering mechanism. Typically, monotonic ordering is based on logic rooted in a sequence number or date-time stamp. Because non-interactive mitigations are asynchronous, however, they do not have the latency and scalability limitations of interactive mitigations and are therefore preferred.
 
-The KEL of a KERI AID provides such a monotonic ordering mechanism as it employs both a sequence number and digest chaining. For authentic data directly anchored to or determined by a KEL, the relative KEL location determines the monotonic order. This ordering determination includes TELs , which themselves are monotonically ordered with respect to anchoring seals in the associated KEL {{PTEL_ID}}.  For authentic data not directly anchored or included in a KEL, the relative key state (which is determined by the KEL) may be used in combination with a date-time stamp to ensure monotonic ordering. Finally, for any AID whose key state is fixed, a date-time stamp may be used with appropriate update logic to ensure monotonic ordering. The logic that ensures monotonic ordering is called BADA and is described later in this section.
+The KEL of a KERI AID provides such a monotonic ordering mechanism as it employs both a sequence number and digest chaining. For authentic data directly anchored to or determined by a KEL, the relative KEL location determines the monotonic order. This ordering determination includes TELs , which themselves are monotonically ordered with respect to anchoring seals in the associated KEL [[ref: ACDC]].  For authentic data not directly anchored or included in a KEL, the relative key state (which is determined by the KEL) may be used in combination with a date-time stamp to ensure monotonic ordering. Finally, for any AID whose key state is fixed, a date-time stamp may be used with appropriate update logic to ensure monotonic ordering. The logic that ensures monotonic ordering is called BADA and is described later in this section.
 
 A deletion attack is related to a replay attack. Once erased or deleted, a verifier may not be able to detect a replay attack of the deleted data because it has lost a record of the prior play to compare against. To elaborate, once erased, any stale authenticated data acting as authorization may be replayed without detection. This exposes a problem with the GPDR (General Data Protection Regulation) right-to-erasure, which, if naively implemented as total erasure, exposes the data controller to a replay attack of erased data.
 
@@ -2643,12 +2491,6 @@ To Nullify set the `url` to the empty string `""`.
 
 ~~~
 
-
-::: issue
-https://github.com/trustoverip/tswg-keri-specification/issues/34
-:::
-
-
 [//]: # (\newpage)
 
 [//]: # (\makebibliography)
@@ -2716,6 +2558,10 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 [[def: HCR]]
 
 ~ https://en.wikipedia.org/wiki/Collision_resistance
+
+[[def: IPT, Invasion Percolation]]
+
+~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
 
 [[def: ITPS]]
 
@@ -2927,5 +2773,73 @@ https://github.com/trustoverip/tswg-keri-specification/issues/34
 
 [[def: DPKI]]
 ~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
+
+[[def: Eclipse Attack]]
+
+~ https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin 
+
+[[def: RFC3986, Uniform Resource Identifier (URI): Generic Syntax]]
+
+~ https://datatracker.ietf.org/doc/html/rfc3986
+
+[[def: PT, Percolation Theory]]
+
+~ https://en.wikipedia.org/wiki/Percolation_theory
+
+[[def: FPP, First Passage Percolation]]
+
+~ https://en.wikipedia.org/wiki/First_passage_percolation
+
+[[def: IPT, Invasion Percolation]]
+
+~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+
+[[def: DOMIP, Dynamic Opinion Model and Invasion Percolation]]
+
+~ https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.103.018701
+
+[[def: PTEL_ID, IETF PTEL (Public Transaction Event Log) Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-ptel
+
+[[def: Proof_ID, IETF CESR-Proof Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-cesr-proof
+
+[[def: IPEX_ID, IPEX (Issuance and Presentation EXchange) Internet Draft]]
+
+~ https://github.com/WebOfTrust/keripy/blob/master/ref/Peer2PeerCredentials.md
+
+[[def: DIDK_ID, IETF DID-KERI Internet Draft]]
+
+~ https://github.com/WebOfTrust/ietf-did-keri
+
+[[def: JSON, JavaScript Object Notation Delimeters]]
+
+~ https://www.json.org/json-en.html
+
+[[def: RFC8259, JSON (JavaScript Object Notation)]]
+
+~ https://datatracker.ietf.org/doc/html/rfc8259
+
+[[def: RFC4627, The application/json Media Type for JavaScript Object Notation (JSON)]]
+
+~ https://datatracker.ietf.org/doc/rfc4627/
+
+[[def: URL, URL]]
+
+~ https://en.wikipedia.org/wiki/URL
+
+[[def: QR, QR Code]]
+
+~ https://en.wikipedia.org/wiki/QR_code
+
+[[def: DM, Data Matrix]]
+
+~ https://en.wikipedia.org/wiki/Data_Matrix
+
+[[def: RTE, GDPR Right to Erasure]]
+
+~ https://gdpr-info.eu/art-17-gdpr/
 
 [[spec]]
