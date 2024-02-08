@@ -55,6 +55,7 @@
     "merge-stream": "2.0.0",
     "pkg-dir": "4.2.0",
     "prismjs": ">=1.24.0",
+    "spec-up": "^0.10.6",
     "yargs": "16.2.0"
   }
 }
