@@ -13,6 +13,8 @@ Key Event Receipt Infrastructure (KERI)
 
 **Editors:**
 
+- [Kevin Griffin](https://github.com/m00sey), [GLEIF](https://gleif.org/)
+
 **Contributors:**
 
 **Participate:**
