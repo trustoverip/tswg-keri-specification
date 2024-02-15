@@ -543,12 +543,15 @@ The message types in KERI are detailed in the table below:
 
 | Type | Title | Class| Description |
 |---|---|---|
+|     |  **Key Event Messages** | |
 |`icp`| Inception | Establishment Key Event | Incepts an AID and initializes its keystate |
 |`rot`| Rotation | Establishment Key Event | Rotates the AID's key state |
 |`ixn`| Interaction | Non-Establishment Key Event | Seals interaction data to the current key state|
 |`dip`| Delegated Inception | Establishment Event | Incepts a Delegated AID and initializes its keystate  |
 |`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
+|     |  **Receipt Messages** | |
 |`rct`| Receipt | Receipt Message | Associates a proof such as signature or seal to a key event |
+|     |  **Other Messages** | |
 |`qry`| Query | Other Message | Query information associated with an AID |
 |`rpy`| Reply | Other Message | Reply with information associated with an AID either solicited by Query or unsolicited |
 |`pro`| Prod | Other Message | Prod (request) information associated with a Seal |
@@ -748,6 +751,8 @@ Attached bare, `bar` message.
 
 ### Key event messages
 
+The Key Event Message types shall be as follows `[icp, rot, ixn, dip, drt]`. 
+
 The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator may drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
 
 #### Inception Event Message Body
@@ -935,6 +940,8 @@ The top-level fields of a Delegated Rotation, `drt` event message body shall app
 
 #### Receipt Message Body
 
+The Receipt Message types shall be as follows `[rct]`. 
+
 The top-level fields of a Receipt, `rct` message body shall appear in the following order: `[ v, t, d, i, s]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The Signatures or Seals are on the key event indicated by the top-level fields of the Receipt, not the Receipt message body itself.
 
 The SAID, `d` field value is the SAID of a key event from a KEL, i.e., the key event being receipted, not the receipt message itself. 
@@ -956,6 +963,8 @@ Receipt example:
 ```
 
 ### Other Messages
+
+The Other Message types shall be as follows `[qry, rpy, pro, bar, xip, exn]`. 
 
 #### Reserved field labels in other messages
 
@@ -979,7 +988,7 @@ Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field va
 
 ##### AID fields
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers to the Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Other Message, it refers to the Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
 
 ##### Prior event SAID field
 
@@ -987,7 +996,7 @@ The prior, `p` field is the SAID of the prior exchange message in a transaction.
 
 ##### Exchange identifier field
 
-The Exchange Identifier SAID, `x` field value shall be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message shall be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each of the subsequent exchange messages in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each of the subsequent exchange messages verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, then the Exchange Identifier, `x` field value, shall be the empty string. 
+The Exchange Identifier SAID, `x` field value shall be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message shall be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each subsequent exchange message in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each subsequent exchange message verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, the Exchange Identifier, `x` field value, shall be the empty string. 
 
 
 ##### Datetime, `dt` field
@@ -1026,7 +1035,8 @@ Example Query Message
 {
   "v": "KERICAAJSONAACd_",
   "t": "qry",
-  "d" : "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "d" : "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
+  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
   "dt": "2020-08-22T17:50:12.988921+00:00",
   "r": "/logs",
   "rr": "/log/processor",
@@ -1050,7 +1060,8 @@ Reply message example:
 {
   "v": "KERI10JSON00011c_",
   "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
+  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
   "dt": "2020-08-22T17:50:12.988921+00:00",
   "r":  "/logs/processor",
   "a" :
@@ -1073,7 +1084,9 @@ Prod message example:
 {
   "v": "KERICAAJSONAACd_",
   "t": "pro",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
+  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
   "r": "/sealed/data",
   "rr": "/process/sealed/data",
   "q":
@@ -1098,7 +1111,9 @@ Bare message example:
 {
   "v": "KERICAAJSONAACd_",
   "t": "bre",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
+  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
+  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
+  "dt": "2020-08-22T17:50:12.988921+00:00",
   "r": "/process/sealed/data",
   "a":
   {
