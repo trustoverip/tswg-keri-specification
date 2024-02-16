@@ -1553,9 +1553,9 @@ To summarize, an alternate but verifiable version of a rotation event would be d
 
 As a special case, to even better protect the initial keypairs in an inception event from a Dead-attack, a controller may coincidently create both the inception event and an immediately following rotation event and then emit them together as one. The initial (original incepting) keypairs may be discarded (including removing all traces from signing infrastructure) after creation but before emission of the coincident events, thereby minimizing the exposure to Dead Attack of these initial keypairs.
 
-::: issue
-Diagram Dead-Attack Exploit
-:::
+
+![Establishment Dead-Attack](assets/ExploitDead.png)
+
 
 #### Live-Attacks
 
@@ -1574,6 +1574,9 @@ Notwithstanding any mitigations, assuming a successful compromise of the pre-rot
 To elaborate, a successful live exploit must compromise the unexposed next set of private keys from the public-keys declared in the latest rotation. Assuming the private keys remain secret, a compromise must come either by brute force inversion of the one-way digest function protecting the public keys and then by brute force inversion of the one-way scalar multiplication function that generates the public key from the private keys or by a side-channel attack at the first-use of the private keys to sign the rotation event. By construction, no earlier signing side-channel attack is possible. This makes successful Live-attack exploits from such side-channel attacks extremely difficult.
 
 Given the cryptographic strength of the key generation algorithm, a successful brute force live attack may be computationally infeasible.  Hiding the unexposed next (pre-rotated) public keys behind cryptographic strength digests provides an additional layer of protection not merely from pre-quantum brute force attacks but also from surprise post-quantum brute force attacks. In this case, a brute force attack would first have to invert the post-quantum resistant one-way hashing function used to create the digest before it may attempt to invert the one-way public key generation algorithm. Moreover, as computation capability increases, the controller can merely rotate to correspondingly strong quantum-safe cryptographic one-way functions for key generation. This makes brute force live attack computationally infeasible indefinitely. For more detail see the Annex on Cryptographic Strength.
+
+![Establishment Live-Attack](assets/ExploitLive.png)
+
 
 #### Delegated Event Live-attacks
 
@@ -1725,9 +1728,6 @@ The latest-seen delegated rotation constraint in B. means that any earlier deleg
 
 For example, in the diagram below, a rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events.
 
-::: issue
-Diagram Here
-:::
 
 ### KERI's Algorithm for Witness Agreement (KAWA)
 
