@@ -66,9 +66,9 @@ https://github.com/trustoverip/tswg-keri-specification/issues/47
 
 The original design of the Internet Protocol (IP) has no security layer(s) [[spec: RFC0791]], providing no built-in mechanism for secure attribution to the source of an IP packet. Anyone, including any intermediary, can forge an IP packet, and a recipient may not be able to ascertain when or if the packet was sent by an imposter. This means that secure attribution mechanisms for the Internet must be overlaid. This documents presents an identifier system security overlay, called the Key Event Receipt Infrastructure (KERI) protocol, that serves as a trust spanning layer for the Internet. This overlay includes a primary root-of-trust in a Self-certifying identifier (SCID) that provides a formalism for Autonomic identifiers (AIDs), Autonomic namespaces (ANs), and the basis for a universal Autonomic Identity System (AIS).
 
-The KERI protocol provides verifiable authorship (authenticity) of any message or data item via secure cryptographically verifiable attribution to a SCID as a primary root-of-trust [[ref: SCID]] [[ref: UIT]] [[ref: SCPK]] [[ref: SFS]] [[ref: SCPN]] [[ref: SCURL]] [[ref: PKI]]. This root-of-trust is cryptographic, not administrative, because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures. This cryptographic root-of-trust enables end-verifiability where every data item may be cryptographically attributable to its source by any recipient verifier without reliance on any infrastructure not under the verifier's ultimate control. Therefore, KERI has no security dependency on any other infrastructure and does not rely on security guarantees that may or may not be provided by the traditional internet infrastructure. This makes intervening operational infrastructure replaceable, enabling ambient verifiability (Verifiable by anyone, anywhere, at any time). 
+The KERI protocol provides verifiable authorship (authenticity) of any message or data item via secure cryptographically verifiable attribution to a SCID as a primary root-of-trust [[ref: SCID]] [[4]] [[16]] [[18]] [[19]] [[17]] [[15]]. This root-of-trust is cryptographic, not administrative, because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures. This cryptographic root-of-trust enables end-verifiability where every data item may be cryptographically attributable to its source by any recipient verifier without reliance on any infrastructure not under the verifier's ultimate control. Therefore, KERI has no security dependency on any other infrastructure and does not rely on security guarantees that may or may not be provided by the traditional internet infrastructure. This makes intervening operational infrastructure replaceable, enabling ambient verifiability (Verifiable by anyone, anywhere, at any time). 
 
-A SCID is strongly bound at inception to a cryptographic keypair that is self-contained unless control over the SCID needs to be transferred to a new keypair. The KERI protocol provides end-verifiable control provenance over a variant of SCID, called an Autonomic identifier (AID), via signed transfer statements in an append-only chained Key event log (KEL). The key management operation for tansferring control over an AID is implemented via a novel key [pre-rotation](#key-rotationpre-rotation) scheme [[ref: DAD]]. With pre-rotation, a control over an AID can be re-established by rotating to a one-time use set of unexposed but pre-committed rotation keypairs. This approach fixes the foundational flaw in traditional Public key infrastructure (PKI), which is insecure key rotation. KERI enables decentralized public key infrastructure (DPKI) that is more secure and more portable. KERI may be viewed as a viable reboot of the Web-of-Trust concept for DPKI because KERI fixes the hard problem of DPKI which is key rotation. 
+A SCID is strongly bound at inception to a cryptographic keypair that is self-contained unless control over the SCID needs to be transferred to a new keypair. The KERI protocol provides end-verifiable control provenance over a variant of SCID, called an Autonomic identifier (AID), via signed transfer statements in an append-only chained Key event log (KEL). The key management operation for tansferring control over an AID is implemented via a novel key [pre-rotation](#key-rotationpre-rotation) scheme [[6]]. With pre-rotation, a control over an AID can be re-established by rotating to a one-time use set of unexposed but pre-committed rotation keypairs. This approach fixes the foundational flaw in traditional Public key infrastructure (PKI), which is insecure key rotation. KERI enables decentralized public key infrastructure (DPKI) that is more secure and more portable. KERI may be viewed as a viable reboot of the Web-of-Trust concept for DPKI because KERI fixes the hard problem of DPKI which is key rotation. 
 
 Two primary trust modalities motivated the design of the KERI protocol, namely a direct (one-to-one) mode and an indirect (one-to-any) mode. In the direct mode, two entities establish trust over AIDs via a direct exchange of their counterparts' verified signatures. In the indirect mode, trust over AIDs depends on witnessed Key event receipt logs (KERLs) as a secondary root-of-trust for validating key events. The security and accountability guarantees of indirect mode are provided by KERI’s Algorithm for Witness Agreement (KAWA) among a set of key event Witnesses. The KAWA approach may be much more performant and scalable than more complex approaches that depend on a total ordering distributed consensus ledger. Nevertheless, KERI may employ a distributed consensus ledger when other considerations make it the best choice. 
 
@@ -104,7 +104,8 @@ ISO and IEC maintain terminological databases for use in standardization at the 
  - IEC Electropedia: available at <http://www.electropedia.org/>
 
 [[def: Primitive]]:
-~ a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR [[ref: CESR-ID]].
+
+~ a serialization of a unitary value.  All Primitives in KERI must be expressed in CESR [[1]].
 
 [[def: Cryptographic Primitive]]
 
@@ -112,9 +113,9 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Cryptonym]]
 
-~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [[ref: OWF]] [[ref: COWF]] [[ref: TMCrypto]] [[ref: QCHC]]. A Cryptonym is a type of Primitive. Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
+~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [[13]] [[14]] [[12]] [[11]]. A Cryptonym is a type of Primitive. Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
 
-[[def: Self-certifying identifier (SCID)]]
+[[def: Self-certifying identifier, SCID]]
 
 ~ a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric non-repudiable signing keypair, `(public, private)`.
 
@@ -154,7 +155,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a Non-establishment event that anchors external data to the Key state as established by the most recent prior Establishment event.
 
-[[def: Key event log (KEL)]]
+[[def: Key event log, KEL]]
 
 ~ a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.
 
@@ -194,31 +195,31 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ message whose body references a Key event and whose attachments must include one or more signatures on that Key event.
 
-[[def: Self-addressing identifiers (SAIDs)]]
+[[def: Self-addressing identifiers, SAID]]
 
 ~ an identifier that is content-addressable and self-referential. A SAID is uniquely and cryptographically bound to a serialization of data that includes the SAID as a component in that serialization [[ref: SAID]].
 
-[[def: SAD (Self-Addressed Data)]]
+[[def: Self-addressed data, SAD]]
 
 ~ a representation of data content from which a SAID is derived. The SAID is both cryptographically bound to (content-addressable) and encapsulated by (self-referential) its SAD [[ref: SAID]].
 
-[[def: Autonomic namespace (AN)]]
+[[def: Autonomic namespace, AN]]
 
 ~ a namespace that is self-certifying and hence self-administrating. An AN has a self-certifying prefix that provides cryptographic verification of root control authority over its namespace. All derived AIDs in the same AN share the same root-of-trust, source-of-truth, and locus-of-control (RSL). The governance of the namespace is therefore unified into one entity, that is, the controller who is/holds the root authority over the namespace.
 
-[[def: Autonomic identity system (AIS)]]
+[[def: Autonomic identity system, AIS]]
 
 ~ an identity system that includes a primary root-of-trust in self-certifying identifiers that are strongly bound at issuance to a cryptographic signing (public, private) key pair. An AIS enables any entity to establish control over an AN in an independent, interoperable, and portable way.
 
-[[def: Decentralized key management infrastructure (DKMI)]]
+[[def: Decentralized key management infrastructure, DKMI]]
 
 ~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier [[ref: DPKI]].
 
 [[def: Key event receipt log, KERL]]
 
-~ a key event receipt log is a [[ref: KEL]] that also includes all the consistent key event receipt [[ref: message]]s created by the associated set of witnesses. See annex [Key event receipt log](#key-event-receipt-log)
+~ a key event receipt log is a [[ref: KEL]] that also includes all the consistent key event receipt [[ref: Message]]s created by the associated set of witnesses. See annex [Key event receipt log](#key-event-receipt-log)
 
-[[def: KERI’s Algorithm for Witness Agreement, KAWA, KA2CE]]
+[[def: KERI’s Algorithm for Witness Agreement, KAWA]]
 
 ~ a type of Byzantine Fault Tolerant (BFT) algorithm
 
@@ -234,13 +235,9 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a watcher is an _entity_ or _component_ that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the _controller_ of the identifier as one of its witnesses. See annex [watcher](#watcher)
 
-[[def: Key state notice]]
-
-~ a data structure representing the current key state of a given [[ref: AID]]
-
 [[def: Backer]]
 
-~ an alternative to a traditional KERI based [[ref: witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
+~ an alternative to a traditional KERI based [[ref: Witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
 
 [[def: Configuration traits, Modes]]
 
@@ -250,17 +247,13 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See annex (Seal)[#seal].
 
-[[def: Anchors]]
-
-~ data in the anchoring KEL event, for example the `{i, s, d}` dict that points to an approved delegation event.
-
 [[def: Current threshold]]
 
-~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
+~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [[ref: Message]] for the [[ref: Message]] to be considered fully signed.
 
 [[def: Next threshold]]
 
-~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: message]] for the [[ref: message]] to be considered fully signed.
+~ represents the number or fractional weights of signatures from the given set of next keys required to be attached to a [[ref: Message]] for the [[ref: Message]] to be considered fully signed.
 
 [[def: Dead-Attack]]
 
@@ -272,11 +265,19 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: First-Seen]]
 
-~ refers to the first instance of a [[ref: message]] recieved by any [[ref: witness]] or [[ref: watcher]]. The first-seen event is always seen, and can never be unseen. It forms the basis for [[ref: duplicity detection]] in KERI based systems.
+~ refers to the first instance of a [[ref: Message]] recieved by any [[ref: Witness]] or [[ref: Watcher]]. The first-seen event is always seen, and can never be unseen. It forms the basis for [[ref: Duplicity]] detection in KERI based systems.
 
 [[def: Key-State]]
 
 ~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
+
+[[def: Authentic Chained Data Container, ACDC]]
+
+~ a directed acyclic graph with properties to provide a verifiable chain of proof-of-authorship. See the full [specification](https://trustoverip.github.io/tswg-acdc-specification/)
+
+[[def: Concise Binary Object Representation, CBOR]]
+
+~ 
 
 [//]: # (KERI foundational overview {#sec:content})
 
@@ -301,9 +302,6 @@ Key event validation includes everything needed to validate events, including st
 
 
 ![Controller Application with Agent](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/ControllerAppAgentSplitFunctions.png?raw=true)
-
-
-
 
 #### Direct exchange
 
@@ -331,15 +329,18 @@ Watchers may implement different additional features. A watcher could choose to 
 
 Ultimately, a validator decides whether or not to trust the key state of a given AID based on the evidence or lack thereof of duplicity. A given validator may choose to use Judge and Jury services to aid it in deciding whether or not to trust the key state of a given AID. An honest validator shall trust when there is no evidence of duplicity and shall not trust when there is any evidence of duplicity unless and until the duplicity has been reconciled. KERI provides mechanisms for duplicity reconciliation. These include key compromise recovery mechanisms.
 
+<<<<<<< HEAD
 
 ![Indirect Exchange](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/ControllerAppAgentWitnessWatcherIndirectExchange.png?raw=true)
+=======
+![Indirect Exchange](../images/ControllerAppAgentWitnessWatcherIndirectExchange.png)
+>>>>>>> 3c2c1d1 (clean up biblio)
 
 #### Ecosystem
 
 The open standard KERI protocol fosters an open competitive ecosystem of service providers for the various infrastructure components such as controller applications (wallets, key chains, and agents), witnesses, and watchers (Judges and Juries). Because there is no requirement for shared governance over any of the infrastructure components, each controller and each validator are free to choose their own service providers based on price, performance, ease of usability, etc. This enables competition across the full spectrum of infrastructure components. Thus, existing cloud and web infrastructure can be leveraged at comparable performance and price levels.  KERI, by design, fosters the development of a global watcher network that will eventually result in universal duplicity detectability and ambient verifiability with the goal of providing a universal DKMI in support of a trust-spanning layer for the internet.
 
 ![KERI Ecosystem](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/Ecosystem.png?raw=true)
-
 
 ### KERI’s identifier system security overlay
 
@@ -349,23 +350,29 @@ An authenticatable (Verifiable) internet message (packet) or data item includes 
 
 ![Authenticatable Message](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/AuthenticatableMessage.png?raw=true)
 
-
-
 ### Overcoming existing security overlay flaws
 
 KERI overcomes two major system security overlay flaws. The first major flaw is that the mapping between the identifier (domain name) and the controlling keypair(s) is merely asserted by a trusted entity e.g., certificate authority (CA) via a certificate. Because the mapping is merely asserted, a Verifier cannot verify cryptographically the mapping between the identifier and the controlling keypair(s) but must trust the operational processes of the trusted entity making that assertion, i.e., the CA who issued and signed the certificate. As is well known, a successful attack upon those operational processes may fool a Verifier into trusting an invalid mapping i.e., the certificate is issued to the wrong keypair(s) albeit with a Verifiable signature from a valid CA. Noteworthy is that the signature on the certificate is not made with the controlling keypairs of the identifier but made with keypairs controlled by the issuer i.e., the CA. The fact that the certificate is signed by the CA means that the mapping itself is not Verifiable but merely that the CA asserted the mapping between keypair(s) and identifier. The certificate merely provides evidence of the authenticity of the assignment of the mapping but not evidence of the veracity of the mapping.
 
-The second major flaw is that when rotating the valid signing keys there is no cryptographically Verifiable way to link the new (rotated in) controlling/signing key(s) to the prior (rotated out) controlling/signing key(s). Key rotation is asserted merely and implicitly by a trusted entity (CA) by issuing a new certificate with new controlling/signing keys.  Key rotation is necessary because over time the controlling keypair(s) of an identifier becomes weak due to exposure when used to sign Messages and must be replaced. An explicit Rotation mechanism first revokes the old keys and then replaces them with new keys. Even a certificate revocation list (CRL) as per [[spec: RFC5280]], with an online status protocol (OCSP) registration as per [[spec: RFC6960]], does not provide a cryptographically Verifiable connection between the old and new keys; This merely is asserted. The lack of a single universal CRL or registry means that multiple potential replacements may be valid. From a cryptographic verifiability perspective, Rotation by assertion with a new certificate that either implicitly or explicitly provides revocation and replacement is essentially the same as starting over by creating a brand-new independent mapping between a given identifier and the controlling keypair(s). This start-over style of Key rotation may well be one of the main reasons that other key assignment methods, such as Pretty Good Privacy (PGP's) web-of-trust failed. Without a universally Verifiable revocation mechanism, any Rotation (revocation and replacement) assertion by some certificate authority, either explicit or implicit, is mutually independent of any other. This lack of universal cryptographic verifiability of a Rotation fosters ambiguity as to the actual valid mapping at any point in time between the identifier and its controlling keypair(s). In other words, for a given identifier, any or all assertions made by some set of CAs may be potentially valid.
+The second major flaw is that when rotating the valid signing keys there is no cryptographically Verifiable way to link the new (rotated in) controlling/signing key(s) to the prior (rotated out) controlling/signing key(s). Key rotation is asserted merely and implicitly by a trusted entity (CA) by issuing a new certificate with new controlling/signing keys.  Key rotation is necessary because over time the controlling keypair(s) of an identifier becomes weak due to exposure when used to sign Messages and must be replaced. An explicit Rotation mechanism first revokes the old keys and then replaces them with new keys. Even a certificate revocation list (CRL) [[20]] as per [[spec: RFC5280]], with an online status protocol (OCSP) registration as per [[spec: RFC6960]], does not provide a cryptographically Verifiable connection between the old and new keys; This merely is asserted. The lack of a single universal CRL or registry means that multiple potential replacements may be valid. From a cryptographic verifiability perspective, Rotation by assertion with a new certificate that either implicitly or explicitly provides revocation and replacement is essentially the same as starting over by creating a brand-new independent mapping between a given identifier and the controlling keypair(s). This start-over style of Key rotation may well be one of the main reasons that other key assignment methods, such as Pretty Good Privacy (PGP's) web-of-trust failed. Without a universally Verifiable revocation mechanism, any Rotation (revocation and replacement) assertion by some certificate authority, either explicit or implicit, is mutually independent of any other. This lack of universal cryptographic verifiability of a Rotation fosters ambiguity as to the actual valid mapping at any point in time between the identifier and its controlling keypair(s). In other words, for a given identifier, any or all assertions made by some set of CAs may be potentially valid.
 
 The KERI protocol fixes both of these flaws using a combination of AIDs, key pre-rotation, and a Verifiable data structure, the KEL, as verifiable proof of Key state and duplicity-evident mechanisms for evaluating and reconciling Key state by Validators. Unlike certificate transparency, KERI enables the detection of Duplicity in the Key state via non-repudiable cryptographic proofs of Duplicity not merely the detection of inconsistency in the Key state that may or may not be duplicitous.
 
 ### End-verifiable
 
+<<<<<<< HEAD
 A data item or statement is end-to-end-verifiable, or end-verifiable for short, when that data item may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control. KERI's end-verifiability is pervasive. It means that everything in KERI or that depends on KERI is also end-verifiable; therefore, KERI has no security dependency on any other infrastructure, including conventional PKI. It also does not rely on security guarantees that may or may not be provided by web or internet infrastructure.  KERI's identifier system-based security overlay for the Internet provides each identifier with a primary root-of-trust based on self-certifying, self-administering, self-governing AIDS and ANs that provide the trust basis for a universal AIS [[ref: UIT]] [[ref: SCPK]] [[ref: SFS]] [[ref: SCPN]] [[ref: SCURL]]. This root-of-trust is cryptographic, not administrative because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures alone.
 
 Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
 
 ![End-to-end Verifiability](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/End2EndNetwork.png?raw=true)
+=======
+A data item or statement is end-to-end-verifiable, or end-verifiable for short, when that data item may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control. KERI's end-verifiability is pervasive. It means that everything in KERI or that depends on KERI is also end-verifiable; therefore, KERI has no security dependency on any other infrastructure, including conventional PKI. It also does not rely on security guarantees that may or may not be provided by web or internet infrastructure.  KERI's identifier system-based security overlay for the Internet provides each identifier with a primary root-of-trust based on self-certifying, self-administering, self-governing AIDS and ANs that provide the trust basis for a universal AIS[[4]] [[16]] [[18]] [[19]] [[17]]. This root-of-trust is cryptographic, not administrative because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures alone.
+
+Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
+
+![End-to-end Verifiability](../assets/End2EndNetwork.png)
+>>>>>>> 3c2c1d1 (clean up biblio)
 
 End verifiability means that the end destination can verify the source of the data without having to trust the middle. This gives rise to the concept called ambient verifiability, where the source of any data can be verified anywhere, at any time, by anybody. Ambient verifiability removes any need to trust any of the components in the middle, i.e., the whole internet.
 
@@ -389,13 +396,12 @@ An important innovation of KERI is that it solves the key Rotation problem of PK
 
 ### Qualified Cryptographic Primitives
 
-A Cryptographic primitive is a serialization of a value associated with a cryptographic operation, including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[ref: CESR]].  A property of CESR is that all cryptographic primitives expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
+A Cryptographic primitive is a serialization of a value associated with a cryptographic operation, including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature. Furthermore, a Qualified cryptographic primitive includes a prepended derivation code (as a proem) that indicates the cryptographic algorithm or suite used for that derivation. This simplifies and compactifies the essential information needed to use that Cryptographic primitive.  All Cryptographic primitives in KERI must be expressed using the CESR (Compact Event Streaming Representation) protocol [[1]].  A property of CESR is that all cryptographic primitives expressed in either its Text or Binary domains are qualified by construction. Indeed, cryptographic primitive qualification is an essential property of CESR which makes a uniquely beneficial encoding for a cryptographic primitive heavy protocol like KERI.
 ### CESR Encoding
 
-As stated previously, KERI represents all cryptographic primitives with CESR  [[ref: CESR specification]]. CESR supports round-trip lossless conversion between its Text, Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a field or array element string value as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64, which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
+As stated previously, KERI represents all cryptographic primitives with [[1]]. CESR supports round-trip lossless conversion between its Text, Binary, and Raw domain representations and lossless composability between its Text and Binary domain representations. Composability is ensured between any concatenated group of text Primitives and the binary equivalent of that group because all CESR Primitives are aligned on 24-bit boundaries. Both the text and binary domain representations are serializations suitable for transmission over the wire. The Text domain representation is also suitable to be embedded as a field or array element string value as part of a field map serialization such as JSON, CBOR, or MsgPack. The Text domain uses the set of characters from the URL-safe variant of Base64, which in turn is a subset of the ASCII character set. For the sake of readability, all examples in this specification are expressed in CESR's Text domain.
 
 The CESR protocol supports several different types of encoding tables for different types of derivation codes used to qualify primitives. These tables include very compact codes. For example, a 256-bit (32-byte) digest using the BLAKE3 digest algorithm, i.e., Blake3-256, when expressed in Text domain CESR, consists of 44 Base64 characters that begin with the one-character derivation code `E`, such as `EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug`. The equivalent qualified Binary domain representation consists of 33 bytes. Unless otherwise indicated, all Cryptographic primitives used in this specification are qualified Primitives expressed in CESR’s Text domain. This includes serializations that are signed, hashed, or encrypted.
-
 
 ### KERI’s secure bindings
 
@@ -407,7 +413,7 @@ When these bindings are strong, then the overlay is highly invulnerable to attac
 
 The bound triad is created as follows:
 
-::: issue
+::: issue diagram
 https://github.com/trustoverip/tswg-keri-specification/issues/33
 :::
 
@@ -429,7 +435,7 @@ Each Controller in a set of Controllers may prove its contribution to the contro
 
 #### Tetrad bindings
 
-At Inception, the triad of an identifier, a set of keypairs, and a set of Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[ref: KERI-WP]] [[ref: VDS]].  The KEL is not necessary for non-transferable identifiers and do not need to persist control via key Rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL; non-transferable (ephemeral) identifiers do not.
+At Inception, the triad of an identifier, a set of keypairs, and a set of Controllers are strongly bound together. But in order for those bindings to persist after a key Rotation, another mechanism is required. That mechanism is the KEL, a Verifiable data structure [[4]] [[21]].  The KEL is not necessary for non-transferable identifiers and do not need to persist control via key Rotation despite key weakness or compromise. To reiterate, transferable (persistent) identifiers each need a KEL; non-transferable (ephemeral) identifiers do not.
 
 For persistent (transferable) identifiers, this additional mechanism may be bound to the triad to form a tetrad consisting of the KEL, the identifier, the set of keypairs, and the set of Controllers. The first entry in the KEL is called the Inception event, a serialization of the incepting information associated with the previously mentioned identifier.
 
@@ -451,7 +457,7 @@ The essence of the KERI protocol is a strongly bound tetrad of an identifier, se
 
 ### Autonomic Namespaces (ANs)
 
-A namespace groups symbols or identifiers for a set of related objects [[ref: Namespace]]. In an identity system, an identifier can be generalized as belonging to a namespace that provides a systematic way of organizing related identifiers with their resources and attributes.
+A namespace groups symbols or identifiers for a set of related objects [[23]]. In an identity system, an identifier can be generalized as belonging to a namespace that provides a systematic way of organizing related identifiers with their resources and attributes.
 
 To elaborate, a namespace employs some scheme for assigning identifiers to the elements of the namespace. A simple name-spacing scheme uses a prefix or prefixes in a hierarchical fashion to compose identifiers. The following is an example of a namespace scheme for addresses within the USA that uses a hierarchy of prefixes:
 
@@ -514,7 +520,6 @@ A field label may have different values in different contexts but must not have 
 
 Because the order of appearance of fields is enforced in all KERI data structures, whenever a field appears (in a given Message or block in a Message) the message in which a label appears must provide the necessary context to determine the meaning of that field fully and hence the field value type and associated semantics.
 
-
 #### Compact KERI field labels
 
 The primary field labels are compact in that they use only one or two characters. KERI is meant to support resource-constrained applications such as supply chain or IoT (Internet of Things) applications. Compact labels better support resource-constrained applications in general. With compact labels, the over-the-wire verifiable signed serialization consumes a minimum amount of bandwidth. Nevertheless, without loss of generality, a one-to-one normative semantic overlay using more verbose expressive field labels may be applied to the normative compact labels after verification of the over-the-wire serialization. This approach better supports bandwidth and storage constraints on transmission while not precluding any later semantic post-processing. This is a well-known design pattern for resource-constrained applications.
@@ -525,14 +530,13 @@ The top-level fields of each message type shall appear in a specific order. All 
 
 ##### Version string field
 
-The version string, `v`, field shall be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[ref: CBOR]] [[ref: RFC8949]] [[ref: MGPK]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream may use a different serialization type. The format for the version string field value is defined in the CESR specification [[ref: CESR]].
+The version string, `v`, field shall be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser may use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream may use a different serialization type. The format for the version string field value is defined in the CESR specification [[1]].
 
-The protocol field, `PPPP` value in the version string shall be `KERI` for the KERI protocol. The version field, `VVV`, shall encode the current version of the KERI protocol [[ref: CESR]].
-
+The protocol field, `PPPP` value in the version string shall be `KERI` for the KERI protocol. The version field, `VVV`, shall encode the current version of the KERI protocol [[1]].
 
 ##### Legacy version string field format
 
-Compliant KERI version 2.XX implementations shall support the old KERI version 1.x version string format to properly verify message bodies created with 1.x format events. The old version 1.x version string format is defined in the CESR specification [[ref: CESR]]. The protocol field, `PPPP` value in the version string shall be `KERI` for the KERI protocol. The version field, `vv`, shall encode the old version of the KERI protocol [[ref: CESR]].
+Compliant KERI version 2.XX implementations shall support the old KERI version 1.x version string format to properly verify message bodies created with 1.x format events. The old version 1.x version string format is defined in the CESR specification [[1]]. The protocol field, `PPPP` value in the version string shall be `KERI` for the KERI protocol. The version field, `vv`, shall encode the old version of the KERI protocol [[1]].
 
 ##### Message type  field
 
@@ -565,7 +569,7 @@ Some fields in KERI data structures may have a SAID (self-referential content ad
 
 Each SAID provides a stable universal cryptographically verifiable and agile reference to its encapsulating block (serialized field map).
 
-A cryptographic commitment (such as a digital signature or cryptographic digest) on a given digest with sufficient cryptographic strength including collision resistance is equivalent to a commitment to the block from which the given digest was derived. Specifically, a digital signature on a SAID makes a Verifiable cryptographic non-repudiable commitment that is equivalent to a commitment on the full serialization of the associated block from which the SAID was derived. This enables reasoning about KERI data structures in whole or in part via their SAIDS in a fully interoperable, Verifiable, compact, and secure manner. This also supports the well-known bow-tie model of Ricardian Contracts [[ref: RC]]. This includes reasoning about the whole KERI data structure given by its top-level SAID, `d`, field as well as reasoning about any nested or attached data structures using their SAIDS.
+A cryptographic commitment (such as a digital signature or cryptographic digest) on a given digest with sufficient cryptographic strength including collision resistance is equivalent to a commitment to the block from which the given digest was derived. Specifically, a digital signature on a SAID makes a Verifiable cryptographic non-repudiable commitment that is equivalent to a commitment on the full serialization of the associated block from which the SAID was derived. This enables reasoning about KERI data structures in whole or in part via their SAIDS in a fully interoperable, Verifiable, compact, and secure manner. This also supports the well-known bow-tie model of Ricardian Contracts [[22]]. This includes reasoning about the whole KERI data structure given by its top-level SAID, `d`, field as well as reasoning about any nested or attached data structures using their SAIDS.
 
 The SAID, `d` field is the SAID of its enclosing block (field map); when it appears at the top level of the message, it is the SAID of the message itself.
 
@@ -575,7 +579,7 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 
 ##### AID fields
 
-Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[ref: KERI-WP]]. 
+Some fields, such as the `i` and `di` fields, must each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[4]]. 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field may also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement may be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
 The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers Controller AID of the sender of that message. A Controller AID, `i` field may appear in other places in messages. In those cases, its meaning is determined by the context of its appearance.
@@ -1177,7 +1181,11 @@ Exchange message example:
 
 #### Indexed Signatures
 
+<<<<<<< HEAD
 Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[ref: CESR]]. Indexed signatures may be attached to both key event messages and non-key event messages. In this case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
+=======
+Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[1]]. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
+>>>>>>> 3c2c1d1 (clean up biblio)
 
 There are two types of attached indexed signatures: controller-indexed and witnessed-indexed. Other information may be required with the attachment the type the type of event to which the signature is attached to which AID the indexed signature belongs.
 
@@ -1199,11 +1207,11 @@ A set of witness-indexed signatures on an interaction, inception, or rotation (d
 
 Events that have a non-empty set of attached signatures which set does not satisfy the required thresholds may escrow the event while waiting for other signatures to arrive either as attachments to the same version of the event or to a receipt of that event (see next section). A Validator that receives a key event or non-key-event message that does not have attached at least one verifiable Controller signature shall drop that message (i.e., not escrow or otherwise accept it). This protects the Validator from a DDoS attack with spurious unsigned messages.
 
-Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures [[ref: CESR]]. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
+Indexed signatures minimize the space requirements for signatures. The indexed signatures codes are provided in the CESR code table for indexed signatures [[1]]. Given an indexed signature, a Validator looks up the associate public key from the index into the appropriate table.
 
 #### Non-indexed signatures
 
-CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. [[ref: CESR]]
+CESR also supports codes for signatures that are not indexed. In this case, additional information must be attached, such as the associated public key, in order for a validator to verify the signature. This additional information may be in the form of a CESR group defined by a CESR group code. [[1]]
 
 #### Endorsements
 
@@ -1211,7 +1219,7 @@ Other entities, as identified by their AIDs, may wish to attach signatures on ke
 
 #### Sealing
 
-Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD [[ref: CESR]]. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
+Any serialized data may be sealed in a KEL and thereby bound to the associated key state by including the associated seal in a key event. Seals shall include a cryptographic digest or digest proof of the serialized data. This may be the SAID of the data when that data follows the SAID protocol, i.e., is a SAD [[1]]. This enables later verification of the sealing when given the data. Because all events in a KEL are signed by the KEL's controller, a seal, once bound or anchored via inclusion in an event, represents an indirect signature on the sealed data. One property of cryptographic strength digests is cryptographic strength collision resistance. Such resistance makes it computationally infeasible for any two distinct (non-identical) data items to have the same digest. Therefore, a commitment via a nonrepudiable signature on a cryptographic strength digest of a data item is equivalent to a signature on the data item itself. Sealing, therefore, provides a type of indirect endorsement. The notable advantage of a seal as an indirect endorsement over a direct endorsement signature is that the seal is also bound to the key state of the endorser at the location in the KEL where the seal appears. This enables the validity of the endorsement to persist in spite of later changes to the key state. This is an essential feature for unbounded term but verifiable issuances. This also enables an endorsed issuance using one key state with later revocation of that issuance using a different key state. The order of appearance of seals in a KEL provides a verifiable ordering of the associated endorsements of that data, which can be used as a foundation for ordered verifiable transactions.
 
 One primary use case for sealing in KERI is delegated AIDs. The Delegator (AID) approves (endorses) the associated delegation of a delegated event in the Delegatee's KEL by sealing the SAID of that delegated event in the Delegator's KEL. Because the Delegator signs the sealing event, the presence of the delegated event's SAID (cryptographic digest) in the Delegator's KEL is equivalent cryptographically to a signed endorsement by the Delegator of the delegated event itself but with the added advantage that the validity of that delegation persists in spite of changes to the key state of the Delegator.  A validator need only receive an attached reference to the delegating event that includes the seal in order to look up the seal and verify its presence. CESR provides codes for attached event seal references as well as codes for event seals.
 
@@ -1221,7 +1229,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[ref: CESR]]
+Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[1]]
 
 ## KERI key management
 
@@ -1539,13 +1547,19 @@ Commentary of each event:
 
 A delegation or identifier delegation operation is provided by a pair of events. One event is the delegating event in the KEL of the Delegator and the other event is the delegated event in the KEL of the Delegatee. This pairing of events is a somewhat novel approach to delegation in that the resultant delegation requires cooperation between the Delegator and Delegatee. This is called cooperative delegation.  In a cooperative delegation, a delegating identifier approves the establishment operation (inception or rotation) of a delegated identifier. A delegating event is a type of event that includes in its data payload an event seal of the delegated event that is the target the delegation operation. This delegated event seal includes a digest of the delegated event. This verifiably seals or anchors or binds the delegated event to the KEL of the Delegator.
 
+::: issue diagram
 Delegating Event Diagram
+:::
 
+::: issue diagram
 Delegated Event Seal Diagram
+:::
 
 Likewise, the inception event of the Delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the Delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in Delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the Delegatee's KEL and provides a way to recover from pre-rotated key compromise.
 
+::: issue diagram
 Delegated Event with Delegator AID Diagram
+:::
 
 Because the delegating event payload is a list, a single delegating event may perform multiple delegation operations, one per each delegation seal.
 
@@ -1571,7 +1585,7 @@ By definition, a Dead-attack on a given establishment event occurs after the Key
 
 ##### Non-establishment Dead-attack
 
-A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
+A successful non-establishment Dead-Attack first must compromise the set of signing keys for some past but stale interaction (non-establishment) event; second, create an alternate verifiable version of that stale interaction event; and third, propagate this alternate event to a given validator before the original event has had time to propagate to that validator or any other component the validator may access as First-Seen. This looks like what is commonly known as an [[24]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack. Should the event also be protected with a witness pool, then the attacker must compromise not only the stale signing keys but also a threshold satisficing number of witnesses protecting that event. This could make a non-establishment attack practically infeasible.
 
 The one exception would be the case where the event's key state has only a single signing key and a single prior pre-rotated key that has been repurposed as the single signing key, which the signing key has been compromised. In this case, the attacker could then attempt an establishment Dead-attack by creating a compromised state rotation event using the stale compromised signing key as a compromised rotation key in order to compromise the immediately prior establishment event. The attacker can then rotate in a set of witnesses under its control so that witness compromise is not needed. Notwithstanding this exploit, as the next paragraphs explain, the controller is still protected against an establishment Dead-attack as long as the original event has had time to propagate as First-seen to any component, such as a watcher the Validator chooses to consult.
 
@@ -1583,7 +1597,7 @@ To elaborate, compromising a set of keys after the first use, given best practic
 
 In any case, a validator or other component may still be protected as long as the original version of the event has had time to propagate as First-Seen to that validator or other component (such as witness, watcher, juror, judge) that the validator may access. Therefore, in order to successfully detect duplicity and thereby be protected, any validator needs merely to compare any later copy of the event with any copy of the original event as propagated to any component it may consult. The attacker, therefore, must get ahead of the propagation of a past rotation event. A later surprise quantum attack provides no advantage in this case since the event has already propagated and is already First-seen. The compromised event would be detectable as duplicitous and dropped.
 
-To restate, as already described above, this type of attack looks like what is commonly known as an [[ref: Eclipse Attack]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
+To restate, as already described above, this type of attack looks like what is commonly known as an [[24]] on a validator. To protect against such an attack, a controller must propagate the event sufficiently widely enough that the attacker cannot eclipse all components, such as Watchers, that the validator may consult. The more distant the stale event is in the past the more difficult it becomes to mount a successful eclipse attack because the event would have more time to be universally propagated to the full network of watchers. Otherwise, the Validator would have already First-seen the original event and the compromised event would be dropped i.e., cannot be accepted as First-seen by the Validator. Network propagation times are, at most, seconds and may be as little as milliseconds, which only opens a very short time window of how stale a stale event may be before it is sufficiently protected from any such eclipse attack.
 
 To further elaborate, recall that the original version of the event is the one that first exposes the keys to potential compromise. This may only allow a very narrow window of time for an attacker to get ahead of that event’s propagation. In other words, in order for a Dead-Attack to be successful, it must completely avoid detection as duplicitous. To do this, it must either prevent the validator from gaining access to any original copy of the key event history, i.e., an eclipse attack or, equivalently, must first destroy all extant copies of the original key event history accessible to the validator, i.e., some type of deletion attack. This may be very difficult given a sufficiently widespread watcher network.
 
@@ -1593,9 +1607,7 @@ To summarize, an alternate but verifiable version of a rotation event would be d
 
 As a special case, to even better protect the initial keypairs in an inception event from a Dead-attack, a controller may coincidently create both the inception event and an immediately following rotation event and then emit them together as one. The initial (original incepting) keypairs may be discarded (including removing all traces from signing infrastructure) after creation but before emission of the coincident events, thereby minimizing the exposure to Dead Attack of these initial keypairs.
 
-
 ![Establishment Dead-Attack](assets/ExploitDead.png)
-
 
 #### Live-Attacks
 
@@ -1617,7 +1629,6 @@ Given the cryptographic strength of the key generation algorithm, a successful b
 
 ![Establishment Live-Attack](assets/ExploitLive.png)
 
-
 #### Delegated Event Live-attacks
 
 Notwithstanding the foregoing section, delegated events are provided with an additional layer of protection against and an additional means of recovery from establishment Live-attack exploits.  As described previously, a delegated event is only valid if the validator finds an anchored delegation seal of the delegated establishment event in the delegator's KEL. This means that notwithstanding a successful compromise of the Delegatee's current set of pre-rotated keys, the attacker is not able to issue a valid compromised rotation event. The attacker must also issue a delegation seal of the compromised rotation event in the delegator's KEL. This means the attacker must either induce the delegator to issue a seal or must also compromise the delegator's signing keys. This provides an additional layer of protection from establishment Live-attack for delegated events.
@@ -1635,7 +1646,7 @@ Moreover, anytime the sealing (anchoring) event in the delegator's KEL may be su
 
 #### Cryptographic strength
 
-For crypto-systems with perfect-security, the critical design parameter is the number of bits of entropy needed to resist any practical brute force attack. In other words, when a large random or pseudo-random number from a cryptographic strength pseudo-random number generator (CSPRNG) [[ref: CSPRNG]] expressed as a string of characters is used as a seed or private key to a cryptosystem with perfect-security, the critical design parameter is determined by the amount of random entropy in that string needed to withstand a brute force attack. Any subsequent cryptographic operations must preserve that minimum level of cryptographic strength. In information theory, [[ref: IThry]] [[ref: ITPS]] the entropy of a message or string of characters is measured in bits. Another way of saying this is that the degree of randomness of a string of characters can be measured by the number of bits of entropy in that string.  Assuming conventional non-quantum computers, the convention wisdom is that, for systems with information-theoretic or perfect-security, the seed/key needs to have on the order of 128 bits (16 bytes, 32 hex characters) of entropy to practically withstand any brute force attack [[ref: TMCrypto]] [[ref: QCHC]]. A cryptographic quality random or pseudo-random number expressed as a string of characters will have essentially as many bits of entropy as the number of bits in the number. For other crypto-systems such as digital signatures that do not have perfect-security, the size of the seed/key may need to be much larger than 128 bits in order to maintain 128 bits of cryptographic strength.
+For crypto-systems with perfect-security, the critical design parameter is the number of bits of entropy needed to resist any practical brute force attack. In other words, when a large random or pseudo-random number from a cryptographic strength pseudo-random number generator (CSPRNG) [[ref: CSPRNG]] expressed as a string of characters is used as a seed or private key to a cryptosystem with perfect-security, the critical design parameter is determined by the amount of random entropy in that string needed to withstand a brute force attack. Any subsequent cryptographic operations must preserve that minimum level of cryptographic strength. In information theory, [[10]] [[ref: ITPS]] the entropy of a message or string of characters is measured in bits. Another way of saying this is that the degree of randomness of a string of characters can be measured by the number of bits of entropy in that string.  Assuming conventional non-quantum computers, the convention wisdom is that, for systems with information-theoretic or perfect-security, the seed/key needs to have on the order of 128 bits (16 bytes, 32 hex characters) of entropy to practically withstand any brute force attack [[12]] [[11]]. A cryptographic quality random or pseudo-random number expressed as a string of characters will have essentially as many bits of entropy as the number of bits in the number. For other crypto-systems such as digital signatures that do not have perfect-security, the size of the seed/key may need to be much larger than 128 bits in order to maintain 128 bits of cryptographic strength.
 
 An N-bit long base-2 random number has 2<sup>N</sup> different possible values. Given that no other information is available to an attacker with perfect-security, the attacker may need to try every possible value before finding the correct one. Thus, the number of attempts that the attacker would have to try maybe as much as 2<sup>N-1</sup>.  Given available computing power, one can easily show that 128 bits is a large enough N to make brute force attack computationally infeasible.
 
@@ -1773,7 +1784,7 @@ For example, in the diagram below, a rotation event at the same location may sup
 
 #### Introduction
 
-A controller may provide a highly available promulgation service for its events via a set or pool of N designated witnesses. This witness pool may also provide enhanced security for the controller over its events. Even though the witnesses are explicitly designated by the controller, they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event. The purpose of the witness set is to better protect the service from faults including Byzantine faults. Thus, the service employs a type of Byzantine Fault Tolerant (BFT) algorithm called KERI’s Algorithm for Witness Agreement (KAWA) (formerly known as KA2CE). The primary purpose of KAWA is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attacks. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand.
+A controller may provide a highly available promulgation service for its events via a set or pool of N designated witnesses. This witness pool may also provide enhanced security for the controller over its events. Even though the witnesses are explicitly designated by the controller, they may or may not be under the control of the controller. The designation is a cryptographic commitment to the witnesses via a verifiable statement included in an establishment event. The purpose of the witness set is to better protect the service from faults including Byzantine faults. Thus, the service employs a type of Byzantine Fault Tolerant (BFT) algorithm called KERI’s Algorithm for Witness Agreement (KAWA). The primary purpose of KAWA is to protect the controller’s ability to promulgate the authoritative copy of its key event history despite external attacks. This includes maintaining a sufficient degree of availability such that any validator may obtain an authoritative copy on demand.
 
 The critical insight is that because the controller is the sole source of truth for the creation of any and all key events, it alone, is sufficient to order its own key events. Indeed, a key event history does not need to provide double spend proofing of an account balance, merely consistency. Key events, by and large, are idempotent authorization operations as opposed to non-idempotent account balance decrement or increment operations. Total or global ordering may be critical for non-idempotency, whereas local ordering may be sufficient for idempotency, especially to merely prove the consistency of those operations. The implication of these insights is that fault tolerance may be provided with a single-phase agreement by the set of witnesses instead of a much more complex multi-phase commit among a pool of replicants or other total ordering agreement process as is used by popular BFT algorithms. Indeed, the security guarantees from KAWA may approach that of other BFT algorithms but without their scalability, cost, throughput, or latency limitations. If those other algorithms may be deemed sufficiently secure, then so may be KAWA. Moreover, because the controller is the sole source of truth for key events, a validator may hold that controller (whether trusted or not) accountable for those key events. As a result, the algorithm is designed to enable a controller to provide itself with any degree of protection it deems necessary given this accountability.
 
@@ -2160,15 +2171,19 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 ### Out-Of-Band-Introduction (OOBI)
 
-An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or [[ref: SAID]]. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols [[ref: ACDC]] [[ref: OOBI]]. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory [[ref: IPT]][[ref: DOMIP]][[ref: PT]][[ref: FPP]]. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
+An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or [[ref: SAID]]. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but must be verified. To clarify, any information obtained from the service endpoint provided in the OOBI must be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols [[ref: ACDC]] [[ref: OOBI]]. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory [[27]] [[28]] [[25]] [[26]]. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
 
-Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[ref: URL]]. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[ref: RFC3986]] [[ref: URL]]. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
+Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID requires an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[29]]. The principal reason for this requirement is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[spec: RFC3986]] [[29]]. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
 
 Moreover, because IP infrastructure is not trusted by KERI, a KERI OOBI by itself is considered insecure with respect to KERI, and any OOBI must, therefore, be later verified using a KERI BADA mechanism. The principal use case for an OOBI is to jump-start or bootstrap the discovery of a service endpoint for a given AID. To reiterate, the OOBI by itself is not sufficient for discovery because the OOBI itself is insecure. The OOBI merely jump-starts or bootstraps the authenticated discovery.
 
 OOBIs enable a KERI implementation to leverage existing IP and DNS infrastructure to introduce KERI AIDs and discover service endpoints, which may then be securely attributed. KERI does not, therefore, need its own dedicated discovery network; OOBIs with URLs will do.
 
+<<<<<<< HEAD
 A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identified by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[ref: CESR]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
+=======
+A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[1]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
+>>>>>>> 3c2c1d1 (clean up biblio)
 
 #### Basic OOBI
 
@@ -2186,7 +2201,7 @@ In concrete tuple form, an OOBI is as follows:
 
 An OOBI itself is not signed or otherwise authenticatable by KERI but may employ some other Out-Of-Band-Authentication (OOBA) mechanism, i.e., non-KERI.
 
-The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix [[ref: QR]] [[ref: DM]].
+The OOBI is intentionally simplistic to enable very low byte count introductions such as a may be conveyed by a QR code or Data matrix [[29]] [[30]].
 
 
 #### OOBI URL (IURL)
@@ -2343,7 +2358,7 @@ An OOBI may be augmented with one or more OOBAs to minimize the likelihood of a 
 
 #### SPED (Speedy Percolated Endpoint Discovery)
 
-All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) [[ref: PT]][[ref: FPP]][[ref: IPT]][[ref: DOMIP]]. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
+All the information needed to discover and verify is bootstrapped from the OOBI. Subsequent authorization is non-interactive, thus making it highly scalable. BADA-RUN authorization is also lightweight for the host because the only memory requirements are a sequence number, date-time stamp window, and nullification state. This provides what we call zero-trust percolated discovery or speedy percolated endpoint discovery (SPED) [[25]][[26]][[27]][[28]]. Percolation means that each discoverer, in turn, may share what it discovers with any subsequent discoverers. Because the information so discovered is end-verifiable, the percolation mechanism does not need to be trusted. Percolating intermediaries do not need to be trusted.
 
 #### JIT/NTK Discovery
 
@@ -2551,347 +2566,98 @@ To Nullify set the `url` to the empty string `""`.
 
 ## Bibliography
 
-[[def: KERI]]
-
-~ https://github.com/trustoverip/tswg-keri-specification
-
-[[def: CESR]]
-
-~ https://github.com/trustoverip/tswg-cesr-specification
-
-[[def: SAID]]
-
-~ https://github.com/trustoverip/tswg-said-specification
-
-[[def: OOBI]]
-
-~ https://github.com/trustoverip/tswg-oobi-specification
-
-[[def: DIDK]]
-
-~ https://github.com/WebOfTrust/ietf-did-keri
-
-[[def: RFC8949]]
-
-~ https://www.rfc-editor.org/rfc/rfc8949.html
-
-[[def: CBORC]]
-
-~ https://en.wikipedia.org/wiki/CBOR
-
-[[def: MGPK]]
-
-~ https://github.com/msgpack/msgpack/blob/master/spec.md
-
-[[def: KERI-WP]]
-
-~ https://arxiv.org/abs/1907.02143
-
-[[def: UIT]]
-
-~ https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf
-
-[[def: DAD]]
-
-~ https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf
-
-[[def: IDSys]]
-
- ~ https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/Identity-System-Essentials.pdf
-
-[[def: JSch]]
-
-~ https://json-schema.org
-
-[[def: JSch_202012]]
-
-~ https://json-schema.org/draft/2020-12/release-notes.html
-
-[[def: HCR]]
-
-~ https://en.wikipedia.org/wiki/Collision_resistance
-
-[[def: IPT, Invasion Percolation]]
-
-~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
-
-[[def: ITPS]]
-
-~ https://en.wikipedia.org/wiki/Information-theoretic_security
-
-[[def: OTP]]
-
-~ https://en.wikipedia.org/wiki/One-time_pad
-
-[[def: VCphr]]
-
-~ https://www.ciphermachinesandcryptology.com/en/onetimepad.htm
-
-[[def: SSplt]]
-
-~ https://www.ciphermachinesandcryptology.com/en/secretsplitting.htm
-
-[[def: SShr]]
-
-~ https://en.wikipedia.org/wiki/Secret_sharing
-
-[[def: CSPRNG]]
-
-~ https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator
-
-[[def: IThry]]
-
- ~ https://en.wikipedia.org/wiki/Information_theory
-
-[[def: BLAKE3]]
-
-~ https://github.com/BLAKE3-team/BLAKE3
-
-[[def: BLAKE3Spec]]
-
-~ https://github.com/BLAKE3-team/BLAKE3-specs/blob/master/blake3.pdf
-
-[[def: BLAKE3Hash]]
-
-~ https://www.infoq.com/news/2020/01/blake3-fast-crypto-hash/
-
-[[def: QCHC]]
-
-~ https://cr.yp.to/hash/collisioncost-20090823.pdf
-
-[[def: TMCrypto]]
-
-~ https://eprint.iacr.org/2019/1492.pdf
-
-[[def: EdSC]]
-
-~ https://eprint.iacr.org/2020/823
-
-[[def: PSEd]]
-
-~ https://ieeexplore.ieee.org/document/9519456?denied=
-
-[[def: TMEd]]
-
-~ https://eprint.iacr.org/2020/1244.pdf
-
-[[def: Salt]]
-
-~ https://medium.com/@fridakahsas/salt-nonces-and-ivs-whats-the-difference-d7a44724a447
-
-[[def: Stretch]]
-
-~ https://en.wikipedia.org/wiki/Key_stretching
-
-[[def: HDKC]]
-
-~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/topics-and-advance-readings/hierarchical-deterministic-keys--bip32-and-beyond.md
-
-[[def: OWF]]
-
-~ https://en.wikipedia.org/wiki/One-way_function
-
-[[def: COWF]]
-
-~ http://www.crypto-it.net/eng/theory/one-way-function.html
-
-[[def: RB]]
-
-~ https://en.wikipedia.org/wiki/Rainbow_table
-
-[[def: DRB]]
-
-~ https://www.commonlounge.com/discussion/2ee3f431a19e4deabe4aa30b43710aa7
-
-[[def: BDay]]
-
-~ https://en.wikipedia.org/wiki/Birthday_attack
-
-[[def: BDC]]
-
-~ https://auth0.com/blog/birthday-attacks-collisions-and-password-strength/
-
-[[def: DHKE]]
-
-~ https://www.infoworld.com/article/3647751/understand-diffie-hellman-key-exchange.html
-
-[[def: KeyEx]]
-
-~ https://libsodium.gitbook.io/doc/key_exchange
-
-[[def: Hash]]
-
-~ https://en.wikipedia.org/wiki/Cryptographic_hash_function
-
-[[def: PKI]]
-
-~ https://en.wikipedia.org/wiki/Public-key_cryptography
-
-[[def: SCPK]]
-
-~ https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf
-
-[[def: SCURL]]
-
-~ https://pdos.csail.mit.edu/~kaminsky/sfs-http.ps
-
-[[def: SFS]]
-
-~ https://pdos.csail.mit.edu/~kaminsky/sfs-http.ps
-
-[[def: SCPN]]
-
-~ https://dl.acm.org/doi/pdf/10.1145/319195.319213
-
-[[def: DNS]]
-
-~ https://en.wikipedia.org/wiki/Domain_Name_System
-
-[[def: CAA]]
-
-~ https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization
-
-[[def: CA]]
-
-~ https://en.wikipedia.org/wiki/Certificate_authority
-
-[[def: CRL]]
-
-~ https://en.wikipedia.org/wiki/Certificate_revocation_list
-
-[[def: OCSPW]]
-
-~ https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol
-
-[[def: WOT]]
-
- ~ https://en.wikipedia.org/wiki/Web_of_trust
-
-[[def: CEDS]]
-
-~ https://resources.infosecinstitute.com/cybercrime-exploits-digital-certificates/#gref
-
-[[def: KDDH]]
-
-~ https://krebsonsecurity.com/2019/02/a-deep-dive-on-the-recent-widespread-dns-hijacking-attacks/
-
-[[def: DNSH]]
-
-~ https://arstechnica.com/information-technology/2019/01/a-dns-hijacking-wave-is-targeting-companies-at-an-almost-unprecedented-scale/
-
-[[def: SFTCA]]
-
-~ https://pdfs.semanticscholar.org/7876/380d71dd718a22546664b7fcc5b413c1fa49.pdf
-
-[[def: DNSP]]
-
-~ https://www.thesslstore.com/blog/dns-poisoning-attacks-a-guide-for-website-admins/
-
-[[def: BGPC]]
-
-~ https://petsymposium.org/2017/papers/hotpets/bgp-bogus-tls.pdf
-
-[[def: BBGP]]
-
-~ https://www.usenix.org/conference/usenixsecurity18/presentation/birge-lee
-
-[[def: CTE]]
-
-~ https://certificate.transparency.dev
-
-[[def: CTAOL]]
-
-~ https://queue.acm.org/detail.cfm?id=2668154
-
-[[def: RT]]
-
-~ https://www.links.org/files/RevocationTransparency.pdf
-
-[[def: VDS]]
-
-~ https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf
-
-[[def: ESMT]]
-
-~ https://eprint.iacr.org/2016/683.pdf
-
-[[def: Ricardian contract, RC]]
-
-~ https://en.wikipedia.org/wiki/Ricardian_contract
-
-[[def: Namespace]]
-
-~ https://en.wikipedia.org/wiki/Namespace
-
-[[def: DPKI]]
-~ https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/final-documents/dpki.pdf
-
-[[def: Eclipse Attack]]
-
-~ https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin 
-
-[[def: RFC3986, Uniform Resource Identifier (URI): Generic Syntax]]
-
-~ https://datatracker.ietf.org/doc/html/rfc3986
-
-[[def: PT, Percolation Theory]]
-
-~ https://en.wikipedia.org/wiki/Percolation_theory
-
-[[def: FPP, First Passage Percolation]]
-
-~ https://en.wikipedia.org/wiki/First_passage_percolation
-
-[[def: IPT, Invasion Percolation]]
-
-~ https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
-
-[[def: DOMIP, Dynamic Opinion Model and Invasion Percolation]]
-
-~ https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.103.018701
-
-[[def: PTEL_ID, IETF PTEL (Public Transaction Event Log) Internet Draft]]
-
-~ https://github.com/WebOfTrust/ietf-ptel
-
-[[def: Proof_ID, IETF CESR-Proof Internet Draft]]
-
-~ https://github.com/WebOfTrust/ietf-cesr-proof
-
-[[def: IPEX_ID, IPEX (Issuance and Presentation EXchange) Internet Draft]]
-
-~ https://github.com/WebOfTrust/keripy/blob/master/ref/Peer2PeerCredentials.md
-
-[[def: DIDK_ID, IETF DID-KERI Internet Draft]]
-
-~ https://github.com/WebOfTrust/ietf-did-keri
-
-[[def: JSON, JavaScript Object Notation Delimeters]]
-
-~ https://www.json.org/json-en.html
-
-[[def: RFC8259, JSON (JavaScript Object Notation)]]
-
-~ https://datatracker.ietf.org/doc/html/rfc8259
-
-[[def: RFC4627, The application/json Media Type for JavaScript Object Notation (JSON)]]
-
-~ https://datatracker.ietf.org/doc/rfc4627/
-
-[[def: URL, URL]]
-
-~ https://en.wikipedia.org/wiki/URL
-
-[[def: QR, QR Code]]
-
-~ https://en.wikipedia.org/wiki/QR_code
-
-[[def: DM, Data Matrix]]
-
-~ https://en.wikipedia.org/wiki/Data_Matrix
-
-[[def: RTE, GDPR Right to Erasure]]
-
-~ https://gdpr-info.eu/art-17-gdpr/
+### Normtative
 
 [[spec]]
+
+### Informative
+
+[1]. Samuel M. Smith, Composable Event Streaming Representation (CESR), 2022
+[1]: https://github.com/trustoverip/tswg-cesr-specification
+
+[2]. C. Bormann, P. Hoffman, Concise Binary Object Representation (CBOR), 2020
+[2]: https://www.rfc-editor.org/rfc/rfc8949.html
+
+[3]. Sadayuki Furuhashi, MessagePack, 2008
+[3]: https://github.com/msgpack/msgpack/blob/master/spec.md
+
+[4]. Samuel M. Smith, Key Event Receipt Infrstructue, 2021
+[4]: https://arxiv.org/abs/1907.02143
+
+[5]. Samuel M. Smith, Universay Identifier Theory, 2020
+[5]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf
+
+[6]. Samuel M. Smith, Decentralized Autonomic Data (DAD) and the three R's of Key Management, 2018
+[6]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf
+
+[7]. David Wilkinson, Jorge F Willemsen, Invasion percolation: a new form of percolation theory, 1983
+[7]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+
+[8]. Information-Theoretic and Perfect Security
+[8]: https://en.wikipedia.org/wiki/Information-theoretic_security
+
+[9]. Cryptographically-secure pseudorandom number generator
+[9]: https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator
+
+[10]. Information Theory
+[10]: https://en.wikipedia.org/wiki/Information_theory
+
+[11]. Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete?
+[11]: https://cr.yp.to/hash/collisioncost-20090823.pdf
+
+[12]. Jean-Philippe Aumasson, Too Much Crypto, 2021
+[12]: https://eprint.iacr.org/2019/1492.pdf
+
+[13]. One-way Function
+[13]: https://en.wikipedia.org/wiki/One-way_function
+
+[14]. One-way Function
+[14]: http://www.crypto-it.net/eng/theory/one-way-function.html
+
+[15]. Public-key Cryptography
+[15]: https://en.wikipedia.org/wiki/Public-key_cryptography
+
+[16]. Marc Girault, Self-certified public keys 
+[16]: https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf
+
+[17]. M. Kaminsky, E. Banks, SFS-HTTP: Securing the Web with Self-Certifying URLs, 1999
+[17]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
+
+[18]. David Mazieres, Self-certifying File System, 2000
+[18]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
+
+[19]. David Mazieres, M. Kaashoek, Escaping the Evils of Centralized Control with self-certifying pathnames, 2000
+[19]: https://dl.acm.org/doi/pdf/10.1145/319195.319213
+
+[20]. Certificate Revocation List
+[20]: https://en.wikipedia.org/wiki/Certificate_revocation_list
+
+[21]. Verifiable Data Structures
+[21]: https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf
+
+[22]. Ricardian contract
+[22]: https://en.wikipedia.org/wiki/Ricardian_contract
+
+[23]. Namespace
+[23]: https://en.wikipedia.org/wiki/Namespace
+
+[24]. Eclipse Attack
+[24]: https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin
+
+[25]. Percolation Theory
+[25]: https://en.wikipedia.org/wiki/Percolation_theory
+
+[26]. First Passage Percolation
+[26]: https://en.wikipedia.org/wiki/First_passage_percolation
+
+[27]. Invasion Percolation
+[27]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+
+[28]. Uniform Resource Locator
+[28]: https://en.wikipedia.org/wiki/URL
+
+[29]. QR Code
+[29]: https://en.wikipedia.org/wiki/QR_code
+
+[30]. Data Matrix
+[30]: https://en.wikipedia.org/wiki/Data_Matrix
