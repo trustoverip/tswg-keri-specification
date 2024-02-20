@@ -1403,7 +1403,7 @@ Fractionally weighted thresholds become more interesting when the weights are no
 As a complex example, consider the following threshold with some weights as nested weighted lists of weights.
 
 ```json
-[[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}], ["1/2", ''{"1/2": ["1", "1"]}]]
+[[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}], ["1/2", {"1/2": ["1", "1"]}]]
 ```
 
 The corresponding public key list has 9 entries, as follows:
@@ -1429,7 +1429,7 @@ Suppose that for the first clause, valid signatures from the following keys are 
 The second clause is as follows:
 
 ```json
-["1/2", ''{"1/2": ["1", "1"]}]
+["1/2", {"1/2": ["1", "1"]}]
 ```
 The first element is a simple weight of 1/2, which corresponds to A<sup>6</sup> in the key list.
 
