@@ -1392,13 +1392,56 @@ NT means Next threshold.
 
 ### Fractionally weighted threshold
 
-A fractionally weighted threshold consists of a list of one or more clauses where each clause is itself a list of rational fractions (i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A list of clauses acts to order the set of rational fraction weights that appear in the list of clauses. Satisfaction of a fractionally weighted threshold requires satisfaction of each and every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that corresponds to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures the exactness and universality of threshold satisfaction computations.
+A simple fractionally weighted threshold consists of a list of one or more clauses where each clause is a list of rational fractions (i.e., ratios of non-negative integers expressed as fractions, where zero is not allowed in the denominator). Each entry in each clause in the fractional weight list corresponds one-to-one to a public key appearing in a key list in an Establishment event. Key lists order a key set. A list of clauses acts to order the set of rational fraction weights that appear in the list of clauses. Satisfaction of a fractionally weighted threshold requires satisfaction of every clause in the list. In other words, the clauses are logically ANDed together. Satisfaction of any clause requires that the sum of the weights in that clause that corresponds to verified signatures on that event must sum to at least a weight of one. Using rational fractions and rational fraction summation avoids the problem of floating-point rounding errors and ensures the exactness and universality of threshold satisfaction computations. In a complex fractionally weighted threshold, each weight in a clause may be either a simple weight or a weighted list of weights. This provides an additional layer of nesting of weights.
 
 For example, consider the following simple single clause fractionally weighted threshold, [1/2, 1/2, 1/2].  Three weights mean there must be exactly three corresponding key pairs. Let the three keypairs in one-to-one order be denoted by the list of indexed public keys, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]. The threshold is satisfied if any two of the public keys sign because 1/2 + 1/2 = 1. This is exactly equivalent to an integer-valued ‘2 of 3’ threshold.
 
 The public key's appearance order in a given key list and its associated threshold weight list must be the same.
 
-Fractionally weighted thresholds become more interesting when the weights are not all equal or include multiple clauses. Consider the following five-element single clause fractionally weighted threshold list, [1/2, 1/2, 1/2, 1/4, 1/4] and its corresponding public key list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>].  Satisfaction would be met given signatures from any two or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> because each of these keys has a weight of 1/2 and the combination of any two or more sums to 1 or more. Alternatively, satisfaction would be met with signatures from any one or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> and both of A<sup>3</sup>, and A<sup>4</sup> because any of those combinations would sum to 1 or more. Because participation of A<sup>3</sup> and A<sup>4</sup> is not required as long as at least two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are available then A<sup>3</sup> and A<sup>4</sup> may be treated as reserve members of the controlling set of keys. These reserve members only need to participate in the event that only one of the other three is available. The flexibility of a fractionally weighted threshold enables redundancy in the combinations of keys needed to satisfy both day-to-day and reserve contingency use cases.
+Fractionally weighted thresholds become more interesting when the weights are not all equal or include multiple clauses. Consider the following five-element single clause fractionally weighted threshold list, [1/2, 1/2, 1/2, 1/4, 1/4] and its corresponding public key list, [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>].  Satisfaction would be met given signatures from any two or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> because each of these keys has a weight of 1/2 and the combination of any two or more sums to 1 or more. Alternatively, satisfaction would be met with signatures from any one or more of A<sup>0</sup>, A<sup>1</sup>, or A<sup>2</sup> and both of A<sup>3</sup>, and A<sup>4</sup> because any of those combinations would sum to 1 or more. Because participation of A<sup>3</sup> and A<sup>4</sup> is not required as long as at least two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are available then A<sup>3</sup> and A<sup>4</sup> may be treated as reserve members of the controlling set of keys. These reserve members only need to participate if only one of the other three is available. The flexibility of a fractionally weighted threshold enables redundancy in the combinations of keys needed to satisfy both day-to-day and reserve contingency use cases.
+
+As a complex example, consider the following threshold with some weights as nested weighted lists of weights.
+
+```json
+[[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}], ["1/2", ''{"1/2": ["1", "1"]}]]
+```
+
+The corresponding public key list has 9 entries, as follows:
+
+[A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>, A<sup>3</sup>, A<sup>4</sup>,  A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>, A<sup>0</sup>].
+
+There are two clauses in the threshold. 
+
+The first clause is as follows:
+
+```json
+[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}]
+```
+
+The first element is a nested weighted list of three weights expressed as a field map or JSON object block with only one field. The key or label for this field is the weight on the list of weights, and the value of this field is the list of three weights as a nested fractionally weighted threshold. Therefore, this first element corresponds to the three entries A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> in the key list. Because each entry in this list has the same weight, 1/2, valid signatures for any two of A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> will satisfy the nested threshold. Satisfaction of the nested threshold contributes the weight, 1/2 that the field label provides to the satisfaction of the enclosing clause.  
+
+The second element is a simple weight of 1/2, corresponding to A<sup>3</sup> in the key list.
+
+The third element is a nested weighted list of two weights that correspond to A<sup>4</sup> and A<sup>5</sup> in the key list. Because each of the nested weights is 1, signatures from only one of A<sup>4</sup> and A<sup>5</sup> need to be valid to satisfy the nested threshold. Satisfaction contributes the field key weight of 1/2 to the clause.
+
+Suppose that for the first clause, valid signatures from the following keys are provided: A<sup>0</sup>, A<sup>3</sup>, and A<sup>5</sup>. Then, the following weights are contributed for the clause: 1/2 and 1/2. These sum to 1, so the clause threshold is satisfied. Note that because only one of the three weights for the first element was satisfied, the first element did not contribute any weight to the clause satisfaction.
+
+The second clause is as follows:
+
+```json
+["1/2", ''{"1/2": ["1", "1"]}]
+```
+The first element is a simple weight of 1/2, which corresponds to A<sup>6</sup> in the key list.
+
+The second element is a nested weighted list of two weights that correspond to A<sup>7</sup> and A<sup>8</sup> in the key list. Because each of the nested weights is 1, signatures from only one of A<sup>7</sup> and A<sup>8</sup> need to be valid to satisfy the nested threshold. Such satisfaction contributes the field key weight of 1/2 to the clause.
+
+Suppose that for the first clause, valid signatures from the following keys are provided: A<sup>6</sup>, and A<sup>8</sup>. Then, the following weights are contributed for the clause: 1/2 and 1/2. These sum to 1, so the clause threshold is satisfied. 
+
+Given that signature from A<sup>0</sup>, A<sup>3</sup>, A<sup>5</sup>, A<sup>6</sup>, and A<sup>8</sup> are valid then both clauses will be satisfied so that the whole threshold is satisfied.
+
+A use case for complex nested weighted lists of weights is when a given contributor to a fractionally weighted threshold manages its keys across multiple devices such that each device contributes a key. The total weight from the given contributor needs to be normalized to a single weight, but the satisfaction of its contribution is itself a fractionally weighted threshold across that contributor's devices.
+
+
 
 ### Reserve rotation
 
