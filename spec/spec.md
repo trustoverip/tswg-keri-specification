@@ -677,6 +677,10 @@ The value of this seal's `d` field is root of a Merkle tree of digests of extern
 
 Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 ```json
 {
 
@@ -686,12 +690,15 @@ Event seals bind an event from some other (external) KEL or other type of event 
 }
 ```
 
-
 #### Latest establishment event seal
 
 The latest establishment event seal's function is similar to the event seal above except that it does not designate a specific event but merely designates that latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the external KEL. This is useful for endorsing a message.
 
 The JSON version is shown. There is also a native CESR version of the seal.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 ```json
 {
@@ -710,6 +717,9 @@ To reiterate, the seal must appear in the same establishment event that designat
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 ```json
 {
@@ -720,6 +730,9 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 Attached bare, `bar` message.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 ```json
 {
@@ -752,6 +765,10 @@ The convention for field ordering is to put the fields that are common to all Me
 #### Inception Event Message Body
 
 The top-level fields of an Inception, `icp`, event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Inception event example:
 
@@ -794,6 +811,10 @@ Inception event example:
 
 The top-level fields of a Rotation, `rot` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 Rotation event example:
 
 ```json
@@ -832,6 +853,10 @@ Rotation event example:
 
 The top-level fields of an Interaction, `ixn` event message body shall appear in the following order: `[ v, t, d, i, s, p, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 ```json
 {
   "v": "KERICAAJSONAACd_",
@@ -855,6 +880,10 @@ The top-level fields of an Interaction, `ixn` event message body shall appear in
 #### Delegated Inception Event Message Body
 
 The top-level fields of a Delegated Inception, `dip` event message body shall appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes. 
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 ```json
 {
@@ -896,6 +925,10 @@ The top-level fields of a Delegated Inception, `dip` event message body shall ap
 #### Delegated Rotation Event Message Body
 
 The top-level fields of a Delegated Rotation, `drt` event message body shall appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are required. No other top-level fields are allowed. Signatures and other information may be attached to the Message body using CESR attachment codes . Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 ```json
 {
@@ -943,6 +976,10 @@ The SAID, `d` field value is the SAID of a key event from a KEL, i.e., the key e
 The Identifier AID, `i` field value is the Controller AID of the KEL for the key event being receipted. 
 
 The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Receipt example:
 
@@ -1023,6 +1060,10 @@ The Attribute, `a` field value is a field map (block). Its fields provide the at
 
 The top-level fields of a Query, `qry` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 Example Query Message
 
 ```json
@@ -1048,6 +1089,10 @@ Example Query Message
 
 The top-level fields of a Reply, `rpy` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 Reply message example:
 
 ```json
@@ -1071,6 +1116,10 @@ Reply message example:
 #### Prod Message Body
 
 The top-level fields of a Prod, `pro` message body shall appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Prod message example:
 
@@ -1099,6 +1148,10 @@ Prod message example:
 The top-level fields of a Reply, `bar` message body shall appear in the following order: `[ v, t, d, dt, r, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
 The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 Bare message example:
 
 ```json
@@ -1122,8 +1175,11 @@ Bare message example:
 
 #### Exchange Transaction Inception Message Body
 
-
 The top-level fields of an Exchange Transaction Inceipt, `xip` message body shall appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Exchange transaction inception message example:
 
@@ -1147,6 +1203,10 @@ Exchange transaction inception message example:
 #### Exchange Message Body
 
 The top-level fields of an Exchange, `exn` message body shall appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are required. No other top-level fields are allowed. Signatures and Seals shall be attached to the Message body using CESR attachment codes. 
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Exchange message example:
 
@@ -1312,6 +1372,10 @@ When the AID in the `i` field is SAID, the new Inception event has two qualified
 The derivation of the `d` and `i` fields is special. Both the `d` and `i` fields are replaced with dummy `#` characters of the length of the digest to be used. The digest of the Inception event is then computed and both the `d` and `i` fields are replaced with the qualified digest value. Validation of an Inception event requires examining the `i` field's derivation code and if it is a digest-type then the `d` field must be identical otherwise the Inception event is invalid.
 
 When the AID is not self-addressing, i.e.., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which is the standard SAID algorithm.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Inception event message body
 
@@ -2257,6 +2321,10 @@ An OOBI may include a list of URLs thus simultaneously making an introductory as
 
 A more verbose expression for an OOBI would be an unsigned KERI reply message, `rpy`. The route, `r` field in the message starts with `/oobi`. This specifies that it is an OOBI, so the recipient knows to apply OOBI processing logic to the message. A list of URLs may be provided so that one reply message may provide multiple introductions.
 
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 For example,
 
 ~~~json
@@ -2450,6 +2518,10 @@ A party interested in discovering the service endpoint for a given Controller AI
 To summarize, upon acceptance of an OOBI the recipient queries the provided URL for proof that the URL is an authorized endpoint for the given AID. The proof format may depend on the actual role of the endpoint. A current witness for an AID is designated in the current key state's latest establishment event in the AID's KEL. Therefore, merely replying with the Key State or KEL may serve as proof for a witness introduced by an OOBI. The actual URL may be authorized by an attendant signed `/loc/scheme` reply message with the URL.
 
 Other roles that are not explicitly part of Key-state (i.e., are not designated in KEL establishment events) must be authorized by explicit signed reply messages. Typically, these will be a signed `/end/role/` reply message. The actual URL may be authorized by an attendant signed `/loc/scheme` reply message with the URL.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
 
 Example reply messages.
 
