@@ -329,12 +329,7 @@ Watchers may implement different additional features. A watcher could choose to 
 
 Ultimately, a validator decides whether or not to trust the key state of a given AID based on the evidence or lack thereof of duplicity. A given validator may choose to use Judge and Jury services to aid it in deciding whether or not to trust the key state of a given AID. An honest validator shall trust when there is no evidence of duplicity and shall not trust when there is any evidence of duplicity unless and until the duplicity has been reconciled. KERI provides mechanisms for duplicity reconciliation. These include key compromise recovery mechanisms.
 
-<<<<<<< HEAD
-
 ![Indirect Exchange](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/ControllerAppAgentWitnessWatcherIndirectExchange.png?raw=true)
-=======
-![Indirect Exchange](../images/ControllerAppAgentWitnessWatcherIndirectExchange.png)
->>>>>>> 3c2c1d1 (clean up biblio)
 
 #### Ecosystem
 
@@ -360,19 +355,11 @@ The KERI protocol fixes both of these flaws using a combination of AIDs, key pre
 
 ### End-verifiable
 
-<<<<<<< HEAD
-A data item or statement is end-to-end-verifiable, or end-verifiable for short, when that data item may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control. KERI's end-verifiability is pervasive. It means that everything in KERI or that depends on KERI is also end-verifiable; therefore, KERI has no security dependency on any other infrastructure, including conventional PKI. It also does not rely on security guarantees that may or may not be provided by web or internet infrastructure.  KERI's identifier system-based security overlay for the Internet provides each identifier with a primary root-of-trust based on self-certifying, self-administering, self-governing AIDS and ANs that provide the trust basis for a universal AIS [[ref: UIT]] [[ref: SCPK]] [[ref: SFS]] [[ref: SCPN]] [[ref: SCURL]]. This root-of-trust is cryptographic, not administrative because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures alone.
+A data item or statement is end-to-end-verifiable, or end-verifiable for short, when that data item may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control. KERI's end-verifiability is pervasive. It means that everything in KERI or that depends on KERI is also end-verifiable; therefore, KERI has no security dependency on any other infrastructure, including conventional PKI. It also does not rely on security guarantees that may or may not be provided by web or internet infrastructure.  KERI's identifier system-based security overlay for the Internet provides each identifier with a primary root-of-trust based on self-certifying, self-administering, self-governing AIDS and ANs that provide the trust basis for a universal AIS [[4]] [[16]] [[18]] [[19]] [[17]]. This root-of-trust is cryptographic, not administrative because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures alone.
 
 Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
 
 ![End-to-end Verifiability](https://github.com/trustoverip/tswg-keri-specification/blob/revised-format/images/End2EndNetwork.png?raw=true)
-=======
-A data item or statement is end-to-end-verifiable, or end-verifiable for short, when that data item may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier's ultimate control. KERI's end-verifiability is pervasive. It means that everything in KERI or that depends on KERI is also end-verifiable; therefore, KERI has no security dependency on any other infrastructure, including conventional PKI. It also does not rely on security guarantees that may or may not be provided by web or internet infrastructure.  KERI's identifier system-based security overlay for the Internet provides each identifier with a primary root-of-trust based on self-certifying, self-administering, self-governing AIDS and ANs that provide the trust basis for a universal AIS[[4]] [[16]] [[18]] [[19]] [[17]]. This root-of-trust is cryptographic, not administrative because it does not rely on any trusted third-party administrative process but may be established with cryptographically verifiable data structures alone.
-
-Often, the two ends cannot transmit data directly between each other but must relay that data through other components or infrastructure not under the control of either end. For example, Internet infrastructure is public and is not controlled by either end of a transmission. A term for any set of components that relays data between the ends or, equivalently, the party that controls it is the middle. The following diagram shows two ends communicating over the middle.
-
-![End-to-end Verifiability](../assets/End2EndNetwork.png)
->>>>>>> 3c2c1d1 (clean up biblio)
 
 End verifiability means that the end destination can verify the source of the data without having to trust the middle. This gives rise to the concept called ambient verifiability, where the source of any data can be verified anywhere, at any time, by anybody. Ambient verifiability removes any need to trust any of the components in the middle, i.e., the whole internet.
 
@@ -1181,11 +1168,7 @@ Exchange message example:
 
 #### Indexed Signatures
 
-<<<<<<< HEAD
-Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[ref: CESR]]. Indexed signatures may be attached to both key event messages and non-key event messages. In this case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
-=======
 Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and may be attached to the KERI data structure as part of a CESR stream. CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI establishment event message data structure. This way, only the indexed signature must be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[1]]. Indexed signatures may be attached to both key event messages and non-key event messages. In the case, information about the associated key state for the signature may also need to be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed and only the AID of the signer is required. In the former case, where the signature is attached to a key event, the AID may be inferred.
->>>>>>> 3c2c1d1 (clean up biblio)
 
 There are two types of attached indexed signatures: controller-indexed and witnessed-indexed. Other information may be required with the attachment the type the type of event to which the signature is attached to which AID the indexed signature belongs.
 
@@ -1547,19 +1530,7 @@ Commentary of each event:
 
 A delegation or identifier delegation operation is provided by a pair of events. One event is the delegating event in the KEL of the Delegator and the other event is the delegated event in the KEL of the Delegatee. This pairing of events is a somewhat novel approach to delegation in that the resultant delegation requires cooperation between the Delegator and Delegatee. This is called cooperative delegation.  In a cooperative delegation, a delegating identifier approves the establishment operation (inception or rotation) of a delegated identifier. A delegating event is a type of event that includes in its data payload an event seal of the delegated event that is the target the delegation operation. This delegated event seal includes a digest of the delegated event. This verifiably seals or anchors or binds the delegated event to the KEL of the Delegator.
 
-::: issue diagram
-Delegating Event Diagram
-:::
-
-::: issue diagram
-Delegated Event Seal Diagram
-:::
-
 Likewise, the inception event of the Delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the Delegatee’s KEL to a unique delegator. A validator must be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in Delegatee's inception event) make the delegation cooperative. Both must participate. As will be seen later, this cooperation adds an additional layer of security to the Delegatee's KEL and provides a way to recover from pre-rotated key compromise.
-
-::: issue diagram
-Delegated Event with Delegator AID Diagram
-:::
 
 Because the delegating event payload is a list, a single delegating event may perform multiple delegation operations, one per each delegation seal.
 
@@ -1777,7 +1748,7 @@ C. IF neither A. nor B. is satisfied, then recursively apply rules A. and B. to 
 
 The latest-seen delegated rotation constraint in B. means that any earlier delegated rotations can NOT be superseded. This greatly simplifies the validation logic and avoids a potentially infinite regress of forks in the delegated identifier's KEL. However, this means recovery can happen for any compromise of pre-rotated keys, only the latest-seen. In order to unrecoverably capture control of a delegated identifier, the attacker must issue a delegated rotation that rotates to keys under the control of the attacker that the delegator must approve and then issue and get approved by the delegator another rotation that follows but does not supersede the compromising rotation. At that point, recovery is no longer possible because the delegate would no longer control the private pre-rotated keys needed to sign a recovery rotation as the latest-seen rotation verifiably. Recovery is possible after the first compromised rotation by superseding it but not after the subsequent compromised rotation.
 
-For example, in the diagram below, a rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events.
+A rotation event at the same location may supersede an interaction. This enables recovery of live exploit of the exposed current set of authoritative keys used to sign non-establishment events via a rotation establishment event to the unexposed next set of authoritative keys. The recovery process forks off a disputed branch from the recovered trunk. This disputed branch has the compromised events, and the main trunk has the recovered events.
 
 
 ### KERI's Algorithm for Witness Agreement (KAWA)
@@ -2179,11 +2150,7 @@ Moreover, because IP infrastructure is not trusted by KERI, a KERI OOBI by itsel
 
 OOBIs enable a KERI implementation to leverage existing IP and DNS infrastructure to introduce KERI AIDs and discover service endpoints, which may then be securely attributed. KERI does not, therefore, need its own dedicated discovery network; OOBIs with URLs will do.
 
-<<<<<<< HEAD
-A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identified by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[ref: CESR]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
-=======
 A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (items identifier by their SAID). A SAID is a content address derived from a cryptographic digest of the serialization of a data item. The SAID protocol [[1]] provides a derivation process where the SAID is actually included in the SAD. This makes a SAID self-referential. Verification of a SAD resource obtained by querying a URI that includes the SAD's SAID is accomplished by simply re-deriving the SAID of the SAD in the reply and comparing it to the SAID in the URI. The `sad` URI scheme may be simply expressed as `sad:said` where `said` is replaced with the actual SAID of the referenced SAD item. The media type of the returned SAD is determined by its CESR-compatible serialization type, such as JSON, CBOR, MGPK, or native CESR, for example.
->>>>>>> 3c2c1d1 (clean up biblio)
 
 #### Basic OOBI
 
