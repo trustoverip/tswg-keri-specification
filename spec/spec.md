@@ -1609,7 +1609,7 @@ To summarize, an alternate but verifiable version of a rotation event would be d
 
 As a special case, to even better protect the initial keypairs in an inception event from a Dead-attack, a controller may coincidently create both the inception event and an immediately following rotation event and then emit them together as one. The initial (original incepting) keypairs may be discarded (including removing all traces from signing infrastructure) after creation but before emission of the coincident events, thereby minimizing the exposure to Dead Attack of these initial keypairs.
 
-![Establishment Dead-Attack](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/60f4b8805220cf417f936c0fb7b7dcb72227bb32/images/ExploitDead.png)
+![Establishment Dead-Attack](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/ExploitDead.png)
 
 **Figure:** *Establishment Dead-Attack*
 
@@ -1631,7 +1631,7 @@ To elaborate, a successful live exploit must compromise the unexposed next set o
 
 Given the cryptographic strength of the key generation algorithm, a successful brute force live attack may be computationally infeasible.  Hiding the unexposed next (pre-rotated) public keys behind cryptographic strength digests provides an additional layer of protection not merely from pre-quantum brute force attacks but also from surprise post-quantum brute force attacks. In this case, a brute force attack would first have to invert the post-quantum resistant one-way hashing function used to create the digest before it may attempt to invert the one-way public key generation algorithm. Moreover, as computation capability increases, the controller can merely rotate to correspondingly strong quantum-safe cryptographic one-way functions for key generation. This makes brute force live attack computationally infeasible indefinitely. For more detail see the Annex on Cryptographic Strength.
 
-![Establishment Live-Attack](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/60f4b8805220cf417f936c0fb7b7dcb72227bb32/images/ExploitLive.png)
+![Establishment Live-Attack](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/ExploitLive.png)
 
 **Figure:** *Establishment Live-Attack*
 
