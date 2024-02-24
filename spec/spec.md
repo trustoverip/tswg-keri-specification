@@ -801,7 +801,7 @@ Inception event example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "icp",
   "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
@@ -846,7 +846,7 @@ Rotation event example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "rot",
   "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -886,7 +886,7 @@ The top-level fields of an Interaction, `ixn` event message body shall appear in
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "ixn",
   "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -959,7 +959,7 @@ The top-level fields of a Delegated Rotation, `drt` event message body shall app
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "drt",
   "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
   "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
@@ -1012,7 +1012,7 @@ Receipt example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "rct",
   "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
   "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
@@ -1095,7 +1095,7 @@ Example Query Message
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "qry",
   "d" : "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
   "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
@@ -1152,7 +1152,7 @@ Prod message example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "pro",
   "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
   "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
@@ -1183,7 +1183,7 @@ Bare message example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "bre",
   "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
   "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
@@ -1212,7 +1212,7 @@ Exchange transaction inception message example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "xip",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
@@ -1239,7 +1239,7 @@ Exchange message example:
 
 ```json
 {
-  "v": "KERICAAJSONAACd_",
+  "v": "KERICAAJSONAACd.",
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
