@@ -87,7 +87,7 @@ Implementation design of a protocol-based decentralized key management infrastru
 - a cryptographically verifiable data structure that enables changes to that key state.
 
 Thus, security over secure attribution is reduced to key management. This key management includes, for the first time, a practical solution to the hard problem of public key rotation. There is no reliance on trusted third parties. The resulting secure attribution is fully end-to-end verifiable.
-Because of the reliance on asymmetric (public, private) digital signing key pairs, this may be viewed as a type of decentralized public key infrastructure (DPKI)  The protocol supports cryptographic agility for both pre and post-quantum attack resistance. The application scope includes any electronically transmitted information. The implementation dependency scope assumes no more than cryptographic libraries that provide cryptographic strength pseudo-random number generators, cryptographic strength digest algorithms, and cryptographic strength digital signature algorithms.
+Because of the reliance on asymmetric (public, private) digital signing key pairs, this may be viewed as a type of decentralized public key infrastructure (DPKI). The protocol supports cryptographic agility for both pre and post-quantum attack resistance. The application scope includes any electronically transmitted information. The implementation dependency scope assumes no more than cryptographic libraries that provide cryptographic strength pseudo-random number generators, cryptographic strength digest algorithms, and cryptographic strength digital signature algorithms.
 
 ## Normative references
 
@@ -131,13 +131,17 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 ~ an alternative to a traditional KERI based [[ref: Witness]] commonly using Distributed Ledger Technology (DLT) to store the [[ref: KEL]] for an identifier.
 
-[[def: Concise Binary Object Representation, CBOR]]
+[[def: Concise binary object representation, CBOR]]
 
-~ something
+~ a binary data serialization format loosely based on JSON, authored by C. Bormann. Like JSON it allows the transmission of data objects that contain name–value pairs, but in a more concise manner. This increases processing and transfer speeds at the cost of human readability [[31]].
 
 [[def: Configuration traits, Modes]]
 
-~ a list of specially defined strings representing a configuration of a KEL. See (Configuration traits field)[#configuration-traits-field].
+~ a list of specially defined strings representing a configuration of a KEL. See [[ref: Configuration traits field]]
+
+[[def: Configuration traits field]] 
+
+~ something
 
 [[def: Controller]]
 
@@ -157,7 +161,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Dead-Attack]]
 
-~ an attack on an establishment event that occurs after the Key-state for that event has become stale because a later establishment event has rotated the sets of signing and pre-rotated keys to new sets. See (Security Properties of Prerotation)[#dead-attacks].
+~ an attack on an establishment event that occurs after the Key-state for that event has become stale because a later establishment event has rotated the sets of signing and pre-rotated keys to new sets. See [Security Properties of Prerotation](#dead-attacks).
 
 [[def: Decentralized key management infrastructure, DKMI]]
 
@@ -221,7 +225,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Live-Attack]]
 
-~ an attack that compromises either the current signing keys used to sign non-establishment events or he current pre-rotated keys needed to sign a subsequent establishment event. See (Security Properties of Prerotation)[#live-attacks].
+~ an attack that compromises either the current signing keys used to sign non-establishment events or he current pre-rotated keys needed to sign a subsequent establishment event. See [Security Properties of Prerotation](#live-attacks).
 
 [[def: Message]]
 
@@ -253,7 +257,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Seal]]
 
-~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See annex (Seal)[#seal].
+~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. See section [Seals](#seals) and annex [Seal](#seal).
 
 [[def: Self-addressed data, SAD]]
 
@@ -1759,6 +1763,15 @@ The analysis of protection against an attack can be further decomposed into thre
 
 Protection consists of either prevention or mitigation of both of the harm cases. The primary protection mechanisms for the controller include best practice key management techniques for maintaining root control authority, redundant confirmation of events by supporting components, and duplicity detection on the behavior of designated supporting components. The primary protection mechanism for the validator is duplicity detection on the behavior of supporting components.
 
+#### Key Event Receipt Log
+
+A Key Event Receipt Log consists of signed key events, keeping track of establishment events. To begin with the inception event and any number of rotation events. We call that this establishment subsequence.  
+The Key Event Receipt Logs are built from receipts of events signed by the witnesses of those events (called *commitments*); these are also append-only but not hash-chained.
+
+#### Seal
+
+A seal anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence. A seal is a cryptographic commitment in a secondary root-of-trust (e.g. TEL) that is anchored in a primary-root-of-trust (e.g.KEL). The main characteristics are that payload of the seal becomes immutable and the controller commits a signature to the seal.
+
 ### Validation
 
 
@@ -1767,6 +1780,19 @@ A verifier is an entity or component that cryptographically verifies an event me
 
 #### Validator
 In contrast, a validator is an entity or component that determines that a given signed event associated with an AID was valid at the time of its issuance. Validation first requires that the event itself is verifiable; that is, it has verifiable structure and signatures from the current controlling key pairs at the time of its issuance. Therefore, a validator must first act as a verifier in order to establish the root authoritative set of keys and verify the associated signatures. Once verified, the validator may apply other criteria or constraints to the event in order to determine its validity. This may include witnessing and delegation validation. The final result of validation may be acceptance of the event into the associated KEL. The location of an event in its key event sequence is determined by its sequence number, `sn`. The version of an event at a given location in the key event sequence is different or inconsistent with some other event at the same location if any of its content differs or is inconsistent with that other event.
+
+#### Witness
+A witness is an entity or component designated (trusted) by the controller of an identifier. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A witness is the controller of its own self-referential identifier which may or may not be the same as the identifier to which it is a witness.  
+
+An identifier witness therefore is part of its trust basis and may be controlled (but not necessarily so) by its controller. The purpose of a pool of witnesses is to protect the controller from external exploit of its identifier.  
+The terms [[ref: Backer]] and [[ref: Witness]] are closely related in KERI but are not synonyms or interchangeable.
+
+In an operational sense a witness constitutes an entity that may receive, verify, and store key events for an identifier. Each witness controls its own identifier used to sign key event messages, a controller is a special case of a witness.
+
+#### Watcher
+KERI's alternative to total global ordering and consensus protocols is the duplicity detection mechanism. In verification and validation watchers are all that matter; they guarantee that logs are immutable by one very simple rule: "[[ref: first seen]] wins".
+
+In an operational sense a set of watchers (that the validators trust) record any and all copies of key event logs (KEL) that they see. Because these watchers can be anyone and anywhere, any controller of a public identifier is at peril should they choose to publish inconsistent copies of their KEL. This removes the incentive to be duplicitous.
 
 #### Duplicity
 
@@ -2767,3 +2793,7 @@ To Nullify set the `url` to the empty string `""`.
 [30]. Data Matrix
 
 [30]: https://en.wikipedia.org/wiki/Data_Matrix
+
+[31]. Concise Binary Opbject Representation
+
+[31]: https://en.wikipedia.org/wiki/CBOR
