@@ -1952,7 +1952,7 @@ Using this conversion, the base CESR encoding of the DateTime example above beco
 
 `2020-08-22T17c50c09d988921p00c00`
 
-The CESR code for DateTime is prepended to this string to produce the fully qualified CESR encoding. This encodes the datetime compactly into Base64 without doing a direct Base65 conversion of a binary string.
+The CESR code for DateTime is prepended to this string to produce the fully qualified CESR encoding. This encodes the datetime compactly into Base64 without doing a direct Base64 conversion of a binary string.
 
 ##### Threshold
 
@@ -1976,7 +1976,7 @@ Using this infix conversion, the CESR encoding of the JSON fractionally weighted
 
 `1s2k1s2v1s2v1s2c1s2c1s2k1v1a1s21s2k1v1`
 
-Because thresholds are variable length, the appropriate fully qualified CESR code for Base64 only variable-length strings is prepended to the threshold.  This encodes the threshold compactly into Base64 without doing a direct Base65 conversion of a binary string.
+Because thresholds are variable length, the appropriate fully qualified CESR code for Base64 only variable-length strings is prepended to the threshold.  This encodes the threshold compactly into Base64 without doing a direct Base64 conversion of a binary string.
 
 ##### Route or Return Route
 
@@ -1989,7 +1989,7 @@ Converting the slashes to dashes gives:
 `-ipex-offer`
 
 
-In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base65 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
+In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base64 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
 
 One caveat for Base64 encoded variable lengths strings is that the string shall not start with the `A` character. This is because of a pre-padding ambiguity for variable length Base64 strings. The convention to prevent this is always starting the route with a slash, `/`, which is converted to a dash, `-`. Otherwise, the route shall be treated as a variable-length binary string, which must be converted to Base64 for encoding in the Text domain.
 
