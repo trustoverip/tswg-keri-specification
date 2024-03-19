@@ -1924,7 +1924,75 @@ Finally, however unlikely, subsequent improvements in cryptographic attack mecha
 
 ### Native CESR Encodings of KERI Messages
 
-By native CESR encoding means that the field maps of fields and values in a KERI message body may be represented in pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; he second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
+A native CESR encoding of the field map of a KERI message body is represented using pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; the second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no top-level labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
+
+Nested field maps may appear as values of top-level fields. For example, a seal may be expressed as a field map. In that case, the CESR count code for a generic field map is used.
+
+Similarly, lists may appear as values of top-level fields. For example, the current signing keys are expressed as a key list. In that case, the CESR count code for a generic list is used.
+
+#### CESR Field Encodings
+
+Some field values in KERI messages that include non-Base64 characters have custom CESR  Text domain encodings (Base64). These encodings are more compact than the case given the direct conversion of a binary string with non-Base64 characters into Base64.
+
+##### DateTime
+
+As described above, the datetime, `dt` field value, if any, shall be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  An example datetime string in this format is as follows:
+
+`2020-08-22T17:50:09.988921+00:00`
+
+Because this field value format employs non-Base64 characters, direct conversion to Base64 would increase the size of the value. Instead, the non-Base64 characters are converted to unique Base-64 characters using the following conversion table:
+
+| Non-Base64| Base64 | Description |
+|:----:|:---:|:-----|
+| `:` | `c`| colon |
+| `.` | `d`| dot |
+| `+` | `p`| plus |
+
+Using this conversion, the base CESR encoding of the DateTime example above becomes:
+
+`2020-08-22T17c50c09d988921p00c00`
+
+The CESR code for DateTime is prepended to this string to produce the fully qualified CESR encoding. This encodes the datetime compactly into Base64 without doing a direct Base64 conversion of a binary string.
+
+##### Threshold
+
+As described above, the fractionally weighted threshold field value may be represented as a list of lists of fractional weights. Those fractional weights may be simple or complex. A complex fractional weight is a single-element field map whose key is a fractional weight and whose value is a list of fraction weights. When serialized in JSON, this field value format employs non-Base64 characters. An example fractionally weighted threshold in JSON is as follows:
+
+```json
+[[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}], ["1/2", {"1/2": ["1", "1"]}]]
+```
+
+Direct conversion to Base64 would increase the size of the value. Instead, the block delimited expressions of lists, `[]` and field maps, `{:}` are converted to infix operators in Base64. Likewise, the non-Base64 separators for fractions and list elements are converted to infix operators as separators in Base64. The precedence order of the infix operators enables round-trip conversion between the block-delimited non-Base64 expression and the infix Base64 expression. Noteworthy is that the infix operator expression does not allow recursive nesting. This is not a problem because only one layer of nesting is supported. The following table provides the infix operators in order of priority. Higher in the table is a higher priority.
+
+|Non-Base64 Operation|  Base64 Infix Operator | Description |
+|:----:|:---:|:-----|
+| `/` | `s`| slash |
+| `{:[,]}` | `k`| key of map|
+| `{:[,]}` | `v`| nested weight list element of map value|
+| `[,]` | `c`| simple weight list element |
+| `[[],[]]`| `a` | ANDed weight list ]
+
+Using this infix conversion, the CESR encoding of the JSON fractionally weighted threshold example above becomes:
+
+`1s2k1s2v1s2v1s2c1s2c1s2k1v1a1s21s2k1v1`
+
+Because thresholds are variable length, the appropriate fully qualified CESR code for Base64 only variable-length strings is prepended to the threshold.  This encodes the threshold compactly into Base64 without doing a direct Base64 conversion of a binary string.
+
+##### Route or Return Route
+
+As described above, the value of a Route or Return Route field is a slash, `/` delimited path. Because the slash, `/`, is a non-Base64 character, direct conversion of the route string as binary to Base64 would increase the size of the value. Instead, slashes, `/` may be converted to dashes, `-`. This conversion is only applicable to a route that does not otherwise have any dash, `-` characters, or non-Base64 characters besides the slash, `/.` In that case, the route shall be converted as binary to Base64. An example route is as follows:
+
+`/ipex/offer`
+
+Converting the slashes to dashes gives:
+
+`-ipex-offer`
+
+
+In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base64 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
+
+One caveat for Base64 encoded variable lengths strings is that the string shall not start with the `A` character. This is because of a pre-padding ambiguity for variable length Base64 strings. The convention to prevent this is always starting the route with a slash, `/`, which is converted to a dash, `-`. Otherwise, the route shall be treated as a variable-length binary string, which must be converted to Base64 for encoding in the Text domain.
+
 
 #### Key Event Messages
 These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
