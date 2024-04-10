@@ -2005,7 +2005,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `Y&&&&###` e.g., `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `X&&&` e.g., `Xicp` | Packet Type (inception) |
+| `t` | `X&&&` e.g., `icp` | Packet Type |
 | `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `M&&&` e.g., `MAAA` | Sequence Number of Event |
@@ -2041,7 +2041,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrot` | Packet Type (inception) |
+| `t` | `rot` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAB` | Sequence Number of Event |
@@ -2078,7 +2078,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xixn` | Packet Type (inception) |
+| `t` | `ixn` | Packet Type |
 | `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAC` | Sequence Number of Event |
@@ -2103,7 +2103,7 @@ Field order by label:  `v`, `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native  op-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xdip` | Packet Type (inception) |
+| `t` | `dip` | Packet Type |
 | `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAA` | Sequence Number of Event |
@@ -2141,7 +2141,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xdrt` | Packet Type (inception) |
+| `t` | `drt` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAB` | Sequence Number of Event |
@@ -2179,7 +2179,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrct` | Packet Type (inception) |
+| `t` | `rct` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL being receipted |
 | `s` | `MAAB` | Sequence Number of event message being receipted |
@@ -2196,7 +2196,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xqry` | Packet Type (inception) |
+| `t` | `qry` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2215,7 +2215,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrpy` | Packet Type (inception) |
+| `t` | `rpy` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2233,7 +2233,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xpro` | Packet Type (inception) |
+| `t` | `pro` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2252,7 +2252,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xbar` | Packet Type (inception) |
+| `t` | `bar` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2269,7 +2269,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xxip` | Packet Type (inception) |
+| `t` | `xip` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
@@ -2291,7 +2291,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xexn` | Packet Type (inception) |
+| `t` | `exn` | Packet Type |
 | `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
 | `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
