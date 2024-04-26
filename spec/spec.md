@@ -225,7 +225,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Live-Attack]]
 
-~ an attack that compromises either the current signing keys used to sign non-establishment events or he current pre-rotated keys needed to sign a subsequent establishment event. See [Security Properties of Prerotation](#live-attacks).
+~ an attack that compromises either the current signing keys used to sign non-establishment events or the current pre-rotated keys needed to sign a subsequent establishment event. See [Security Properties of Prerotation](#live-attacks).
 
 [[def: Message]]
 
@@ -1786,8 +1786,8 @@ Protection consists of either prevention or mitigation of both of the harm cases
 
 #### Key Event Receipt Log
 
-A Key Event Receipt Log consists of signed key events, keeping track of establishment events. To begin with the inception event and any number of rotation events. We call that this establishment subsequence.  
-The Key Event Receipt Logs are built from receipts of events signed by the witnesses of those events (called *commitments*); these are also append-only but not hash-chained.
+A Key Event Receipt Log (KEL) consists of signed key events, keeping track of establishment events. To begin with the inception event and any number of rotation events. We call that this establishment subsequence.  
+The Key Event Receipt Logs are KELs that also include receipts of events signed by the witnesses of those events (called *commitments*); these are also append-only but not hash-chained.
 
 #### Seal
 
