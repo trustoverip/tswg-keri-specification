@@ -221,7 +221,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Key-State]]
 
-~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations. A key-state of an AID is first established through an inception event and may be altered by subsequent rotation events.
+~ a set of authoritative keys for an AID along with other essential information necessary to establish, evolve, verify, and validate control-signing authority for that AID. This information includes the current public keys and their thresholds (for a multi-signature scheme); pre-rotated key digests and their thresholds; [[ref: witness]]es and their thresholds; and configurations. An AID’s key state is first established through its [[ref:inception event]] and may evolve via subsequent [[ref: rotation event]]s. Thus, an AID’s key state is time dependent.
 
 [[def: Live-Attack]]
 
@@ -289,11 +289,11 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Watcher]]
 
-~ a watcher is an _entity_ or _component_ that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the _controller_ of the identifier as one of its witnesses. See annex [watcher](#watcher)
+~ a watcher is an _entity_ or _component_ that keeps a copy of a [[ref: KERL]] for an identifier but is not designated by the _controller_ of the identifier as one of its witnesses. 
 
 [[def: Witness]]
 
-~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex [Witness](#witness).
+~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex A under KAWA (KERI's Algorithm for Witness Agreement).
 
 [//]: # (KERI foundational overview {#sec:content})
 
@@ -582,7 +582,7 @@ The message types in KERI are detailed in the table below:
 |`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
 |     |  **Receipt Messages** | |
 |`rct`| Receipt | Receipt Message | Associates a proof such as signature or seal to a key event |
-|     |  **Other Messages** | |
+|     |  **Routed Messages** | |
 |`qry`| Query | Other Message | Query information associated with an AID |
 |`rpy`| Reply | Other Message | Reply with information associated with an AID either solicited by Query or unsolicited |
 |`pro`| Prod | Other Message | Prod (request) information associated with a Seal |
@@ -601,7 +601,7 @@ A cryptographic commitment (such as a digital signature or cryptographic digest)
 
 The SAID, `d` field is the SAID of its enclosing block (field map); when it appears at the top level of the message, it is the SAID of the message itself.
 
-The prior, `p` field is the SAID of a prior event message. When the prior `p` field appears in a key event message, then its value shall be the SAID of the key event message whose sequence number is one less than the sequence number of its own key event message. Only key event messages have sequence numbers. Other messages do not. When the prior, `p` field appears in an Exchange, `exn` message then its value is the SAID of the prior exchange message in the associated exchange transaction.
+The prior, `p` field is the SAID of a prior event message. When the prior `p` field appears in a key event message, then its value shall be the SAID of the key event message whose sequence number is one less than the sequence number of its own key event message. Only key event messages have sequence numbers. Routed messages do not. When the prior, `p` field appears in an Exchange, `exn` message then its value is the SAID of the prior exchange message in the associated exchange transaction.
 
 
 
@@ -992,8 +992,8 @@ The top-level fields of a Delegated Rotation, `drt` event message body shall app
       "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
     ],
   "bt": "1",
-  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "c":[],
   "a":[]
 }
@@ -1030,11 +1030,32 @@ Receipt example:
 }
 ```
 
-### Other Messages
+### Routed Messages
 
-The Other Message types shall be as follows `[qry, rpy, pro, bar, xip, exn]`. 
+The Routed Messages MUST include a route, `r` field, and MAY include a return route, `rr` field. The value of the route and return route fields are hierarchical. The Routed Message types shall be as follows `[qry, rpy, pro, bar, xip, exn]`. 
 
-#### Reserved field labels in other messages
+#### Routed Services
+Routed messages enable a backend to employ routed services in support of KELs, KERLs, service endpoints, and supporting data for KERI. Using hierarchical routes to manage services is a powerful paradigm for both externally and internally facing APIs. By abstracting the route concept so that it is not tied to the narrow confines of ReST URL-based APIs and combining that abstraction with OOBIs that map transport schemes to AIDs, a KERI implementation can use routing across its distributed infrastructure as a unifying architectural property.  
+
+For example, once a message has been received at a transport-specific port and the appropriate authentication (secure attribution) policy has been applied, it can be forwarded to a service router that distributes the message to the process that handles it. One way to effect that distribution is to prefix the external route provided in the message with an internal route that redirects the message appropriately. Thus, routing can affiliate the external-facing API with any internal-facing API. A return route enables the response to be returned despite asynchronous internal processing of the request. With this approach, no artificial synchronous state must be maintained to match outgoing and incoming messages. The internal routes can reflect different types of routing, such as intra-process, inter-process, inter-host, inter-protocol, and inter-database. 
+
+A given implementation could have multiple types of routers, each with different properties, including security properties.
+
+#### Routing Security
+
+Suppose that some information needs to be protected as sealed-confidential where sealed means the information is bound to the KEL via a Seal and confidential means that the information is sensitive and must be protected. A KEL conveys two types of information:
+
+- information that is public to the KEL, namely key state. In general, key state includes not just the current signing keys but all the associated information including thresholds for both signing keys, next pre-rotated key digests, witness pool identifiers and threshold and configuration data. Any viewer of a KEL can view this key state. Thus, the publicity of the KEL itself determines the publicity of its key state data. Other public information may be sealed to a KEL. The seal itself is a cryptographic digest that does not disclose the data. Still, if the associated data is provided elsewhere in a public manner, then the seal provides no confidentiality protection but merely a verifiable binding. An example of this type of data is a transaction event log used for a revocation registry for an ACDC.
+
+- information that is hidden but sealed to the key state in the KEL. A seal includes a cryptographic digest of information. The presence of the seal in an event in the KEL binds that data to the key state at that event but without disclosing the information. Thus the binding is public but the information is not. When the information includes sufficient cryptographic entropy, such as through the inclusion of a salty-nonce (UUID) then an attacker can not discover that data even with a rainbow table attack. The digest effectively hides or blinds the data. This enables the data to be protected or treated as sensitive or confidential. Access to the KEL does not disclose the data. Some other exchange process is required to disclose or un-blind the data. This type is appropriate for sealed confidential information.
+
+One security vulnerability of routed architectures is attacks on the routers themselves (especially router configuration, both static and dynamic). This vulnerability is most acute when a single router must handle information with different security properties. One solution to this problem is to use a pre-router that can redirect messages to different post-routers with different security properties.  For example, a pre-router would route sensitive data to a sensitive data post-router and non-sensitive data to a non-sensitive data post-router. This ensures that sensitive and non-sensitive data are never mixed. This enables tighter, more secure configuration control over data flows within an infrastructure. The best pre-routers act early in the routing process.
+
+In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange may used for the first type of information above, namely information public to a KEL. The second class, prod-bare may be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it must take appropriate measures to protect the router.  
+
+Notable is that the exchange message types are only associated with the first class of data. This is because exchange messages are signed by the participating peers but not sealed. Once an exchange transaction is completed successfully, the set of messages in that transaction may be aggregated and then sealed to the participating peer's KELs. The transaction set may then be treated as sealed-confidential information, and its subsequent disclosure is managed with prod-bare messages. An exchange message may reference a data item that is sealed but the disclosure of that seal may happen with a bare, `bar` message. Often, the point of an exchange is to negotiate a chain-link confidential disclosure of information. The detailed disclosure may happen out-of-band to the exchange that negotiates the contractual commitments to that data. Those commitments use cryptographic digests that maintain confidentiality. Later disclosure of the information may be facilitated with a prod-bare pair.
+
+#### Reserved field labels in routed messages
 
 Reserved field labels in other KERI message body types:
 
@@ -1956,7 +1977,75 @@ Finally, however unlikely, subsequent improvements in cryptographic attack mecha
 
 ### Native CESR Encodings of KERI Messages
 
-By native CESR encoding means that the field maps of fields and values in a KERI message body may be represented in pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; he second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
+A native CESR encoding of the field map of a KERI message body is represented using pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; the second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no top-level labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
+
+Nested field maps may appear as values of top-level fields. For example, a seal may be expressed as a field map. In that case, the CESR count code for a generic field map is used.
+
+Similarly, lists may appear as values of top-level fields. For example, the current signing keys are expressed as a key list. In that case, the CESR count code for a generic list is used.
+
+#### CESR Field Encodings
+
+Some field values in KERI messages that include non-Base64 characters have custom CESR  Text domain encodings (Base64). These encodings are more compact than the case given the direct conversion of a binary string with non-Base64 characters into Base64.
+
+##### DateTime
+
+As described above, the datetime, `dt` field value, if any, shall be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  An example datetime string in this format is as follows:
+
+`2020-08-22T17:50:09.988921+00:00`
+
+Because this field value format employs non-Base64 characters, direct conversion to Base64 would increase the size of the value. Instead, the non-Base64 characters are converted to unique Base-64 characters using the following conversion table:
+
+| Non-Base64| Base64 | Description |
+|:----:|:---:|:-----|
+| `:` | `c`| colon |
+| `.` | `d`| dot |
+| `+` | `p`| plus |
+
+Using this conversion, the base CESR encoding of the DateTime example above becomes:
+
+`2020-08-22T17c50c09d988921p00c00`
+
+The CESR code for DateTime is prepended to this string to produce the fully qualified CESR encoding. This encodes the datetime compactly into Base64 without doing a direct Base64 conversion of a binary string.
+
+##### Threshold
+
+As described above, the fractionally weighted threshold field value may be represented as a list of lists of fractional weights. Those fractional weights may be simple or complex. A complex fractional weight is a single-element field map whose key is a fractional weight and whose value is a list of fraction weights. When serialized in JSON, this field value format employs non-Base64 characters. An example fractionally weighted threshold in JSON is as follows:
+
+```json
+[[{"1/2": ["1/2", "1/2", "1/2"]}, "1/2", {"1/2": ["1", "1"]}], ["1/2", {"1/2": ["1", "1"]}]]
+```
+
+Direct conversion to Base64 would increase the size of the value. Instead, the block delimited expressions of lists, `[]` and field maps, `{:}` are converted to infix operators in Base64. Likewise, the non-Base64 separators for fractions and list elements are converted to infix operators as separators in Base64. The precedence order of the infix operators enables round-trip conversion between the block-delimited non-Base64 expression and the infix Base64 expression. Noteworthy is that the infix operator expression does not allow recursive nesting. This is not a problem because only one layer of nesting is supported. The following table provides the infix operators in order of priority. Higher in the table is a higher priority.
+
+|Non-Base64 Operation|  Base64 Infix Operator | Description |
+|:----:|:---:|:-----|
+| `/` | `s`| slash |
+| `{:[,]}` | `k`| key of map|
+| `{:[,]}` | `v`| nested weight list element of map value|
+| `[,]` | `c`| simple weight list element |
+| `[[],[]]`| `a` | ANDed weight list ]
+
+Using this infix conversion, the CESR encoding of the JSON fractionally weighted threshold example above becomes:
+
+`1s2k1s2v1s2v1s2c1s2c1s2k1v1a1s21s2k1v1`
+
+Because thresholds are variable length, the appropriate fully qualified CESR code for Base64 only variable-length strings is prepended to the threshold.  This encodes the threshold compactly into Base64 without doing a direct Base64 conversion of a binary string.
+
+##### Route or Return Route
+
+As described above, the value of a Route or Return Route field is a slash, `/` delimited path. Because the slash, `/`, is a non-Base64 character, direct conversion of the route string as binary to Base64 would increase the size of the value. Instead, slashes, `/` may be converted to dashes, `-`. This conversion is only applicable to a route that does not otherwise have any dash, `-` characters, or non-Base64 characters besides the slash, `/.` In that case, the route shall be converted as binary to Base64. An example route is as follows:
+
+`/ipex/offer`
+
+Converting the slashes to dashes gives:
+
+`-ipex-offer`
+
+
+In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base64 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
+
+One caveat for Base64 encoded variable lengths strings is that the string shall not start with the `A` character. This is because of a pre-padding ambiguity for variable length Base64 strings. The convention to prevent this is always starting the route with a slash, `/`, which is converted to a dash, `-`. Otherwise, the route shall be treated as a variable-length binary string, which must be converted to Base64 for encoding in the Text domain.
+
 
 #### Key Event Messages
 These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
@@ -1969,7 +2058,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `Y&&&&###` e.g., `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `X&&&` e.g., `Xicp` | Packet Type (inception) |
+| `t` | `X&&&` e.g., `icp` | Packet Type |
 | `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `M&&&` e.g., `MAAA` | Sequence Number of Event |
@@ -2005,7 +2094,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrot` | Packet Type (inception) |
+| `t` | `rot` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAB` | Sequence Number of Event |
@@ -2042,7 +2131,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xixn` | Packet Type (inception) |
+| `t` | `ixn` | Packet Type |
 | `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAC` | Sequence Number of Event |
@@ -2067,7 +2156,7 @@ Field order by label:  `v`, `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native  op-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xdip` | Packet Type (inception) |
+| `t` | `dip` | Packet Type |
 | `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAA` | Sequence Number of Event |
@@ -2105,7 +2194,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`,
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xdrt` | Packet Type (inception) |
+| `t` | `drt` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
 | `s` | `MAAB` | Sequence Number of Event |
@@ -2143,7 +2232,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrct` | Packet Type (inception) |
+| `t` | `rct` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL being receipted |
 | `s` | `MAAB` | Sequence Number of event message being receipted |
@@ -2160,7 +2249,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xqry` | Packet Type (inception) |
+| `t` | `qry` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2179,7 +2268,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xrpy` | Packet Type (inception) |
+| `t` | `rpy` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2197,7 +2286,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xpro` | Packet Type (inception) |
+| `t` | `pro` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2216,7 +2305,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xbar` | Packet Type (inception) |
+| `t` | `bar` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
@@ -2233,7 +2322,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xxip` | Packet Type (inception) |
+| `t` | `xip` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
@@ -2255,7 +2344,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 |:--------:|:-------|:------|
 | NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
 | `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `Xexn` | Packet Type (inception) |
+| `t` | `exn` | Packet Type |
 | `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
 | `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
