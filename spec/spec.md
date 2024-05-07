@@ -284,7 +284,7 @@ ISO and IEC maintain terminological databases for use in standardization at the 
 
 [[def: Witness]]
 
-~ an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex [Witness](#witness).
+~ a _witness_ is an _entity_ or _component_ designated (trusted) by the _controller_ of an _identifier_. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A _witness_ is the _controller_ of its own self-referential _identifier_ which may or may not be the same as the _identifier_ to which it is a _witness_. See Annex A under KAWA (KERI's Algorithm for Witness Agreement).
 
 [//]: # (KERI foundational overview {#sec:content})
 
@@ -575,7 +575,7 @@ The message types in KERI are detailed in the table below:
 |`drt`| Delegated Rotation | Establishment Key Event | Rotates the Delegated AID's key state |
 |     |  **Receipt Messages** | |
 |`rct`| Receipt | Receipt Message | Associates a proof such as signature or seal to a key event |
-|     |  **Other Messages** | |
+|     |  **Routed Messages** | |
 |`qry`| Query | Other Message | Query information associated with an AID |
 |`rpy`| Reply | Other Message | Reply with information associated with an AID either solicited by Query or unsolicited |
 |`pro`| Prod | Other Message | Prod (request) information associated with a Seal |
@@ -594,7 +594,7 @@ A cryptographic commitment (such as a digital signature or cryptographic digest)
 
 The SAID, `d` field is the SAID of its enclosing block (field map); when it appears at the top level of the message, it is the SAID of the message itself.
 
-The prior, `p` field is the SAID of a prior event message. When the prior `p` field appears in a key event message, then its value shall be the SAID of the key event message whose sequence number is one less than the sequence number of its own key event message. Only key event messages have sequence numbers. Other messages do not. When the prior, `p` field appears in an Exchange, `exn` message then its value is the SAID of the prior exchange message in the associated exchange transaction.
+The prior, `p` field is the SAID of a prior event message. When the prior `p` field appears in a key event message, then its value shall be the SAID of the key event message whose sequence number is one less than the sequence number of its own key event message. Only key event messages have sequence numbers. Routed messages do not. When the prior, `p` field appears in an Exchange, `exn` message then its value is the SAID of the prior exchange message in the associated exchange transaction.
 
 
 
@@ -985,8 +985,8 @@ The top-level fields of a Delegated Rotation, `drt` event message body shall app
       "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
     ],
   "bt": "1",
-  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
+  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
   "c":[],
   "a":[]
 }
@@ -1023,11 +1023,32 @@ Receipt example:
 }
 ```
 
-### Other Messages
+### Routed Messages
 
-The Other Message types shall be as follows `[qry, rpy, pro, bar, xip, exn]`. 
+The Routed Messages MUST include a route, `r` field, and MAY include a return route, `rr` field. The value of the route and return route fields are hierarchical. The Routed Message types shall be as follows `[qry, rpy, pro, bar, xip, exn]`. 
 
-#### Reserved field labels in other messages
+#### Routed Services
+Routed messages enable a backend to employ routed services in support of KELs, KERLs, service endpoints, and supporting data for KERI. Using hierarchical routes to manage services is a powerful paradigm for both externally and internally facing APIs. By abstracting the route concept so that it is not tied to the narrow confines of ReST URL-based APIs and combining that abstraction with OOBIs that map transport schemes to AIDs, a KERI implementation can use routing across its distributed infrastructure as a unifying architectural property.  
+
+For example, once a message has been received at a transport-specific port and the appropriate authentication (secure attribution) policy has been applied, it can be forwarded to a service router that distributes the message to the process that handles it. One way to effect that distribution is to prefix the external route provided in the message with an internal route that redirects the message appropriately. Thus, routing can affiliate the external-facing API with any internal-facing API. A return route enables the response to be returned despite asynchronous internal processing of the request. With this approach, no artificial synchronous state must be maintained to match outgoing and incoming messages. The internal routes can reflect different types of routing, such as intra-process, inter-process, inter-host, inter-protocol, and inter-database. 
+
+A given implementation could have multiple types of routers, each with different properties, including security properties.
+
+#### Routing Security
+
+Suppose that some information needs to be protected as sealed-confidential where sealed means the information is bound to the KEL via a Seal and confidential means that the information is sensitive and must be protected. A KEL conveys two types of information:
+
+- information that is public to the KEL, namely key state. In general, key state includes not just the current signing keys but all the associated information including thresholds for both signing keys, next pre-rotated key digests, witness pool identifiers and threshold and configuration data. Any viewer of a KEL can view this key state. Thus, the publicity of the KEL itself determines the publicity of its key state data. Other public information may be sealed to a KEL. The seal itself is a cryptographic digest that does not disclose the data. Still, if the associated data is provided elsewhere in a public manner, then the seal provides no confidentiality protection but merely a verifiable binding. An example of this type of data is a transaction event log used for a revocation registry for an ACDC.
+
+- information that is hidden but sealed to the key state in the KEL. A seal includes a cryptographic digest of information. The presence of the seal in an event in the KEL binds that data to the key state at that event but without disclosing the information. Thus the binding is public but the information is not. When the information includes sufficient cryptographic entropy, such as through the inclusion of a salty-nonce (UUID) then an attacker can not discover that data even with a rainbow table attack. The digest effectively hides or blinds the data. This enables the data to be protected or treated as sensitive or confidential. Access to the KEL does not disclose the data. Some other exchange process is required to disclose or un-blind the data. This type is appropriate for sealed confidential information.
+
+One security vulnerability of routed architectures is attacks on the routers themselves (especially router configuration, both static and dynamic). This vulnerability is most acute when a single router must handle information with different security properties. One solution to this problem is to use a pre-router that can redirect messages to different post-routers with different security properties.  For example, a pre-router would route sensitive data to a sensitive data post-router and non-sensitive data to a non-sensitive data post-router. This ensures that sensitive and non-sensitive data are never mixed. This enables tighter, more secure configuration control over data flows within an infrastructure. The best pre-routers act early in the routing process.
+
+In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange may used for the first type of information above, namely information public to a KEL. The second class, prod-bare may be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it must take appropriate measures to protect the router.  
+
+Notable is that the exchange message types are only associated with the first class of data. This is because exchange messages are signed by the participating peers but not sealed. Once an exchange transaction is completed successfully, the set of messages in that transaction may be aggregated and then sealed to the participating peer's KELs. The transaction set may then be treated as sealed-confidential information, and its subsequent disclosure is managed with prod-bare messages. An exchange message may reference a data item that is sealed but the disclosure of that seal may happen with a bare, `bar` message. Often, the point of an exchange is to negotiate a chain-link confidential disclosure of information. The detailed disclosure may happen out-of-band to the exchange that negotiates the contractual commitments to that data. Those commitments use cryptographic digests that maintain confidentiality. Later disclosure of the information may be facilitated with a prod-bare pair.
+
+#### Reserved field labels in routed messages
 
 Reserved field labels in other KERI message body types:
 
