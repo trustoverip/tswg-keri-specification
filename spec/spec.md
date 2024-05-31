@@ -1,5 +1,6 @@
 Key Event Receipt Infrastructure (KERI)
 ==================
+MINOR CHANGE FOR TESTING PURPOSES
 
 **Specification Status**: v1.0 Draft
 
