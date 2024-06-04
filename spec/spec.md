@@ -2206,7 +2206,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `s`.
 | `s` | `MAAB` | Sequence Number of event message being receipted |
 
 
-#### KERI support Messages
+#### KERI Routed Messages
 These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
 
 #### Query Message
