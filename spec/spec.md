@@ -96,6 +96,15 @@ The following documents are referred to in the text in such a way that some or a
 
 [//]: # (:::)
 
+[a]. IETF RFC-2119 Key words for use in RFCs to Indicate Requirement Levels
+[a]: https://www.rfc-editor.org/rfc/rfc2119.txt
+
+[b]. IETF RFC-4648 Base64 
+[b]: https://www.rfc-editor.org/rfc/rfc4648.txt
+
+[c]. IETF RFC-3339 DateTime 
+[c]: https://www.rfc-editor.org/rfc/rfc3339.txt
+
 
 ## Terms and Definitions
 
