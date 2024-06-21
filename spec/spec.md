@@ -1066,7 +1066,8 @@ Reserved field labels in other KERI message body types:
 |`v`| Version String | enables regex parsing of field map in CESR stream |
 |`t`| Message Type | three character string|
 |`d`| Digest SAID | fully qualified digest of block in which it appears|
-|`i`| Identifier Prefix (AID) | fully qualified primitive, Controller AID |
+|`i`| Identifier Prefix (AID) | fully qualified primitive of the Controller (sender) AID |
+|`ri`| Receiver Identifier Prefix (AID) | fully qualified primitive of the message Receiver (recipient) AID |
 |`x`| Exchange Identifier (SAID) | fully qualified unique identifier for an exchange transaction |
 |`p`| Prior SAID | fully qualified digest, prior message SAID |
 |`dt`| Issuer relative ISO date/time string |
@@ -1077,9 +1078,13 @@ Reserved field labels in other KERI message body types:
 
 Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field values are the same as found above in the Key Event message body section. 
 
-##### AID fields
+##### Controller AID field
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Other Message, it refers to the Controller AID of the sender of that message. A Controller AID, `i` field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a Routed Message, it refers to the Controller AID of the sender of that message. A Receiver AID, `i` field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
+
+##### Receiver AID field
+
+The Receiver AID, `ri` field value is an AID of the receiver (recipient) of an exchange message. The receiver is a controller on its associated KEL but is not the sender of the exchange message. The Reciever Identifier AID, `ri` field appears at the top-level of a Routed Exchange Message, it refers to the AID of the receiver (recipient) of that message. 
 
 ##### Prior event SAID field
 
@@ -1249,6 +1254,7 @@ Exchange transaction inception message example:
   "t": "xip",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
+  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
   "dt": "2021-11-12T19:11:19.342132+00:00",
   "r": "/echo/out",
   "q": {},
@@ -1276,6 +1282,7 @@ Exchange message example:
   "t": "exn",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
+  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
   "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
   "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
   "dt": "2021-11-12T19:11:19.342132+00:00",
