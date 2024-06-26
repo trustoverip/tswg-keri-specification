@@ -1240,7 +1240,7 @@ Bare message example:
 
 #### Exchange Transaction Inception Message Body
 
-The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange Transaction Inception, `xip` message body MUST appear in the following order: `[ v, t, d, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -1268,7 +1268,7 @@ Exchange transaction inception message example:
 
 #### Exchange Message Body
 
-The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, ri, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -2305,7 +2305,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
 #### Exchange Transaction Inception Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
@@ -2314,6 +2314,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 | `t` | `xip` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
+| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Recipient AID  |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `q` | `-H##` or `-H#####` | Count code for Query field map |
@@ -2327,7 +2328,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 
 #### Exchange Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
@@ -2336,6 +2337,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 | `t` | `exn` | Packet Type |
 | `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
+| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Recipient AID  |
 | `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
 | `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
