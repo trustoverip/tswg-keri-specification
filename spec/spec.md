@@ -704,7 +704,7 @@ The value of this seal's `d` field is an undifferentiated digest of some externa
 
 #### Merkle Tree root digest seal
 
-The value of this seal's `d` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  The JSON version is shown. There is also a native CESR version of the seal.
+The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
