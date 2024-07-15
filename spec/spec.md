@@ -1080,7 +1080,7 @@ Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field va
 
 ##### Controller AID field
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a Routed Message, it refers to the Controller AID of the sender of that message. A Receiver AID, `i` field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a Routed Message, it refers to the Controller AID of the sender of that message. A Controller AID, `i` field MAY appear in other places in messages (not at the top level). In those cases, its meaning SHOULD be determined by the context of its appearance.
 
 ##### Receiver AID field
 
