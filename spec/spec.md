@@ -1240,7 +1240,7 @@ Bare message example:
 
 #### Exchange Transaction Inception Message Body
 
-The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -1268,7 +1268,7 @@ Exchange transaction inception message example:
 
 #### Exchange Message Body
 
-The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, ri, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -2305,7 +2305,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
 #### Exchange Transaction Inception Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
@@ -2328,7 +2328,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 
 #### Exchange Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
