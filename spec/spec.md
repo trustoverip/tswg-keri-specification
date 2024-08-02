@@ -1886,19 +1886,9 @@ When network bandwidth is less constrained, a gossip protocol might provide full
 
 #### Immunity and Availability
 
-It can be shown (see [KERI-WP](#KERI-WP)) that for any set of N witnesses, there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all, despite a dishonest controller &mdash; but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). The To elaborate, given at most F* potentially unavailable or F potentially duplicitous witnesses, an immune agreement requires that M be a sufficient majority of N and guarantees as a result that the service may either only produce a sufficient agreement for one version of each event or none at all despite a dishonest or exploited controller. The following table provides values of  N, M, F, and F* that satisfy this immunity constraint.
+It can be [shown](#KERI-WP) that for any set of N witnesses, there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all, despite a dishonest controller &mdash; but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). A Controller MAY choose to use the KAWA algorthm to achieve immunity.
 
-| F |  N | 3F+1 | (N+F+1)/2 | N-F |   M | F*=N-M |
-|--:|---:|-----:|----------:|----:|----:|-------:|
-| 1 |  4 |    4 |         3 |   3 |   3 |      1 |
-| 1 |  6 |    4 |         4 |   5 | 4,5 |    2,1 |
-| 2 |  7 |    7 |         5 |   5 |   5 |      2 |
-| 2 |  9 |    7 |         6 |   7 | 6,7 |    3,2 |
-| 3 | 10 |   10 |         7 |   7 |   7 |      7 |
-| 3 | 12 |   10 |         8 |   9 | 8,9 |    4,3 |
-
-
-Given the immune constraint is satisfied, the service may not produce multiple divergent but proper KERL). In order to be deemed proper, an agreement must have been verified as consistent with all prior events by every non-faulty witness who is a party to that agreement. Thus, any user of the service, be it a validator, watcher, juror, or judge, will be able to obtain either a proper event agreement on demand from some witness or none at all. Any non-faulty witness with a proper agreement will keep that agreement in its KERL and provide it on demand. Consequently, the availability of a proper event at a witness is tantamount to the availability of a proper log (KERL) of all prior events consistent with that event at that witness, and thereby, high availability of the service is assured.
+Given the immune constraint is satisfied, the service may not produce multiple divergent but proper KERL. In order to be deemed proper, an agreement must have been verified as consistent with all prior events by every non-faulty witness who is a party to that agreement. Thus, any user of the service, be it a validator, watcher, juror, or judge, will be able to obtain either a proper event agreement on demand from some witness or none at all. Any non-faulty witness with a proper agreement will keep that agreement in its KERL and provide it on demand. Consequently, the availability of a proper event at a witness is tantamount to the availability of a proper log (KERL) of all prior events consistent with that event at that witness, and thereby, high availability of the service is assured.
 
 #### Security Properties
 
