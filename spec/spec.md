@@ -1886,7 +1886,7 @@ When network bandwidth is less constrained, a gossip protocol might provide full
 
 #### Immunity and Availability
 
-It can be shown that for any set of N witnesses, (see [[ref: KERI-WP ]]) there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all despite a dishonest controller but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). To elaborate, given at most F* potentially unavailable or F potentially duplicitous witnesses, an immune agreement requires that M be a sufficient majority of N and guarantees as a result that the service may either only produce a sufficient agreement for one version of each event or none at all despite a dishonest or exploited controller. The following table provides values of  N, M, F, and F* that satisfy this immunity constraint.
+It can be shown (see [KERI-WP](#KERI-WP)) that for any set of N witnesses, there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all, despite a dishonest controller &mdash; but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). The To elaborate, given at most F* potentially unavailable or F potentially duplicitous witnesses, an immune agreement requires that M be a sufficient majority of N and guarantees as a result that the service may either only produce a sufficient agreement for one version of each event or none at all despite a dishonest or exploited controller. The following table provides values of  N, M, F, and F* that satisfy this immunity constraint.
 
 | F |  N | 3F+1 | (N+F+1)/2 | N-F |   M | F*=N-M |
 |--:|---:|-----:|----------:|----:|----:|-------:|
@@ -2710,23 +2710,15 @@ To Nullify set the `url` to the empty string `""`.
 
 [[spec]]
 
-[1]. Samuel M. Smith, Composable Event Streaming Representation (CESR), 2022
+<a id="CESR">1</a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
 
-[1]: https://github.com/trustoverip/tswg-cesr-specification
+<a id="CBOR">2</a>. C. Bormann, P. Hoffman, [Concise Binary Object Representation (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html), 2020
 
-[2]. C. Bormann, P. Hoffman, Concise Binary Object Representation (CBOR), 2020
+<a id="MessagePack">3</a>. Sadayuki Furuhashi, [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md), 2008
 
-[2]: https://www.rfc-editor.org/rfc/rfc8949.html
+<a id="KERI-WP">4</a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
 
-[3]. Sadayuki Furuhashi, MessagePack, 2008
-
-[3]: https://github.com/msgpack/msgpack/blob/master/spec.md
-
-[4]. Samuel M. Smith, Key Event Receipt Infrstructue, 2021
-
-[4]: https://arxiv.org/abs/1907.02143
-
-[5]. Samuel M. Smith, Universay Identifier Theory, 2020
+[5]. Samuel M. Smith, Universal Identifier Theory, 2020
 
 [5]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf
 
