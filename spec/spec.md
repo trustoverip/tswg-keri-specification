@@ -2718,106 +2718,54 @@ To Nullify set the `url` to the empty string `""`.
 
 <a id="KERI-WP">4</a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
 
-[5]. Samuel M. Smith, Universal Identifier Theory, 2020
+<a id="">5</a>. Samuel M. Smith, [Universal Identifier Theory](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf), 2020
 
-[5]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf
+<a id="">6</a>. Samuel M. Smith, [Decentralized Autonomic Data (DAD) and the three R's of Key Management](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf), 2018
 
-[6]. Samuel M. Smith, Decentralized Autonomic Data (DAD) and the three R's of Key Management, 2018
+<a id="">7</a>. David Wilkinson, Jorge F Willemsen, [Invasion percolation: a new form of percolation theory](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf), 1983
 
-[6]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf
+<a id="">8</a>. [Information-Theoretic and Perfect Security](https://en.wikipedia.org/wiki/Information-theoretic_security)
 
-[7]. David Wilkinson, Jorge F Willemsen, Invasion percolation: a new form of percolation theory, 1983
+<a id="">9</a>. [Cryptographically-secure pseudorandom number generator](https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator)
 
-[7]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+<a id="">10</a>. [Information Theory](https://en.wikipedia.org/wiki/Information_theory)
 
-[8]. Information-Theoretic and Perfect Security
+<a id="">11</a>. [Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete](https://cr.yp.to/hash/collisioncost-20090823.pdf?
 
-[8]: https://en.wikipedia.org/wiki/Information-theoretic_security
+<a id="">12</a>. Jean-Philippe Aumasson, [Too Much Crypto](https://eprint.iacr.org/2019/1492.pdf), 2021
 
-[9]. Cryptographically-secure pseudorandom number generator
+<a id="">13</a>. [One-way Function](https://en.wikipedia.org/wiki/One-way_function)
 
-[9]: https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator
+<a id="">14</a>. [One-way Function](http://www.crypto-it.net/eng/theory/one-way-function.html)
 
-[10]. Information Theory
+<a id="">15</a>. [Public-key Cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
 
-[10]: https://en.wikipedia.org/wiki/Information_theory
+<a id="">16</a>. Marc Girault, [Self-certified public keys](https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf) 
 
-[11]. Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete?
+<a id="">17</a>. M. Kaminsky, E. Banks, [SFS-HTTP: Securing the Web with Self-Certifying URLs](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 1999
 
-[11]: https://cr.yp.to/hash/collisioncost-20090823.pdf
+<a id="">18</a>. David Mazieres, [Self-certifying File System](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 2000
 
-[12]. Jean-Philippe Aumasson, Too Much Crypto, 2021
+<a id="">19</a>. David Mazieres, M. Kaashoek, [Escaping the Evils of Centralized Control with self-certifying pathnames](https://dl.acm.org/doi/pdf/10.1145/319195.319213), 2000
 
-[12]: https://eprint.iacr.org/2019/1492.pdf
+<a id="">20</a>. [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list)
 
-[13]. One-way Function
+<a id="">21</a>. [Verifiable Data Structures](https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf)
 
-[13]: https://en.wikipedia.org/wiki/One-way_function
+<a id="">22</a>. [Ricardian contract](https://en.wikipedia.org/wiki/Ricardian_contract)
 
-[14]. One-way Function
+<a id="">23</a>. [Namespace](https://en.wikipedia.org/wiki/Namespace)
 
-[14]: http://www.crypto-it.net/eng/theory/one-way-function.html
+<a id="">24</a>. [Eclipse Attack](https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin)
 
-[15]. Public-key Cryptography
+<a id="">25</a>. [Percolation Theory](https://en.wikipedia.org/wiki/Percolation_theory)
 
-[15]: https://en.wikipedia.org/wiki/Public-key_cryptography
+<a id="">26</a>. [First Passage Percolation](https://en.wikipedia.org/wiki/First_passage_percolation)
 
-[16]. Marc Girault, Self-certified public keys 
+<a id="">27</a>. [Invasion Percolation](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf)
 
-[16]: https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf
+<a id="">28</a>. [Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
 
-[17]. M. Kaminsky, E. Banks, SFS-HTTP: Securing the Web with Self-Certifying URLs, 1999
+<a id="">29</a>. [QR Code](https://en.wikipedia.org/wiki/QR_code)
 
-[17]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
-
-[18]. David Mazieres, Self-certifying File System, 2000
-
-[18]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
-
-[19]. David Mazieres, M. Kaashoek, Escaping the Evils of Centralized Control with self-certifying pathnames, 2000
-
-[19]: https://dl.acm.org/doi/pdf/10.1145/319195.319213
-
-[20]. Certificate Revocation List
-
-[20]: https://en.wikipedia.org/wiki/Certificate_revocation_list
-
-[21]. Verifiable Data Structures
-
-[21]: https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf
-
-[22]. Ricardian contract
-
-[22]: https://en.wikipedia.org/wiki/Ricardian_contract
-
-[23]. Namespace
-
-[23]: https://en.wikipedia.org/wiki/Namespace
-
-[24]. Eclipse Attack
-
-[24]: https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin
-
-[25]. Percolation Theory
-
-[25]: https://en.wikipedia.org/wiki/Percolation_theory
-
-[26]. First Passage Percolation
-
-[26]: https://en.wikipedia.org/wiki/First_passage_percolation
-
-[27]. Invasion Percolation
-
-[27]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
-
-[28]. Uniform Resource Locator
-
-[28]: https://en.wikipedia.org/wiki/URL
-
-[29]. QR Code
-
-[29]: https://en.wikipedia.org/wiki/QR_code
-
-[30]. Data Matrix
-
-[30]: https://en.wikipedia.org/wiki/Data_Matrix
+<a id="">30</a>. [Data Matrix](https://en.wikipedia.org/wiki/Data_Matrix)
