@@ -658,7 +658,7 @@ The Backer Remove, `br` field value is a list of strings that each is the fully 
 
 ##### Backer add list
 
-The Backer Add, `ba` field value is a list of strings that each is the fully qualified AID of a Backer to be appended to the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID MUST NOT appear more than once in any Backer Add list. The Backer Add, `ba` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by appending in order the AIDs from the Backer Add, `ba` list except for any AIDs that already appear in the current Backer list. The AIDs in the Backer Add, `ba` list MUST NOT be appended until all AIDs in the Backer Add, `ba` list have been removed. 
+The Backer Add, `ba` field value is a list of strings that each is the fully qualified AID of a Backer to be appended to the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID MUST NOT appear more than once in any Backer Add list. The Backer Add, `ba` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by appending in order the AIDs from the Backer Add, `ba` list except for any AIDs that already appear in the current Backer list. The AIDs in the Backer Add, `ba` list MUST NOT be appended until all AIDs in the Backer Remove, `br` list have been removed. 
 
 
 ##### Configuration traits field
