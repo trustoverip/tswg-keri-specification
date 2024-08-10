@@ -321,7 +321,7 @@ Key event validation includes everything needed to validate events, including st
 ![Controller Application with Agent](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/ControllerAppAgentSplitFunctions.png)
 
 **Figure:** *Controller Application with Agent*
-
+			
 #### Direct exchange
 
 The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
@@ -927,7 +927,7 @@ The top-level fields of a Delegated Inception, `dip` event message body MUST app
 ```json
 {
   "v": "KERI10JSON0001ac_",
-  "t": "icp",
+  "t": "dip",
   "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "s": "0",
