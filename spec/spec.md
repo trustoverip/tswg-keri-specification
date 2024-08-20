@@ -316,7 +316,7 @@ Key event validation includes everything needed to validate events, including st
 ![Controller Application with Agent](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/ControllerAppAgentSplitFunctions.png)
 
 **Figure:** *Controller Application with Agent*
-
+			
 #### Direct exchange
 
 The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
@@ -653,7 +653,7 @@ The Backer Remove, `br` field value is a list of strings that each is the fully 
 
 ##### Backer add list
 
-The Backer Add, `ba` field value is a list of strings that each is the fully qualified AID of a Backer to be appended to the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID MUST NOT appear more than once in any Backer Add list. The Backer Add, `ba` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by appending in order the AIDs from the Backer Add, `ba` list except for any AIDs that already appear in the current Backer list. The AIDs in the Backer Add, `ba` list MUST NOT be appended until all AIDs in the Backer Add, `ba` list have been removed. 
+The Backer Add, `ba` field value is a list of strings that each is the fully qualified AID of a Backer to be appended to the current Backer list. This allows Backer lists to be changed in an incremental fashion. A given AID MUST NOT appear more than once in any Backer Add list. The Backer Add, `ba` list appears in Rotation and Delegated Rotation events. Given such an event, the current backer list is updated by appending in order the AIDs from the Backer Add, `ba` list except for any AIDs that already appear in the current Backer list. The AIDs in the Backer Add, `ba` list MUST NOT be appended until all AIDs in the Backer Remove, `br` list have been removed. 
 
 
 ##### Configuration traits field
@@ -922,7 +922,7 @@ The top-level fields of a Delegated Inception, `dip` event message body MUST app
 ```json
 {
   "v": "KERI10JSON0001ac_",
-  "t": "icp",
+  "t": "dip",
   "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
   "s": "0",
@@ -1075,7 +1075,7 @@ Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field va
 
 ##### Controller AID field
 
-The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a Routed Message, it refers to the Controller AID of the sender of that message. A Receiver AID, `i` field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
+The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a Routed Message, it refers to the Controller AID of the sender of that message. A Controller AID, `i` field MAY appear in other places in messages (not at the top level). In those cases, its meaning SHOULD be determined by the context of its appearance.
 
 ##### Receiver AID field
 
@@ -1235,7 +1235,7 @@ Bare message example:
 
 #### Exchange Transaction Inception Message Body
 
-The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -1263,7 +1263,7 @@ Exchange transaction inception message example:
 
 #### Exchange Message Body
 
-The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, ri, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -2300,7 +2300,7 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
 #### Exchange Transaction Inception Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
@@ -2309,6 +2309,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 | `t` | `xip` | Packet Type |
 | `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
+| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
 | `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
 | `q` | `-H##` or `-H#####` | Count code for Query field map |
@@ -2322,7 +2323,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `dt`, `r`, `q`, `a`.
 
 #### Exchange Message
 
-Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
+Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 | Field Label | Value | Description |
 |:--------:|:-------|:------|
@@ -2331,6 +2332,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `x`, `p`, `dt`, `r`, `q`, `a`.
 | `t` | `exn` | Packet Type |
 | `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
 | `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
+| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
 | `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
 | `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
 | `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
