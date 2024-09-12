@@ -432,8 +432,6 @@ In simple form, an identifier-system security overlay binds together a triad con
 
 When these bindings are strong, then the overlay is highly invulnerable to attack. In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI, all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See Annex A on cryptographic strength for more detail.
 
-When these bindings are strong, then the overlay is highly invulnerable to attack.  In contrast, when these bindings are weak, then the overlay is highly vulnerable to attack. With KERI, all the bindings of the triad are strong because they are cryptographically Verifiable with a minimum cryptographic strength or level of approximately 128 bits. See Annex A on cryptographic strength for more detail.
-
 The bound triad is created as follows:
 ![Self-certifying Issuance Triad](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/SelfCertIssuanceTriad.png)
 
