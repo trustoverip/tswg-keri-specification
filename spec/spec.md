@@ -1921,19 +1921,9 @@ When network bandwidth is less constrained, a gossip protocol might provide full
 
 #### Immunity and Availability
 
-It can be shown that for any set of N witnesses, (see [[ref: KERI-WP ]]) there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all despite a dishonest controller but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). To elaborate, given at most F* potentially unavailable or F potentially duplicitous witnesses, an immune agreement requires that M be a sufficient majority of N and guarantees as a result that the service may either only produce a sufficient agreement for one version of each event or none at all despite a dishonest or exploited controller. The following table provides values of  N, M, F, and F* that satisfy this immunity constraint.
+It can be [shown](#KERI-WP) that for any set of N witnesses, there is a threshold M < N that guarantees that at most one sufficient agreement occurs or none at all, despite a dishonest controller &mdash; but where at most F* = N-M of the witnesses are potentially unavailable and at most F < M is duplicitous. This guarantee means that the agreement is deemed immune (from failure due to faulty F or F*). A Controller MAY choose to use the KAWA algorthm to achieve immunity.
 
-| F |  N | 3F+1 | (N+F+1)/2 | N-F |   M | F*=N-M |
-|--:|---:|-----:|----------:|----:|----:|-------:|
-| 1 |  4 |    4 |         3 |   3 |   3 |      1 |
-| 1 |  6 |    4 |         4 |   5 | 4,5 |    2,1 |
-| 2 |  7 |    7 |         5 |   5 |   5 |      2 |
-| 2 |  9 |    7 |         6 |   7 | 6,7 |    3,2 |
-| 3 | 10 |   10 |         7 |   7 |   7 |      7 |
-| 3 | 12 |   10 |         8 |   9 | 8,9 |    4,3 |
-
-
-Given the immune constraint is satisfied, the service may not produce multiple divergent but proper KERL). In order to be deemed proper, an agreement MUST have been verified as consistent with all prior events by every non-faulty witness who is a party to that agreement. Thus, any user of the service, be it a validator, watcher, juror, or judge, will be able to obtain either a proper event agreement on demand from some witness or none at all. Any non-faulty witness with a proper agreement will keep that agreement in its KERL and provide it on demand. Consequently, the availability of a proper event at a witness is tantamount to the availability of a proper log (KERL) of all prior events consistent with that event at that witness, and thereby, high availability of the service is assured.
+Given the immune constraint is satisfied, the service may not produce multiple divergent but proper KERL. In order to be deemed proper, an agreement must have been verified as consistent with all prior events by every non-faulty witness who is a party to that agreement. Thus, any user of the service, be it a validator, watcher, juror, or judge, will be able to obtain either a proper event agreement on demand from some witness or none at all. Any non-faulty witness with a proper agreement will keep that agreement in its KERL and provide it on demand. Consequently, the availability of a proper event at a witness is tantamount to the availability of a proper log (KERL) of all prior events consistent with that event at that witness, and thereby, high availability of the service is assured.
 
 #### Security Properties
 
@@ -2747,122 +2737,62 @@ To Nullify set the `url` to the empty string `""`.
 
 [[spec]]
 
-[1]. Samuel M. Smith, Composable Event Streaming Representation (CESR), 2022
+<a id="CESR">1</a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
 
-[1]: https://github.com/trustoverip/tswg-cesr-specification
+<a id="CBOR">2</a>. C. Bormann, P. Hoffman, [Concise Binary Object Representation (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html), 2020
 
-[2]. C. Bormann, P. Hoffman, Concise Binary Object Representation (CBOR), 2020
+<a id="MessagePack">3</a>. Sadayuki Furuhashi, [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md), 2008
 
-[2]: https://www.rfc-editor.org/rfc/rfc8949.html
+<a id="KERI-WP">4</a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
 
-[3]. Sadayuki Furuhashi, MessagePack, 2008
+<a id="">5</a>. Samuel M. Smith, [Universal Identifier Theory](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf), 2020
 
-[3]: https://github.com/msgpack/msgpack/blob/master/spec.md
+<a id="">6</a>. Samuel M. Smith, [Decentralized Autonomic Data (DAD) and the three R's of Key Management](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf), 2018
 
-[4]. Samuel M. Smith, Key Event Receipt Infrstructue, 2021
+<a id="">7</a>. David Wilkinson, Jorge F Willemsen, [Invasion percolation: a new form of percolation theory](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf), 1983
 
-[4]: https://arxiv.org/abs/1907.02143
+<a id="">8</a>. [Information-Theoretic and Perfect Security](https://en.wikipedia.org/wiki/Information-theoretic_security)
 
-[5]. Samuel M. Smith, Universay Identifier Theory, 2020
+<a id="">9</a>. [Cryptographically-secure pseudorandom number generator](https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator)
 
-[5]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf
+<a id="">10</a>. [Information Theory](https://en.wikipedia.org/wiki/Information_theory)
 
-[6]. Samuel M. Smith, Decentralized Autonomic Data (DAD) and the three R's of Key Management, 2018
+<a id="">11</a>. [Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete](https://cr.yp.to/hash/collisioncost-20090823.pdf?
 
-[6]: https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf
+<a id="">12</a>. Jean-Philippe Aumasson, [Too Much Crypto](https://eprint.iacr.org/2019/1492.pdf), 2021
 
-[7]. David Wilkinson, Jorge F Willemsen, Invasion percolation: a new form of percolation theory, 1983
+<a id="">13</a>. [One-way Function](https://en.wikipedia.org/wiki/One-way_function)
 
-[7]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
+<a id="">14</a>. [One-way Function](http://www.crypto-it.net/eng/theory/one-way-function.html)
 
-[8]. Information-Theoretic and Perfect Security
+<a id="">15</a>. [Public-key Cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
 
-[8]: https://en.wikipedia.org/wiki/Information-theoretic_security
+<a id="">16</a>. Marc Girault, [Self-certified public keys](https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf) 
 
-[9]. Cryptographically-secure pseudorandom number generator
+<a id="">17</a>. M. Kaminsky, E. Banks, [SFS-HTTP: Securing the Web with Self-Certifying URLs](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 1999
 
-[9]: https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator
+<a id="">18</a>. David Mazieres, [Self-certifying File System](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 2000
 
-[10]. Information Theory
+<a id="">19</a>. David Mazieres, M. Kaashoek, [Escaping the Evils of Centralized Control with self-certifying pathnames](https://dl.acm.org/doi/pdf/10.1145/319195.319213), 2000
 
-[10]: https://en.wikipedia.org/wiki/Information_theory
+<a id="">20</a>. [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list)
 
-[11]. Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete?
+<a id="">21</a>. [Verifiable Data Structures](https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf)
 
-[11]: https://cr.yp.to/hash/collisioncost-20090823.pdf
+<a id="">22</a>. [Ricardian contract](https://en.wikipedia.org/wiki/Ricardian_contract)
 
-[12]. Jean-Philippe Aumasson, Too Much Crypto, 2021
+<a id="">23</a>. [Namespace](https://en.wikipedia.org/wiki/Namespace)
 
-[12]: https://eprint.iacr.org/2019/1492.pdf
+<a id="">24</a>. [Eclipse Attack](https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin)
 
-[13]. One-way Function
+<a id="">25</a>. [Percolation Theory](https://en.wikipedia.org/wiki/Percolation_theory)
 
-[13]: https://en.wikipedia.org/wiki/One-way_function
+<a id="">26</a>. [First Passage Percolation](https://en.wikipedia.org/wiki/First_passage_percolation)
 
-[14]. One-way Function
+<a id="">27</a>. [Invasion Percolation](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf)
 
-[14]: http://www.crypto-it.net/eng/theory/one-way-function.html
+<a id="">28</a>. [Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
 
-[15]. Public-key Cryptography
+<a id="">29</a>. [QR Code](https://en.wikipedia.org/wiki/QR_code)
 
-[15]: https://en.wikipedia.org/wiki/Public-key_cryptography
-
-[16]. Marc Girault, Self-certified public keys 
-
-[16]: https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf
-
-[17]. M. Kaminsky, E. Banks, SFS-HTTP: Securing the Web with Self-Certifying URLs, 1999
-
-[17]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
-
-[18]. David Mazieres, Self-certifying File System, 2000
-
-[18]: https://pdos.csail.mit.edu/kaminsky/sfs-http.ps
-
-[19]. David Mazieres, M. Kaashoek, Escaping the Evils of Centralized Control with self-certifying pathnames, 2000
-
-[19]: https://dl.acm.org/doi/pdf/10.1145/319195.319213
-
-[20]. Certificate Revocation List
-
-[20]: https://en.wikipedia.org/wiki/Certificate_revocation_list
-
-[21]. Verifiable Data Structures
-
-[21]: https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf
-
-[22]. Ricardian contract
-
-[22]: https://en.wikipedia.org/wiki/Ricardian_contract
-
-[23]. Namespace
-
-[23]: https://en.wikipedia.org/wiki/Namespace
-
-[24]. Eclipse Attack
-
-[24]: https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin
-
-[25]. Percolation Theory
-
-[25]: https://en.wikipedia.org/wiki/Percolation_theory
-
-[26]. First Passage Percolation
-
-[26]: https://en.wikipedia.org/wiki/First_passage_percolation
-
-[27]. Invasion Percolation
-
-[27]: https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf
-
-[28]. Uniform Resource Locator
-
-[28]: https://en.wikipedia.org/wiki/URL
-
-[29]. QR Code
-
-[29]: https://en.wikipedia.org/wiki/QR_code
-
-[30]. Data Matrix
-
-[30]: https://en.wikipedia.org/wiki/Data_Matrix
+<a id="">30</a>. [Data Matrix](https://en.wikipedia.org/wiki/Data_Matrix)
