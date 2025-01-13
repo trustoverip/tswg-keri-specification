@@ -1,23 +1,40 @@
-
 {
-  "specs": [
-    {
-      "title": "Key Event Receipt Infrastructure",
-      "spec_directory": "./spec",
-      "output_path": "./docs",
-      "markdown_paths": [
-        "head.md",
-        "termdefs.md",
-        "body.md"
-      ],
-      "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
-      "logo_link": "https://github.com/trustoverip/tswg-keri-specification",
-      "katex": true,
-      "source": {
-        "host": "github",
-        "account": "trustoverip",
-        "repo": "tswg-keri-specification"
-      }
-    }
-  ]
+    "specs": [
+        {
+            "title": "Spec-Up-T Starterpack",
+            "description": "Create technical specifications in markdown. Based on the original Spec-Up, extended with Terminology tooling",
+            "author": "Trust over IP Foundation",
+            "spec_directory": "./spec",
+            "spec_terms_directory": "terms-definitions",
+            "output_path": "./docs",
+            "markdown_paths": [
+                "spec-head.md",
+                "terms-and-definitions-intro.md",
+                "spec-body.md"
+            ],
+            "logo": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/logo.svg",
+            "logo_link": "https://github.com/trustoverip/spec-up-t",
+            "favicon": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/favicon.ico",
+            "source": {
+                "host": "github",
+                "account": "trustoverip",
+                "repo": "spec-up-t-starter-pack"
+            },
+            "external_specs": [
+                {
+                    "external_spec": "kmg-1",
+                    "gh_page": "https://henkvancann.github.io/keri-main-glossary/",
+                    "url": "https://github.com/henkvancann/keri-main-glossary",
+                    "terms_dir": "spec/term-definitions"
+                },
+                {
+                    "external_spec": "test-2",
+                    "gh_page": "https://blockchainbird.github.io/spec-up-xref-test-2/",
+                    "url": "https://github.com/blockchainbird/spec-up-xref-test-2",
+                    "terms_dir": "spec/term-definitions"
+                }
+            ],
+            "katex": false
+        }
+    ]
 }
