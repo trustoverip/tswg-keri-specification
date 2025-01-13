@@ -6,7 +6,9 @@
       "spec_directory": "./spec",
       "output_path": "./docs",
       "markdown_paths": [
-        "spec.md"
+        "head.md",
+        "termdefs.md",
+        "body.md"
       ],
       "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
       "logo_link": "https://github.com/trustoverip/tswg-keri-specification",
