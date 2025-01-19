@@ -2438,6 +2438,9 @@ To Nullify set the `url` to the empty string `""`.
 
 [[spec]]
 
+### Informative section
+[[spec-inform]]
+
 <a id="CESR">1</a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
 
 <a id="CBOR">2</a>. C. Bormann, P. Hoffman, [Concise Binary Object Representation (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html), 2020
