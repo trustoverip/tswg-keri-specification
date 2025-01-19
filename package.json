@@ -1,6 +1,6 @@
 {
   "name": "spec-up",
-  "version": "0.10.6",
+  "version": "-.-.-",
   "description": "Technical specification drafting tool that generates rich specification documents from markdown.",
   "main": "./index",
   "repository": {
@@ -8,9 +8,19 @@
     "url": "git+https://github.com/decentralized-identity/spec-up.git"
   },
   "scripts": {
-    "edit": "node -e \"require('./index')()\"",
-    "render": "node -e \"require('./index')({ nowatch: true })\"",
-    "dev": "node -e \"require('./index')({ dev: true })\""
+    "edit": "node -e \"require('spec-up-t')()\"",
+    "render": "node --no-warnings -e \"require('spec-up-t')({ nowatch: true })\"",
+    "dev": "node -e \"require('spec-up-t')({ dev: true })\"",
+    "xtrefupdate": "node src/server/xtref-update.js",
+    "xtrefupdateall": "node src/server/xtref-update-all.js",
+    "topdf": "node -e \"require('spec-up-t/src/create-pdf.js')\"",
+    "freeze": "node -e \"require('spec-up-t/src/freeze.js')\"",
+    "references": "node -e \"require('spec-up-t/src/references.js')\"",
+    "help": "cat help.txt",
+    "menu": "bash ./main.sh",
+    "addremovexrefsource": "node src/server/add-remove-xref-source.js",
+    "configure": "node src/server/configure.js",
+    "postinstall": "node postinstall-message.js"
   },
   "keywords": [
     "spec",

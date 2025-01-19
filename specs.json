@@ -5,7 +5,7 @@
             "description": "Create technical specifications in markdown. Based on the original Spec-Up, extended with Terminology tooling",
             "author": "Trust over IP Foundation",
             "spec_directory": "./spec",
-            "spec_terms_directory": "terms-definitions",
+            "spec_terms_directory": "spec_terms_directory",
             "output_path": "./docs",
             "markdown_paths": [
                 "spec-head.md",
