@@ -25,3 +25,12 @@ report.xml
 .idea
 venv/
 /.vs
+node_modules
+*.log
+dist
+*.bak
+*.tmp
+.env
+coverage
+build
+.history

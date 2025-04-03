@@ -1,0 +1,123 @@
+name: Menu
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Select the script to run'
+        type: choice
+        required: true
+        default: 'Render specification'
+        options:
+          # - Edit specification
+          - Render specification
+          # - Develop specification
+          - Collect external references (cached)
+          - Collect external references (no cache)
+          - Convert to PDF
+          - Freeze specification
+          - List references
+          # - Show help
+          # - Add/remove xref source
+          # - Configure specification
+          - Custom update
+
+jobs:
+  build-and-deploy-spec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed for pushing changes and deploying to Pages
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # We’ll use MY_PAT for push
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Extract output_path from JSON
+        id: extract-output
+        run: |
+          OUTPUT_PATH=$(jq -r '.specs[0].output_path // "default/output"' specs.json)
+          if [ "$OUTPUT_PATH" = "null" ] || [ -z "$OUTPUT_PATH" ]; then
+            echo "Error: Unable to extract output_path from specs.json"
+            exit 1
+          fi
+          echo "OUTPUT_PATH=$OUTPUT_PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies 🔧
+        run: |
+          echo "Installing dependencies..."
+          npm install
+          echo "Spec-Up-T version:"
+          npm list spec-up-t || echo "spec-up-t not found"
+
+      - name: Run selected script
+        env:
+          MY_PAT: ${{ secrets.MY_PAT }} # Make the secret available as an env var
+        run: |
+          case "${{ github.event.inputs.script }}" in
+            "Edit specification")
+              node -e "require('spec-up-t')()"
+              ;;
+            "Render specification")
+              node --no-warnings -e "require('spec-up-t/index.js')({ nowatch: true })"
+              ;;
+            "Develop specification")
+              node -e "require('spec-up-t')({ dev: true })"
+              ;;
+            "Collect external references (cached)")
+              node --no-warnings -e "require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: true})"
+              ;;
+            "Collect external references (no cache)")
+              node --no-warnings -e "require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: false, pat: process.env.MY_PAT})"
+              ;;
+            "Convert to PDF")
+              node -e "require('spec-up-t/src/create-pdf.js')"
+              ;;
+            "Freeze specification")
+              node -e "require('spec-up-t/src/freeze.js')"
+              ;;
+            "List references")
+              node -e "require('spec-up-t/src/references.js')"
+              ;;
+            "Show help")
+              cat ./node_modules/spec-up-t/src/install-from-boilerplate/help.txt || echo "Help file not found"
+              ;;
+            "Add/remove xref source")
+              node --no-warnings -e "require('spec-up-t/src/add-remove-xref-source.js')"
+              ;;
+            "Configure specification")
+              node --no-warnings -e "require('spec-up-t/src/configure.js')"
+              ;;
+            "Custom update")
+              npm update && node -e "require('spec-up-t/src/install-from-boilerplate/custom-update.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Custom update: Copy files from spec-up-t" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            *)
+              echo "Unknown script: ${{ github.event.inputs.script }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Deploy to GitHub Pages
+        if: success() && github.event.inputs.script != 'Show help' && github.event.inputs.script != 'Show menu'
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ env.OUTPUT_PATH }}
+          allow_empty_commit: true
+          force_orphan: true
+
+      - name: Clean up
+        if: always()
+        run: |
+          echo "Cleaning up..."
+          rm -rf node_modules

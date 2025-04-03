@@ -68,15 +68,27 @@
       "external_specs": [
         {
           "external_spec": "kmg-1",
-          "gh_page": "https://henkvancann.github.io/keri-main-glossary/",
-          "url": "https://github.com/henkvancann/keri-main-glossary",
-          "terms_dir": "spec/term-definitions"
+          "gh_page": "https://weboftrust.github.io/kerisuite-glossary/",
+          "url": "https://github.com/weboftrust/kerisuite-glossary",
+          "terms_dir": "spec/terms-definitions"
         },
         {
-          "external_spec": "test-2",
-          "gh_page": "https://blockchainbird.github.io/spec-up-xref-test-2/",
-          "url": "https://github.com/blockchainbird/spec-up-xref-test-2",
-          "terms_dir": "spec/term-definitions"
+          "external_spec": "toip1",
+          "gh_page": "https://trustoverip.github.io/ctwg-main-glossary/",
+          "url": "https://github.com/trustoverip/ctwg-main-glossary",
+          "terms_dir": "spec/terms-definitions"
+        },
+        {
+          "external_spec": "vlei1",
+          "gh_page": "https://keri-foundation.github.io/vlei-glossary/",
+          "url": "https://github.com/keri-foundation/vlei-glossary",
+          "terms_dir": "spec/terms-definitions"
+        },
+        {
+          "external_spec": "toip2",
+          "gh_page": "https://trustoverip.github.io/ctwg-general-glossary/",
+          "url": "https://trustoverip.github.io/ctwg-general-glossary",
+          "terms_dir": "spec/terms-definitions"
         }
       ],
       "katex": false
