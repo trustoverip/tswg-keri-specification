@@ -1,8 +1,8 @@
 [[tref: toip2, autonomic-identity-system]]
 ~ | Property | Value |
 ~ | -------- | ----- |
-~ | Owner | ![avatar](undefined) trustoverip |
-~ | Repo | [ctwg-main-glossary](https://github.com/trustoverip/ctwg-main-glossary) |
+~ | Owner | ![avatar](undefined) henkvancann |
+~ | Repo | [ctwg-general-glossary](https://github.com/henkvancann/ctwg-general-glossary) |
 ~ | Commit hash | not found |
 
 ~ This term was not found in the external repository.
