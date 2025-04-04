@@ -1,4 +1,4 @@
-name: Menu
+name: Run Menu
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ on:
           - Collect external references (no cache)
           - Convert to PDF
           - Freeze specification
-          - List references
+          # - List references
           # - Show help
           # - Add/remove xref source
           # - Configure specification
@@ -31,7 +31,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
         with:
-          persist-credentials: false  # We’ll use MY_PAT for push
+          persist-credentials: true  # We’ll use MY_PAT for push
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -60,46 +60,71 @@ jobs:
           MY_PAT: ${{ secrets.MY_PAT }} # Make the secret available as an env var
         run: |
           case "${{ github.event.inputs.script }}" in
-            "Edit specification")
-              node -e "require('spec-up-t')()"
-              ;;
+            # "Edit specification")
+            #   node -e "require('spec-up-t')()"
+            #   ;;
             "Render specification")
               node --no-warnings -e "require('spec-up-t/index.js')({ nowatch: true })"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Render specification: Update files" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
-            "Develop specification")
-              node -e "require('spec-up-t')({ dev: true })"
-              ;;
+            # "Develop specification")
+            #   node -e "require('spec-up-t')({ dev: true })"
+            #   ;;
             "Collect external references (cached)")
               node --no-warnings -e "require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: true})"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Collect external references (cached)" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
             "Collect external references (no cache)")
               node --no-warnings -e "require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: false, pat: process.env.MY_PAT})"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Collect external references (no cache)" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
             "Convert to PDF")
               node -e "require('spec-up-t/src/create-pdf.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Convert to PDF" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
             "Freeze specification")
               node -e "require('spec-up-t/src/freeze.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Freeze specification" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
-            "List references")
-              node -e "require('spec-up-t/src/references.js')"
-              ;;
-            "Show help")
-              cat ./node_modules/spec-up-t/src/install-from-boilerplate/help.txt || echo "Help file not found"
-              ;;
-            "Add/remove xref source")
-              node --no-warnings -e "require('spec-up-t/src/add-remove-xref-source.js')"
-              ;;
-            "Configure specification")
-              node --no-warnings -e "require('spec-up-t/src/configure.js')"
-              ;;
+            # "List references")
+            #   node -e "require('spec-up-t/src/references.js')"
+            #   ;;
+            # "Show help")
+            #   cat ./node_modules/spec-up-t/src/install-from-boilerplate/help.txt || echo "Help file not found"
+            #   ;;
+            # "Add/remove xref source")
+            #   node --no-warnings -e "require('spec-up-t/src/add-remove-xref-source.js')"
+            #   ;;
+            # "Configure specification")
+            #   node --no-warnings -e "require('spec-up-t/src/configure.js')"
+            #   ;;
             "Custom update")
               npm update && node -e "require('spec-up-t/src/install-from-boilerplate/custom-update.js')"
               git config --global user.email "actions@github.com"
               git config --global user.name "GitHub Actions"
               git add .
               git commit -m "Custom update: Copy files from spec-up-t" || echo "No changes to commit"
-              git push https://x-access-token:${{ secrets.MY_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
               ;;
             *)
               echo "Unknown script: ${{ github.event.inputs.script }}"

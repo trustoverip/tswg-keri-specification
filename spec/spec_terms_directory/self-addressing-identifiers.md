@@ -1,8 +1,8 @@
-[[tref: kmg-1, self-addressing-identifiers, SAID]]
+[[tref: toip2, self-addressing-identifiers, SAID]]
 ~ | Property | Value |
 ~ | -------- | ----- |
-~ | Owner | ![avatar](undefined) weboftrust |
-~ | Repo | [kerisuite-glossary](https://github.com/weboftrust/kerisuite-glossary) |
+~ | Owner | ![avatar](undefined) trustoverip |
+~ | Repo | [ctwg-main-glossary](https://github.com/trustoverip/ctwg-main-glossary) |
 ~ | Commit hash | not found |
 
 ~ This term was not found in the external repository.
