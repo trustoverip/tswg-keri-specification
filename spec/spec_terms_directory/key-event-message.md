@@ -10,5 +10,3 @@
 ~ More in <a href="https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-message">extended KERI glossary</a>
 
 ~ <span style="display: none;">End of included external content. Add your optional custom content below.</span>
-
-~ More in <a href="https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-message">extended KERI glossary</a>
