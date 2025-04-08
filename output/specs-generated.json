@@ -68,8 +68,8 @@
       "external_specs": [
         {
           "external_spec": "kmg-1",
-          "gh_page": "https://weboftrust.github.io/kerisuite-glossary/",
-          "url": "https://github.com/weboftrust/kerisuite-glossary",
+          "gh_page": "https://henkvancann.github.io/kerisuite-glossary/",
+          "url": "https://github.com/henkvancann/kerisuite-glossary",
           "terms_dir": "spec/terms-definitions"
         },
         {
@@ -80,8 +80,8 @@
         },
         {
           "external_spec": "vlei1",
-          "gh_page": "https://keri-foundation.github.io/vlei-glossary/",
-          "url": "https://github.com/keri-foundation/vlei-glossary",
+          "gh_page": "https://henkvancann.github.io/vlei-glossary/",
+          "url": "https://github.com/henkvancann/vlei-glossary",
           "terms_dir": "spec/terms-definitions"
         },
         {
