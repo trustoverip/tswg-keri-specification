@@ -17,8 +17,8 @@
             "favicon": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/favicon.ico",
             "source": {
                 "host": "github",
-                "account": "trustoverip",
-                "repo": "spec-up-t-starter-pack"
+                "account": "henkvancann",
+                "repo": "tswg-keri-specification"
             },
             "external_specs": [
                 {

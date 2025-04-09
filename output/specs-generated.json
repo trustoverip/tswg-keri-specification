@@ -10,7 +10,7 @@
       "markdown_paths": [
         "spec-head.md",
         "terms-and-definitions-intro.md",
-        "spec_terms_directory/KERI’s-algorithm-for-witness-agreement.md",
+        "spec_terms_directory/KERIs-algorithm-for-witness-agreement.md",
         "spec_terms_directory/authentic-chained-data-container.md",
         "spec_terms_directory/autonomic-identifier.md",
         "spec_terms_directory/autonomic-identity-system.md",
@@ -62,8 +62,8 @@
       "favicon": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/favicon.ico",
       "source": {
         "host": "github",
-        "account": "trustoverip",
-        "repo": "spec-up-t-starter-pack"
+        "account": "henkvancann",
+        "repo": "tswg-keri-specification"
       },
       "external_specs": [
         {
