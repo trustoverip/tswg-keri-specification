@@ -1,1 +1,1 @@
-[[tref: toip2, dead-attack]]
+[[tref: kmg-1, dead-attack]]

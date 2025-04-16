@@ -1,7 +1,7 @@
 {
   "specs": [
     {
-      "title": "Spec-Up-T Starterpack",
+      "title": "KERI specification",
       "description": "Create technical specifications in markdown. Based on the original Spec-Up, extended with Terminology tooling",
       "author": "Trust over IP Foundation",
       "spec_directory": "./spec",
@@ -63,7 +63,8 @@
       "source": {
         "host": "github",
         "account": "henkvancann",
-        "repo": "tswg-keri-specification"
+        "repo": "tswg-keri-specification",
+        "branch": "revised-format"
       },
       "external_specs": [
         {

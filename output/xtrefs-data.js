@@ -1,12 +1,12 @@
 const allXTrefs = {
   "xtrefs": [
     {
-      "externalSpec": "toip2",
-      "term": "KERI’s-algorithm-for-witness-agreement",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "externalSpec": "kmg-1",
+      "term": "keris-algorithm-for-witness-agreement",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "kerisuite-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -24,34 +24,34 @@ const allXTrefs = {
       "content": "[[def: authentic-chained-data-container, authentic-chained data container]]\n\n~ a directed acyclic graph with properties to provide a verifiable chain of [[ref: proof-of-authorship]]. See the full [specification](https://trustoverip.github.io/tswg-acdc-specification/)  \n~ Source: Dr. S.Smith, 2024\n\n~ Explained briefly, an ACDC or [[ref: authentic-data-container]] proves digital data consistency and authenticity in one go. An ACDC cryptographically secures commitment to the data contained, and its identifiers are self-addressing, which means they point to themselves and are also contained in the data.\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-chained-data-container\">extended KERI glossary</a>\n"
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "kmg-1",
       "term": "autonomic-identifier",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "kerisuite-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "toip1",
       "term": "autonomic-identity-system",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/ctwg-main-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "ctwg-main-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "toip1",
       "term": "autonomic-namespace",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/ctwg-main-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "ctwg-main-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -140,12 +140,12 @@ const allXTrefs = {
       "content": "[[def: current-threshold, current threshold]]\n\n~ represents the number or fractional weights of signatures from the given set of current keys required to be attached to a [Message](https://trustoverip.github.io/tswg-keri-specification/#term:message) for the [Message](https://trustoverip.github.io/tswg-keri-specification/#term:message) to be considered fully signed.  \n~ Source: Dr. S.Smith, 2024\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/current-threshold\">extended KERI glossary</a>\n"
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "kmg-1",
       "term": "dead-attack",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "kerisuite-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -175,12 +175,12 @@ const allXTrefs = {
       "content": "[[def: duplicity, duplicity]]\n\n~ the existence of more than one version of a Verifiable [[ref: key-event-log]] for a given [[ref: AID]].  \n~ Source: Dr. S.Smith, 2024\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/duplicity\">extended KERI glossary</a>\n"
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "toip1",
       "term": "end-verifiability",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/ctwg-main-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "ctwg-main-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -234,12 +234,12 @@ const allXTrefs = {
       "content": "[[def: inception, inception]]\n\n~ The operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and duplicity evident upon acceptance as the inception event that begins the AID's KEL.  \n~ Source [Sam Smith](https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology)\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inception\">extended KERI glossary</a>\n"
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "kmg-1",
       "term": "interaction-event",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "kerisuite-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -293,12 +293,12 @@ const allXTrefs = {
       "content": "[[def: key-event-receipt, key event receipt]]\n\n~ message whose body references a Key event and whose attachments must include one or more signatures on that Key event.   \n~ Source [Sam Smith](https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology)\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt\">extended KERI glossary</a>\n"
     },
     {
-      "externalSpec": "toip2",
+      "externalSpec": "kmg-1",
       "term": "key-event",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
+      "repo": "kerisuite-glossary",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."

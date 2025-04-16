@@ -1,1 +1,1 @@
-[[tref: toip2, key-event]]
+[[tref: kmg-1, key-event]]
