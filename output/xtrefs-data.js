@@ -98,9 +98,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-main-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "864b61ade56d9365c057a1f7f54d5d9b82cee56e",
+      "content": "[[def: controller, controllers]]\n\n~ In the context of digital [[ref: communications]], the [[ref: entity]] in control of sending and receiving digital [[ref: communications]]. In the context of decentralized digital trust infrastructure, the [[ref: entity]] in control of the [[ref: cryptographic keys]] necessary to perform [[ref: cryptographically verifiable]] [[ref: actions]] using a [[ref: digital agent]] and [[ref: digital wallet]]. In a ToIP context, the [[ref: entity]] in control of a [[ref: ToIP endpoint]].\n\n~ See also: [[ref: device controller]], [[ref: DID controller]], [[ref: ToIP controller]].\n\n~ Supporting definitions:\n\n~ [eSSIF-Lab](https://essif-lab.github.io/framework/docs/essifLab-glossary#controller): the role that an [actor](https://essif-lab.github.io/framework/docs/terms/actor) performs as it is executing actions on that [entity](https://essif-lab.github.io/framework/docs/terms/entity) for the purpose of ensuring that the [entity](https://essif-lab.github.io/framework/docs/terms/entity) will act/behave, or be used, in a particular way.\n"
     },
     {
       "externalSpec": "toip2",
@@ -109,9 +110,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "95419bcb8829a343bcbc77f0b5c2035c3bbc46c8",
+      "content": "[[def: cryptographic-primitive, cryptographic primitive]]\n\n~ the serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature.  \n~ Source: Dr. S.Smith, 2024\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptographic-primitive\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -120,9 +122,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "bee0a1c93c20563be021a071e80b8cdf9dd79072",
+      "content": "[[def: cryptonym, cryptonym]]\n\n~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on [[ref: cryptographic-strength]]. A cryptonym is a type of [[ref: primitive]]. \n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptonym\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "kmg-1",
@@ -154,9 +157,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "9509d29a288baf687b2aa0979b712901069cac16",
+      "content": "[[def: decentralized-key-management-infrastructure, decentralized key-management infrastructure]]\n\n~ a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier [DPKI](https://trustoverip.github.io/tswg-keri-specification/#term:dpki).  \n~ Source: Dr. S.Smith, 2024\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/decentralized-key-management-infrastructure\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -165,9 +169,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "62090fdb3f1d36d63df633bc19e55db2a8343c1b",
+      "content": "[[def: duplicity, duplicity]]\n\n~ the existence of more than one version of a Verifiable [[ref: key-event-log]] for a given [[ref: AID]].  \n~ Source: Dr. S.Smith, 2024\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/duplicity\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -223,9 +228,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "d3463a95ca968fb6a64daed7938cba66b8ab9d21",
+      "content": "[[def: inception, inception]]\n\n~ The operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and duplicity evident upon acceptance as the inception event that begins the AID's KEL.  \n~ Source [Sam Smith](https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology)\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inception\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -304,9 +310,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "d81240951684691b44afa5da54d6538874fedfd2",
+      "content": "[[def: key-state, key state]]\n\n~ a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations. \n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-state\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -315,9 +322,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "a92f1037b32436954f5121ded2a440dc94583da4",
+      "content": "[[def: live-attack, live attack]]\n\n~ an attack that compromises either the current signing keys used to sign non-establishment events or the current pre-rotated keys needed to sign a subsequent establishment event. See (Security Properties of Prerotation)[#live-attacks].  \n~ Source: Dr. S.Smith\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/live-attack\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip1",
@@ -326,9 +334,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-main-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "7aaff3ffeec4002f35c993465476d57703b148f6",
+      "content": "[[def: message, messages]]\n\n~ A discrete unit of [[ref: communication]] intended by the source for consumption by some recipient or group of recipients.\n\n~ Source: [Wikipedia](https://en.wikipedia.org/wiki/Message).\n\n~ See also: [[ref: ToIP message]], [[ref: verifiable message]].\n"
     },
     {
       "externalSpec": "kmg-1",
@@ -361,9 +370,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "c3289f825c90169e65846d21eea87566ebda040c",
+      "content": "[[def: primitive, primitive]]\n\n~ a serialization of a unitary value. All Primitives in KERI must be expressed in [[ref: composable-event-streaming-representation]].  \n~ Source: Dr. S.Smith\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/primitive\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -395,9 +405,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "cb3cc97cc868dac1e585908011f8bb0e93631572",
+      "content": "[[def: salt, salt]]\n\n~ random data fed as an additional input to a one-way function that hashes data.  \n~ Source: Dr. S. Smith\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/salt\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip2",
@@ -406,9 +417,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "4526eff71b3ca664463e6254c06a8977dfeb0eb8",
+      "content": "[[def: seal, seal]]\n\n~ a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence.  \n~ Source: Dr. S. Smith\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/seal\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "kmg-1",
@@ -451,9 +463,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "f9dc9b3e2cf0fe1297b5a8b79117cc31541f5b2c",
+      "content": "[[def: validator, validator]]\n\n~ any entity or agent that evaluates whether or not a given signed statement as attributed to an identifier is valid at the time of its issuance.  \n~ Source: Dr. S. Smith\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/validator\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "toip1",
@@ -462,9 +475,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-main-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "52800fbbbb41ca0d8e2e80269ac4fd8f8977180e",
+      "content": "[[def: verifiable, verifiability]]\n\n~ In the context of digital [[ref: communications]] infrastructure, the ability to determine the [[ref: authenticity]] of a [[ref: communication]] (e.g., sender, contents, [[ref: claims]], [[ref: metadata]], provenance), or the underlying [[ref: sociotechnical]] infrastructure (e.g., [[ref: governance]], [[ref: roles]], [[ref: policies]], [[ref: authorizations]], [[ref: certifications]]).\n\n~ See also:[[ref: appraisable]], [[ref: digital signature]].\n"
     },
     {
       "externalSpec": "toip1",
@@ -473,9 +487,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-main-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "09ebd3fab6db9e0abca68b6f0da15acdb61c23ef",
+      "content": "[[def: verifier, verifiers]]\n\n~ A [[ref: role]] an [[ref: agent]] performs to perform [[ref: verification]] of one or more [[ref: proofs]] of the [[ref: claims]] in a [[ref: digital credential]] or other [[ref: verifiable data]].\n\n~ See also: [[ref: relying party]]; [[ref: issuer]], [[ref: holder]].\n\n~ Mental model: [W3C Verifiable Credentials Data Model Roles & Information Flows](https://www.w3.org/TR/vc-data-model/#roles)\n\n~ Supporting definitions:\n\n~ [W3C VC](https://www.w3.org/TR/vc-data-model/#terminology): A role an [entity](https://www.w3.org/TR/vc-data-model/#dfn-entities) performs by receiving one or more [verifiable credentials](https://www.w3.org/TR/vc-data-model/#dfn-verifiable-credentials), optionally inside a [verifiable presentation](https://www.w3.org/TR/vc-data-model/#dfn-verifiable-presentations) for processing. Other specifications might refer to this concept as a [[ref: relying party]].\n\n~ [eSSIF-Lab](https://essif-lab.github.io/framework/docs/essifLab-glossary#verifier): a component that implements the [capability](https://essif-lab.github.io/framework/docs/terms/capability) to request [peer agents](https://essif-lab.github.io/framework/docs/terms/peer-agent) to present (provide) data from credentials (of a specified kind, issued by specified [parties](https://essif-lab.github.io/framework/docs/terms/party)), and to verify such responses (check structure, signatures, dates), according to its [principal](https://essif-lab.github.io/framework/docs/terms/principal)'s [verifier policy](https://essif-lab.github.io/framework/docs/terms/verifier-policy). \n\n~ [NIST](https://csrc.nist.gov/glossary/term/verifier) The entity that verifies the authenticity of a digital signature using the public key.\n"
     },
     {
       "externalSpec": "toip2",
@@ -484,9 +499,10 @@ const allXTrefs = {
       "terms_dir": "spec/terms-definitions",
       "owner": "henkvancann",
       "repo": "ctwg-general-glossary",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/479356?v=4",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "ced432d7ec1c120f5a1f89d8bc0864d240d38cf5",
+      "content": "[[def: version, version]]\n\n~ an instance of a KEL for an AID in which at least one event is unique between two instances of the [[ref: kel]].  \n~ Source: Dr. S. Smith\n\n~ More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version\">extended KERI glossary</a>\n"
     },
     {
       "externalSpec": "kmg-1",
