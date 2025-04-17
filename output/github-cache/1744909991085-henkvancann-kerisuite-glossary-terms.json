@@ -1,0 +1,1073 @@
+{
+  "timestamp": 1744909991085,
+  "repository": "henkvancann/kerisuite-glossary",
+  "terms": [
+    {
+      "term": "ACDC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ACDC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ADC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:authentic-data-container\">authentic-data-container</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ADC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "APC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:authentic-provenance-chain\">authentic-provenance-chain</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/APC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "AVR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:authorized-vlei-representative\">authorized-vlei-representative</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/AVR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "BADA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:best-available-data-acceptance-mechanism\">best-available-data-acceptance-mechanism</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/BADA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CESR-version",
+      "definition": "<dd>\n<p>the CESR Version is provided by a special Count Code that specifies the Version of all the CESR code tables in a given Stream or Stream section.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CESR-version\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CESR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CESR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CLC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:chain-link-confidentiality\">chain-link-confidentiality</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CLC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "DAR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:designated-authorized-representative\">designated-authorized-representative</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/DAR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "DEL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:duplicitous-event-log\">duplicitous-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/DEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ECR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:engagement-context-role\">engagement-context-role</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ECR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "GAR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:gleif-authorized-representative\">gleif-authorized-representative</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/GAR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "GLEIS",
+      "definition": "<dd>\n<p>Global Legal Entity Identifier System</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/GLEIS\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "IPEX",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:issuance-and-presentation-exchange-protocol\">issuance-and-presentation-exchange-protocol</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/IPEX\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KA2CE",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-agreement-algorithm-for-control-establishment\">keri-agreement-algorithm-for-control-establishment</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KA2CE\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KAACE",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-agreement-algorithm-for-control-establishment\">keri-agreement-algorithm-for-control-establishment</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KAACE\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KAPI",
+      "definition": "<dd>\n<p>Application programmer interfaces (APIs) for the various components in the KERI ecosystem such as Controllers, Agents, Witnesses, Watchers, Registrars etc need by which they can share information. The unique properties of the KERI protocol require APIs that preserve those properties. We call the set of APIs the KERI API.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"kapi\" path-3=\"blob\" path-4=\"main\" path-5=\"kapi.md\" href=\"https://github.com/WebOfTrust/kapi/blob/main/kapi.md\">Source Kapi Repo</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KAPI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KAWA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri’s-algorithm-for-witness-agreement\">keri’s-algorithm-for-witness-agreement</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KAWA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KEL",
+      "definition": "<dd>\n<p>A Key Event Log.</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:key-event-receipt-infrastructure\">key-event-receipt-infrastructure</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERIA-agent",
+      "definition": "<dd>\n<p>An <a class=\"term-reference\" href=\"#term:agent\">agent</a> in <a class=\"term-reference\" href=\"#term:keria\">keria</a> terms, is an instance of a keystore (<a class=\"term-reference\" href=\"#term:hab\">hab</a>) that runs in a given instance of the KERIA agent server.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERIA-agent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERIA",
+      "definition": "<dd>\n<p>KERI Agent in the cloud. The KERIA service will expose 3 separate HTTP endpoints on 3 separate network interfaces.</p>\n</dd>\n<dd>\n<ol>\n<li>Boot Interface - Exposes one endpoint for Agent Worker initialization.</li>\n</ol>\n</dd>\n<dd>\n<ol start=\"2\">\n<li>Admin Interface - The REST API for command and control operations from the Signify Client.</li>\n</ol>\n</dd>\n<dd>\n<ol start=\"3\">\n<li>KERI Protocol Interface - CESR over HTTP endpoint for KERI protocol interactions with the rest of the world.</li>\n</ol>\n</dd>\n<dd>\n<p>More at <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"keria\" path-3=\"blob\" path-4=\"main\" path-5=\"docs\" path-6=\"protocol.md\" href=\"https://github.com/WebOfTrust/keria/blob/main/docs/protocol.md\">Source Github repo</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERIA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERIMask",
+      "definition": "<dd>\n<p>A wallet similar to <em>MetaMask</em>, the manifestation will be a browser extension and it will connect to KERIA servers in order for a person to control AIDs from their browser.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERIMask\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERISSE",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-suite-search-engine\">keri-suite-search-engine</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERISSE\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KERL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KERL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KID",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-improvement-doc\">keri-improvement-doc</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KID\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "KRAM",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-request-authentication-method\">keri-request-authentication-method</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/KRAM\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "OOBI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:out-of-band-introduction\">out-of-band-introduction</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/OOBI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "OOR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:official-organizational-role\">official-organizational-role</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/OOR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "PID",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:percolated-information-discovery\">percolated-information-discovery</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/PID\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "PTEL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:public-transaction-event-log\">public-transaction-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/PTEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "QAR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:qvi-authorized-representative\">qvi-authorized-representative</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/QAR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "QVI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:qualified-vlei-issuer\">qualified-vlei-issuer</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/QVI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "RID",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:root-autonomic-identifier\">root-autonomic-identifier</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/RID\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "RUN",
+      "definition": "<dd>\n<p>The acronym for the new peer-to-peer end-verifiable monotonic update policy is RUN (<strong>Read, Update, Nullify</strong>).</p>\n</dd>\n<dd>\n<p>RUN as opposed to <a class=\"term-reference\" href=\"#term:crud\">CRUD</a> which is the traditional client-server database update policy.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/RUN\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SAD",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:self-addressing-data\">self-addressing-data</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SAD\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SAID",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:self-addressing-identifier\">self-addressing-identifier</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SAID\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SKRAP",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:signify-keria-request-authentication-protocol\">signify-keria-request-authentication-protocol</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SKRAP\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SKWA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:simple-keri-for-web-auth\">simple-keri-for-web-auth</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SKWA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SPAC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:secure-private-authentic-confidentiality\">secure-private-authentic-confidentiality</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SPAC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "TEL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/TEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "TOAD",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:threshold-of-accountable-duplicity\">threshold-of-accountable-duplicity</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/TOAD\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "VCTEL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:virtual-credential-transaction-event-log\">virtual-credential-transaction-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/VCTEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "abandoned-identifier",
+      "definition": "<dd>\n<p>An <a class=\"term-reference\" href=\"#term:aid\">AID</a> is abandoned when either the <a class=\"term-reference\" href=\"#term:inception-event\">inception-event</a> or a subsequent <a class=\"term-reference\" href=\"#term:rotation-event\">rotation-event</a> rotates to an empty next key digest list (which means the next threshold must also be 0).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/abandoned-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "access-controlled-interaction",
+      "definition": "<dd>\n<p>Access controlled actions like submitting a report. If you already have that report then load balancer needs a mechanism to drop repeated requests.</p>\n</dd>\n<dd>\n<p>Source: Samuel Smith / Daniel Hardman / Lance Byrd - Zoom meeting KERI Suite Jan 16 2024; discussion minute 30-60 min</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/access-controlled-interaction\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ambient-verifiability",
+      "definition": "<dd>\n<p>Verifiable by anyone, anywhere, at anytime. Although this seems a general term, it was first used in the context of KERI by Sam Smith.</p>\n</dd>\n<dd>\n<p><em>Ambient Duplicity Detection</em> is an example of ambient verifiability that describes the possibility of detecting duplicity by anyone, anywhere, anytime.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ambient-verifiability\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ample",
+      "definition": "<dd>\n<p>The minimum required number of participants in an event to have a <a class=\"term-reference\" href=\"#term:supermajority\">supermajority</a> so that one and only one agreement or consensus on an event may be reached. This is a critical part of the <a class=\"term-reference\" href=\"#term:kaace\">KAACE</a> agreement algorithm (consensus) in KERI for establishing consensus between witnesses on the key state of a KERI identifier.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ample\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authentic-chained-data-container",
+      "definition": "<dd>\n<p>a directed acyclic graph with properties to provide a verifiable chain of <a class=\"term-reference\" href=\"#term:proof-of-authorship\">proof-of-authorship</a>. See the full <a path-0=\"trustoverip.github.io\" path-1=\"tswg-acdc-specification\" path-2=\"\" href=\"https://trustoverip.github.io/tswg-acdc-specification/\">specification</a></p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>Explained briefly, an ACDC or <a class=\"term-reference\" href=\"#term:authentic-data-container\">authentic-data-container</a> proves digital data consistency and authenticity in one go. An ACDC cryptographically secures commitment to the data contained, and its identifiers are self-addressing, which means they point to themselves and are also contained in the data.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-chained-data-container\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authentic-data-container",
+      "definition": "<dd>\n<p>A mechanism for conveying data that allows the <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> of its content to be proved.</p>\n</dd>\n<dd>\n<p><strong>Instance</strong></p>\n</dd>\n<dd>\n<p>A <a path-0=\"w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"\" href=\"https://w3.org/TR/vc-data-model/\">Verifiable Credential</a> is an <a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-data-container\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authentic-provenance-chain",
+      "definition": "<dd>\n<p>Interlinked <a class=\"term-reference\" href=\"#term:presentation-exchange\">presentation-exchange</a> of evidence that allow data to be tracked back to its origin in an objectively <a class=\"term-reference\" href=\"#term:verifiable\">verifiable</a> way.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-provenance-chain\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authorized-vlei-representative",
+      "definition": "<dd>\n<p>Also ‘AVR’. This a representative of a Legal Entity that are authorized by the <a class=\"term-reference\" href=\"#term:dar\">DAR</a> of a Legal Entity to request issuance and revocation of:</p>\n</dd>\n<dd>\n<ul>\n<li>vLEI Legal Entity Credentials</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>Legal Entity Official Organizational Role vLEI Credentials (<a class=\"term-reference\" href=\"#term:official-organizational-role\">official-organizational-role</a> vLEI Credentials)</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>Legal Entity Engagement Context Role vLEI Credentials (<a class=\"term-reference\" href=\"#term:engagement-context-role\">engagement-context-role</a> vLEI Credentials).</li>\n</ul>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from <a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">source</a> Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authorized-vlei-representative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "backer",
+      "definition": "<dd>\n<p>an alternative to a traditional KERI based <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:witness\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:witness\">Witness</a> commonly using Distributed Ledger Technology (DLT) to store the <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:kel\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:kel\">KEL</a> for an identifier.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/backer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "base-media-type",
+      "definition": "<dd>\n<p><code>credential</code> plus <code>ld</code> plus <code>json</code>.</p>\n</dd>\n<dd>\n<p>Other media types of credentials are allowed by must provide either unidirectional or bidirectional transformations.  So, for example, we would create credential+acdc+json and provide a unidirectional transformation to credential+ld+json.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/base-media-type\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "bespoke-credential",
+      "definition": "<dd>\n<p>It’s an <a class=\"term-reference\" href=\"#term:issuance-event\">issuance-event</a> of the disclosure or presentation of other ACDCs. <em>Bespoke</em> means <em>Custom</em> or <em>tailor made</em>.</p>\n</dd>\n<dd>\n<p>A bespoke credential serves as an on-the-fly contract with the issuee; it’s a self-referencing and self-contained contract between the issuer and the verifier. Mind you, here the issuer and issuee are merely the discloser and disclosee of another (set of) ACDC(s).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/bespoke-credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "best-available-data-acceptance-mechanism",
+      "definition": "<dd>\n<p>The BADA security model provides a degree of <a class=\"term-reference\" href=\"#term:replay-attack\">replay-attack</a> protection. The attributate originator (issuer, author, source) is provided by an attached signature couple or quadruple. A single reply could have multiple originators. When used as an <a class=\"term-reference\" href=\"#term:authorization\">authorization</a> the reply attributes may include the identifier of the authorizer and the logic for processing the associated route may require a matching attachment.</p>\n</dd>\n<dd>\n<p>BADA is part of <a class=\"term-reference\" href=\"#term:keri\">KERI</a>'s <a path-0=\"hackmd.io\" path-1=\"Qsrfj7Y-TIGl5ESvrxWGxw\" href=\"https://hackmd.io/Qsrfj7Y-TIGl5ESvrxWGxw\">Zero Trust Computing Architecture for Data Management</a>: How to support Secure Async Data Flow Routing in KERI enabled Applications.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/best-available-data-acceptance-mechanism\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "bexter",
+      "definition": "<dd>\n<p>The class variable length text that is used in CESR and preserves the round-trip transposability using Base64 URL safe-only encoding even though the text variable length.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/bexter\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "bis",
+      "definition": "<dd>\n<p>bis = backed vc issue, registry-backed transaction event log credential issuance</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/bis\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "bivalent",
+      "definition": "<dd>\n<p>A nested set of layered delegations in a <a class=\"term-reference\" href=\"#term:delegation\">delegation</a> tree, wraps each layer with compromise recovery protection of the next higher layer. This maintains the security of the root layer for compromise recovery all the way out to the leaves in spite of the leaves using less secure key management methods.</p>\n</dd>\n<dd>\n<p><img src=\"https://github.com/WebOfTrust/WOT-terms/blob/0582b911fee7cdf0e2730df788bb5afd38d31e14/static/img/bivalent-delegated-key-management-infrastructure.png\" alt=\"bivalent-key-management-infrastructure\"></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/bivalent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "blind-oobi",
+      "definition": "<dd>\n<p>A blind <a class=\"term-reference\" href=\"#term:oobi\">OOBI</a> means that you have some mechanisms in place for verifying the <a class=\"term-reference\" href=\"#term:aid\">AID</a> instead of via the OOBI itself. A blind OOBI is essentially a <a class=\"term-reference\" href=\"#term:url\">URL</a>. It’s called “blind” because the witness is not in the OOBI itself. You haves other ways of verifying the AID supplied.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/blind-oobi\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "blinded-revocation-registry",
+      "definition": "<dd>\n<p>The current state of a <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a> (TEL) <strong>may be hidden or blinded</strong> such that <em>the only way</em> for a potential verifier of the state to observe that state is <em>when the controller of a designated AID discloses it</em> at the time of presentation.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/blinded-revocation-registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "bran",
+      "definition": "<dd>\n<p>A cryptographic string used as a primary input, a seed, for creating key material for and <a class=\"term-reference\" href=\"#term:autonomic-identifier\">autonomic-identifier</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/bran\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "brv",
+      "definition": "<dd>\n<p>brv = backed vc revoke, registry-backed transaction event log credential revocation</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/brv\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cesr-proof-signatures",
+      "definition": "<dd>\n<p>CESR Proof Signatures is an extension to the Composable Event Streaming Representation [CESR] that provides transposable cryptographic signature attachments on self-addressing data <a class=\"term-reference\" href=\"#term:sad\">SAD</a>. Any SAD, such as an Authentic Chained Data Container (ACDC) Verifiable Credential [ACDC], for example, may be signed with a CESR Proof Signature and streamed along with any other CESR content. In addition, a signed SAD can be embedded inside another SAD, and the CESR proof signature attachment can be transposed across envelope boundaries and streamed without losing any cryptographic integrity.</p>\n</dd>\n<dd>\n<p>(Philip Feairheller, IETF-cesr-proof)</p>\n</dd>\n<dd>\n<img src=\"https://hackmd.io/_uploads/ByxcPBQT5.png\" width=\"600\" height=\"350\">\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cesr-proof-signatures\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cesride",
+      "definition": "<dd>\n<p>is concerned with parsing CESR primitives.</p>\n</dd>\n<dd>\n<p>Cesride is built from cryptographic primitives that are named clearly and concisely. There are:</p>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:diger\">diger</a></li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:verfer\">verfer</a></li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:signer\">signer</a></li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:siger\">siger</a></li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:cigar\">cigar</a></li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:salter\">salter</a></li>\n</ul>\n</dd>\n<dd>\n<p>Each primitive will have methods attached to it that permit one to generate and parse the qualified base2 or <a class=\"term-reference\" href=\"#term:base64\">base64</a> representation.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cesride\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "chain-link-confidential-disclosure",
+      "definition": "<dd>\n<p>contractual restrictions and liability imposed on a recipient of a disclosed <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a> that contractually link the obligations to protect the disclosure of the information contained within the ACDC to all subsequent recipients as the information moves downstream. The Chain-link Confidential Disclosure provides a mechanism for protecting against un-permissioned exploitation of the data disclosed via an ACDC.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/chain-link-confidential-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "chain-link-confidentiality",
+      "definition": "<dd>\n<p>Chains together a sequence of <a class=\"term-reference\" href=\"#term:disclosee\">disclosee</a> which may also include a set of constraints on data usage by both second and third parties expressed in legal language such that the constraints apply to all recipients of the disclosed data thus the phrase “chain link” confidentiality. Each Disclosee in the sequence in turn is the <a class=\"term-reference\" href=\"#term:discloser\">discloser</a> to the next Disclosee.</p>\n</dd>\n<dd>\n<p>This is the primary mechanism of granting digital data rights through binding information exchange to confidentiality laws. Confidentiality is dynamically negotiated on a per-event, per-data exchange basis according to the data that is being shared in a given exchange.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/chain-link-confidentiality\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cigar",
+      "definition": "<dd>\n<p>An <strong><em>un</em></strong><a class=\"term-reference\" href=\"#term:indexed-signature\">indexed-signature</a>.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"cesride#terminology\" href=\"https://github.com/WebOfTrust/cesride#terminology\">Source</a> by Jason Colburne</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cigar\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "code-table-selector",
+      "definition": "<dd>\n<p>the first character in the text code of <a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a> that determines which <a class=\"term-reference\" href=\"#term:code-table\">code-table</a> to use, either a default code table or a code table selector character when not the default code table. Thus the 1 character text code table must do double duty. It must provide selectors for the different text code tables and also provide type codes for the most popular primitives that have a pad size of 1 that appear is the default code table.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/code-table-selector\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cold-start-stream-parsing",
+      "definition": "<dd>\n<p>After a reboot (or cold start), a stream processor looks for framing information to know how to parse groups of elements in the stream.</p>\n</dd>\n<dd>\n<p>If that framing information is ambiguous then the parser may become confused and require yet another cold start. While processing a given stream a parser may become confused especially if a portion of the stream is malformed in some way. This usually requires flushing the stream and forcing a cold start to resynchronize the parser to subsequent stream elements.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cold-start-stream-parsing\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "compact-disclosure",
+      "definition": "<dd>\n<p>a disclosure of an ACDC that discloses only the SAID(s) of some or all of its field maps. Both Partial and Selective Disclosure rely on Compact Disclosure.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/compact-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "compact-variant",
+      "definition": "<dd>\n<p>Either a <a class=\"term-reference\" href=\"#term:most-compact\">most-compact</a> version of an ACDC or the <a class=\"term-reference\" href=\"#term:fully-compact\">fully-compact</a> version of an ACDC. An <a class=\"term-reference\" href=\"#term:issuer\">issuer</a> commitment via a signature to any variant of ACDC (compact, full, etc) makes a cryptographic commitment to the top-level section fields shared by all variants of that ACDC because the value of a <a class=\"term-reference\" href=\"#term:top-level-section\">top-level-section</a> is either the <a class=\"term-reference\" href=\"#term:sad\">SAD</a> or the <a class=\"term-reference\" href=\"#term:said\">SAID</a> of the SAD of the associated section.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/compact-variant\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "composable-event-streaming-representation",
+      "definition": "<dd>\n<p>Also called ‘CESR’. This compact encoding scheme fully supports both textual and binary streaming applications of attached crypto material of all types. This approach includes <a class=\"term-reference\" href=\"#term:composability\">composability</a> in both the textual and binary streaming domains. The <a class=\"term-reference\" href=\"#term:primitive\">primitive</a> may be the minimum possible but still composable size.</p>\n</dd>\n<dd>\n<p>Making composability a guaranteed property allows future extensible support of new compositions of streaming formats based on pre-existing core primitives and compositions of core primitives. This enables optimized stream processing in both the binary and text domains.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/composable-event-streaming-representation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "composable",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:composability\">composability</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/composable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "configuration-traits",
+      "definition": "<dd>\n<p>a list of specially defined strings representing a configuration of a KEL. See <a class=\"term-reference\" href=\"#term:#configuration-traits-field\">#configuration-traits-field</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-traits\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "contingent-disclosure",
+      "definition": "<dd>\n<p>Contingent disclosure is a privacy-preserving mechanism where only specific information or attributes are disclosed under defined conditions. It enables the selective sharing of data such that only the required information is revealed to a relying party, without exposing other unrelated or sensitive details. <a class=\"term-reference\" href=\"#term:chain-link-confidentiality\">chain-link-confidentiality</a> is a form of contingent disclosure.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/contingent-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "contractually-protected-disclosure",
+      "definition": "<dd>\n<p>a discloser of an ACDC that leverages a Graduated Disclosure so that contractual protections can be put into place to minimize the leakage of information that can be correlated. A Contractually Protected Disclosure partially or selectively reveals the information contained within the ACDC in the initial interaction with the recipient and discloses further information only after the recipient agrees to the terms established by the discloser. More information may be progressively revealed as the recipient agrees to additional terms.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/contractually-protected-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cooperative-delegation",
+      "definition": "<dd>\n<p>The way KERI addresses the <a class=\"term-reference\" href=\"#term:security-cost-performance-architecture-trade-off\">security-cost-performance-architecture-trade-off</a> is via <a class=\"term-reference\" href=\"#term:delegation\">delegation</a> of identifier prefixes. Delegation includes a delegator and a delegate. For this reason we may call this a cooperative delegation. This is a somewhat <strong>novel form of delegation</strong>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cooperative-delegation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "count-code",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:group-framing-code\">group-framing-code</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/count-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "current-threshold",
+      "definition": "<dd>\n<p>represents the number or fractional weights of signatures from the given set of current keys required to be attached to a <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> for the <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> to be considered fully signed.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/current-threshold\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "custodial-agent",
+      "definition": "<dd>\n<p>An <a class=\"term-reference\" href=\"#term:agent\">agent</a> owned by an individual who has granted <a class=\"term-reference\" href=\"#term:signing-authority\">signing-authority</a> to a custodian who is usually also the host of the running agent software. Using <a class=\"term-reference\" href=\"#term:partial-rotation\">partial-rotation</a> to facilitate custodial key management the owner of the identifier retains <a class=\"term-reference\" href=\"#term:rotation-authority\">rotation-authority</a> and thus the ability to “fire” the custodian at any time without requiring the cooperation of the custodian.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/custodial-agent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "custodial-rotation",
+      "definition": "<dd>\n<p>Rotation is based on control authority that is split between two key sets. The first for signing authority and the second (pre-rotated) for rotation authority, the associated thresholds and key list can be structured so that a designated custodial agent can hold signing authority, while the original controller can hold exclusive rotation authority.</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:partial-rotation\">partial-rotation</a> supports the vital use case of custodial key rotation to authorize a <a class=\"term-reference\" href=\"#term:custodial-agent\">custodial-agent</a>.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann based on the <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md\">IETF-KERI draft 2022</a> by Samual Smith.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/custodial-rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "delegation",
+      "definition": "<dd>\n<p>A person or group of persons officially elected or appointed to represent another or others.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/delegation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "derivation-code",
+      "definition": "<dd>\n<p>To properly extract and use the <a class=\"term-reference\" href=\"#term:public-key-infrastructure\">public-key-infrastructure</a> embedded in a <a class=\"term-reference\" href=\"#term:self-certifying-identifier\">self-certifying-identifier</a> we need to know the cryptographic <em>signing scheme</em> used by the <a class=\"term-reference\" href=\"#term:key-pair\">key-pair</a>. KERI includes this very compactly in the identifier, by replacing the pad character (a character used to fill a void to able to always end up with a fixed length public key) with a special character that encodes the derivation process. We call this the <em>derivation code</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/derivation-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "designated-authorized-representative",
+      "definition": "<dd>\n<p>Also ‘DAR’. These are representatives of a Legal Entity that are authorized by the Legal Entity to act officially on behalf of the Legal Entity. DARs can authorize:</p>\n</dd>\n<dd>\n<ol>\n<li>vLEI Issuer Qualification Program Checklists</li>\n</ol>\n</dd>\n<dd>\n<ol start=\"2\">\n<li>execute the vLEI Issuer Qualification Agreement</li>\n</ol>\n</dd>\n<dd>\n<ol start=\"3\">\n<li>provide designate/replace Authorized vLEI Representatives (<a class=\"term-reference\" href=\"#term:authorized-vlei-representative\">authorized-vlei-representative</a>s).</li>\n</ol>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from <a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">source</a> Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/designated-authorized-representative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "diger",
+      "definition": "<dd>\n<p>A <em>primitive</em> that represents a <a class=\"term-reference\" href=\"#term:digest\">digest</a>. It has the ability to <a class=\"term-reference\" href=\"#term:verify\">verify</a> that an input hashes to its raw value.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"cesride#terminology\" href=\"https://github.com/WebOfTrust/cesride#terminology\">Source</a> by Jason Colburne</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/diger\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "dip",
+      "definition": "<dd>\n<p>dip = delcept, delegated inception</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/dip\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "direct-mode",
+      "definition": "<dd>\n<p>Two primary trust modalities motivated the KERI design, One of these is the <em>direct</em> (one-to-one) mode, in which the identity controller establishes control via verified signatures of the controlling key-pair. The direct mode doesn’t use witnesses nor <a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a>s, but has direct (albeit intermittent) network contact with the validator.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/direct-mode\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "domain",
+      "definition": "<dd>\n<p>a representation of a <a class=\"term-reference\" href=\"#term:primitive\">primitive</a> either Text (T), Binary (B) or Raw binary ®.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p>Beware: outside of CESR but within the internet world, the term ‘domain’ mostly refers to the concept of a <em>domain name</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/domain\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "drt",
+      "definition": "<dd>\n<p>drt = deltate, delegated rotation</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/drt\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "dual-indexed-codes",
+      "definition": "<dd>\n<p>a context-specific coding scheme, for the common use case of thresholded multi-signature schemes in <a class=\"term-reference\" href=\"#term:cesr\">CESR</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/dual-indexed-codes\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "dual-text-binary-encoding-format",
+      "definition": "<dd>\n<p>An encoding format that allows for both text and binary encoding format, which is fully interchangeable. The <a class=\"term-reference\" href=\"#term:composability\">composability</a> property enables the round trip conversion en-masse of concatenated primitives between the text domain and binary domain while maintaining the separability of individual primitives.</p>\n</dd>\n<dd>\n<p>Read more in <a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"tswg-cesr-specification\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-cesr.md\" href=\"https://github.com/trustoverip/tswg-cesr-specification/blob/main/draft-ssmith-cesr.md\">source</a> of Samuel Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/dual-text-binary-encoding-format\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "duplicitous-event-log",
+      "definition": "<dd>\n<p>This is a record of inconsistent event messages produced by a given controller or witness with respect to a given <a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a>. The duplicitous events are indexed to the corresponding event in a KERL.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/duplicitous-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "duplicity-detection",
+      "definition": "<dd>\n<p>A mechanism to detect <a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> in cryptographically secured event logs.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/duplicity-detection\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "encrypt-sender-sign-receiver",
+      "definition": "<dd>\n<p>An authenticated encryption approach, using <a class=\"term-reference\" href=\"#term:pki\">PKI</a>. It covers <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> and <a class=\"term-reference\" href=\"#term:confidentiality\">confidentiality</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/encrypt-sender-sign-receiver\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "end-role",
+      "definition": "<dd>\n<p>An end role is an authorization for one <a class=\"term-reference\" href=\"#term:aid\">AID</a> to serve in a role for another <a class=\"term-reference\" href=\"#term:aid\">AID</a>.</p>\n</dd>\n<dd>\n<p>For example, declaring that your <a class=\"term-reference\" href=\"#term:agent\">agent</a> <a class=\"term-reference\" href=\"#term:aid\">AID</a> is serving in the role of <a class=\"term-reference\" href=\"#term:agent\">agent</a> for your business AIDs.</p>\n</dd>\n<dd>\n<p>Source: Phil Feairheller</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/end-role\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "engagement-context-role",
+      "definition": "<dd>\n<p>A person that represents the <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a> in a functional or in another context role and is issued an ECR <a class=\"term-reference\" href=\"#term:vlei-credential\">vlei-credential</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/engagement-context-role\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "escrow-state",
+      "definition": "<dd>\n<p>The current state of all the temporary storage locations (what events are waiting for what other information) that KERI protocol needs to  keep track of, due to its fully asynchronous nature.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/escrow-state\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "establishment-event",
+      "definition": "<dd>\n<p>a <a class=\"term-reference\" href=\"#term:key-event\">key-event</a> that establishes or changes the key state which includes the current set of authoritative keypairs (key state) for an <a class=\"term-reference\" href=\"#term:aid\">AID</a>.</p>\n</dd>\n<dd>\n<p>Source: dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/establishment-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "exn",
+      "definition": "<dd>\n<p>exn = exchange</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/exn\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "exp",
+      "definition": "<dd>\n<p>exp = expose, sealed data exposition</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/exp\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "field-map",
+      "definition": "<dd>\n<p>A traditional <code>key:value</code> pair renamed to avoid confusing with the cryptographic use of the term ‘key’.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/field-map\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "first-seen",
+      "definition": "<dd>\n<p>refers to the first instance of a <a class=\"term-reference\" href=\"#term:message\">message</a> received by any <a class=\"term-reference\" href=\"#term:witness\">witness</a> or <a class=\"term-reference\" href=\"#term:watcher\">watcher</a>. The first-seen event is always seen, and can never be unseen. It forms the basis for <a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> detection in KERI-based systems.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/first-seen\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "frame-code",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:framing-code\">framing-code</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/frame-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "framing-code",
+      "definition": "<dd>\n<p>a code that delineates a number of characters or bytes, as appropriate, that can be extracted atomically from a <a class=\"term-reference\" href=\"#term:stream\">stream</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/framing-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "full-disclosure",
+      "definition": "<dd>\n<p>a disclosure of an ACDC that discloses the full details of some or all of its field maps. In the context of <a class=\"term-reference\" href=\"#term:selective-disclosure\">selective-disclosure</a>, Full Disclosure means detailed disclosure of the selectively disclosed attributes, not the detailed disclosure of all selectively disclosable attributes. In the context of <a class=\"term-reference\" href=\"#term:partial-disclosure\">partial-disclosure</a>, Full Disclosure means detailed disclosure of the field map that was so far only partially disclosed.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/full-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "fully-compact",
+      "definition": "<dd>\n<p>The most compact form of an <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a>. This is the only signed variant of an ACDC and this signature is anchored in a <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a> (TEL) for the ACDC.</p>\n</dd>\n<dd>\n<p>This is one valid choice for an ACDC schema.</p>\n</dd>\n<dd>\n<p>This form is part of the <a class=\"term-reference\" href=\"#term:graduated-disclosure\">graduated-disclosure</a> mechanism in ACDCs.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/fully-compact\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "fully-expanded",
+      "definition": "<dd>\n<p>The most user-friendly version of an <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a> credential. It doesn’t need to be signed and typically is not signed since the most compact version which is signed can be computed from this form and then the signature can be looked up in the <a class=\"term-reference\" href=\"#term:tel\">TEL</a> of the ACDC in question.</p>\n</dd>\n<dd>\n<p>Regarding the graduated disclosure objective this form is the one with the highest amount of disclosure for a given node of an ACDC graph.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/fully-expanded\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ghost-credential",
+      "definition": "<dd>\n<p>Is a valid credential within in a 90 days grace period (the revocation transaction time frame before it’s booked to revocation registry).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ghost-credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "gleif-authorized-representative",
+      "definition": "<dd>\n<p>A representative of GLEIF authorized to perform the identity verifications requirements needed to issue the <a class=\"term-reference\" href=\"#term:qvi\">QVI</a> <a class=\"term-reference\" href=\"#term:vlei\">vLEI</a> Credential.</p>\n</dd>\n<dd>\n<p>Source: <a path-0=\"www.gleif.org\" path-1=\"media\" path-2=\"pages\" path-3=\"vlei\" path-4=\"introducing-the-vlei-ecosystem-governance-framework\" path-5=\"0349aa74c5-1678443743\" path-6=\"2022-12-16_verifiable-lei-_vlei_-ecosystem-governance-framework-glossary_v1.0_final.pdf\" href=\"https://www.gleif.org/media/pages/vlei/introducing-the-vlei-ecosystem-governance-framework/0349aa74c5-1678443743/2022-12-16_verifiable-lei-_vlei_-ecosystem-governance-framework-glossary_v1.0_final.pdf\">GLEIF Ecosystem Governance Framework v1.0 Glossary</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/gleif-authorized-representative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "graduated-disclosure",
+      "definition": "<dd>\n<p>a disclosure of an <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a> that does not reveal its entire content in the initial interaction with the recipient and, instead, partially or selectively reveals only the information contained within the ACDC necessary to further a transaction with the recipient. A Graduated disclosure may involve multiple steps where more information is progressively revealed as the recipient satisfies the conditions set by the <a class=\"term-reference\" href=\"#term:discloser\">discloser</a>. <a class=\"term-reference\" href=\"#term:compact-disclosure\">compact-disclosure</a>, <a class=\"term-reference\" href=\"#term:partial-disclosure\">partial-disclosure</a>, <a class=\"term-reference\" href=\"#term:selective-disclosure\">selective-disclosure</a>, and <a class=\"term-reference\" href=\"#term:full-disclosure\">full-disclosure</a> are all Graduated disclosure mechanisms.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/graduated-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "group-code",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:group-framing-code\">group-framing-code</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/group-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "group-framing-code",
+      "definition": "<dd>\n<p>special Framing Codes that can be specified to support groups of Primitives which make them pipelinable. Self-framing grouping using Count Codes is one of the primary advantages of composable encoding.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/group-framing-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hab",
+      "definition": "<dd>\n<p>A Hab is a keystore for one identifier. The Python implementation in <a class=\"term-reference\" href=\"#term:keripy\">keripy</a>, also used by <a class=\"term-reference\" href=\"#term:keria\">keria</a> uses <a path-0=\"www.lmdb.tech\" path-1=\"doc\" path-2=\"\" href=\"http://www.lmdb.tech/doc/\">LMDB</a> to store key material and all other data.</p>\n</dd>\n<dd>\n<p>Many Habs are included within and managed by a <a class=\"term-reference\" href=\"#term:habery\">habery</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hab\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "habery",
+      "definition": "<dd>\n<p>‘Hab’ comes from ‘Habitat’. It’s a place where multi-sigs and AIDs are linked. Habery manages a collection of <a class=\"term-reference\" href=\"#term:hab\">hab</a>. A Hab is a data structure (a Python object).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/habery\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hierarchical-composition",
+      "definition": "<dd>\n<p>Encoding protocol that is composable in a hierarchy and enables <a class=\"term-reference\" href=\"#term:pipelining\">pipelining</a> (multiplexing and de-multiplexing) of complex streams in either text or compact binary. This allows management at scale for high-bandwidth applications.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hierarchical-composition\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "icp",
+      "definition": "<dd>\n<p>icp = incept, inception</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/icp\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "inception-event",
+      "definition": "<dd>\n<p>an <a class=\"term-reference\" href=\"#term:establishment-event\">establishment-event</a> that provides the incepting information needed to derive an AID and establish its initial Key state.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inception-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "indexed-signature",
+      "definition": "<dd>\n<p>Also called <em>siger</em>. An indexed signature attachment is used when signing anything with a multi-key autonomic identifier. The index is included as part of the attachment, so a verifier knows which of the multiple public keys was used to generate a specific signature.</p>\n</dd>\n<dd>\n<p>Source:Philip Feairheller</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/indexed-signature\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "indirect-mode",
+      "definition": "<dd>\n<p>Two primary trust modalities motivated the KERI design, One of these is the <em>indirect</em> (one-to-many) mode, which depends on witnessed key event receipt logs (KERL) as a secondary root-of-trust for validating events. This gives rise to the acronym KERI for key event receipt infrastructure.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/indirect-mode\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "inquisitor",
+      "definition": "<dd>\n<p>In the ACDC context it’s a general term for someone (in a validating role) that launches an inquiry at some KERI <a class=\"term-reference\" href=\"#term:witness\">witness</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inquisitor\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "interactive-authentication-design",
+      "definition": "<dd>\n<p>A group of approaches having an interactive mechanism that requires a set of requests and responses or challenge responses with challenge response replies for secure authentication.</p>\n</dd>\n<dd>\n<p>More in <a path-0=\"hackmd.io\" path-1=\"ZbVAbNK1SPyT90-oNwN_cw\" href=\"https://hackmd.io/ZbVAbNK1SPyT90-oNwN_cw\">source</a> Keri Request Authentication Mechanism (KRAM) by Samuel Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/interactive-authentication-design\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "interceptor",
+      "definition": "<dd>\n<p>a <a class=\"term-reference\" href=\"#term:keria\">keria</a> class that allows to push events that are happening inside the cloud agent to other backend processes.</p>\n</dd>\n<dd>\n<p>It is similar to the notifier class but it is used to “notify” other web services.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/interceptor\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "interleaved-serialization",
+      "definition": "<dd>\n<p>Serializations of different types interleaved in an overarching format</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/interleaved-serialization\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "iss",
+      "definition": "<dd>\n<p>iss = vc issue, verifiable credential issuance</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/iss\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "issuance-and-presentation-exchange-protocol",
+      "definition": "<dd>\n<p>provides a uniform mechanism for the issuance and presentation of ACDCs in a securely attributable manner.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/issuance-and-presentation-exchange-protocol\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "issuance-event",
+      "definition": "<dd>\n<p>The initial transaction event log event anchored to the issuing AID’s key event log that represents the issuance of an ACDC credential.</p>\n</dd>\n<dd>\n<p>Source: Philip Feairheller.</p>\n</dd>\n<dd>\n<p>It’s a sort of “<a class=\"term-reference\" href=\"#term:inception-event\">inception-event</a>” of a verifiable credential.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/issuance-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "issuance-exchange",
+      "definition": "<dd>\n<p>A special case of a <a class=\"term-reference\" href=\"#term:presentation-exchange\">presentation-exchange</a> where the <a class=\"term-reference\" href=\"#term:discloser\">discloser</a> is the <a class=\"term-reference\" href=\"#term:issuer\">issuer</a> of the origin (Primary) ACDC of the <a class=\"term-reference\" href=\"#term:directed-acyclic-graph\">directed-acyclic-graph</a> formed by the set of chained <a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a>s so disclosed.</p>\n</dd>\n<dd>\n<p>In an issuance exchange, when the origin ACDC has an <a class=\"term-reference\" href=\"#term:issuee\">issuee</a>, the <a class=\"term-reference\" href=\"#term:disclosee\">disclosee</a> MAY also be the origin ACDC’s Issuee.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/issuance-exchange\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ixn",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:json\">JSON</a> field name (attribute) for Interaction Event; its content (value) contains a hash pointer. All <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a> events are anchored in a <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> in either ixn (<a class=\"term-reference\" href=\"#term:interaction-event\">interaction-event</a>) or <a class=\"term-reference\" href=\"#term:rot\">rot</a> (<a class=\"term-reference\" href=\"#term:rotation-event\">rotation-event</a>s). This is the foundation enabling a verifiable credential protocol to be built on top of KERI.</p>\n</dd>\n<dd>\n<p><a path-0=\"kentbull.com\" path-1=\"2023\" path-2=\"03\" path-3=\"09\" path-4=\"keri-tutorial-series-treasure-hunting-in-abydos-issuing-and-verifying-a-credential-acdc\" path-5=\"\" href=\"https://kentbull.com/2023/03/09/keri-tutorial-series-treasure-hunting-in-abydos-issuing-and-verifying-a-credential-acdc/\">Source</a> Kent Bull 2023</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ixn\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "judge",
+      "definition": "<dd>\n<p>A judge is an entity or component that examines the entries of one or more <a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a> and DELs of a given identifier to validate that the event history is from a non-<a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> controller and has been witnessed by a sufficient number of non-duplicitous <a class=\"term-reference\" href=\"#term:witness\">witness</a> such that it may be trusted or conversely not-trusted by a <a class=\"term-reference\" href=\"#term:validator\">validator</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/judge\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "juror",
+      "definition": "<dd>\n<p>A juror has the basic task of performing <a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> detection on events and event receipts.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/juror\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "jury",
+      "definition": "<dd>\n<p>The jury is the set of entities or components acting as <a class=\"term-reference\" href=\"#term:juror\">juror</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/jury\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keep",
+      "definition": "<dd>\n<p>Is KERI’s and ACDC’s user interface that uses the keripy agent for its backend. It uses the REST API exposed from the keripy agent.</p>\n</dd>\n<dd>\n<p>Source: Philip Feairheller</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keep\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-agreement-algorithm-for-control-establishment",
+      "definition": "<dd>\n<p>Agreement on an event in a key event log <a class=\"term-reference\" href=\"#term:kel\">KEL</a> means each <a class=\"term-reference\" href=\"#term:witness\">witness</a> has observed the exact version of the event and each witness’ <a class=\"term-reference\" href=\"#term:receipt\">receipt</a> has been received by every other witness.</p>\n</dd>\n<dd>\n<p>Control establishment means that the set of agreeing witnesses, along with the controller of the identifier and associated keypairs, create a verifiable way to establish control authority for an identifier by reading all of the events in the KEL that have been agreed upon by the witnesses and the controller.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-agreement-algorithm-for-control-establishment\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-command-line-interface",
+      "definition": "<dd>\n<p>Command line tool used to create identifiers, manage keys, query for KELs and participate in delegated identifiers or multi-signature group identifiers.  It also includes operations for running witnesses, watchers and cloud agents to establish a cloud presence for any identifier.</p>\n</dd>\n<dd>\n<p>Most commands require a “name” parameter which references a named Habitat (think wallet) for performing the operation.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-command-line-interface\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-event-stream",
+      "definition": "<dd>\n<p>A stream of verifiable KERI data, consisting of the <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> and other data such as a <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a>. This data is a CESR event stream (TODO: link to IANA application/cesr media type) and may be serialized in a file using <a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a> encoding. We refer to these <em>CESR stream resources</em> as KERI event streams to simplify the vocabulary.</p>\n</dd>\n<dd>\n<p>Source <code>did:webs</code> <a path-0=\"trustoverip.github.io\" path-1=\"tswg-did-method-webs-specification\" path-2=\"index.html\" href=\"https://trustoverip.github.io/tswg-did-method-webs-specification/index.html\">ToIP specification</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-event-stream\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-improvement-doc",
+      "definition": "<dd>\n<p>These docs are modular so teams of contributors can independently work and create PRs of individual KIDs; KIDs answer the question “how we do it”. We add commentary to the indivudual KIDs that elaborate on the why. It has been split from the how to not bother implementors with the why.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-improvement-doc\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-ox",
+      "definition": "<dd>\n<p>The RUST programming-language implementation of the <a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"acdc\" path-3=\"wiki\" path-4=\"KERI\" href=\"https://github.com/trustoverip/acdc/wiki/KERI\">KERI</a> protocol.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-ox\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-request-authentication-method",
+      "definition": "<dd>\n<p>All requests from a web client must use KRAM (KERI Request Authentication Method) for replay attack protection. The method is essentially based on each request body needing to include a date time string field in ISO-8601 format that must be within an acceptable time window relative to the server’s date time. See the <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"kram\" path-3=\"blob\" path-4=\"main\" path-5=\"README.md\" href=\"https://github.com/WebOfTrust/kram/blob/main/README.md\">KRAM Github repo</a></p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"skwa\" href=\"https://github.com/WebOfTrust/skwa\">SKWA GitHub repo</a>, more info in <a path-0=\"hackmd.io\" path-1=\"ZbVAbNK1SPyT90-oNwN_cw\" href=\"https://hackmd.io/ZbVAbNK1SPyT90-oNwN_cw\">HackMD.io write-up</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-request-authentication-method\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-suite-search-engine",
+      "definition": "<dd>\n<p>KERISSE is the Docusaurus <a path-0=\"weboftrust.github.io\" path-1=\"WOT-terms\" path-2=\"\" href=\"https://weboftrust.github.io/WOT-terms/\">self-education site</a> of Web-of-Trust GitHub repo with Typesense search facilities. Because of its focus on well-versed developers in the field of <a class=\"term-reference\" href=\"#term:ssi\">SSI</a> and the support of their journey to understand the structure of the code and how things work in the <a class=\"term-reference\" href=\"#term:keri-suite\">keri-suite</a> it’s more a search engine that drills down on documentation.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-suite-search-engine\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri-suite",
+      "definition": "<dd>\n<p>The <em>KERI suite</em> is the set of inter-related developments (KERI, ACDC, OOBI, CESR, IPEX, etc) under the Web-of -Trust user on Github</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri-suite\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keride",
+      "definition": "<dd>\n<p>is a <em>Rust</em> programming language library for <a class=\"term-reference\" href=\"#term:key-event-receipt-infrastructure\">key-event-receipt-infrastructure</a>. Among its features</p>\n</dd>\n<dd>\n<p>is <a class=\"term-reference\" href=\"#term:cesr\">CESR</a>, signing, prefixing, pathing, and parsing.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"keride\" href=\"https://github.com/WebOfTrust/keride\">Github repo</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keride\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keridemlia",
+      "definition": "<dd>\n<p>It is a contraction of <a class=\"term-reference\" href=\"#term:key-event-receipt-infrastructure\">key-event-receipt-infrastructure</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Kademlia\" href=\"https://en.wikipedia.org/wiki/Kademlia\">Kademlia</a>. It’s the distributed database of Witness IP-addresses based on a <a class=\"term-reference\" href=\"#term:distributed-hash-table\">distributed-hash-table</a>. It also does the CNAME - stuff that <a class=\"term-reference\" href=\"#term:domain-name\">domain-name</a> Services (DNS) offers for KERI: the mapping between an identifier and it’s controller AID stored in the KEL to its current wittness AID and the wittness AID to the IP address.</p>\n</dd>\n<dd>\n<p>(@henkvancann)</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keridemlia\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keripy",
+      "definition": "<dd>\n<p>The Python programming-language implementation of the <a class=\"term-reference\" href=\"#term:keri\">KERI</a> protocol.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keripy\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keri’s-algorithm-for-witness-agreement",
+      "definition": "<dd>\n<p>a type of Byzantine Fault Tolerant (<a class=\"term-reference\" href=\"#term:byzantine-fault-tolerance\">byzantine-fault-tolerance</a>) algorithm.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri’s-algorithm-for-witness-agreement\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "kever",
+      "definition": "<dd>\n<p>Kever is a key event verifier.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/kever\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-event-log",
+      "definition": "<dd>\n<p>a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-event-message",
+      "definition": "<dd>\n<p>Message whose body is a key event and whose attachments may include signatures on its body.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-message\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-event-receipt-infrastructure",
+      "definition": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-event-receipt-log",
+      "definition": "<dd>\n<p>a key event receipt log is a <a class=\"term-reference\" href=\"#term:kel\">kel</a> that also includes all the consistent key event receipt <a class=\"term-reference\" href=\"#term:message\">message</a>s created by the associated set of witnesses. See annex <a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-event-receipt",
+      "definition": "<dd>\n<p>message whose body references a Key event and whose attachments must include one or more signatures on that Key event.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "kli",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:keri-command-line-interface\">keri-command-line-interface</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/kli\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ksn",
+      "definition": "<dd>\n<p>ksn = state, key state notice</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ksn\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ledger-backer",
+      "definition": "<dd>\n<p>A <a class=\"term-reference\" href=\"#term:witness\">witness</a> in KERI that is ledger-registered. It’s a type of <a class=\"term-reference\" href=\"#term:backer\">backer</a> that proof its authenticity by a signing key anchored to the public key of a data item on a (public) blockchain.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ledger-backer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "legal-entity-engagement-context-role-vlei-credential-governance-framework",
+      "definition": "<dd>\n<p>A document that details the requirements for <a class=\"term-reference\" href=\"#term:vlei-role-credential\">vlei-role-credential</a> <strong>issued to</strong> representatives of a Legal Entity <em>in other than official roles</em> but in functional or other context of engagement.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a>: Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/legal-entity-engagement-context-role-vlei-credential-governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "legal-entity-official-organizational-role-vlei-credential-governance-framework",
+      "definition": "<dd>\n<p>A document that details the requirements for <a class=\"term-reference\" href=\"#term:vlei-role-credential\">vlei-role-credential</a> <strong>issued to</strong> official representatives of a Legal Entity.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a>: Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/legal-entity-official-organizational-role-vlei-credential-governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "legal-entity-vlei-credential-governance-framework",
+      "definition": "<dd>\n<p>A <em>document</em> that details the requirements for vLEI Credential <strong>issued by</strong> a <a class=\"term-reference\" href=\"#term:qualified-vlei-issuer\">qualified-vlei-issuer</a> to a <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/legal-entity-vlei-credential-governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "listed-identifier",
+      "definition": "<dd>\n<p>Is a list in an <a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a> of authorised did:webs identifier + method; the list appears in the metadata of the did:webs DID-doc.</p>\n</dd>\n<dd>\n<p>Source: paraphrased Samuel Smith, Zoom meeting <em>KERI dev</em> Thursday Nov 9 2023</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/listed-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "locked-state",
+      "definition": "<dd>\n<p>The default status a KERI data store is in once it has been created using a <a class=\"term-reference\" href=\"#term:passcode\">passcode</a>; it is by default encrypted.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/locked-state\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "management-TEL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:management-transaction-event-log\">management-transaction-event-log</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/management-TEL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "management-transaction-event-log",
+      "definition": "<dd>\n<p>A ‘management <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a>’ will signal the creation of the <em>Virtual Credential Registry <a class=\"term-reference\" href=\"#term:vcr\">VCR</a></em> and track the list of <em>Registrars</em> that will act as <em><a class=\"term-reference\" href=\"#term:backer\">backer</a></em> for the individual _ transaction event logs (TELs)_ for each <a class=\"term-reference\" href=\"#term:virtual-credential\">virtual-credential</a> (VC).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/management-transaction-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "moobi",
+      "definition": "<dd>\n<p>Multi <a class=\"term-reference\" href=\"#term:oobi\">OOBI</a> would allow to share a bunch of different end-points (oobis) all at once. A way for a single store to share multiple endpoints for that store.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/moobi\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "most-compact",
+      "definition": "<dd>\n<p>An <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a> that, for a given level of disclosure, is as compact as it can be, which means</p>\n</dd>\n<dd>\n<ul>\n<li>it has the <a class=\"term-reference\" href=\"#term:said\">SAID</a>s for each section that are not disclosed</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>it has expanded sections that are disclosed</li>\n</ul>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/most-compact\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "multi-valent",
+      "definition": "<dd>\n<p>A <a class=\"term-reference\" href=\"#term:delegator\">delegator</a> may have multiple <a class=\"term-reference\" href=\"#term:delegate\">delegate</a>, thereby enabling elastic horizontal scalability. Multiple delegates from a single delegator. Furthermore, each delegate may act as a delegator for its own delegates to form a <em>nested delegation tree</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/multi-valent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "naive-conversion",
+      "definition": "<dd>\n<p>Non-CESR Base64 conversion. How people are used to using the Base64 encode and decode.  Without <a class=\"term-reference\" href=\"#term:pre-pad\">pre-pad</a>ding etc all the stuff CESR does to ensure aligns on 24 bit boundaries so <a class=\"term-reference\" href=\"#term:cesr\">CESR</a> never uses the ‘=’ pad character. But naive <a class=\"term-reference\" href=\"#term:base64\">base64</a> will pad if the length is not 24 bit aligned.</p>\n</dd>\n<dd>\n<p>Source: Samuel Smith in <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-cesr\" path-3=\"issues\" path-4=\"34\" href=\"https://github.com/WebOfTrust/ietf-cesr/issues/34\">issue 34</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/naive-conversion\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ndigs",
+      "definition": "<dd>\n<p>Digests of public keys, not keys themselves. The reason to use ndigs is to prove control over public keys or to hide keys. It’s used in Keripy and consists of a list of qualified base64 digests of public rotation key derivations.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ndigs\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "nested-cooperative-delegated-identifiers",
+      "definition": "<dd>\n<p>In KERI delegations are cooperative, this means that both the delegator and delegate must contribute to a delegation. The delegator creates a cryptographic commitment in either a rotation or interaction event via a seal in a delegated establishment event. The delegate creates a cryptographic commitment in its establishment event via a seal to the delegating event.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/nested-cooperative-delegated-identifiers\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "next-threshold",
+      "definition": "<dd>\n<p>represents the number or fractional weights of signatures from the given set of next keys required to be attached to a <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> for the <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> to be considered fully signed.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/next-threshold\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-establishment-event",
+      "definition": "<dd>\n<p>a Key event that does not change the current Key state for an AID. Typically, the purpose of a Non-establishment event is to anchor external data to a given Key state as established by the most recent prior Establishment event for an AID.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-establishment-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-interactive-authentication-design",
+      "definition": "<dd>\n<p>A group of approaches having non-interactive mechanisms that pose unique problems because they do not allow a challenge response reply handshake. A request is submitted that is self-authenticating without additional interaction.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-interactive-authentication-design\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-transferable-identifier",
+      "definition": "<dd>\n<p>Controlling keys over this identifier cannot be rotated and therefore this identifier is <a class=\"term-reference\" href=\"#term:non-transferable\">non-transferable</a> to other control.</p>\n</dd>\n<dd>\n<p>An identifier of this type has specific positive features like short-lived, peer to peer, one-time use, discardable, etc. that are very practical in certain use cases. Moreover non-transferable identifiers are much easier to govern than persistent identifiers that are <a class=\"term-reference\" href=\"#term:transferable\">transferable</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-transferable-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "official-organizational-role",
+      "definition": "<dd>\n<p>Also ‘OOR’. A person that represents the Legal Entity in an official organizational role and is issued an OOR vLEI Credential.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a> Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/official-organizational-role\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "opcode",
+      "definition": "<dd>\n<p>Opcodes are meant to provide stream processing instructions that are more general and flexible than simply concatenated primitives or groups of primitives.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/opcode\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "operator",
+      "definition": "<dd>\n<p>an optional field map in the Edge section that enables expression of the edge logic on edge subgraph as either a unary operator on the edge itself or an m-ary operator on the edge group.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/operator\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "out-of-band-introduction",
+      "definition": "<dd>\n<p>Out-of-band Introductions (OOBIs) are discovery and validation of IP resources for <a class=\"term-reference\" href=\"#term:key-event-receipt-infrastructure\">key-event-receipt-infrastructure</a> autonomic identifiers. <strong>Discovery via URI, trust via KERI.</strong></p>\n</dd>\n<dd>\n<p>The simplest form of a KERI OOBI is a namespaced string, a tuple, a mapping, a structured message, or structured attachment that contains both a KERI AID and a URL. The OOBI associates the URL with the AID.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/out-of-band-introduction\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "parside",
+      "definition": "<dd>\n<p>is a bunch of generators. Responsible for pulling out a stream of bits from a CESR stream and parse it.</p>\n</dd>\n<dd>\n<p>Sam Smith suggested for Parside to not iterate stuff, only parse chunks delimited by the <a class=\"term-reference\" href=\"#term:count-code\">count-code</a>. (Source Cesride: meeting Feb 2 2023)</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/parside\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "partial-disclosure",
+      "definition": "<dd>\n<p>a disclosure of an ACDC that partially discloses its field maps using Compact Disclosure. The Compact Disclosure provides a cryptographically equivalent commitment to the yet-to-be-disclosed content, and the later exchange of the uncompacted content is verifiable to an earlier Partial Disclosure. Unlike Selective disclosure, a partially disclosable field becomes correlatable to its encompassing block after its Full Disclosure.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/partial-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "partial-pre-rotation",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:partial-rotation\">partial-rotation</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/partial-pre-rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "partial-rotation",
+      "definition": "<dd>\n<p>The pre-rotation mechanism supports partial pre-rotation or <strong>more exactly partial rotation of pre-rotated keypairs</strong>. It’s a rotation operation on a set of pre-rotated keys that may keep some keys in reserve (i.e unexposed) while exposing others as needed.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/partial-rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pathing",
+      "definition": "<dd>\n<p>It was designed to sign portions of a credential aimed at complex cases like</p>\n</dd>\n<dd>\n<ul>\n<li>a credential embedded in another credential</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>multiple signers, only signing portions of a credential (partial signing)</li>\n</ul>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pathing\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "percolated-discovery",
+      "definition": "<dd>\n<p>a discovery mechanism for information associated with an AID or a SAID, which is based on Invasion Percolation Theory. Once an entity has discovered such information, it may in turn share what it discovers with other entities. Since the information so discovered is end-verifiable, the percolation mechanism and percolating intermediaries do not need to be trusted.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:percolated-information-discovery\">percolated-information-discovery</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/percolated-discovery\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "percolated-information-discovery",
+      "definition": "<dd>\n<p>In the <a class=\"term-reference\" href=\"#term:oobi\">OOBI</a> protocol, a discovery mechanism for the <a class=\"term-reference\" href=\"#term:keri\">KERI</a> and the <a class=\"term-reference\" href=\"#term:acdc\">ACDC</a> protocols is provided by a bootstrap that enables Percolated Information Discovery (PID), which is based on Invasion Percolation Theory.</p>\n</dd>\n<dd>\n<p>After related information for discovery and verification is bootstrapped from the OOBI, subsequent authorization is non-interactive, thus making it highly scalable. This provides what we call zero-trust percolated discovery or speedy percolated discovery.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/percolated-information-discovery\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pre-rotation",
+      "definition": "<dd>\n<p>Cryptographic commitment to next rotated key set in previous rotation or <a class=\"term-reference\" href=\"#term:inception-event\">inception-event</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pre-rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "prefix",
+      "definition": "<dd>\n<p>A prefix that is composed of a basic Base-64 (URL safe) derivation code pre-pended to Base-64 encoding of a basic public digital signing key.</p>\n</dd>\n<dd>\n<p>Including the derivation code in the prefix binds the derivation process along with the public key to the resultant identifier.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/prefix\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "presentation-exchange",
+      "definition": "<dd>\n<p>An exchange that provides disclosure of one or more <a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a>s between a Discloser and a Disclosee.</p>\n</dd>\n<dd>\n<p>A presentation exchange is the process by which <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> information may be exchanged between two parties, namely, the <a class=\"term-reference\" href=\"#term:discloser\">discloser</a> and <a class=\"term-reference\" href=\"#term:disclosee\">disclosee</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/presentation-exchange\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "primary-root-of-trust",
+      "definition": "<dd>\n<p>In KERI a <a class=\"term-reference\" href=\"#term:root-of-trust\">root-of-trust</a> that is cryptographically verifiable all the way to its current controlling key pair in a PKI.</p>\n</dd>\n<dd>\n<p>The characteristic <em>primary</em> is one-on-one related to the <strong>entropy</strong> used for the creation of (the seed of) the private keys.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/primary-root-of-trust\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "proem",
+      "definition": "<dd>\n<p>A “proem” is an introductory statement, preamble, or preface. It sets the stage for the content that follows, often providing context, framing the discussion, or outlining the purpose and scope of the material.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/proem\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "promiscuous-mode",
+      "definition": "<dd>\n<p>It is the mode a <a class=\"term-reference\" href=\"#term:watcher\">watcher</a> runs in. A watcher uses the same code as a <a class=\"term-reference\" href=\"#term:witness\">witness</a>. However a watcher does so “lacking standards of selection; acting without careful judgment; indiscriminate”. Or “Showing little forethought or critical judgment; casual.”</p>\n</dd>\n<dd>\n<p><a path-0=\"www.wordnik.com\" path-1=\"words\" path-2=\"promiscuous\" href=\"https://www.wordnik.com/words/promiscuous\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/promiscuous-mode\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "proof-of-authorship",
+      "definition": "<dd>\n<p>Proof that somebody or something has originally created certain content. It’s about <em>data</em>’s inception. Whereas <a class=\"term-reference\" href=\"#term:proof-of-authority\">proof-of-authority</a> is about <em>rights</em> attached to this data.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/proof-of-authorship\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "provenanced",
+      "definition": "<dd>\n<p>The act of verifying <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> or quality of documented history or origin of something.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/provenanced\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "public-transaction-event-log",
+      "definition": "<dd>\n<p>is a public hash-linked data structure of transactions that can be used to track state anchored to a <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/public-transaction-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "public-verifiable-credential-registry",
+      "definition": "<dd>\n<p>is a form of a <a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"toip\" path-3=\"wiki\" path-4=\"credential-registry\" href=\"https://github.com/trustoverip/toip/wiki/credential-registry\">Verifiable Data Registry</a> that tracks the issuance/revocation state of credentials issued by the controller of the <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a>. Two types of TELs will be used for this purpose: <a class=\"term-reference\" href=\"#term:management-transaction-event-log\">management-transaction-event-log</a> and <a class=\"term-reference\" href=\"#term:virtual-credential-transaction-event-log\">virtual-credential-transaction-event-log</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/public-verifiable-credential-registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "qry",
+      "definition": "<dd>\n<p>qry = query</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/qry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "quadlet",
+      "definition": "<dd>\n<p>a group of 4 characters in the T domain and equivalently in triplets of 3 bytes each in the B domain used to define variable size.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/quadlet\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "qualified-vlei-issuer-vlei-credential-governance-framework",
+      "definition": "<dd>\n<p>A <em>document</em> that details the requirements to enable this Credential to be <strong>issued by</strong> <a class=\"term-reference\" href=\"#term:gleif\">GLEIF</a> <strong>to</strong> <a class=\"term-reference\" href=\"#term:qualified-vlei-issuer\">qualified-vlei-issuer</a> which allows the Qualified vLEI Issuers to issue, verify and revoke <a class=\"term-reference\" href=\"#term:legal-entity-vlei-credential-governance-framework\">legal-entity-vlei-credential-governance-framework</a>, <a class=\"term-reference\" href=\"#term:legal-entity-official-organizational-role-vlei-credential-governance-framework\">legal-entity-official-organizational-role-vlei-credential-governance-framework</a>, and <a class=\"term-reference\" href=\"#term:legal-entity-engagement-context-role-vlei-credential-governance-framework\">legal-entity-engagement-context-role-vlei-credential-governance-framework</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/qualified-vlei-issuer-vlei-credential-governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "qualified-vlei-issuer",
+      "definition": "<dd>\n<p>The contracting party to the vLEI Issuer Qualification Agreement that has been qualified by GLEIF as a Qualified vLEI Issuer.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a>: Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/qualified-vlei-issuer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "qualified",
+      "definition": "<dd>\n<p>When qualified, a cryptographic primitive includes a prepended derivation code (as a <a class=\"term-reference\" href=\"#term:proem\">proem</a>), that indicates the cryptographic algorithm or suite used for that derivation.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/qualified\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "qvi-authorized-representative",
+      "definition": "<dd>\n<p>A designated representative of a <a class=\"term-reference\" href=\"#term:qvi\">QVI</a> authorized, to conduct QVI operations with GLEIF and <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a>. Also referring to a person in the role of a QAR.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from <a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">source</a> Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/qvi-authorized-representative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rct",
+      "definition": "<dd>\n<p>rct = receipt</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rct\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "read-update-nullify",
+      "definition": "<dd>\n<p>Read, update, nullify are a set of actions you (or a server) can take on data. “Read” means to view it, “update” means to change it, and “nullify” means to invalidate it, but not “Delete” it. Mind you, there’s also no “Create”.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/read-update-nullify\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "receipt-log",
+      "definition": "<dd>\n<p>ordered record of all key event receipts for a given set of witnesses.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/receipt-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "reconciliation",
+      "definition": "<dd>\n<p>Reconciliation is the process in which you decide to accept a fork of the <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> or not.</p>\n</dd>\n<dd>\n<p>Source: Samuel Smith, Zoom meeting Jan 2 2024.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/reconciliation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "redundant-credential",
+      "definition": "<dd>\n<p>Multiple credentials issued by the same issuer (e.g. a <a class=\"term-reference\" href=\"#term:qvi\">QVI</a>). They do not have anything to do with each other. They are independently valid.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/redundant-credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "registrar",
+      "definition": "<dd>\n<p>identifiers that serve as backers for each <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a> (TEL) under its provenance. This list of Registrars can be rotated with events specific to a certain type of TEL. In this way, a Registrar is analogous to a Backer in KERI KELs and Registrar lists are analogous to Backer lists in KERI KELs.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/registrar\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "registration-interaction",
+      "definition": "<dd>\n<p>Setup/Registration interaction, new AID and authorization to establish access control. You present a (<a class=\"term-reference\" href=\"#term:vlei\">vLEI</a>) credential. You don’t want that captured and misused. Narrowing the scope to a certain role (e.g. Document Submitter) is a pre-registration via <a class=\"term-reference\" href=\"#term:delegation\">delegation</a> authority.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/registration-interaction\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "reserve-rotation",
+      "definition": "<dd>\n<p>One important use case for <a class=\"term-reference\" href=\"#term:partial-rotation\">partial-rotation</a> is to enable pre-rotated key pairs designated in one <a class=\"term-reference\" href=\"#term:establishment-event\">establishment-event</a> <strong>to be held in reserve and not exposed</strong> at the next (immediately subsequent) establishment event.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md\">IETF-KERI draft 2022</a> by Samual Smith.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/reserve-rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rev",
+      "definition": "<dd>\n<p>rev = vc revoke, verifiable credential revocation</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rev\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "revocation-event",
+      "definition": "<dd>\n<p>An event that revokes <a class=\"term-reference\" href=\"#term:control-authority\">control-authority</a> over an <a class=\"term-reference\" href=\"#term:identifier\">identifier</a>. From that point in time the authoritative key-pairs at hand are not valid anymore.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/revocation-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "root-autonomic-identifier",
+      "definition": "<dd>\n<p>An entity may provide the <a class=\"term-reference\" href=\"#term:root-of-trust\">root-of-trust</a> for some ecosystem (with delegation )via its root <a class=\"term-reference\" href=\"#term:aid\">AID</a>. Let’s call this the <em>RID</em> for “root AID”. The RID must be protected using the highest level of <a class=\"term-reference\" href=\"#term:security\">security</a> in its <a class=\"term-reference\" href=\"#term:key-management\">key-management</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/root-autonomic-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rot",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:json\">JSON</a> field name (attribute) for Rotation Event; its content (value) contains a hash pointer. All <a class=\"term-reference\" href=\"#term:transaction-event-log\">transaction-event-log</a> events are anchored in a <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> in either ixn (<a class=\"term-reference\" href=\"#term:interaction-event\">interaction-event</a>) or <a class=\"term-reference\" href=\"#term:rot\">rot</a> (<a class=\"term-reference\" href=\"#term:rotation-event\">rotation-event</a>s). This is the foundation enabling a verifiable credential protocol to be built on top of KERI.</p>\n</dd>\n<dd>\n<p><a path-0=\"kentbull.com\" path-1=\"2023\" path-2=\"03\" path-3=\"09\" path-4=\"keri-tutorial-series-treasure-hunting-in-abydos-issuing-and-verifying-a-credential-acdc\" path-5=\"\" href=\"https://kentbull.com/2023/03/09/keri-tutorial-series-treasure-hunting-in-abydos-issuing-and-verifying-a-credential-acdc/\">Source</a> Kent Bull 2023</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rot\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rotation",
+      "definition": "<dd>\n<p>The operation of revoking and replacing the set of <a class=\"term-reference\" href=\"#term:authoritative\">authoritative</a> <a class=\"term-reference\" href=\"#term:key-pair\">key-pair</a> for an <a class=\"term-reference\" href=\"#term:aid\">AID</a>. This operation is made verifiable and <a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> evident upon acceptance as a rotation event that is appended to the AID’s <a class=\"term-reference\" href=\"#term:kel\">KEL</a>.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rotation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rpy",
+      "definition": "<dd>\n<p>rpy = reply</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rpy\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rules",
+      "definition": "<dd>\n<p>a top-level field map within an ACDC that provides a legal language as a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Ricardian_contract\" href=\"https://en.wikipedia.org/wiki/Ricardian_contract\">Ricardian Contract</a>, which is both human and machine-readable and referenceable by a cryptographic digest.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rules\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "run-off-the-crud",
+      "definition": "<dd>\n<p><em>RUN off the <a class=\"term-reference\" href=\"#term:crud\">CRUD</a></em> is an alternative to the traditional <a class=\"term-reference\" href=\"#term:crud\">CRUD</a> approach to defining basic operations on resources in data management systems (e.g., databases, APIs). RUN stands for Read, Update, Nullify and bears a nuanced approach to deletion.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/run-off-the-crud\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "sally",
+      "definition": "<dd>\n<p>is an implementation of a verification service and acting as a reporting server. It is purpose-built software for the vLEI ecosystem to allow participants in the vLEI ecosystem present credentials, so the <a class=\"term-reference\" href=\"#term:gleif\">GLEIF</a> Reporting API can show what <a class=\"term-reference\" href=\"#term:vlei\">vLEI</a> are; issued to <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/sally\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "salter",
+      "definition": "<dd>\n<p>A primitive that represents a <a class=\"term-reference\" href=\"#term:seed\">seed</a>. It has the ability to generate new <a class=\"term-reference\" href=\"#term:signer\">signer</a>s.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"cesride#terminology\" href=\"https://github.com/WebOfTrust/cesride#terminology\">Source</a> by Jason Colburne</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/salter\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "salty-nonce-blinding-factor",
+      "definition": "<dd>\n<p>For ease of sharing a secret and hiding information with this secret of Blindable State TELs we use a Salty Nonce Blinding Factor. You’d like to hide the state of certain credentials to some verifiers in the future, while keeping the state verifiable for others.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/salty-nonce-blinding-factor\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "schema",
+      "definition": "<dd>\n<p>the <a class=\"term-reference\" href=\"#term:said\">said</a> of a JSON schema that is used to issue and verify an ACDC.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/schema\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "secondary-root-of-trust",
+      "definition": "<dd>\n<p>In KERI its a <a class=\"term-reference\" href=\"#term:root-of-trust\">root-of-trust</a> that, for its secure attribution, depends on another verifiable data structure (VDS) which MUST be a <a class=\"term-reference\" href=\"#term:primary-root-of-trust\">primary-root-of-trust</a>.</p>\n</dd>\n<dd>\n<p>By its nature and cryptographic anchoring via <a class=\"term-reference\" href=\"#term:seal\">seal</a> to a primary root-of-trust, a secondary root-of-trust still has a high level of trustability and can be automatically verified.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/secondary-root-of-trust\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "secure-private-authentic-confidentiality",
+      "definition": "<dd>\n<p>ToIP Trust Spanning Layer Group realized we do have a secure authentication layer (KERI) but we don’t have a secure confidentiality and privacy mechanism. Sam Smith proposes SPAC paper to define this.</p>\n</dd>\n<dd>\n<p>Related:</p>\n</dd>\n<dd>\n<p><a path-0=\"www.usenix.org\" path-1=\"system\" path-2=\"files\" path-3=\"sec22-cohen.pdf\" href=\"https://www.usenix.org/system/files/sec22-cohen.pdf\"><span>https://www.usenix.org/system/files/sec22-cohen.pdf</span></a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/secure-private-authentic-confidentiality\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "selective-disclosure",
+      "definition": "<dd>\n<p>a disclosure of an ACDC that selectively discloses its attributes using Compact Disclosure. The set of selectively disclosable attributes is provided as an array of blinded blocks where each attribute in the set has its own dedicated blinded block. Unlike Partial Disclosure, the selectively disclosed fields are not correlatable to the so far undisclosed but selectively disclosable fields in the same encompassing block.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/selective-disclosure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "self-addressed-data",
+      "definition": "<dd>\n<p>a representation of data content from which a SAID is derived. The SAID is both cryptographically bound to (content-addressable) and encapsulated by (self-referential) its SAD <a class=\"term-reference\" href=\"#term:said\">said</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/self-addressed-data\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "self-addressing-identifier",
+      "definition": "<dd>\n<p>any identifier that is deterministically generated out of the content, or a digest of the content.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smtih</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/self-addressing-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "self-framing",
+      "definition": "<dd>\n<p>a textual or binary encoding that begins with type, size, and value so that a parser knows how many characters (when textual) or bytes (when binary) to extract from the stream for a given element without parsing the rest of the characters or bytes in the element is Self-Framing.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/self-framing\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "server-sent-event",
+      "definition": "<dd>\n<p>Mailbox notifications; a streaming service for the agent U/I, to get notifications from the KERI system itself.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/server-sent-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "siger",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:indexed-signature\">indexed-signature</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/siger\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "signer",
+      "definition": "<dd>\n<p>A primitive that represents a private key. It has the ability to create Sigers and Cigars (signatures).</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"cesride#terminology\" href=\"https://github.com/WebOfTrust/cesride#terminology\">Source</a> by Jason Colburne</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/signer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "signify-keria-request-authentication-protocol",
+      "definition": "<dd>\n<p>SKRAP is a client to the KERIA server. Mobile clients will be using SKRAP to connect to KERI <a class=\"term-reference\" href=\"#term:aid\">AID</a>s via <a class=\"term-reference\" href=\"#term:agent\">agent</a>s in the new, multi-tenant Mark II Agent server, <a class=\"term-reference\" href=\"#term:keria\">keria</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/signify-keria-request-authentication-protocol\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "signify",
+      "definition": "<dd>\n<p>Signify is a web client <a class=\"term-reference\" href=\"#term:key-event\">key-event</a> signing - and key pair creation app that minimizes the use of <a class=\"term-reference\" href=\"#term:keri\">KERI</a> on the client.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/signify\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "simple-keri-for-web-auth",
+      "definition": "<dd>\n<p>A <a class=\"term-reference\" href=\"#term:keri\">KERI</a> implementation that sacrifices performance or other non-security feature for usability. In general a narrow application of KERI may not require all the features of KERI but those features that it does support must still be secure.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"skwa\" href=\"https://github.com/WebOfTrust/skwa\">Github Repo SKWA</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/simple-keri-for-web-auth\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "sniffable",
+      "definition": "<dd>\n<p>A stream is <em>sniffable</em> as soon as it starts with a group code or field map; in fact this is how our parser (<a class=\"term-reference\" href=\"#term:parside\">parside</a>) works. and detects if the CESR stream contains a certain datablock.</p>\n</dd>\n<dd>\n<p>The datablock of CESR binary, CESR Text, JSON, CBOR, MGPK have an Object code or the Group code (binary or text) and it’s always a recognizable and unique <em>three bit combination</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/sniffable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "sniffer",
+      "definition": "<dd>\n<p>The <em>sniffer</em> is part of <a class=\"term-reference\" href=\"#term:parside\">parside</a> and detects if the CESR stream contains CESR binary, CESR Text, JSON, CBOR, MGPK.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/sniffer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "solicited-issuance",
+      "definition": "<dd>\n<p>The issuance of a Legal Entity vLEI Credentials, <a class=\"term-reference\" href=\"#term:oor\">OOR</a> vLEI Credentials and <a class=\"term-reference\" href=\"#term:ecr\">ECR</a> vLEI Credentials upon receipt by the <a class=\"term-reference\" href=\"#term:qar\">QAR</a> of a Fully Signed issuance request from the <a class=\"term-reference\" href=\"#term:avr\">AVR</a>(s) of the <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a>.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a>: Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/solicited-issuance\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "spurn",
+      "definition": "<dd>\n<p>To <em>reject</em>. In KERI, “spurn” refers to a cryptographic or protocol-based act of rejecting an invalid or untrusted event. This rejection is deliberate and purposeful, ensuring the system’s integrity by disregarding information that does not meet the necessary validation criteria. The verb ‘spurn’ is first used in the <a class=\"term-reference\" href=\"#term:ipex\">IPEX</a> specification.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/spurn\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "stable",
+      "definition": "<dd>\n<p>Refers to the state of cryptographic verifiability across a network or system. It generally implies that a particular identifier, event, or data set is consistent, fully verified, and cannot be contested within KERI.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/stable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "streamer",
+      "definition": "<dd>\n<p>A convenience class for supporting stream parsing, including nested (tunneled, encrypted) <a class=\"term-reference\" href=\"#term:cesr\">CESR</a> streams. Streams can be a mixture/combination of different <a class=\"term-reference\" href=\"#term:primitive\">primitive</a>, including other streams. A stream is a concatenation of primitives.</p>\n</dd>\n<dd>\n<p>Source: Kent Bull in chat Zoom meeting KERI Aug 6, 2024.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/streamer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "strip-parameter",
+      "definition": "<dd>\n<p>tells us what part of the <a class=\"term-reference\" href=\"#term:cesr\">CESR</a> stream will be parsed by which code.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/strip-parameter\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "targeted-acdc",
+      "definition": "<dd>\n<p>an ACDC with the presence of the Issuee field in the attribute or attribute aggregate sections.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:untargeted-acdc\">untargeted-acdc</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/targeted-acdc\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "text-binary-concatenation-composability",
+      "definition": "<dd>\n<p>An encoding has <em>composability</em> when any set of <a class=\"term-reference\" href=\"#term:self-framing\">self-framing</a> concatenated primitives expressed in either the text domain or binary domain may be converted as a group to the other domain and back again without loss.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/text-binary-concatenation-composability\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "tholder",
+      "definition": "<dd>\n<p>t-holder object that supports fractionally-weighted <a class=\"term-reference\" href=\"#term:signing-threshold\">signing-threshold</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/tholder\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "threshold-of-accountable-duplicity",
+      "definition": "<dd>\n<p>The threshold of accountable duplicity (TOAD) is a threshold number <code>M</code> that the controller declares to accept accountability for an event when any subset <code>M</code> of the <code>N</code> witnesses confirm that event. The threshold <code>M</code> indicates the minimum number of confirming witnesses the controller deems sufficient given some number <code>F</code> of potentially faulty witnesses, given that <code>M &gt;= N - F</code>. This enables a controller to provide itself with any degree of protection it deems necessary given this accountability.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/threshold-of-accountable-duplicity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "threshold-signature-scheme",
+      "definition": "<dd>\n<p>or TSS; is a type of digital signature protocol used by <a path-0=\"cryptoapis.io\" path-1=\"products\" path-2=\"wallet-as-a-service\" path-3=\"mpc\" href=\"https://cryptoapis.io/products/wallet-as-a-service/mpc\">Mutli-party Computation (MPC)</a> wallets to authorize transactions or key state changes.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"cryptoapis.io\" path-1=\"blog\" path-2=\"78-what-is-the-threshold-signature-scheme\" href=\"https://cryptoapis.io/blog/78-what-is-the-threshold-signature-scheme\">Cryptoapis</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/threshold-signature-scheme\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "top-level-section",
+      "definition": "<dd>\n<p>The fields of an ACDC in <a class=\"term-reference\" href=\"#term:compact-variant\">compact-variant</a>. The value of a top level section field is either the SAD or the SAID of the SAD of the associated section.</p>\n</dd>\n<dd>\n<p>An Issuer commitment via a signature to any variant of ACDC (compact, full, etc) makes a cryptographic commitment to the top-level section fields shared by all variants of that ACDC.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann based on <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-ipex\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-ipex.md#example-most-compact-variant\" href=\"https://github.com/WebOfTrust/ietf-ipex/blob/main/draft-ssmith-ipex.md#example-most-compact-variant\">source</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/top-level-section\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "transaction-event-log",
+      "definition": "<dd>\n<p>The set of transactions that determine registry state form a log called a Transaction Event Log (TEL). The TEL provides a cryptographic proof of registry state by reference to the corresponding controlling <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a>. Any validator may therefore cryptographically verify the <a class=\"term-reference\" href=\"#term:authoritative\">authoritative</a> of the <a class=\"term-reference\" href=\"#term:registry\">registry</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/transaction-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "transfer-off-ledger",
+      "definition": "<dd>\n<p>The act of transferring control authority over an identifier from a ledger (or blockchain) to the native verifiable KERI data structure Key Event Log.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/transfer-off-ledger\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "univalent",
+      "definition": "<dd>\n<p>In identifier systems, univalent means having a unique and non-ambiguous identifier for each entity or resource. This means that there is a <em>one-to-one correspondence</em> between the identifiers and the entities, and that no two different entities share the same identifier.</p>\n</dd>\n<dd>\n<p>Source: Bing chat, Sept 2023</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/univalent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "unpermissioned-correlation",
+      "definition": "<dd>\n<p>a correlation established between two or more disclosed ACDCs whereby the discloser of the ACDCs does not permit the disclosee to establish such a correlation.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/unpermissioned-correlation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "unsolicited-issuance",
+      "definition": "<dd>\n<p>Issuance of a Legal Entity vLEI Credential upon notice by a <a class=\"term-reference\" href=\"#term:qar\">QAR</a> to the <a class=\"term-reference\" href=\"#term:avr\">AVR</a>(s) of the Legal Entity that a Legal Entity vLEI Credential has been solicited on the <a class=\"term-reference\" href=\"#term:legal-entity\">legal-entity</a>’s behalf.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">Source</a>: Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/unsolicited-issuance\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "untargeted-acdc",
+      "definition": "<dd>\n<p>an ACDC without the presence of the Issuee field in the attribute or attribute aggregate sections.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:targeted-acdc\">targeted-acdc</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/untargeted-acdc\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vLEI",
+      "definition": "<dd>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Owner</td>\n<td><img src=\"https://avatars.githubusercontent.com/u/176055535?v=4\" alt=\"avatar\"> keri-foundation</td>\n</tr>\n<tr>\n<td>Repo</td>\n<td><a path-0=\"github.com\" path-1=\"keri-foundation\" path-2=\"vlei-glossary\" href=\"https://github.com/keri-foundation/vlei-glossary\">vlei-glossary</a></td>\n</tr>\n<tr>\n<td>Commit hash</td>\n<td>8c99bb5f4599c0b94641b11e985b090db676b402</td>\n</tr>\n</tbody>\n</table>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:verifiable-legal-entity-identifier\">verifiable-legal-entity-identifier</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vLEI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vcp",
+      "definition": "<dd>\n<p>vcp = vdr incept, verifiable data registry inception</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vcp\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vdr",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:verifiable-data-registry\">verifiable-data-registry</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vdr\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verfer",
+      "definition": "<dd>\n<p>A primitive that represents a public key. It has the ability to <a class=\"term-reference\" href=\"#term:verify\">verify</a> signatures on data.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"cesride#terminology\" href=\"https://github.com/WebOfTrust/cesride#terminology\">Source</a> by Jason Colburne</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verfer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verifiable-legal-entity-identifier",
+      "definition": "<dd>\n<p>Verifiable credentials are issued by authorized validation agents (<a class=\"term-reference\" href=\"#term:qvi\">QVI</a>) under the governance of <a class=\"term-reference\" href=\"#term:gleif\">GLEIF</a>, who delegate tasks to these agents. They provide cryptographic proof that the information about a legal entity, as linked to its Legal Entity Identifier (LEI), is verifiably authentic, accurate, and up-to-date.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verifiable-legal-entity-identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "version-code",
+      "definition": "<dd>\n<p>tells you which set of tables to load, it tells the table state. It’s a unique code. what version of the table is going to load.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version-code\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "version-string",
+      "definition": "<dd>\n<p>the first field in any top-level KERI field map in which it appears.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version-string\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "virtual-credential-transaction-event-log",
+      "definition": "<dd>\n<p>will track the issued or revoked state of each virtual credential (VC) and will contain a reference to its corresponding <em>management transaction event log (management TEL)</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/virtual-credential-transaction-event-log\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vlei credential",
+      "definition": "<dd>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Owner</td>\n<td><img src=\"https://avatars.githubusercontent.com/u/176055535?v=4\" alt=\"avatar\"> keri-foundation</td>\n</tr>\n<tr>\n<td>Repo</td>\n<td><a path-0=\"github.com\" path-1=\"keri-foundation\" path-2=\"vlei-glossary\" href=\"https://github.com/keri-foundation/vlei-glossary\">vlei-glossary</a></td>\n</tr>\n<tr>\n<td>Commit hash</td>\n<td>0e9a78385ad09cce28e32558dbc7a4d3b647ba07</td>\n</tr>\n</tbody>\n</table>\n</dd>\n<dd>\n<p>Credential concerning a verifiable Legal Entity Identifier, residing in the <a class=\"term-reference\" href=\"#term:gleis\">GLEIS</a> and compliant with one or more of the GLEIF <a class=\"term-reference\" href=\"#term:governance-framework\">governance-framework</a>s</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vlei-credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vlei-ecosystem-governance-framework",
+      "definition": "<dd>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Owner</td>\n<td><img src=\"https://avatars.githubusercontent.com/u/176055535?v=4\" alt=\"avatar\"> keri-foundation</td>\n</tr>\n<tr>\n<td>Repo</td>\n<td><a path-0=\"github.com\" path-1=\"keri-foundation\" path-2=\"vlei-glossary\" href=\"https://github.com/keri-foundation/vlei-glossary\">vlei-glossary</a></td>\n</tr>\n<tr>\n<td>Commit hash</td>\n<td>5e36b16e58984eeaccae22116a2bf058ab01a0e9</td>\n</tr>\n</tbody>\n</table>\n</dd>\n<dd>\n<p>The Verifiable LEI (vLEI) Ecosystem <a class=\"term-reference\" href=\"#term:governance-framework\">governance-framework</a> Information Trust Policies. It’s a <strong>document</strong> that defines the information security, privacy, availability, confidentiality and processing integrity policies that apply to all vLEI Ecosystem Members.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from <a path-0=\"www.gleif.org\" path-1=\"vlei\" path-2=\"introducing-the-vlei-ecosystem-governance-framework\" path-3=\"2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\" href=\"https://www.gleif.org/vlei/introducing-the-vlei-ecosystem-governance-framework/2022-02-07_verifiable-lei-vlei-ecosystem-governance-framework-glossary-draft-publication_v0.9-draft.pdf\">source</a> Draft vLEI Ecosystem Governance Framework Glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vlei-ecosystem-governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vlei-role-credential",
+      "definition": "<dd>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Owner</td>\n<td><img src=\"https://avatars.githubusercontent.com/u/176055535?v=4\" alt=\"avatar\"> keri-foundation</td>\n</tr>\n<tr>\n<td>Repo</td>\n<td><a path-0=\"github.com\" path-1=\"keri-foundation\" path-2=\"vlei-glossary\" href=\"https://github.com/keri-foundation/vlei-glossary\">vlei-glossary</a></td>\n</tr>\n<tr>\n<td>Commit hash</td>\n<td>67797dd4ab052191473f1973ee4f583ed837e0f2</td>\n</tr>\n</tbody>\n</table>\n</dd>\n<dd>\n<p>It is a <a class=\"term-reference\" href=\"#term:vlei-credential\">vlei-credential</a> that attests to a role within a legal entity to an individual or an entity. It cryptographically proves that the individual or entity is authorized to act in that role on behalf of the legal entity.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vlei-role-credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "vrt",
+      "definition": "<dd>\n<p>vrt = vdr rotate, verifiable data registry rotation</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/vrt\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "watcher",
+      "definition": "<dd>\n<p>an <em>entity</em> or <em>component</em> that keeps a copy of a <a class=\"term-reference\" href=\"#term:kerl\">kerl</a> for an identifier but that is not designated by the <em>controller</em> of the identifier as one of its witnesses. See annex <a class=\"term-reference\" href=\"#term:watcher\">watcher</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/watcher\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "weight-of-weights",
+      "definition": "<dd>\n<p>There are 2 levels in the multi-sign weighted thresholds of <a class=\"term-reference\" href=\"#term:multisig\">multisig</a> in <a class=\"term-reference\" href=\"#term:keri\">KERI</a> because the solution only needs to focus on <em>tightly cooperating teams</em>.</p>\n</dd>\n<dd>\n<ul>\n<li>An individual using split keys over devices</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>A team of teams</li>\n</ul>\n</dd>\n<dd>\n<p>All other use cases can be solved by other means in KERI (e.g. <a class=\"term-reference\" href=\"#term:delegation\">delegation</a>).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/weight-of-weights\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "weight",
+      "definition": "<dd>\n<p>an optional field map in the Edge section that provides edge weight property that enables directed weighted edges and operators that use weights.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/weight\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "well-known-witnesses",
+      "definition": "<dd>\n<p>Witness identifier creation by using <em>salts</em> to initialize their key stores so that you&nbsp;can predict what identifiers will be created. For testing purposes only!</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/well-known-witnesses\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "witness",
+      "definition": "<dd>\n<p>a witness is an entity or component designated (trusted) by the controller of an identifier. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A witness is the controller of its own self-referential identifier which may or may not be the same as the identifier to which it is a witness. See also <a class=\"term-reference\" href=\"#term:keri’s-algorithm-for-witness-agreement\">keri’s-algorithm-for-witness-agreement</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/witness\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "xip",
+      "definition": "<dd>\n<p>A XIP message allows a transaction set to be a mini peer to peer exchange to become a verifiable data structure. It makes the transaction become duplicity evident.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"wiki.trustoverip.org\" path-1=\"pages\" path-2=\"viewpage.action\" href=\"https://wiki.trustoverip.org/pages/viewpage.action?pageId=80876836\">KERI meeting 2024-03-12</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/xip\">extended KERI glossary</a></p>\n</dd>"
+    }
+  ],
+  "sha": "878d2e5e20e49b02355b798abc5fe329c4711839",
+  "avatarUrl": null,
+  "outputFileName": "1744909991085-henkvancann-kerisuite-glossary-terms.json"
+}

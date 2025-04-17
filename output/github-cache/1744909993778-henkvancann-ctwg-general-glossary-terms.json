@@ -1,0 +1,893 @@
+{
+  "timestamp": 1744909993778,
+  "repository": "henkvancann/ctwg-general-glossary",
+  "terms": [
+    {
+      "term": "ADR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:architectural-decision-record\">architectural-decision-record</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ADR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "API",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:application-programming-interface\">application-programming-interface</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/API\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "BFT",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:byzantine-fault-tolerance\">byzantine-fault-tolerance</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/BFT\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CBOR",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:concise-binary-object-representation\">concise-binary-object-representation</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CBOR\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CRUD",
+      "definition": "<dd>\n<p>Is acronym for the traditional <em>client-server</em> database update policy is CRUD (<strong>Create, Read, Update, Delete</strong>).</p>\n</dd>\n<dd>\n<p>CRUD as opposed to <a class=\"term-reference\" href=\"#term:run\">RUN</a> which is the acronym for the new peer-to-peer end-verifiable monotonic update policy.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CRUD\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CSPRNG",
+      "definition": "<dd>\n<p>means “Cryptographically Secure Pseudorandom Number Generator,” which means that a sequence of numbers (bits, bytes…) that is produced from an algorithm that is deterministic (the sequence is generated from some unknown internal state), hence pseudorandom is also cryptographically secure, or not.</p>\n</dd>\n<dd>\n<p>(Source: <a path-0=\"crypto.stackexchange.com\" path-1=\"questions\" path-2=\"12436\" path-3=\"what-is-the-difference-between-csprng-and-prng\" href=\"https://crypto.stackexchange.com/questions/12436/what-is-the-difference-between-csprng-and-prng\"><span>https://crypto.stackexchange.com/questions/12436/what-is-the-difference-between-csprng-and-prng</span></a>)</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CSPRNG\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "CT",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:certificate-transparency\">certificate-transparency</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/CT\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "DAG",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:directed-acyclic-graph\">directed-acyclic-graph</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/DAG\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "DHT",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:distributed-hash-table\">distributed-hash-table</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/DHT\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "E2E",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:end-to-end\">end-to-end</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/E2E\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "FFI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:foreign-function-interface\">foreign-function-interface</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/FFI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "GLEIF",
+      "definition": "<dd>\n<p>Global Legal Entity Identifier Foundation</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/GLEIF\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "GPG",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:gnu-privacy-guard\">gnu-privacy-guard</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/GPG\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "HSM",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:hardware-security-module\">hardware-security-module</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/HSM\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "I-O",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:input-output\">input-output</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/I-O\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "IANA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:internet-assigned-numbers-authority\">internet-assigned-numbers-authority</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/IANA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "JOSE",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:javascript-object-signing-and-encryption\">javascript-object-signing-and-encryption</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/JOSE\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "JSON",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:javascript-object-notation\">javascript-object-notation</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/JSON\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "LEI",
+      "definition": "<dd>\n<p>Legal Entity Identifier</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/LEI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "LLM",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:large-language-model\">large-language-model</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/LLM\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "LoA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:levels-of-assurance\">levels-of-assurance</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/LoA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "LoC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:loci-of-control\">loci-of-control</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/LoC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "MFA",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:multi-factor-authentication\">multi-factor-authentication</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/MFA\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "MIME-type",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:media-type\">media-type</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/MIME-type\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "NFT",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:non-fungible-token\">non-fungible-token</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/NFT\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "P2P",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:peer-to-peer\">peer-to-peer</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/P2P\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "PGP",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:pretty-good-privacy\">pretty-good-privacy</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/PGP\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "PKI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:public-key-infrastructure\">public-key-infrastructure</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/PKI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "PRNG",
+      "definition": "<dd>\n<p>means “Pseudorandom Number Generator” which means that a sequence of numbers (bits, bytes…) is produced from an algorithm which looks random, but is in fact deterministic (the sequence is generated from some unknown internal state), hence pseudorandom.</p>\n</dd>\n<dd>\n<p>Such pseudorandomness can be cryptographically secure, or not. It is cryptographically secure if nobody can reliably distinguish the output from true randomness, even if the PRNG algorithm is perfectly known (but not its internal state). A non-cryptographically secure PRNG would fool basic statistical tests but can be distinguished from true randomness by an intelligent attacker.</p>\n</dd>\n<dd>\n<p>(Source: <a path-0=\"crypto.stackexchange.com\" path-1=\"questions\" path-2=\"12436\" path-3=\"what-is-the-difference-between-csprng-and-prng\" href=\"https://crypto.stackexchange.com/questions/12436/what-is-the-difference-between-csprng-and-prng\"><span>https://crypto.stackexchange.com/questions/12436/what-is-the-difference-between-csprng-and-prng</span></a>)</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/PRNG\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "SATP",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:secure-asset-transfer-protocol\">secure-asset-transfer-protocol</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/SATP\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "TCP",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:transmission-control-protocol\">transmission-control-protocol</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/TCP\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "TEE",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:trusted-execution-environment\">trusted-execution-environment</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/TEE\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "TPM",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:trusted-platform-module\">trusted-platform-module</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/TPM\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "UI",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:user-interface\">user-interface</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/UI\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "URL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:uniform-resource-locator\">uniform-resource-locator</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/URL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "VC",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:verifiable-credential\">verifiable-credential</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/VC\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "VDS",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:verifiable-data-structure\">verifiable-data-structure</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/VDS\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "XBRL",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:extensible-business-reporting-language\">extensible-business-reporting-language</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/XBRL\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "agency",
+      "definition": "<dd>\n<p>Agents can be people, edge computers and the functionality within <a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"acdc\" path-3=\"wiki\" path-4=\"_new#digital-identity-wallet\" href=\"https://github.com/trustoverip/acdc/wiki/_new#digital-identity-wallet\">wallets</a>. The service an agent offers is <a class=\"term-reference\" href=\"#term:agency\">agency</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/agency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "append-only-event-logs",
+      "definition": "<dd>\n<p>Append-only is a property of computer data storage such that new data can be appended to the storage, but where existing data is immutable.</p>\n</dd>\n<dd>\n<p>A blockchain is an example of an append-only log. The events can be transactions. Bitcoin is a well-known Append only log where the events are <em>totally ordered</em> and signed transfers of control over unspent transaction output.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Append-only\" href=\"https://en.wikipedia.org/wiki/Append-only\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/append-only-event-logs\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "application-programming-interface",
+      "definition": "<dd>\n<p>An application programming interface (API) is a way for two or more <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_program\" href=\"https://en.wikipedia.org/wiki/Computer_program\">computer programs</a> to communicate with each other. It is a type of software <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Interface_(computing)\" href=\"https://en.wikipedia.org/wiki/Interface_(computing)\">interface</a>, offering a service to other pieces of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Software\" href=\"https://en.wikipedia.org/wiki/Software\">software</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/application-programming-interface\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "architectural-decision-record",
+      "definition": "<dd>\n<p>Is a justified software design choice that addresses a functional or non-functional requirement that is architecturally significant.</p>\n</dd>\n<dd>\n<p><a path-0=\"adr.github.io\" path-1=\"\" href=\"https://adr.github.io/\">Source adr.github.io</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/architectural-decision-record\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authentic-web",
+      "definition": "<dd>\n<p>The authentic web is the internet as a whole giant verifiable data structure. Also called <em>Web5</em>. The web will be one big graph. That’s the mental model of the ‘authentic web’.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-web\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authenticity",
+      "definition": "<dd>\n<p>The quality of having an objectively verifiable origin ; contrast <a class=\"term-reference\" href=\"#term:veracity\">veracity</a>. When a newspaper publishes a story about an event, every faithful reproduction of that story may be <em>authentic</em> — but that does not mean the story was <em>true</em> (has <em>veracity</em>).</p>\n</dd>\n<dd>\n<p>Authenticity is strongly related to digital <a class=\"term-reference\" href=\"#term:security\">security</a>. Ideally it should be <a class=\"term-reference\" href=\"#term:verifiable\">verifiable</a> (to a <a class=\"term-reference\" href=\"#term:root-of-trust\">root-of-trust</a>). The future picture therein is the <a class=\"term-reference\" href=\"#term:authentic-web\">authentic-web</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authenticity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authority",
+      "definition": "<dd>\n<p><a path-0=\"glossary.trustoverip.org\" path-1=\"#term:authority\" href=\"https://glossary.trustoverip.org/#term:authority\"><span>https://glossary.trustoverip.org/#term:authority</span></a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authority\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "authorization",
+      "definition": "<dd>\n<p>Is the function of specifying access rights/privileges to resources, which is related to general <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Information_security\" href=\"https://en.wikipedia.org/wiki/Information_security\">information security</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_security\" href=\"https://en.wikipedia.org/wiki/Computer_security\">computer security</a>, and to <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Access_control\" href=\"https://en.wikipedia.org/wiki/Access_control\">access control</a> in particular.</p>\n</dd>\n<dd>\n<p>More formally, “to authorize” is to define an access policy.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authorization\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "autonomic-computing-systems",
+      "definition": "<dd>\n<p>Self managing computing systems using algorithmic governance, from the 90’s way way way before DAOs. KERI creator Sam Smith worked at funded Navy research in the 90’s on autonomic survivable systems as in “self-healing” systems: “We called them autonomic way back then”.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/autonomic-computing-systems\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "base64",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_programming\" href=\"https://en.wikipedia.org/wiki/Computer_programming\">computer programming</a>, Base64 is a group of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Binary-to-text_encoding\" href=\"https://en.wikipedia.org/wiki/Binary-to-text_encoding\">binary-to-text encoding</a> schemes that represent <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Binary_data\" href=\"https://en.wikipedia.org/wiki/Binary_data\">binary data</a> (more specifically, a sequence of 8-bit bytes) in sequences of 24 bits that can be represented by four 6-bit Base64 digits.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Base64\" href=\"https://en.wikipedia.org/wiki/Base64\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/base64\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "blake3",
+      "definition": "<dd>\n<p>BLAKE3 is a relatively young (2020) cryptographic hash function based on Bao and BLAKE2.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/blake3\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "branch",
+      "definition": "<dd>\n<p>In software development a ‘branch’ refers to the result of branching: the duplication of an object under version control for further separate modification.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/branch\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "byzantine-agreement",
+      "definition": "<dd>\n<p>(non PoW) Byzantine Agreement is <a class=\"term-reference\" href=\"#term:byzantine-fault-tolerance\">byzantine-fault-tolerance</a> of distributed computing systems that enable them to come to consensus despite arbitrary behavior from a fraction of the nodes in the network. BA consensus makes no assumptions about the behavior of nodes in the system. Practical Byzantine Fault Tolerance (pBFT) is the prototypical model for Byzantine agreement, and it can reach consensus fast and efficiently while concurrently decoupling consensus from resources (i.e., financial stake in PoS or electricity in PoW).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/byzantine-agreement\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "byzantine-fault-tolerance",
+      "definition": "<dd>\n<p>A Byzantine fault (also interactive consistency, source congruency, error avalanche, <a class=\"term-reference\" href=\"#term:byzantine-agreement\">byzantine-agreement</a> problem, Byzantine generals problem, and Byzantine failure) is a condition of a computer system, particularly distributed computing systems, where components may fail and there is imperfect information on whether a component has failed.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/byzantine-fault-tolerance\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "canonicalization",
+      "definition": "<dd>\n<p>In computer science, canonicalization (sometimes standardization or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Normalization_(statistics)\" href=\"https://en.wikipedia.org/wiki/Normalization_(statistics)\">normalization</a>) is a process for converting data that has more than one possible representation into a “standard,” “normal,” or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Canonical_form\" href=\"https://en.wikipedia.org/wiki/Canonical_form\">canonical form</a>.</p>\n</dd>\n<dd>\n<p>This can be done to compare different representations for equivalence, to count the number of distinct data structures, to improve the efficiency of various algorithms by eliminating repeated calculations, or to make it possible to impose a meaningful sorting order.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Canonicalization\" href=\"https://en.wikipedia.org/wiki/Canonicalization\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/canonicalization\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "certificate-transparency",
+      "definition": "<dd>\n<p>Certificate Transparency (CT) is an Internet security standard and open source framework for monitoring and auditing digital certificates. The standard creates a system of public logs that seek to eventually record all certificates issued by publicly trusted certificate authorities, allowing efficient identification of mistakenly or maliciously issued certificates. As of 2021, Certificate Transparency is mandatory for all SSL/TLS certificates.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/certificate-transparency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "chain-of-custody",
+      "definition": "<dd>\n<p>From Wikipedia (<a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Chain_of_custody\" href=\"https://en.wikipedia.org/wiki/Chain_of_custody\">Source</a>):</p>\n</dd>\n<dd>\n<p>Chain of custody (CoC), in legal contexts, is the chronological documentation or <a path-0=\"en.wiktionary.org\" path-1=\"wiki\" path-2=\"paper_trail\" href=\"https://en.wiktionary.org/wiki/paper_trail\">paper trail</a> that records the sequence of custody, control, transfer, analysis, and disposition of materials, including physical or electronic <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Evidence\" href=\"https://en.wikipedia.org/wiki/Evidence\">evidence</a>. Of particular importance in criminal cases, the concept is also applied in civil litigation and more broadly in drug testing of athletes and in <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Supply_chain_management\" href=\"https://en.wikipedia.org/wiki/Supply_chain_management\">supply chain management</a>, e.g. to improve the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Traceability\" href=\"https://en.wikipedia.org/wiki/Traceability\">traceability</a> of food products, or to provide assurances that wood products originate from <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Sustainable_forest_management\" href=\"https://en.wikipedia.org/wiki/Sustainable_forest_management\">sustainably managed forests</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/chain-of-custody\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "claim",
+      "definition": "<dd>\n<p>An assertion of the truth of something, typically one which is disputed or in doubt. A set of claims might convey personally identifying information: name, address, date of birth and citizenship, for example. (<a path-0=\"www.identityblog.com\" path-1=\"\" href=\"https://www.identityblog.com/?p=352\">Source</a>).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/claim\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "clone",
+      "definition": "<dd>\n<p>A copy of a system that is - and works exactly as the original</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/clone\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cloud-agent",
+      "definition": "<dd>\n<p>Cloud agent is software that is installed on the cloud server instances in order to provide security, monitoring, and analysis solutions for the cloud. They actually provide information and helps to provide control over cloud entities.</p>\n</dd>\n<dd>\n<p><em>Paraphrased by @henkvancann based on <a path-0=\"www.cloudopedia.com\" path-1=\"cloud-agent\" path-2=\"\" href=\"https://www.cloudopedia.com/cloud-agent/\">source</a></em>.</p>\n</dd>\n<dd>\n<p>Also see <a class=\"term-reference\" href=\"#term:agent\">agent</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cloud-agent\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "code-table",
+      "definition": "<dd>\n<p>a code table is the Internet’s most comprehensive yet simple resource for browsing and searching for <a path-0=\"www.codetable.net\" path-1=\"altkeycodes\" href=\"https://www.codetable.net/altkeycodes\">alt codes</a>, <a path-0=\"www.codetable.net\" path-1=\"asciikeycodes\" href=\"https://www.codetable.net/asciikeycodes\">ascii codes</a>, <a path-0=\"www.codetable.net\" path-1=\"entitiesinhtml\" href=\"https://www.codetable.net/entitiesinhtml\">entities in html</a>, <a path-0=\"www.codetable.net\" path-1=\"unicodecharacters\" href=\"https://www.codetable.net/unicodecharacters\">unicode characters</a>, and <a path-0=\"www.codetable.net\" path-1=\"groups\" href=\"https://www.codetable.net/groups\">unicode groups and categories</a>.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.codetable.net\" href=\"https://www.codetable.net\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/code-table\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "collision",
+      "definition": "<dd>\n<p>In cryptography and identity <em>collision</em> generally refers to something going wrong because an identical result has been produced but it refers to - or points to - different sources or assets backing this result.</p>\n</dd>\n<dd>\n<p>E.g. two hashes collide, meaning two different digital sources produce the same hash.</p>\n</dd>\n<dd>\n<p>Another example is <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Naming_collision\" href=\"https://en.wikipedia.org/wiki/Naming_collision\">name(space) collision</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/collision\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "complementary-integrity-verification",
+      "definition": "<dd>\n<p>A mechanism that can verify integrity independent of needing access to a previous instance or reference version of the information for comparison.</p>\n</dd>\n<dd>\n<p>Source: Neil Thomson</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/complementary-integrity-verification\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "composability",
+      "definition": "<dd>\n<p>short for text-binary concatenation composability. An encoding has Composability when any set of Self-Framing concatenated Primitives expressed in either the Text domain or Binary domain may be converted as a group to the other Domain and back again without loss.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/composability\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "concatenation",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Formal_language\" href=\"https://en.wikipedia.org/wiki/Formal_language\">formal language theory</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_programming\" href=\"https://en.wikipedia.org/wiki/Computer_programming\">computer programming</a>, string concatenation is the operation of joining <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Character_string_(computer_science)\" href=\"https://en.wikipedia.org/wiki/Character_string_(computer_science)\">character strings</a> <a path-0=\"en.wiktionary.org\" path-1=\"wiki\" path-2=\"end-to-end\" href=\"https://en.wiktionary.org/wiki/end-to-end\">end-to-end</a>. For example, the concatenation of “snow” and “ball” is “snowball”.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Concatenation\" href=\"https://en.wikipedia.org/wiki/Concatenation\">Wikipedia page</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/concatenation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "confidentiality",
+      "definition": "<dd>\n<p>All statements in a conversation are only known by the parties to that conversation.</p>\n</dd>\n<dd>\n<p>Source: Samuel Smith, at IIW-37, Oct 2023.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/confidentiality\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "configuration-files",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computing\" href=\"https://en.wikipedia.org/wiki/Computing\">computing</a>, configuration files (commonly known simply as config files) are <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_file\" href=\"https://en.wikipedia.org/wiki/Computer_file\">files</a> used to configure the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Parameter_(computer_programming)\" href=\"https://en.wikipedia.org/wiki/Parameter_(computer_programming)\">parameters</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Initialization_(programming)\" href=\"https://en.wikipedia.org/wiki/Initialization_(programming)\">initial settings</a> for some <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_program\" href=\"https://en.wikipedia.org/wiki/Computer_program\">computer programs</a>. They are used for user <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Application_software\" href=\"https://en.wikipedia.org/wiki/Application_software\">applications</a>, <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Server_(computing)\" href=\"https://en.wikipedia.org/wiki/Server_(computing)\">server processes</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Operating_system\" href=\"https://en.wikipedia.org/wiki/Operating_system\">operating system</a> settings.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Configuration_file\" href=\"https://en.wikipedia.org/wiki/Configuration_file\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-files\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "consensus-mechanism",
+      "definition": "<dd>\n<p>How groups of entitities come to decisions. In general to learn about consensus mechanisms read any textbook on decision making, automated reasoning, multi-objective decision making, operations research etc.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/consensus-mechanism\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "content-addressable-hash",
+      "definition": "<dd>\n<p>Finding content by a hash of this content, generated by a one-way hash function applied to the content.</p>\n</dd>\n<dd>\n<p>Content addressing is a way to find data in a network using its content rather than its location. The way we do is by taking the content of the content and hashing it. Try uploading an image to IPFS and get the hash using the below button.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/content-addressable-hash\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "controller",
+      "definition": "<dd>\n<p>an entity that can cryptographically prove the control authority over an AID and make changes on the associated KEL. A controller of a multi-sig AID may consist of multiple controlling entities.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/controller\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "coroutines",
+      "definition": "<dd>\n<p>Computer programs that can be suspended and resumed at will.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/coroutines\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "correlation",
+      "definition": "<dd>\n<p>In our scope this is an identifier used to indicate that external parties have observed how wallet contents are related.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/correlation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "credential",
+      "definition": "<dd>\n<p>Evidence of authority, status, rights, entitlement to privileges, or the like.</p>\n</dd>\n<dd>\n<p>(<a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"tswg-acdc-specification\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-acdc.md#introduction\" href=\"https://github.com/trustoverip/tswg-acdc-specification/blob/main/draft-ssmith-acdc.md#introduction\">source</a>)</p>\n</dd>\n<dd>\n<p>A credential has its current state and a history, which is captured in a doc or a graph.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/credential\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "crypto-libraries",
+      "definition": "<dd>\n<p>Cryptography libraries deal with cryptography algorithms and have API function calls to each of the supported features.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/crypto-libraries\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cryptocurrency",
+      "definition": "<dd>\n<p>A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records.</p>\n</dd>\n<dd>\n<p>See <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Cryptocurrency\" href=\"https://en.wikipedia.org/wiki/Cryptocurrency\">more</a> on source Wikipedia.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptocurrency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cryptographic-commitment-scheme",
+      "definition": "<dd>\n<p>is a cryptographic primitive that allows one to commit to a chosen value (or chosen statement) while keeping it hidden to others, with the ability to reveal the committed value later.</p>\n</dd>\n<dd>\n<p>Commitment schemes are designed so that a party cannot change the value or statement after they have committed to it: that is, commitment schemes are <em>binding</em>.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Commitment_scheme\" href=\"https://en.wikipedia.org/wiki/Commitment_scheme\">wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptographic-commitment-scheme\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cryptographic-primitive",
+      "definition": "<dd>\n<p>the serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptographic-primitive\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cryptographic-strength",
+      "definition": "<dd>\n<p>The term “cryptographically strong” is often used to describe an encryption algorithm, and implies, in comparison to some other algorithm (which is thus cryptographically weak), greater resistance to attack. But it can also be used to describe hashing and unique identifier and filename creation algorithms.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Strong_cryptography\" href=\"https://en.wikipedia.org/wiki/Strong_cryptography\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptographic-strength\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "cryptonym",
+      "definition": "<dd>\n<p>a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on <a class=\"term-reference\" href=\"#term:cryptographic-strength\">cryptographic-strength</a>. A cryptonym is a type of <a class=\"term-reference\" href=\"#term:primitive\">primitive</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptonym\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "data-anchor",
+      "definition": "<dd>\n<p>Data anchors are <a class=\"term-reference\" href=\"#term:digest\">digest</a> of digital data, that uniquely identify this data. The digest is the anchor and can be used to identify - and point to the data at the same time.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/data-anchor\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "decentralized-key-management-infrastructure",
+      "definition": "<dd>\n<p>a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:dpki\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:dpki\">DPKI</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/decentralized-key-management-infrastructure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "digest",
+      "definition": "<dd>\n<p>verifiable cryptographic commitment. It’s a collision-resistant hash of content.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/digest\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "digital-signature",
+      "definition": "<dd>\n<p>A <em>digital</em> signature is a mathematical scheme for verifying the authenticity of digital messages or documents. A valid digital signature, where the prerequisites are satisfied, gives a recipient very strong reason to believe that the message was created by a known sender (authentication), and that the message was not altered in transit (integrity).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/digital-signature\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "directed-acyclic-graph",
+      "definition": "<dd>\n<p>From Wikipedia (<a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Directed_acyclic_graph\" href=\"https://en.wikipedia.org/wiki/Directed_acyclic_graph\">source</a>):</p>\n</dd>\n<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Mathematics\" href=\"https://en.wikipedia.org/wiki/Mathematics\">mathematics</a>, particularly <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Graph_theory\" href=\"https://en.wikipedia.org/wiki/Graph_theory\">graph theory</a>, and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_science\" href=\"https://en.wikipedia.org/wiki/Computer_science\">computer science</a>, a directed acyclic graph (DAG <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Help:IPA\" path-3=\"English\" href=\"https://en.wikipedia.org/wiki/Help:IPA/English\">/ˈdæɡ/</a> (<a path-0=\"upload.wikimedia.org\" path-1=\"wikipedia\" path-2=\"commons\" path-3=\"5\" path-4=\"5a\" path-5=\"En-us-DAG.ogg\" href=\"https://upload.wikimedia.org/wikipedia/commons/5/5a/En-us-DAG.ogg\">listen</a>)) is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Directed_graph\" href=\"https://en.wikipedia.org/wiki/Directed_graph\">directed graph</a> with no <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Cycle_graph#Directed_cycle_graph\" href=\"https://en.wikipedia.org/wiki/Cycle_graph#Directed_cycle_graph\">directed cycles</a>. That is, it consists of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Vertex_(graph_theory)\" href=\"https://en.wikipedia.org/wiki/Vertex_(graph_theory)\">vertices</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Edge_(graph_theory)\" href=\"https://en.wikipedia.org/wiki/Edge_(graph_theory)\">edges</a> (also called arcs), with each edge directed from one vertex to another.</p>\n</dd>\n<dd>\n<img src=\"https://hackmd.io/_uploads/rywIzRLo5.png\" width=\"219\" height=\"300\" alt=\"A directed acyclic graph (DAG)\">\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/directed-acyclic-graph\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "disclosee",
+      "definition": "<dd>\n<p>a role of an entity that is a recipient to which an ACDC is disclosed. A Disclosee may or may not be the Issuee of the disclosed ACDC.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/disclosee\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "discloser",
+      "definition": "<dd>\n<p>a role of an entity that discloses an <a class=\"term-reference\" href=\"#term:authentic-chained-data-container\">authentic-chained-data-container</a>. A Discloser may or may not be the Issuer of the disclosed ACDC.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/discloser\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "distributed-hash-table",
+      "definition": "<dd>\n<p>It is a distributed system that provides a lookup service similar to a hash table: key-value pairs are stored in a DHT, and any participating node can efficiently retrieve the value associated with a given key. The main advantage of a DHT is that nodes can be added or removed with minimum work around re-distributing keys.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/distributed-hash-table\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "dnd",
+      "definition": "<dd>\n<p>Do Not Delegate is a flag/attribute for an AID, and this is default set to “you can delegate.”</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/dnd\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "domain-name",
+      "definition": "<dd>\n<p>A domain name is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"String_(computer_science)\" href=\"https://en.wikipedia.org/wiki/String_(computer_science)\">string</a> that identifies a realm of administrative autonomy, authority or control within the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Internet\" href=\"https://en.wikipedia.org/wiki/Internet\">Internet</a>. Domain names are used in various networking contexts and for application-specific naming and addressing purposes.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Domain_name\" href=\"https://en.wikipedia.org/wiki/Domain_name\">Source Wikipedia</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/domain-name\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "double-spend-proof",
+      "definition": "<dd>\n<p>Total global ordering of transactions so that value can’t be spent twice at the same time from the unit of value. Or in everyday language: you can’t spend your money twice.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/double-spend-proof\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "duplicity",
+      "definition": "<dd>\n<p>the existence of more than one version of a Verifiable <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> for a given <a class=\"term-reference\" href=\"#term:aid\">AID</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/duplicity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "eclipse-attack",
+      "definition": "<dd>\n<p>An eclipse attack is a <a class=\"term-reference\" href=\"#term:peer-to-peer\">peer-to-peer</a> network-based attack. Eclipse attack can only be performed on nodes that accept incoming connections from other nodes, and not all nodes accept incoming connections.</p>\n</dd>\n<dd>\n<p>In a bitcoin network, by default, there are a maximum of 117 incoming TCP connections and 8 outgoing TCP connections.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.geeksforgeeks.org\" path-1=\"what-is-an-eclipse-attack\" path-2=\"\" href=\"https://www.geeksforgeeks.org/what-is-an-eclipse-attack/\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/eclipse-attack\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "edge",
+      "definition": "<dd>\n<p>a top-level field map within an ACDC that provides edges that connect to other ACDCs, forming a labeled property graph (LPG).</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/edge\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "electronic-signature",
+      "definition": "<dd>\n<p>An electronic signature, or e-signature, refers to data in electronic form, which is logically associated with other data in electronic form and which is used by the signatory to sign. This type of signature has the same legal standing as a handwritten signature as long as it adheres to the requirements of the specific regulation under which it was created (e.g., eIDAS in the European Union, NIST-DSS in the USA or ZertES in Switzerland).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/electronic-signature\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "end-to-end",
+      "definition": "<dd>\n<p>Inter-host communication and data flow transformations, considered in motion and at rest.</p>\n</dd>\n<dd>\n<ol>\n<li>E2E Security.  Inter-host communication must be end-to-end signed/encrypted and data must be stored signed/encrypted. Data is signed/encrypted in motion and at rest.</li>\n</ol>\n</dd>\n<dd>\n<ol start=\"2\">\n<li>E2E Provenance.  Data flow transformations must be end-to-end provenanced using verifiable data items (verifiable data chains or VCs). Every change shall be provenanced.</li>\n</ol>\n</dd>\n<dd>\n<p>Paraphrased from source <a path-0=\"github.com\" path-1=\"SmithSamuelM\" path-2=\"Papers\" path-3=\"blob\" path-4=\"master\" path-5=\"whitepapers\" path-6=\"IdentifierTheory_web.pdf\" href=\"https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf\">Universal Identifier Theory</a> by Samuel Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/end-to-end\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "end-verifiable",
+      "definition": "<dd>\n<p>When a log is <em>end verifiable</em>, it means that the log may be verified by any end user that receives a copy. No trust in intervening infrastructure is needed to verify the log and validate the content.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/end-verifiable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "entity",
+      "definition": "<dd>\n<p><a path-0=\"trustoverip.github.io\" path-1=\"essiflab\" path-2=\"glossary#entity\" href=\"https://trustoverip.github.io/essiflab/glossary#entity\">entity</a> in the <strong>#essiflab</strong> glossary.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/entity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "entropy",
+      "definition": "<dd>\n<p>Unpredictable information. Often used as a <em>secret</em> or as input to a <em>key</em> generation algorithm.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/entropy\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ephemeral",
+      "definition": "<dd>\n<p>Lasting for a markedly brief time. Having a short lifespan.</p>\n</dd>\n<dd>\n<p>In the context of identifiers is often referred to as identifiers for one time use; or throw-away identifiers.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ephemeral\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "escrow",
+      "definition": "<dd>\n<p>‘Escrow’ <strong>as a noun</strong> is a (legal) arrangement in which a third party temporarily holds money or property until a particular condition has been met.</p>\n</dd>\n<dd>\n<p>‘Escrow’ <strong>as a verb</strong>: we use it in protocol design to handle out of order events.  Store the event and wait for the other stuff to show up and then continue processing of the event. So <em>escrowing</em> is the process of storing this event. We root back to the event later.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/escrow\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "extensible-business-reporting-language",
+      "definition": "<dd>\n<p>XBRL is the open international standard for digital business reporting, managed by a global not for profit consortium, XBRL International.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/extensible-business-reporting-language\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "foreign-function-interface",
+      "definition": "<dd>\n<p>Is a mechanism by which a program written in one, usually an <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Interpreted_(programming_languages)\" href=\"https://en.wikipedia.org/wiki/Interpreted_(programming_languages)\">interpreted</a> (scripted), <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Programming_language\" href=\"https://en.wikipedia.org/wiki/Programming_language\">programming language</a> that can call routines or make use of services written or compiled in another one.</p>\n</dd>\n<dd>\n<p>More on Source: <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Foreign_function_interface\" href=\"https://en.wikipedia.org/wiki/Foreign_function_interface\"><span>https://en.wikipedia.org/wiki/Foreign_function_interface</span></a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/foreign-function-interface\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "gnu-privacy-guard",
+      "definition": "<dd>\n<p>also GnuPG; is a free-software replacement for Symantec’s PGP cryptographic software suite. It is compliant with RFC 4880, the IETF standards-track specification of OpenPGP. Modern versions of PGP are interoperable with GnuPG and other OpenPGP-compliant systems.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"GNU_Privacy_Guard\" href=\"https://en.wikipedia.org/wiki/GNU_Privacy_Guard\">wikipedia</a></p>\n</dd>\n<dd>\n<p>See more about the closely related and often-confusing term <a class=\"term-reference\" href=\"#term:pgp\">PGP</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/gnu-privacy-guard\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "governance-framework",
+      "definition": "<dd>\n<p>Also called ‘Governance structure’. Governance frameworks are the structure of a government and reflect the interrelated relationships, factors, and other influences upon the institution. Governance frameworks structure and delineate power and the governing or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Management\" href=\"https://en.wikipedia.org/wiki/Management\">management</a> roles in an organization. They also set rules, procedures, and other informational guidelines.</p>\n</dd>\n<dd>\n<p>More in <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Governance_framework\" href=\"https://en.wikipedia.org/wiki/Governance_framework\">source</a> Wikipedia.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/governance-framework\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "graph-fragment",
+      "definition": "<dd>\n<p>An ACDC is a verifiable data structure and <em>part of a graph</em>, consisting of a node property and one or two edge proporties.</p>\n</dd>\n<dd>\n<img src=\"https://hackmd.io/_uploads/r1KDqKxzj.png\" width=\"300\">\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/graph-fragment\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hardware-security-module",
+      "definition": "<dd>\n<p>A HSM is a physical computing device that safeguards and manages secrets (most importantly <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Digital_keys\" href=\"https://en.wikipedia.org/wiki/Digital_keys\">digital keys</a>), performs <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Encryption\" href=\"https://en.wikipedia.org/wiki/Encryption\">encryption</a> and decryption functions for <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Digital_signature\" href=\"https://en.wikipedia.org/wiki/Digital_signature\">digital signatures</a>, strong <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> and other cryptographic functions.</p>\n</dd>\n<dd>\n<p>More in source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Hardware_security_module\" href=\"https://en.wikipedia.org/wiki/Hardware_security_module\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hardware-security-module\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hierarchical-asynchronous-coroutines-and-input-output",
+      "definition": "<dd>\n<p>HIO is an acronym which stands for ‘Weightless hierarchical asynchronous coroutines and I/O in Python’.</p>\n</dd>\n<dd>\n<p>It’s Rich Flow Based Programming Hierarchical Structured Concurrency with Asynchronous IO. That mouthful of terms has been explained further on <a path-0=\"github.com\" path-1=\"ioflo\" path-2=\"hio\" href=\"https://github.com/ioflo/hio\">Github</a>.</p>\n</dd>\n<dd>\n<p>HIO builds on very early work on hierarchical structured concurrency with lifecycle contexts from <a path-0=\"ioflo.com\" path-1=\"\" href=\"https://ioflo.com/\">ioflo</a>, <a path-0=\"github.com\" path-1=\"ioflo\" path-2=\"ioflo\" href=\"https://github.com/ioflo/ioflo\">ioflo github</a>, and <a path-0=\"github.com\" path-1=\"ioflo\" path-2=\"ioflo_manuals\" href=\"https://github.com/ioflo/ioflo_manuals\">ioflo manuals</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hierarchical-asynchronous-coroutines-and-input-output\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hierchical-deterministic-keys",
+      "definition": "<dd>\n<p>An HDK type is a deterministic Bitcoin wallet derived from a known <a class=\"term-reference\" href=\"#term:seed\">seed</a> that allows child keys to be created from the parent key. Because the child key is generated from a known seed, a relationship between the child and parent keys is invisible to anyone without that seed.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hierchical-deterministic-keys\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "hio",
+      "definition": "<dd>\n<p>Weightless hierarchical asynchronous coroutines and I/O in Python.</p>\n</dd>\n<dd>\n<p>Rich Flow Based Programming Hierarchical Structured Concurrency with Asynchronous IO.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/hio\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "identifier-system",
+      "definition": "<dd>\n<p>a system for uniquely identifying (public) identities</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/identifier-system\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "identifier",
+      "definition": "<dd>\n<p>Something to uniquely identify (public) identities; pointing to something or someone else.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/identifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "identity",
+      "definition": "<dd>\n<p>A unique entity. Typically represented by a unique <a class=\"term-reference\" href=\"#term:identifier\">identifier</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/identity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "inception",
+      "definition": "<dd>\n<p>The operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and duplicity evident upon acceptance as the inception event that begins the AID’s KEL.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inception\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "inconsistency",
+      "definition": "<dd>\n<p>If a reason, idea, opinion, etc. is inconsistent, different parts of it do not agree, or it does not agree with something else. Data inconsistency occurs when similar data is kept in different formats in more than one file. When this happens, it is important to match the data between files.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inconsistency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "input-output",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computing\" href=\"https://en.wikipedia.org/wiki/Computing\">computing</a>, input/output (I/O, or informally io or IO) is the communication between an information processing system, such as a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a>, and the outside world, possibly a human or another information processing system. <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Information\" href=\"https://en.wikipedia.org/wiki/Information\">Inputs</a> are the signals or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_(computing)\" href=\"https://en.wikipedia.org/wiki/Data_(computing)\">data</a> received by the system and outputs are the signals or data sent from it. The term can also be used as part of an action; to “perform I/O” is to perform an <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"I\" path-3=\"O_scheduling\" href=\"https://en.wikipedia.org/wiki/I/O_scheduling\">input or output operation</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/input-output\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "integrity",
+      "definition": "<dd>\n<p>Integrity (of a message or data) means that the information is whole, sound, and unimpaired (not necessarily correct). It means nothing is missing from the information; it is complete and in intended good order.</p>\n</dd>\n<dd>\n<p>Source: Neil Thomson</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/integrity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "internal-inconsistency",
+      "definition": "<dd>\n<p>Internal is used to describe things that exist or happen inside an <a class=\"term-reference\" href=\"#term:entity\">entity</a>. In our scope of digital <a class=\"term-reference\" href=\"#term:identifier\">identifier</a> its (in)consistency is considered within the defining data structures and related data stores.</p>\n</dd>\n<dd>\n<p>In <a class=\"term-reference\" href=\"#term:key-event-receipt-infrastructure\">key-event-receipt-infrastructure</a>, you are protected against internal inconsistency by the hash chain data structure of the <a class=\"term-reference\" href=\"#term:key-event-log\">key-event-log</a> because the only <a class=\"term-reference\" href=\"#term:authority\">authority</a> that can sign the log is the <a class=\"term-reference\" href=\"#term:controller\">controller</a> itself.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/internal-inconsistency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "internet-assigned-numbers-authority",
+      "definition": "<dd>\n<p>is the organization that oversees the allocation of <a path-0=\"www.techtarget.com\" path-1=\"searchunifiedcommunications\" path-2=\"definition\" path-3=\"Internet-Protocol\" href=\"https://www.techtarget.com/searchunifiedcommunications/definition/Internet-Protocol\">IP</a> addresses to internet service providers (<a path-0=\"www.techtarget.com\" path-1=\"whatis\" path-2=\"definition\" path-3=\"ISP\" href=\"https://www.techtarget.com/whatis/definition/ISP\">ISPs</a>).</p>\n</dd>\n<dd>\n<p><a path-0=\"www.techtarget.com\" path-1=\"whatis\" path-2=\"definition\" path-3=\"IANA-Internet-Assigned-Numbers-Authority\" href=\"https://www.techtarget.com/whatis/definition/IANA-Internet-Assigned-Numbers-Authority\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/internet-assigned-numbers-authority\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "interoperability",
+      "definition": "<dd>\n<p>Interoperability is a characteristic of a product or system to work with other products or systems. While the term was initially defined for <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Information_technology\" href=\"https://en.wikipedia.org/wiki/Information_technology\">information technology</a> or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Systems_engineering\" href=\"https://en.wikipedia.org/wiki/Systems_engineering\">systems engineering</a> services to allow for information exchange.</p>\n</dd>\n<dd>\n<p><a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Interoperability\" href=\"https://en.wikipedia.org/wiki/Interoperability\">More on source Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/interoperability\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "interoperable",
+      "definition": "<dd>\n<p><a class=\"term-reference\" href=\"#term:interoperability\">interoperability</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/interoperable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ip-address",
+      "definition": "<dd>\n<p>An Internet Protocol address (IP address) is a numerical label such as ‘192.0.2.1’ that is connected to a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_network\" href=\"https://en.wikipedia.org/wiki/Computer_network\">computer network</a> that uses the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Internet_Protocol\" href=\"https://en.wikipedia.org/wiki/Internet_Protocol\">Internet Protocol</a> for communication. An IP address serves two main functions: network interface <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Identification_(information)\" href=\"https://en.wikipedia.org/wiki/Identification_(information)\">identification</a> and location <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Network_address\" href=\"https://en.wikipedia.org/wiki/Network_address\">addressing</a>.</p>\n</dd>\n<dd>\n<p>Much more on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"IP_address\" href=\"https://en.wikipedia.org/wiki/IP_address\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ip-address\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "issuee",
+      "definition": "<dd>\n<p>a role of an entity to which the claims of an ACDC are asserted.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/issuee\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "issuer",
+      "definition": "<dd>\n<p>a role of an entity that asserts claims and creates an ACDC from these claims.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/issuer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "javascript-object-notation",
+      "definition": "<dd>\n<p>JSON (JavaScript Object Notation, pronounced <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Help:IPA\" path-3=\"English\" href=\"https://en.wikipedia.org/wiki/Help:IPA/English\">/ˈdʒeɪsən/</a>; also <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Help:IPA\" path-3=\"English\" href=\"https://en.wikipedia.org/wiki/Help:IPA/English\">/ˈdʒeɪˌsɒn/</a>) is an <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Open_standard\" href=\"https://en.wikipedia.org/wiki/Open_standard\">open standard</a> <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"File_format\" href=\"https://en.wikipedia.org/wiki/File_format\">file format</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Electronic_data_interchange\" href=\"https://en.wikipedia.org/wiki/Electronic_data_interchange\">data interchange</a> format that uses <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Human-readable_medium\" href=\"https://en.wikipedia.org/wiki/Human-readable_medium\">human-readable</a> text to store and transmit data objects consisting of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Attribute%E2%80%93value_pair\" href=\"https://en.wikipedia.org/wiki/Attribute%E2%80%93value_pair\">attribute–value pairs</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_type\" href=\"https://en.wikipedia.org/wiki/Array_data_type\">arrays</a> (or other <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Serialization\" href=\"https://en.wikipedia.org/wiki/Serialization\">serializable</a> values). It is a common data format with diverse uses in <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Electronic_data_interchange\" href=\"https://en.wikipedia.org/wiki/Electronic_data_interchange\">electronic data interchange</a>, including that of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Web_application\" href=\"https://en.wikipedia.org/wiki/Web_application\">web applications</a> with <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Server_(computing)\" href=\"https://en.wikipedia.org/wiki/Server_(computing)\">servers</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/javascript-object-notation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "javascript-object-signing-and-encryption",
+      "definition": "<dd>\n<p>is a framework intended to provide a method to securely transfer claims (such as authorization information) between parties. The JOSE framework provides a collection of specifications to serve this purpose.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/javascript-object-signing-and-encryption\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-compromise",
+      "definition": "<dd>\n<p>Basically there are three infrastructures that are included in “key management” systems that must be protected:</p>\n</dd>\n<dd>\n<ul>\n<li>Key pair creation and storage</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>Event signing</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li>Event signature verification</li>\n</ul>\n</dd>\n<dd>\n<p>So when we say “key compromise” we really mean compromise of one of those three things.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-compromise\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-management",
+      "definition": "<dd>\n<p>management of cryptographic keys in a crypto-system. This includes dealing with the generation, exchange, storage, use, crypto-shredding (destruction) and replacement of keys (also <a class=\"term-reference\" href=\"#term:#key-rotation\">#key-rotation</a>). It includes cryptographic protocol design, key servers, user procedures, and other relevant protocols.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-management\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-pair",
+      "definition": "<dd>\n<p>is a private key and its corresponding public key resulting from a one-way crypto-graphical function; a key pair is used with an asymmetric-key (public-key) algorithm in a so called <a class=\"term-reference\" href=\"#term:public-key-infrastructure\">public-key-infrastructure</a> (PKI).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-pair\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-state",
+      "definition": "<dd>\n<p>a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-state\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-stretching",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Cryptography\" href=\"https://en.wikipedia.org/wiki/Cryptography\">cryptography</a>, key stretching techniques are used to make a possibly weak <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Key_(cryptography)\" href=\"https://en.wikipedia.org/wiki/Key_(cryptography)\">key</a>, typically a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Password\" href=\"https://en.wikipedia.org/wiki/Password\">password</a> or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Passphrase\" href=\"https://en.wikipedia.org/wiki/Passphrase\">passphrase</a>, more secure against a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Brute-force_attack\" href=\"https://en.wikipedia.org/wiki/Brute-force_attack\">brute-force attack</a> by increasing the resources (time and possibly space) it takes to test each possible key.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-stretching\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key-transparency",
+      "definition": "<dd>\n<p>provides a lookup service for generic records and a public, tamper-proof audit log of all record changes. While being publicly auditable, individual records are only revealed in response to queries for specific IDs.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-transparency\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "key",
+      "definition": "<dd>\n<p>In our digital scope it’s a mechanism for granting or restricting access to something. MAY be used to issue and prove, MAY be used to transfer and control over <em>identity</em> and <em>cryptocurrency</em>. <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Key_(cryptography)\" href=\"https://en.wikipedia.org/wiki/Key_(cryptography)\">More</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "keystore",
+      "definition": "<dd>\n<p>A keystore in KERI is the encrypted data store that hold the private keys for a collection of AIDs.</p>\n</dd>\n<dd>\n<p>Source: Philip Feairheller.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keystore\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "large-language-model",
+      "definition": "<dd>\n<p>A large language model (LLM) is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Language_model\" href=\"https://en.wikipedia.org/wiki/Language_model\">language model</a> consisting of a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Artificial_neural_network\" href=\"https://en.wikipedia.org/wiki/Artificial_neural_network\">neural network</a> with many parameters (typically billions of weights or more), trained on large quantities of unlabeled text using <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Self-supervised_learning\" href=\"https://en.wikipedia.org/wiki/Self-supervised_learning\">self-supervised learning</a> or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Semi-supervised_learning\" href=\"https://en.wikipedia.org/wiki/Semi-supervised_learning\">semi-supervised learning</a>.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Large_language_model\" href=\"https://en.wikipedia.org/wiki/Large_language_model\">Source Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/large-language-model\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "lead-bytes",
+      "definition": "<dd>\n<p>In order to avoid confusion with the use of the term <a class=\"term-reference\" href=\"#term:pad\">pad</a> character, when <a class=\"term-reference\" href=\"#term:pre-pad\">pre-pad</a>ding with bytes that are not replaced later, we use the term <strong>lead bytes</strong>. So lead-bytes are added “pre-conversion”.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/lead-bytes\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "legal-entity",
+      "definition": "<dd>\n<p>Unique parties that are legally or financially responsible for the performance of financial transactions or have the legal right in their jurisdiction to enter independently into legal contracts.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/legal-entity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "levels-of-assurance",
+      "definition": "<dd>\n<p>Identity and other trust decisions are often not binary. They are judgement calls. Any time that judgement is not a simple “Yes/No” answer, you have the option for levels of assurance. Also ‘LoA’.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/levels-of-assurance\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "live-attack",
+      "definition": "<dd>\n<p>an attack that compromises either the current signing keys used to sign non-establishment events or the current pre-rotated keys needed to sign a subsequent establishment event. See (Security Properties of Prerotation)[#live-attacks].</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/live-attack\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "liveness",
+      "definition": "<dd>\n<p>Liveness refers to a set of properties of concurrent systems, that require a system to make progress despite the fact that its concurrently executing components (“processes”) may have to “take turns” in critical sections, parts of the program that cannot be simultaneously run by multiple processes.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/liveness\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "loci-of-control",
+      "definition": "<dd>\n<p>Locus of control is the degree to which people believe that they, as opposed to external forces (beyond their influence), have control over the outcome of events in their lives. Also ‘LoC’.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Locus_of_control\" href=\"https://en.wikipedia.org/wiki/Locus_of_control\">wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/loci-of-control\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "media-type",
+      "definition": "<dd>\n<p>A Media type (formerly known as <em>MIME type</em>) is a standard way to indicate the nature and format of a file, in the same way as ‘image/jpeg’ for JPEG images, used on the internet.</p>\n</dd>\n<dd>\n<p>It is a two-part identifier for file formats and format contents transmitted on the internet. Their purpose is somewhat similar to file extensions in that they identify the intended data format.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/media-type\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "message",
+      "definition": "<dd>\n<p>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/message\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "messagepack",
+      "definition": "<dd>\n<p>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/messagepack\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "multi-factor-authentication",
+      "definition": "<dd>\n<p>Authentication by combining multiple security factors. Well-known factors are <em>what you know</em>, <em>what you have</em> and <em>what you are</em>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/multi-factor-authentication\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "multicodec",
+      "definition": "<dd>\n<p>Is a self-describing multi-format, it wraps other formats with a tiny bit of self-description. A multi-codec identifier is both a variant (variable length integer) and the code identifying data.</p>\n</dd>\n<dd>\n<p>See more at <a path-0=\"github.com\" path-1=\"multiformats\" path-2=\"multicodec\" href=\"https://github.com/multiformats/multicodec\">GitHub Multi-codec</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/multicodec\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "multiplexing",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Telecommunications\" href=\"https://en.wikipedia.org/wiki/Telecommunications\">telecommunications</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_network\" href=\"https://en.wikipedia.org/wiki/Computer_network\">computer networking</a>, multiplexing (sometimes contracted to <em>muxing</em>) is a method by which multiple analog or digital signals are combined into one signal over a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Shared_medium\" href=\"https://en.wikipedia.org/wiki/Shared_medium\">shared medium</a>. The aim is to share a scarce resource - a physical <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Transmission_medium\" href=\"https://en.wikipedia.org/wiki/Transmission_medium\">transmission medium</a>.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Multiplexing\" href=\"https://en.wikipedia.org/wiki/Multiplexing\">Wikipedia-page</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/multiplexing\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "multisig",
+      "definition": "<dd>\n<p>also multi-signature or multisignature; is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Digital_signature\" href=\"https://en.wikipedia.org/wiki/Digital_signature\">digital signature</a> scheme which allows a group of users to sign a single piece of digital data.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from Wikipedia <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Multisignature\" href=\"https://en.wikipedia.org/wiki/Multisignature\">source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/multisig\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "namespace",
+      "definition": "<dd>\n<p>In an identity system, an identifier can be generalized to a <em>namespace</em> to provide a systematic way of organizing identifiers for related resources and their attributes. A namespace is a grouping of symbols or identifiers for a set of related objects.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/namespace\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-fungible-token",
+      "definition": "<dd>\n<p>A non-fungible token (NFT) is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Security_(finance)\" href=\"https://en.wikipedia.org/wiki/Security_(finance)\">financial security</a> consisting of digital data stored in a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Blockchain\" href=\"https://en.wikipedia.org/wiki/Blockchain\">blockchain</a>, a form of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Distributed_ledger\" href=\"https://en.wikipedia.org/wiki/Distributed_ledger\">distributed ledger</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-fungible-token\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-normative",
+      "definition": "<dd>\n<p>A theory is called non-normative if it does not do what has described under ‘<a class=\"term-reference\" href=\"#term:normative\">normative</a>’. In general, the purpose of non-normative theories is not to give answers, but rather to describe possibilities or predict what might happen as a result of certain actions.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.quora.com\" path-1=\"What-is-the-difference-between-normative-and-non-normative\" href=\"https://www.quora.com/What-is-the-difference-between-normative-and-non-normative?share=1\">Source</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-normative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "non-transferable",
+      "definition": "<dd>\n<p>No <a class=\"term-reference\" href=\"#term:transferable\">transferable</a> (the control over) a certain digital asset in an unobstructed or loss-less manner. As opposed to <a class=\"term-reference\" href=\"#term:transferable\">transferable</a>.</p>\n</dd>\n<dd>\n<p>For example not legally transferable to the ownership of another entity.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/non-transferable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "normative",
+      "definition": "<dd>\n<p>a theory is “normative” if it, in some sense, tells you what you should do - what action you should take. If it includes a usable procedure for determining the optimal action in a given scenario.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.quora.com\" path-1=\"What-is-the-difference-between-normative-and-non-normative\" href=\"https://www.quora.com/What-is-the-difference-between-normative-and-non-normative?share=1\">Source</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/normative\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "one-way-function",
+      "definition": "<dd>\n<p>In computer science, a one-way function is a function that is easy to compute on every input, but hard to invert given the image of a random input. Here, “easy” and “hard” are to be understood in the sense of computational complexity theory, specifically the theory of polynomial time problems.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"One-way_function\" href=\"https://en.wikipedia.org/wiki/One-way_function\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/one-way-function\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "owner",
+      "definition": "<dd>\n<p><a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"toip\" path-3=\"wiki\" path-4=\"owner\" href=\"https://github.com/trustoverip/toip/wiki/owner\">Owner</a> in ToIP glossary</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/owner\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ownership",
+      "definition": "<dd>\n<p><a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"toip\" path-3=\"wiki\" path-4=\"ownership\" href=\"https://github.com/trustoverip/toip/wiki/ownership\">Ownership</a> in ToIP glossary</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ownership\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pad",
+      "definition": "<dd>\n<p>is a <a path-0=\"www.webopedia.com\" path-1=\"definitions\" path-2=\"character\" path-3=\"\" href=\"https://www.webopedia.com/definitions/character/\">character</a> used to fill empty space, because many <a path-0=\"www.webopedia.com\" path-1=\"definitions\" path-2=\"application-software\" path-3=\"\" href=\"https://www.webopedia.com/definitions/application-software/\">applications</a> have <a path-0=\"www.webopedia.com\" path-1=\"definitions\" path-2=\"field\" path-3=\"\" href=\"https://www.webopedia.com/definitions/field/\">fields</a> that must be a particular length.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.webopedia.com\" path-1=\"definitions\" path-2=\"pad-character\" path-3=\"\" href=\"https://www.webopedia.com/definitions/pad-character/\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pad\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "passcode",
+      "definition": "<dd>\n<p>A password, sometimes called a passcode (for example in <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Apple_Inc.\" href=\"https://en.wikipedia.org/wiki/Apple_Inc.\">Apple</a> devices), is secret data, typically a string of characters, usually used to confirm a user’s identity.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Password\" href=\"https://en.wikipedia.org/wiki/Password\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/passcode\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "payload",
+      "definition": "<dd>\n<p>The term ‘payload’ is used to distinguish between the ‘interesting’ information in a chunk of data or similar and the overhead to support it. The payload refers to the interesting part.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/payload\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "peer-to-peer",
+      "definition": "<dd>\n<p>Peer-to-peer (P2P) computing or networking is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Distributed_application\" href=\"https://en.wikipedia.org/wiki/Distributed_application\">distributed application</a> architecture that partitions tasks or workloads between peers. Peers are <strong>equally privileged</strong>, <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Equipotent\" href=\"https://en.wikipedia.org/wiki/Equipotent\">equipotent</a> participants in the network. They are said to form a peer-to-peer network of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Node_(networking)\" href=\"https://en.wikipedia.org/wiki/Node_(networking)\">nodes</a></p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Peer-to-peer\" href=\"https://en.wikipedia.org/wiki/Peer-to-peer\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/peer-to-peer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "perfect-security",
+      "definition": "<dd>\n<p>a special case of Information theoretic security <a class=\"term-reference\" href=\"#term:itps\">itps</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/perfect-security\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "persistent-data-structure",
+      "definition": "<dd>\n<p>An append only verifiable data structure. What we sign may not change.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/persistent-data-structure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pipelining",
+      "definition": "<dd>\n<p>In <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computing\" href=\"https://en.wikipedia.org/wiki/Computing\">computing</a>, a pipeline, also known as a data pipeline, is a set of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data\" href=\"https://en.wikipedia.org/wiki/Data\">data</a> processing elements connected in series, where the output of one element is the input of the next one. The elements of a pipeline are often executed in parallel or in time-sliced fashion. Some amount of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Buffer_(computer_science)\" href=\"https://en.wikipedia.org/wiki/Buffer_(computer_science)\">buffer storage</a> is often inserted between elements.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Pipeline_(computing)\" href=\"https://en.wikipedia.org/wiki/Pipeline_(computing)\">Wikipedia-page</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pipelining\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "post-pad",
+      "definition": "<dd>\n<p>the action and / or result of extending a string with <em>trailing</em> pad characters to align to a certain length in bits or bytes.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/post-pad\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "post-quantum",
+      "definition": "<dd>\n<p>In cryptography, post-quantum cryptography (PQC) (sometimes referred to as quantum-proof, quantum-safe or quantum-resistant) refers to cryptographic algorithms (usually public-key algorithms) that are thought to be secure against a cryptanalytic attack by a quantum computer.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Post-quantum_cryptography\" href=\"https://en.wikipedia.org/wiki/Post-quantum_cryptography\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/post-quantum\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pre-pad",
+      "definition": "<dd>\n<p>the action and / or result of prepending a string with <em>leading</em> pad characters to align to a certain length in bits or bytes.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pre-pad\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pretty-good-privacy",
+      "definition": "<dd>\n<p>Is an encryption program that provides cryptographic privacy and authentication for data communication. PGP is used for signing, encrypting, and decrypting texts, e-mails, files, directories, and whole disk partitions and to increase the security of e-mail communications. Phil Zimmermann developed PGP in 1991.</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Pretty_Good_Privacy\" href=\"https://en.wikipedia.org/wiki/Pretty_Good_Privacy\">wikipedia</a></p>\n</dd>\n<dd>\n<p>So also the often confusing <a class=\"term-reference\" href=\"#term:gpg\">GPG</a> term.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pretty-good-privacy\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "primitive",
+      "definition": "<dd>\n<p>a serialization of a unitary value. All Primitives in KERI must be expressed in <a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/primitive\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "privacy",
+      "definition": "<dd>\n<p>Privacy is the ability of an individual or group to seclude themselves or information about themselves, and thereby express themselves selectively.</p>\n</dd>\n<dd>\n<p>The domain of privacy partially overlaps with <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Security\" href=\"https://en.wikipedia.org/wiki/Security\">security</a>, which can include the concepts of appropriate use and protection of information. Privacy may also take the form of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Bodily_integrity\" href=\"https://en.wikipedia.org/wiki/Bodily_integrity\">bodily integrity</a>.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Privacy\" href=\"https://en.wikipedia.org/wiki/Privacy\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/privacy\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "proof-of-authority",
+      "definition": "<dd>\n<p>Proof that somebody or something has certain rights or permissions. It’s about <em>data</em>. Whereas <a class=\"term-reference\" href=\"#term:proof-of-authorship\">proof-of-authorship</a> is about <em>data</em> and its original creator.</p>\n</dd>\n<dd>\n<p>A proof-of-authority provides verifiable authorizations or permissions or rights or credentials.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/proof-of-authority\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "protocol",
+      "definition": "<dd>\n<p>Generic term to describe a code of correct conduct. Also called “<a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Etiquette\" href=\"https://en.wikipedia.org/wiki/Etiquette\">etiquette</a>”: a code of personal behavior.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/protocol\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "provenance",
+      "definition": "<dd>\n<p>From Wikipedia (<a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Provenance\" href=\"https://en.wikipedia.org/wiki/Provenance\">Source</a>):</p>\n</dd>\n<dd>\n<p>Provenance (from the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"French_language\" href=\"https://en.wikipedia.org/wiki/French_language\">French</a> provenir, ‘to come from/forth’) is the chronology of the ownership, custody or location of a historical object. The term was originally mostly used in relation to <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Works_of_art\" href=\"https://en.wikipedia.org/wiki/Works_of_art\">works of art</a> but is now used in similar senses in a wide range of fields, including <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Archaeology\" href=\"https://en.wikipedia.org/wiki/Archaeology\">archaeology</a>, <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Paleontology\" href=\"https://en.wikipedia.org/wiki/Paleontology\">paleontology</a>, <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Archive\" href=\"https://en.wikipedia.org/wiki/Archive\">archives</a>, <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Manuscript\" href=\"https://en.wikipedia.org/wiki/Manuscript\">manuscripts</a>, printed books, the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Circular_economy\" href=\"https://en.wikipedia.org/wiki/Circular_economy\">circular economy</a>, and science and computing.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/provenance\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "pseudo-random-number",
+      "definition": "<dd>\n<p>A (set of) value(s) or element(s) that is statistically random, but it is derived from a known starting point and is typically repeated over and over.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/pseudo-random-number\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "public-key-infrastructure",
+      "definition": "<dd>\n<p>Is a set of roles, policies, hardware, software and procedures needed to create, manage, distribute, use, store and revoke digital certificates and manage public-key encryption.</p>\n</dd>\n<dd>\n<img src=\"https://github.com/WebOfTrust/keri/blob/main/images/pubprivkey-caveat.png?raw=true\" alt=\"Public Private Key caveat to KERI\" border=\"0\" width=\"400\">\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Public_key_infrastructure\" href=\"https://en.wikipedia.org/wiki/Public_key_infrastructure\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/public-key-infrastructure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "race-condition",
+      "definition": "<dd>\n<p>A race condition or race hazard is the condition of an electronics, software, or other system where the system’s substantive behavior is dependent on the sequence or timing of other uncontrollable events. It becomes a bug when one or more of the possible behaviors is undesirable.</p>\n</dd>\n<dd>\n<p><a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Race_condition\" href=\"https://en.wikipedia.org/wiki/Race_condition\">Source</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/race-condition\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "rainbow-table-attack",
+      "definition": "<dd>\n<p>A rainbow table attack is a password-cracking method that uses a special table (a “rainbow table”) to crack the password hashes in a database.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rainbow-table-attack\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "receipt",
+      "definition": "<dd>\n<p>event message or reference with one or more witness signatures.</p>\n</dd>\n<dd>\n<p>See Also:</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:key-event-receipt\">key-event-receipt</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/receipt\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "registry",
+      "definition": "<dd>\n<p>In our digital mental model it’s an <em>official</em> digital <em>record book</em>. When people refer to a registry, they usually mean a specific instance, within a multi-tenant registry. E.g. <a path-0=\"hub.docker.com\" path-1=\"\" href=\"https://hub.docker.com/\">Docker Hub</a> is a multi-tenant registry, where there’s a set of <a path-0=\"docs.docker.com\" path-1=\"docker-hub\" path-2=\"official_images\" path-3=\"\" href=\"https://docs.docker.com/docker-hub/official_images/\">official / public images</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "replay-attack",
+      "definition": "<dd>\n<p>A <em>replay attack</em> occurs when a cybercriminal eavesdrops on a secure network communication, intercepts it, and then fraudulently delays or resends it to misdirect the receiver into doing what the hacker wants.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/replay-attack\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "repo",
+      "definition": "<dd>\n<p>Software is our line of work. In this, ‘repo’ is the short hand for ‘Repository’, mostly referring to a software repo(sitory) on <a path-0=\"github.com\" href=\"https://github.com\">Github.com</a>, Gitlab (<a path-0=\"gitlab.com\" href=\"https://gitlab.com\"><span>https://gitlab.com</span></a>) or other software repository hosting services.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/repo\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "revocation",
+      "definition": "<dd>\n<p>Revocation is the act of <a path-0=\"en.wiktionary.org\" path-1=\"wiki\" path-2=\"recall\" href=\"https://en.wiktionary.org/wiki/recall\">recall</a> or <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Annulment\" href=\"https://en.wikipedia.org/wiki/Annulment\">annulment</a>. It is the cancelling of an act, the recalling of a grant or privilege, or the making <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Void_(law)\" href=\"https://en.wikipedia.org/wiki/Void_(law)\">void</a> of some <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Deed\" href=\"https://en.wikipedia.org/wiki/Deed\">deed</a> previously existing.</p>\n</dd>\n<dd>\n<p>More on source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Revocation\" href=\"https://en.wikipedia.org/wiki/Revocation\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/revocation\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ricardian-contract",
+      "definition": "<dd>\n<p>The Ricardian contract, as invented by Ian Grigg in 1996, is a method of recording a document as a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Contract\" href=\"https://en.wikipedia.org/wiki/Contract\">contract</a> at law, and linking it securely to other systems, such as accounting, for the contract as an issuance of value.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ricardian-contract\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "root-of-trust",
+      "definition": "<dd>\n<p>A root-of-trust is some component of a system that is <a class=\"term-reference\" href=\"#term:security\">security</a> by design and its security characteristics may be inherently trusted or relied upon by other components of the system.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/root-of-trust\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "salt",
+      "definition": "<dd>\n<p>random data fed as an additional input to a one-way function that hashes data.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/salt\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "schema-namespace-registry",
+      "definition": "<dd>\n<p>a centrally managed <a class=\"term-reference\" href=\"#term:schema-registry\">schema-registry</a> where corporations or individuals reserve schemas within a specific <a class=\"term-reference\" href=\"#term:namespace\">namespace</a> in order to have an interoperable schema that is labeled with a corporation-specific or individual-specific namespace.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/schema-namespace-registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "schema-registry",
+      "definition": "<dd>\n<p>Central <a class=\"term-reference\" href=\"#term:registry\">registry</a> for credential schemas based on namespaces.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/schema-registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "seal",
+      "definition": "<dd>\n<p>a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/seal\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "security-overlay-properties-trillema",
+      "definition": "<dd>\n<p>An identifier system has some degree of any combination of the three properties <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a>, <a class=\"term-reference\" href=\"#term:privacy\">privacy</a> and <a class=\"term-reference\" href=\"#term:confidentiality\">confidentiality</a>, but not all three completely.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/security-overlay-properties-trillema\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "seed",
+      "definition": "<dd>\n<p>In cryptography a ‘seed’ is a <em>pseudorandomly</em> generated number, often expressed in representation of a series of words.</p>\n</dd>\n<dd>\n<p>Paraphrased from <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Random_seed\" href=\"https://en.wikipedia.org/wiki/Random_seed\">wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/seed\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "self-sovereignty",
+      "definition": "<dd>\n<p><a path-0=\"github.com\" path-1=\"trustoverip\" path-2=\"toip\" path-3=\"wiki\" path-4=\"self-sovereignty\" href=\"https://github.com/trustoverip/toip/wiki/self-sovereignty\">Self sovereignty</a> in Trust over IP wiki.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/self-sovereignty\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "semver",
+      "definition": "<dd>\n<p>Semantic Versioning Specification 2.0. See also (<a path-0=\"semver.org\" path-1=\"\" href=\"https://semver.org/\"><span>https://semver.org/</span></a>)[<a path-0=\"semver.org\" path-1=\"\" href=\"https://semver.org/\"><span>https://semver.org/</span></a>].</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/semver\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "service-endpoint",
+      "definition": "<dd>\n<p>In our context we consider a <strong>web service endpoint</strong> which is a <a class=\"term-reference\" href=\"#term:uniform-resource-locator\">uniform-resource-locator</a> at which clients of specific service can get access to the service.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/service-endpoint\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "signed-digest",
+      "definition": "<dd>\n<p>commitment to content, by digitally signing a digest of this content.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/signed-digest\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "signing-threshold",
+      "definition": "<dd>\n<p>Is the minimum number of valid signatures to satisfy the requirement for successful verification in a <a class=\"term-reference\" href=\"#term:threshold-signature-scheme\">threshold-signature-scheme</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/signing-threshold\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "source-of-truth",
+      "definition": "<dd>\n<p>The source of truth is a trusted data source that gives a complete picture of the data object as a whole.</p>\n</dd>\n<dd>\n<p><a path-0=\"www.linkedin.com\" path-1=\"pulse\" path-2=\"difference-between-system-record-source-truth-santosh-kudva\" path-3=\"\" href=\"https://www.linkedin.com/pulse/difference-between-system-record-source-truth-santosh-kudva/\">Source</a>: LinkedIN.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/source-of-truth\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "spanning-layer",
+      "definition": "<dd>\n<p>An all encompassing layer horizontal layer in a software architecture. Each trust layer only spans platform specific applications. It bifurcates the internet trust map into domain silos (e.g. <a path-0=\"twitter.com\" href=\"http://twitter.com\"><span>twitter.com</span></a>), because there is no spanning trust layer.</p>\n</dd>\n<dd>\n<p><img src=\"https://github.com/WebOfTrust/keri/blob/main/images/spanning_layer.png\" alt=\"\"></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/spanning-layer\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "stream",
+      "definition": "<dd>\n<p>a <a class=\"term-reference\" href=\"#term:cesr\">CESR</a> Stream is any set of concatenated Primitives, concatenated groups of Primitives, or hierarchically composed groups of <a class=\"term-reference\" href=\"#term:primitives\">primitives</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/stream\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "sub-shell",
+      "definition": "<dd>\n<p>A subshell is basically a new shell just to run a desired program. A subshell can access the global variables set by the ‘parent shell’ but not the local variables. Any changes made by a subshell to a global variable is not passed to the parent shell.</p>\n</dd>\n<dd>\n<p><a path-0=\"linuxhandbook.com\" path-1=\"subshell\" path-2=\"\" href=\"https://linuxhandbook.com/subshell/\">Source</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/sub-shell\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "supermajority",
+      "definition": "<dd>\n<p>Sufficient majority that is labeled <em>immune</em> from certain kinds of attacks or faults.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/supermajority\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "tcp-endpoint",
+      "definition": "<dd>\n<p>This is a <a class=\"term-reference\" href=\"#term:service-endpoint\">service-endpoint</a> of the web <a class=\"term-reference\" href=\"#term:transmission-control-protocol\">transmission-control-protocol</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/tcp-endpoint\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "threshold-structure-security",
+      "definition": "<dd>\n<p>A threshold structure for security allows for weaker key management or execution environment infrastructure individually, but achieve greater overall security by multiplying the number of attack surfaces that an attacker must overcome to compromise a system.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/threshold-structure-security\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "trans-contextual-value",
+      "definition": "<dd>\n<p>Value that is transferrable between contexts. <strong>How do we recapture the value in our data?</strong> 1- Leverage cooperative network effects 2- Retake control of our data.</p>\n</dd>\n<dd>\n<p><a path-0=\"github.com\" path-1=\"SmithSamuelM\" path-2=\"Papers\" path-3=\"blob\" path-4=\"master\" path-5=\"presentations\" path-6=\"NonconformistKeynoteWeb20200702.pdf\" href=\"https://github.com/SmithSamuelM/Papers/blob/master/presentations/NonconformistKeynoteWeb20200702.pdf\">Source</a> Samuel Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/trans-contextual-value\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "transmission-control-protocol",
+      "definition": "<dd>\n<p>One of the main <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Communications_protocol\" href=\"https://en.wikipedia.org/wiki/Communications_protocol\">protocols</a> of the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Internet_protocol_suite\" href=\"https://en.wikipedia.org/wiki/Internet_protocol_suite\">Internet protocol suite</a>. It originated in the initial network implementation in which it complemented the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Internet_Protocol\" href=\"https://en.wikipedia.org/wiki/Internet_Protocol\">Internet Protocol</a> (IP).</p>\n</dd>\n<dd>\n<p>More on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Transmission_Control_Protocol\" href=\"https://en.wikipedia.org/wiki/Transmission_Control_Protocol\">source</a> Wikipedia.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/transmission-control-protocol\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "tritet",
+      "definition": "<dd>\n<p>3 bits. See <a path-0=\"trustoverip.github.io\" path-1=\"tswg-cesr-specification\" path-2=\"#performant-resynchronization-with-unique-start-bits\" href=\"https://trustoverip.github.io/tswg-cesr-specification/#performant-resynchronization-with-unique-start-bits\">Performant resynchronization with unique start bits</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/tritet\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "trusted-execution-environment",
+      "definition": "<dd>\n<p>Protected hardware/software/firmware security system. The controller may protect its key generation, key storage, and event signing infrastructure by running it inside a trusted execution environment (TEE).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/trusted-execution-environment\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "trusted-platform-module",
+      "definition": "<dd>\n<p>A device that enhances the security and privacy (of identity systems) by providing hardware-based cryptographic functions.</p>\n</dd>\n<dd>\n<h2 id=\"functions\"><a class=\"toc-anchor\" href=\"#functions\">#</a> Functions</h2>\n</dd>\n<dd>\n<p>A TPM can generate, store, and protect encryption keys and authentication credentials that are used to verify the identity of a user or a device.</p>\n</dd>\n<dd>\n<p>A TPM can also measure and attest the integrity of the software and firmware that are running on a system, to ensure that they have not been tampered with or compromised.</p>\n</dd>\n<dd>\n<h2 id=\"form\"><a class=\"toc-anchor\" href=\"#form\">#</a> Form</h2>\n</dd>\n<dd>\n<p>A TPM can be implemented as a physical chip, a firmware module, or a virtual device.</p>\n</dd>\n<dd>\n<p>Source: Bing chat sept 2023</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/trusted-platform-module\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "ts-node",
+      "definition": "<dd>\n<p>npm package that lets you run typescript from a shell</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/ts-node\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "uniform-resource-locator",
+      "definition": "<dd>\n<p>A Uniform Resource Locator (URL), colloquially termed a web address, is a reference to a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Web_resource\" href=\"https://en.wikipedia.org/wiki/Web_resource\">web resource</a> that specifies its location on a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer_network\" href=\"https://en.wikipedia.org/wiki/Computer_network\">computer network</a> and a mechanism for retrieving it.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/uniform-resource-locator\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "user-interface",
+      "definition": "<dd>\n<p>A user interface (UI or U/I) is the space where interactions between humans and machines occur.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/user-interface\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "validate",
+      "definition": "<dd>\n<p>ESSIF-lab definition of <em><a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"essifLab-glossary#validate\" href=\"https://essif-lab.github.io/framework/docs/essifLab-glossary#validate\">validate</a></em>. Although this definition is very general, in the KERI/ACDC vocabulary, ‘validate’ currently has extra diverse meanings extending the one of eSSIF-lab, such as</p>\n</dd>\n<dd>\n<ul>\n<li>evaluate</li>\n</ul>\n</dd>\n<dd>\n<ul>\n<li><a class=\"term-reference\" href=\"#term:verify\">verify</a></li>\n</ul>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/validate\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "validator",
+      "definition": "<dd>\n<p>any entity or agent that evaluates whether or not a given signed statement as attributed to an identifier is valid at the time of its issuance.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/validator\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "variable-length",
+      "definition": "<dd>\n<p>a type of count code allowing for vaiable size signatures or attachments which can be parsed to get the full size.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/variable-length\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "veracity",
+      "definition": "<dd>\n<p>The quality of being true; contrast <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a>. When a newspaper publishes a story about an event, every faithful reproduction of that story may be <em>authentic</em> — but that does not mean the story was true (has <em>veracity</em>).</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/veracity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verifiable-data-registry",
+      "definition": "<dd>\n<p>A role a system might perform by mediating issuance and verification of ACDCs. See <a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model-2.0\" path-3=\"#dfn-verifiable-data-registries\" href=\"https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-data-registries\">verifiable data registry</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verifiable-data-registry\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verifiable-data-structure",
+      "definition": "<dd>\n<p>A verifiable data structure is a data structure that incorporates cryptographic techniques to ensure the integrity and authenticity of its contents. It allows users to verify the correctness of the data stored within the structure without relying on a trusted third party.</p>\n</dd>\n<dd>\n<p><a class=\"term-reference\" href=\"#term:#sources-definition-chatgpt\">#Sources-Definition-ChatGPT</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verifiable-data-structure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verifiable",
+      "definition": "<dd>\n<p>a condition of a KEL: being internally consistent with the integrity of its backward and forward chaining digest and authenticity of its non-repudiable signatures.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p><strong>Explanation</strong></p>\n</dd>\n<dd>\n<p>Able to cryptographically verify a certain data structure on its <a class=\"term-reference\" href=\"#term:inconsistency\">inconsistency</a> and its <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verifiable\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verified-integrity",
+      "definition": "<dd>\n<p>A mechanism that can unambiguously assess whether the information is/continues to be whole, sound and unimpaired</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verified-integrity\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verifier",
+      "definition": "<dd>\n<p>any entity or agent that cryptographically verifies the signature(s) and digests on an event Message.</p>\n</dd>\n<dd>\n<p>Source Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verifier\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "verify-signature",
+      "definition": "<dd>\n<p>Applying an algorithm that, given the message, public key and signature, either accepts or rejects the message’s claim to authenticity.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/verify-signature\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "version",
+      "definition": "<dd>\n<p>an instance of a KEL for an AID in which at least one event is unique between two instances of the <a class=\"term-reference\" href=\"#term:kel\">kel</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "wallet",
+      "definition": "<dd>\n<p>A crypto wallet is a device, physical medium, program or a service which stores the <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Public-key_cryptography\" href=\"https://en.wikipedia.org/wiki/Public-key_cryptography\">public and/or private keys</a> for <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Cryptocurrency\" href=\"https://en.wikipedia.org/wiki/Cryptocurrency\">cryptocurrency</a> transactions and digital identifiers.</p>\n</dd>\n<dd>\n<p>Paraphrased by @henkvancann from source <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Cryptocurrency_wallet\" href=\"https://en.wikipedia.org/wiki/Cryptocurrency_wallet\">Wikipedia</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/wallet\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "web-of-trust",
+      "definition": "<dd>\n<p>In cryptography, a web of trust is a concept used in <a class=\"term-reference\" href=\"#term:pgp\">PGP</a>, <a class=\"term-reference\" href=\"#term:gnu-privacy-guard\">gnu-privacy-guard</a>, and other <code>OpenPGP</code>-compatible systems to establish the authenticity of the binding between a public key and its owner.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/web-of-trust\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "zero-trust-computing",
+      "definition": "<dd>\n<p>A security model centered on the principle of “never trust, always verify.” It assumes that threats can exist inside and outside the network, and thus, no entity — a device, user, or system — is inherently trusted. This approach requires continuous verification of all users and devices attempting to access network resources.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/zero-trust-computing\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "term": "zero-trust",
+      "definition": "<dd>\n<p>a Zero Trust approach trusts no one.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/zero-trust\">extended KERI glossary</a></p>\n</dd>"
+    }
+  ],
+  "sha": "99a13e769d952ec7ddc73d810b3b35108d57f0b6",
+  "avatarUrl": null,
+  "outputFileName": "1744909993778-henkvancann-ctwg-general-glossary-terms.json"
+}

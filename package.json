@@ -40,6 +40,6 @@
   "homepage": "https://github.com/decentralized-identity/spec-up#readme",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "spec-up-t": "^1.1.53"
+    "spec-up-t": "github:blockchainbird/spec-up-t#fix/xtref"
   }
 }
