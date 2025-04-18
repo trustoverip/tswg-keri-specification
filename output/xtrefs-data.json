@@ -1,7 +1,7 @@
 {
   "xtrefs": [
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "keris-algorithm-for-witness-agreement",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -13,7 +13,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "authentic-chained-data-container",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -25,7 +25,7 @@
       "content": "<dd>\n<p>a directed acyclic graph with properties to provide a verifiable chain of <a class=\"term-reference\" href=\"#term:proof-of-authorship\">proof-of-authorship</a>. See the full <a path-0=\"trustoverip.github.io\" path-1=\"tswg-acdc-specification\" path-2=\"\" href=\"https://trustoverip.github.io/tswg-acdc-specification/\">specification</a></p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>Explained briefly, an ACDC or <a class=\"term-reference\" href=\"#term:authentic-data-container\">authentic-data-container</a> proves digital data consistency and authenticity in one go. An ACDC cryptographically secures commitment to the data contained, and its identifiers are self-addressing, which means they point to themselves and are also contained in the data.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/authentic-chained-data-container\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "autonomic-identifier",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -61,7 +61,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "backer",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -85,7 +85,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "configuration-traits",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -133,7 +133,7 @@
       "content": "<dd>\n<p>a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on <a class=\"term-reference\" href=\"#term:cryptographic-strength\">cryptographic-strength</a>. A cryptonym is a type of <a class=\"term-reference\" href=\"#term:primitive\">primitive</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/cryptonym\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "current-threshold",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -145,7 +145,7 @@
       "content": "<dd>\n<p>represents the number or fractional weights of signatures from the given set of current keys required to be attached to a <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> for the <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> to be considered fully signed.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/current-threshold\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "dead-attack",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -193,7 +193,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "establishment-event",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -205,7 +205,7 @@
       "content": "<dd>\n<p>a <a class=\"term-reference\" href=\"#term:key-event\">key-event</a> that establishes or changes the key state which includes the current set of authoritative keypairs (key state) for an <a class=\"term-reference\" href=\"#term:aid\">AID</a>.</p>\n</dd>\n<dd>\n<p>Source: dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/establishment-event\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "first-seen",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -217,7 +217,7 @@
       "content": "<dd>\n<p>refers to the first instance of a <a class=\"term-reference\" href=\"#term:message\">message</a> received by any <a class=\"term-reference\" href=\"#term:witness\">witness</a> or <a class=\"term-reference\" href=\"#term:watcher\">watcher</a>. The first-seen event is always seen, and can never be unseen. It forms the basis for <a class=\"term-reference\" href=\"#term:duplicity\">duplicity</a> detection in KERI-based systems.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/first-seen\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "inception-event",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -241,7 +241,7 @@
       "content": "<dd>\n<p>The operation of creating an AID by binding it to the initial set of authoritative keypairs and any other associated information. This operation is made verifiable and duplicity evident upon acceptance as the inception event that begins the AID’s KEL.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/inception\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "interaction-event",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -253,7 +253,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "key-event-log",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -265,7 +265,7 @@
       "content": "<dd>\n<p>a Verifiable data structure that is a backward and forward chained, signed, append-only log of key events for an AID. The first entry in a KEL must be the one and only Inception event of that AID.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-log\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "key-event-message",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -277,7 +277,7 @@
       "content": "<dd>\n<p>Message whose body is a key event and whose attachments may include signatures on its body.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-message\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "key-event-receipt-log",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -289,7 +289,7 @@
       "content": "<dd>\n<p>a key event receipt log is a <a class=\"term-reference\" href=\"#term:kel\">kel</a> that also includes all the consistent key event receipt <a class=\"term-reference\" href=\"#term:message\">message</a>s created by the associated set of witnesses. See annex <a class=\"term-reference\" href=\"#term:key-event-receipt-log\">key-event-receipt-log</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-log\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "key-event-receipt",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -301,7 +301,7 @@
       "content": "<dd>\n<p>message whose body references a Key event and whose attachments must include one or more signatures on that Key event.</p>\n</dd>\n<dd>\n<p>Source <a path-0=\"github.com\" path-1=\"WebOfTrust\" path-2=\"ietf-keri\" path-3=\"blob\" path-4=\"main\" path-5=\"draft-ssmith-keri.md#basic-terminology\" href=\"https://github.com/WebOfTrust/ietf-keri/blob/main/draft-ssmith-keri.md#basic-terminology\">Sam Smith</a></p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "key-event",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -349,7 +349,7 @@
       "content": "<dd>\n<p>A discrete unit of <a class=\"term-reference\" href=\"#term:communication\">communication</a> intended by the source for consumption by some recipient or group of recipients.</p>\n</dd>\n<dd>\n<p>Source: <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Message\" href=\"https://en.wikipedia.org/wiki/Message\">Wikipedia</a>.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>See also: <a class=\"term-reference\" href=\"#term:toip-message\">ToIP message</a>, <a class=\"term-reference\" href=\"#term:verifiable-message\">verifiable message</a>.</p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "next-threshold",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -361,7 +361,7 @@
       "content": "<dd>\n<p>represents the number or fractional weights of signatures from the given set of next keys required to be attached to a <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> for the <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:message\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:message\">Message</a> to be considered fully signed.</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/next-threshold\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "non-establishment-event",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -397,7 +397,7 @@
       "content": "This term was not found in the external repository."
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "rotation",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -433,7 +433,7 @@
       "content": "<dd>\n<p>a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/seal\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "self-addressed-data",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -517,7 +517,7 @@
       "content": "<dd>\n<p>an instance of a KEL for an AID in which at least one event is unique between two instances of the <a class=\"term-reference\" href=\"#term:kel\">kel</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "watcher",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -529,7 +529,7 @@
       "content": "<dd>\n<p>an <em>entity</em> or <em>component</em> that keeps a copy of a <a class=\"term-reference\" href=\"#term:kerl\">kerl</a> for an identifier but that is not designated by the <em>controller</em> of the identifier as one of its witnesses. See annex <a class=\"term-reference\" href=\"#term:watcher\">watcher</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd class=\"last-dd\">\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/watcher\">extended KERI glossary</a></p>\n</dd>"
     },
     {
-      "externalSpec": "kmg-1",
+      "externalSpec": "keri1",
       "term": "witness",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
