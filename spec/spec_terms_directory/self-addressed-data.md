@@ -1,1 +1,1 @@
-[[tref: kmg-1, self-addressed-data, SAD]]
+[[tref: keri1, self-addressed-data, SAD]]

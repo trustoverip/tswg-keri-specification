@@ -1,1 +1,1 @@
-[[tref: kmg-1, configuration-traits, Modes]]
+[[tref: keri1, configuration-traits, Modes]]

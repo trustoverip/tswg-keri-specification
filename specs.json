@@ -23,7 +23,7 @@
             },
             "external_specs": [
                 {
-                    "external_spec": "kmg-1",
+                    "external_spec": "keri1",
                     "gh_page": "https://henkvancann.github.io/kerisuite-glossary/",
                     "url": "https://github.com/henkvancann/kerisuite-glossary",
                     "terms_dir": "spec/terms-definitions"

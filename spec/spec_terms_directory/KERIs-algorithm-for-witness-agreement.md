@@ -1,1 +1,1 @@
-[[tref: kmg-1, keris-algorithm-for-witness-agreement]]
+[[tref: keri1, keris-algorithm-for-witness-agreement]]

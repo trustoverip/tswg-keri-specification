@@ -1,1 +1,1 @@
-[[tref: kmg-1, key-event-log, KEL]]
+[[tref: keri1, key-event-log]]
