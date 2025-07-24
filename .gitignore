@@ -4,10 +4,8 @@ archive.json
 draft-ssmith-keri.xml
 Gemfile.lock
 /.gems/
-*.html
 /lib
 /node_modules/
-package-lock.json
 *.pdf
 *.redxml
 /.refcache
@@ -25,3 +23,13 @@ report.xml
 .idea
 venv/
 /.vs
+node_modules
+*.log
+dist
+*.bak
+*.tmp
+.env
+coverage
+build
+.history
+/.cache/
