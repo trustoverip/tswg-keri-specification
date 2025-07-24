@@ -1,0 +1,3 @@
+[[def: Cryptonym]]
+
+~ a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on cryptographic strength) [[13]] [[14]] [[12]] [[11]]. A Cryptonym is a type of Primitive. Due to the entropy in its derivation, a Cyptonym is a universally unique identifier and only the Controller of the secret salt or seed from which the Cryptonym is derived may prove control over the Cryptonym. Therefore the derivation function must be associated with the Cryptonym and may be encoded as part of the Cryptonym itself.
