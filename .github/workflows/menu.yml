@@ -1,0 +1,163 @@
+name: Run Menu
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Select the script to run'
+        type: choice
+        required: true
+        default: 'Render specification'
+        options:
+          - Add content
+          - Render specification
+          - Export to PDF
+          - Export to DOCX
+          - Collect external references
+          - Add, remove or view xref source
+          - Configure
+          - Run health check
+          - Open documentation website
+          - Freeze specification
+          - Custom update
+
+jobs:
+  build-and-deploy-spec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed for pushing changes and deploying to Pages
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # We’ll use MY_PAT for push
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Extract output_path from JSON
+        id: extract-output
+        run: |
+          OUTPUT_PATH=$(jq -r '.specs[0].output_path // "default/output"' specs.json)
+          if [ "$OUTPUT_PATH" = "null" ] || [ -z "$OUTPUT_PATH" ]; then
+            echo "Error: Unable to extract output_path from specs.json"
+            exit 1
+          fi
+          echo "OUTPUT_PATH=$OUTPUT_PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies 🔧
+        run: |
+          echo "Installing dependencies..."
+          npm install
+          echo "Spec-Up-T version:"
+          npm list spec-up-t || echo "spec-up-t not found"
+
+      - name: Run selected script
+        env:
+          MY_PAT: ${{ secrets.MY_PAT }} # Make the secret available as an env var
+        run: |
+          case "${{ github.event.inputs.script }}" in
+            "Add content")
+              echo "You can start adding your content to the markdown files in the 'spec' directory."
+              echo "You can do this by editing local files in an editor or by going to your repository on GitHub."
+              echo "More info: https://blockchainbird.github.io/spec-up-t-website/docs/various-roles/content-authors-guide/introduction"
+              ;;
+            "Render specification")
+              node --no-warnings -e "require('spec-up-t/index.js')({ nowatch: true })"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Render specification: Update files" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            # ...existing code...
+            "Export to DOCX")
+              node -e "require('spec-up-t/src/create-docx.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Export to DOCX" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Collect external references")
+              node --no-warnings -e "require('spec-up-t/src/collect-external-references.js').collectExternalReferences({ pat: process.env.MY_PAT })"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Collect external references" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Export to PDF")
+              node -e "require('spec-up-t/src/create-pdf.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Export to PDF" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Freeze specification")
+              node -e "require('spec-up-t/src/freeze.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Freeze specification" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Add, remove or view xref source")
+              node --no-warnings -e "require('spec-up-t/src/add-remove-xref-source.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Add, remove or view xref source" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Configure")
+              node --no-warnings -e "require('spec-up-t/src/configure.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Configure" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Run health check")
+              node --no-warnings -e "require('spec-up-t/src/health-check.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Run health check" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            "Open documentation website")
+              echo "Opening documentation website: https://blockchainbird.github.io/spec-up-t-website/"
+              echo "Please visit the URL manually: https://blockchainbird.github.io/spec-up-t-website/"
+              ;;
+            "Custom update")
+              npm update && node -e "require('spec-up-t/src/install-from-boilerplate/custom-update.js')"
+              git config --global user.email "actions@github.com"
+              git config --global user.name "GitHub Actions"
+              git add .
+              git commit -m "Custom update: Copy files from spec-up-t" || echo "No changes to commit"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+              ;;
+            *)
+              echo "Unknown script: ${{ github.event.inputs.script }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Deploy to GitHub Pages
+        if: success() && github.event.inputs.script != 'Add content' && github.event.inputs.script != 'Open documentation website' && github.event.inputs.script != 'Configure' && github.event.inputs.script != 'Run health check'
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ env.OUTPUT_PATH }}
+          allow_empty_commit: true
+          force_orphan: true
+
+      - name: Clean up
+        if: always()
+        run: |
+          echo "Cleaning up..."
+          rm -rf node_modules
