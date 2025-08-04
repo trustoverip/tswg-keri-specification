@@ -1059,9 +1059,10 @@ Reserved field labels in other KERI message body types:
 |`v`| Version String | enables regex parsing of field map in CESR stream |
 |`t`| Message Type | three character string|
 |`d`| Digest SAID | fully qualified digest of block in which it appears|
+|`u`| UUID Salty Nonce | fully qualified universally unique random salty nonce |
 |`i`| Identifier Prefix (AID) | fully qualified primitive of the Controller (sender) AID |
 |`ri`| Receiver Identifier Prefix (AID) | fully qualified primitive of the message Receiver (recipient) AID |
-|`x`| Exchange Identifier (SAID) | fully qualified unique identifier for an exchange transaction |
+|`x`| Exchange SAID | fully qualified unique digest for an exchange transaction |
 |`p`| Prior SAID | fully qualified digest, prior message SAID |
 |`dt`| Issuer relative ISO date/time string |
 |`r`| Route | delimited path string for routing message|
@@ -1070,6 +1071,10 @@ Reserved field labels in other KERI message body types:
 |`a`| Attribute Map  | field map of message attributes | 
 
 Unless otherwise clarified below, the definitions of the `[v, t, d, i]' field values are the same as found above in the Key Event message body section. 
+
+##### UUID Salty Nonce field
+
+The UUID `u` field value is a cryptographic strength salty nonce, i.e., a random number with approximately 128 bits of entropy. This ensures that it is universally unique. This universal uniqueness also ensures that the SAID of the enclosing message will also be universally unique, in spite of all other fields having the same values as some other message, but a different UUID field value.  This field appears in exchange transaction inception messages to ensure that the associated transaction ID is also universally unique..
 
 ##### Controller AID field
 
@@ -1233,7 +1238,7 @@ Bare message example:
 
 #### Exchange Transaction Inception Message Body
 
-The top-level fields of an Exchange Transaction Inceipt, `xip` message body MUST appear in the following order: `[ v, t, d, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
+The top-level fields of an Exchange Transaction Incept, `xip` message body MUST appear in the following order: `[ v, t, d, u, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -1246,6 +1251,7 @@ Exchange transaction inception message example:
   "v": "KERICAAJSONAACd.",
   "t": "xip",
   "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
+  "u": '0AAwMTIzNDU2Nzg5YWJjZGVm',
   "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
   "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
   "dt": "2021-11-12T19:11:19.342132+00:00",
