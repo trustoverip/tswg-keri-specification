@@ -530,9 +530,11 @@ The top-level fields of each message type MUST appear in a specific order. All t
 
 ##### Version string field
 
-The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1]].
+The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. The detailed description of the version string is provided in the CESR protocol specification. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. The Regexable format is `KERIMmmKKKKSSSS.` that provides protocol type `KERI`, major version `M`, minor version `mm`, serialization type `KKKK`, size `SSSS`, and terminator `.`. 
 
-The protocol field, `PPPP` value in the version string MUST be `KERI` for the KERI protocol. The version field, `VVV`, MUST encode the current version of the KERI protocol [[1]].
+A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1]].
+
+The protocol field, `PPPP` value in the version string MUST be `KERI` for the KERI protocol. The version field, `Mmm`, MUST encode the current major and minor version of the KERI protocol [[1]]. 
 
 ##### Legacy version string field format
 
@@ -662,9 +664,40 @@ The collision resistance of a cryptographic strength digest makes it computation
 
 Seals MAY also be used as attachments to events to provide a reference for looking up the key state to be used for signatures on that event. The semantics of a given seal are also modified by the context in which the seal appears, such as appearing in the seal list of a key event in a KEL as opposed to appearing as an attachment to an event or receipt of an event.
 
+When a seal appears in a message whose serialization KIND is not CESR native, i.e. is one of JSON, CBOR, or MGPK then it MUST be encoded as a field map in the message's serialization format. 
+
+When a seal appears either as an attachment to a message of any serialization kind or inside a message whose serialization KIND is CESR native, then the seal MUST be encoded using CESR with the appropriate CESR count (group) code for that type of seal. There are two count codes for each seal type, one is the small-sized code and the other the big-sized code. A given count code can contain multiple seals of the same type. The count code frames all the seals in the counted group by counting the total number of quadlets (triplets) in the counted frame.  Each field in a given seal is unlabeled, but its purpose is determined by its order of appearance in the set of fields for that seal.  The field values appear sequentially in a CESR serialization of that seal. The field ordering is provided in the tables below.
+
+#### Seal Count Codes
+
+|Code| Name | Type | Field Labels | Description |
+|:---:|:---|:---|:---:|:---|
+|`-Q`| DigestSealSingles | SealDigest | `[d]` | Cryptographic digest as seal |
+|`--Q`| BigDigestSealSingles | SealDigest | `[d]` | Cryptographic digest as seal  |
+|`-R`| MerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
+|`--R`| BigMerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
+|`-S`| SealSourceTriples | SealEvent | `[i, s, d]` | Reference to source key event as seal |
+|`--S`| BigSealSourceTriples | SealEvent | `[i, s, d]` | Reference to source key event as seal |
+|`-T`| SealSourceCouples | SealTrans | `[s, d]` | Reference to source transaction event as seal |
+|`--T`| BigSealSourceCouples | SealTrans | `[s, d]` | Reference to source transaction event as seal |
+|`-U`| SealSourceLastSingles | SealLast | `[i]` | Reference to source AID whose last Est Event as seal |
+|`--U`| BigSealSourceLastSingles | SealLast | `[i]` | Reference to source AID whose last Est Event as seal |
+|`-V`| BackerRegistrarSealCouples | SealBack | `[bi, d]` | Reference to Backer AID and metadata digest as seal |
+|`--V`| BigBackerRegistrarSealCouples | SealBack | `[bi, d]` | Reference to Backer AID and metadata digest as seal |
+|`-W`| TypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
+|`--W`| BigTypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
+
+
 #### Digest seal
 
-The value of this seal's `d` field is an undifferentiated digest of some external data item.  If the data is a SAD, then the value is its SAID. This is the JSON version. There is also a native CESR version.
+The value of this seal's `d` field is an undifferentiated digest of some external data item.  If the data is a SAD, then the value is its SAID. 
+
+The JSON version is shown. There is also a native CESR version.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 
 ```json
 {
@@ -674,17 +707,26 @@ The value of this seal's `d` field is an undifferentiated digest of some externa
 
 #### Merkle Tree root digest seal
 
-The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  The JSON version is shown. There is also a native CESR version of the seal.
+The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  
+
+The JSON version is shown. There is also a native CESR version of the seal.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
 
 ```json
 {
-  "rd": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+  "rd": "Eabcde..."
 }
 ```
 
-#### Event seal
+#### Key Event seal
 
-Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
+Key Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. The fields in an Event seal MUST appear in the following order `[ i, s, d]`.
+
+Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -693,15 +735,34 @@ Event seals bind an event from some other (external) KEL or other type of event 
 ```json
 {
 
-  "i": "Ebietyi8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM.",
-  "s": "3",
-  "d": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+  "i": "Ebiety...",
+  "s": "e",
+  "d": "Eabcde..."
+}
+```
+
+#### Transaction Event seal
+
+Transaction event seals bind an event in a transaction event log to an event in the KEL in which that seal appears. This provides an implicit approval or endorsement of that transaction event. The `s` field value is the sequence number of the transaction event in its event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the transaction event. The fields in an Event seal MUST appear in the following order `[ s, d]`.
+
+Transaction seals are used for endorsing transaction events (typically from issuance/revocation registries for ACDCs).  
+
+The JSON version is shown. There is also a CESR native version of the seal.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
+```json
+{
+  "s": "e",
+  "d": "Eabcde..."
 }
 ```
 
 #### Latest establishment event seal
 
-The latest establishment event seal's function is similar to the event seal above except that it does not designate a specific event but merely designates that latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the external KEL. This is useful for endorsing a message.
+The latest establishment event seal's function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
@@ -711,16 +772,16 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
-  "i": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "i": "BACDEF...",
 }
 ```
 
-#### Registrar backer seal
+#### Registrar Backer seal
 
 When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is REQUIRED. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer MUST also include a configuration trait (see below) of `RB` for registrar backers. This indicates that the KEL is ledger registrar-backed instead of witness pool-backed.
 
 The `bi` field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose `bi` field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same `bi` value).
-The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field is an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
+The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field in an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
 
 To reiterate, the seal MUST appear in the same establishment event that designates the registrar backer identifier as a backer identifier in the event's backer's list along with the config trait `RB`.
 
@@ -732,12 +793,26 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
-  "bi": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+  "bi": "BACDEF...",
+  "d": "EFGKDD..."
 }
 ```
 
-Attached bare, `bar` message.
+
+#### Typed seal
+
+Typed seals bind some data via a digest of that data to whatever context in which the seal appears. This provides an implicit approval or endorsement of that data. The type field provides a seal type and version so that various types of digests with different semantics and derivations may be used. This allows each type to also be versioned. This provides a generic facility for seals. 
+
+The `t` field value is the versioned type of the seal. The `d` field value is a cryptographic digest of cryptographic strength. While the CESR encoding of the `d` field value provides the cryptographic algorithm used to compute the digest, the `t` field provides other information useful to its derivation. For example, there are various types of Merkle trees. In every case, the root digest is the digest of its connected nodes; the construction of the tree and proofs of inclusion and exclusion, however, may differ based on the type of Merkle tree, such as a Sparse Merkle tree versus a non-sparse tree.
+
+The value of the type `t` field is a CESR encoded primitive in the Text domain (qb64). It has 4 characters for the seal digest type, and 3 Base64 characters for version. The first version character is the major version, and the last two characters are the minor version.  This provides for a total of 64 major versions and 4096 minor versions for each major version. For example, `CAB` represents a major version of `2` and a minor version of `01`. In dotted decimal notation, this would be `2.1`. The 4 character encoded seal type plus the 3 character encoded seal version consume 7 Base64 characters. The CESR primitive code for such a 7-character primitive is `Y`.  
+An example seal type/version field value for seal type `CSMT` version 2.0 is as follows:
+
+`YCSMTCAA`
+
+The fields in a typed MUST appear in the following order `[ t, d]`.
+
+The JSON version is shown. There is also a CESR native version of the seal.
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -745,25 +820,10 @@ Attached bare, `bar` message.
 
 ```json
 {
-  "v": "KERI10JSON00011c_",
-  "t": "bar",
-  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "r": "process/registrar/bitcoin",
-  "a":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "bi", "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-    "sd":
-    {
-       "d": "EaAoTNZH3ULvYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8J",
-       "stuff": "meta data field"
-     }
-  }
+  "t": "YCSMTCAA",
+  "d": "Eabcde..."
 }
 ```
-
 
 ### Key event messages
 
@@ -1213,6 +1273,33 @@ Bare message example:
 }
 ```
 
+Attached bare, `bar` message for backer seal.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
+```json
+{
+  "v": "KERI10JSON00011c_",
+  "t": "bar",
+  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "r": "process/registrar/bitcoin",
+  "a":
+  {
+    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
+    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
+    "s": "5",
+    "bi", "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+    "sd":
+    {
+       "d": "EaAoTNZH3ULvYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8J",
+       "stuff": "meta data field"
+     }
+  }
+}
+```
+
 #### Exchange Transaction Inception Message Body
 
 The top-level fields of an Exchange Transaction Incept, `xip` message body MUST appear in the following order: `[ v, t, d, u, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
@@ -1285,7 +1372,7 @@ Controller-indexed signatures index into either or both the signing key list fro
 
 Witness-indexed signatures index into the effective witness list as established by the latest Establishment event (interaction or rotation). To clarify, witness-indexed signatures attached to any type of key event (inception, rotation, interaction, delegated inception, delegated rotation) need only one index into the current list of witnesses that is in effect as of the latest establishment event, which MAY or MAY NOT be the event to which the witness signature is attached. Witnesses MUST use only nontransferable identifiers, which include the controlling public key. Consequently, the public key needed for witness signature verification can be extracted from the witness identifier given by the effective witness list.
 
-CESR codes for indexed signatures support up to two indices so that, at most, one copy of an indexed signature needs to be attached. The first index is into the signing list when it's controller-indexed or into the witness list when it is witness-indexed. The second index is into the prior next key digest list when it is controller-indexed.  The CESR group code used to attach the indexed signature MAY vary depending on the type of event, key-event or not, and type of key event,
+CESR codes for indexed signatures support up to two indices per code so that, at most, one encoded instance of an indexed signature needs to be attached. The first index in a given code provides an offset into the signing list in the message to which the indexed signature is attached. The signing list may be the signing key list when it is controller-indexed or the witness AID list when it is witness-indexed. The second index in a given code, when present, is always controller-indexed and is an offset into the prior next key digest list.  The CESR group code used to attach the indexed signature MAY vary depending on the type of key event or other type of message.
 
 Recall that a prior next key digest MUST be exposed as a public key in the succeeding rotation event signing key list when used to sign. Therefore, when the second index is present, it is used to look up the public key digest from the prior next key digest list, then the first index is used to look up the exposed public key from the signing key list, then the digest is verified against the exposed public key, and finally, the doubly indexed signature is verified using the exposed public key.  Verification of the digest means digesting the exposed public key using the same digest type as the prior next key digest and comparing the digests.
 
@@ -1321,7 +1408,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[1]]
+Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attaching seal source references to receipts. [[1]]
 
 ## KERI key management
 
@@ -1941,6 +2028,22 @@ Similarly, lists may appear as values of top-level fields. For example, the curr
 #### CESR Field Encodings
 
 Some field values in KERI messages that include non-Base64 characters have custom CESR  Text domain encodings (Base64). These encodings are more compact than the case given the direct conversion of a binary string with non-Base64 characters into Base64.
+
+##### Protocol and Genus Version
+
+In a CESR-encoded message, the count code for the message includes the message size. This means that the version field in the messages does not need to include the size. Likewise the serialization kind of CESR is determined by the first tritet of the first character of a given message, so the version does not need to include the serialization kind. The only information that MUST be encoded in a native CESR message's version field is the protocol, the protocol version and the genus version of the associated code table. This assumes that for each protocol the genus is fixed so that only the genus version is required not the genus itself given the protocol.
+
+The protocol type uses four characters and MUST be `KERI` for a normative KERI protocol. 
+
+The protocol version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of `01`. In dotted notation, this would be `0.01`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+
+The CESR genus version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of `01`. In dotted notation, this would be `0.01`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+
+The encoded protocol type, protocol version, and genus version consume 10 Base64 characters. The CESR primitive code for such a 10-character primitive is `0O`.  
+An example KERI protocol type/protocolversion/genusversion field value for protocol version 2.0 and genus version 2.0  is as follows:
+
+`0OKERICAACAA`
+
 
 ##### DateTime
 
