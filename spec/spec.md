@@ -676,14 +676,14 @@ When a seal appears either as an attachment to a message of any serialization ki
 |`--Q`| BigDigestSealSingles | SealDigest | `[d]` | Cryptographic digest as seal  |
 |`-R`| MerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
 |`--R`| BigMerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
-|`-S`| SealSourceTriples | SealEvent | `[i, s, d]` | Reference to source key event as seal |
-|`--S`| BigSealSourceTriples | SealEvent | `[i, s, d]` | Reference to source key event as seal |
-|`-T`| SealSourceCouples | SealTrans | `[s, d]` | Reference to source transaction event as seal |
-|`--T`| BigSealSourceCouples | SealTrans | `[s, d]` | Reference to source transaction event as seal |
-|`-U`| SealSourceLastSingles | SealLast | `[i]` | Reference to source AID whose last Est Event as seal |
-|`--U`| BigSealSourceLastSingles | SealLast | `[i]` | Reference to source AID whose last Est Event as seal |
-|`-V`| BackerRegistrarSealCouples | SealBack | `[bi, d]` | Reference to Backer AID and metadata digest as seal |
-|`--V`| BigBackerRegistrarSealCouples | SealBack | `[bi, d]` | Reference to Backer AID and metadata digest as seal |
+|`-S`| SealSourceCouples | SealTrans | `[s, d]` | Source event issuance/delegation/transaction as seal implied AID |
+|`--S`| BigSealSourceCouples | SealTrans | `[s, d]` | Source event issuance/delegation/transaction as seal implied AID |
+|`-T`| SealSourceTriples | SealEvent | `[i, s, d]` | Source key event as seal |
+|`--T`| BigSealSourceTriples | SealEvent | `[i, s, d]` | Source key event as seal |
+|`-U`| SealSourceLastSingles | SealLast | `[i]` | Source AID last Est Event as seal |
+|`--U`| BigSealSourceLastSingles | SealLast | `[i]` | Source AID last Est Event as seal |
+|`-V`| BackerRegistrarSealCouples | SealBack | `[bi, d]` | Backer AID metadata digest as seal |
+|`--V`| BigBackerRegistrarSealCouples | SealBack | `[bi, d]` | Backer AID metadata digest as seal |
 |`-W`| TypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
 |`--W`| BigTypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
 
@@ -721,6 +721,26 @@ The JSON version is shown. There is also a native CESR version of the seal.
   "rd": "Eabcde..."
 }
 ```
+#### Source Event seal
+
+Source event seals bind to an event that implies what AID is associated with the seal from the context in which that seal appears. This provides an implicit approval or endorsement of that event. The associated event might be an issuance, a delegation, or a transaction event. 
+
+The `s` field value is the sequence number of the associated event being sealed. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the associated event. The fields in an Event seal MUST appear in the following order `[ s, d]`.
+
+Source event seals MAY be used for endorsing transaction events that appear in issuance/revocation registries for ACDCs.  They MAY be used as references to delegating events in the KEL of the delegator where the delegator AID is implied by the context in which the seal appears.
+
+The JSON version is shown. There is also a CESR native version of the seal.
+
+::: note 
+  Examples in this section are not cryptographically verifiable
+:::
+
+```json
+{
+  "s": "e",
+  "d": "Eabcde..."
+}
+```
 
 #### Key Event seal
 
@@ -741,24 +761,6 @@ Event seals are used for endorsing delegated events and for endorsing external i
 }
 ```
 
-#### Transaction Event seal
-
-Transaction event seals bind an event in a transaction event log to an event in the KEL in which that seal appears. This provides an implicit approval or endorsement of that transaction event. The `s` field value is the sequence number of the transaction event in its event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the transaction event. The fields in an Event seal MUST appear in the following order `[ s, d]`.
-
-Transaction seals are used for endorsing transaction events (typically from issuance/revocation registries for ACDCs).  
-
-The JSON version is shown. There is also a CESR native version of the seal.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-```json
-{
-  "s": "e",
-  "d": "Eabcde..."
-}
-```
 
 #### Latest establishment event seal
 
