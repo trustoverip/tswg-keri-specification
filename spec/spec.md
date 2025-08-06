@@ -2042,9 +2042,9 @@ In a CESR-encoded message, the count code for the message includes the message s
 
 The protocol type uses four characters and MUST be `KERI` for a normative KERI protocol. 
 
-The protocol version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of `01`. In dotted notation, this would be `0.01`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+The protocol version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of decimal `1`. In dotted notation, this would be `0.1`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
 
-The CESR genus version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of `01`. In dotted notation, this would be `0.01`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+The CESR genus version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of decimal `1`. In dotted notation, this would be `0.1`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
 
 The encoded protocol type, protocol version, and genus version consume 10 Base64 characters. The CESR primitive code for such a 10-character primitive is `0O`.  
 An example KERI protocol type/protocolversion/genusversion field value for protocol version 2.0 and genus version 2.0  is as follows:
