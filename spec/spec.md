@@ -641,16 +641,29 @@ The Configuration Traits, `c` field value is a list of strings. These are specia
 |:---:|:---|:---:|:---|
 |`EO`| Establishment Only | True |Only establishment events MUST appear in this KEL |
 |`DND`| Do Not Delegate | True | This KEL MUST NOT act as a delegator of delegated AIDs|
-|`NRB`| No Registrar Backers | True | This KEL MUST NOT allow any registrar backers |
+|`DID`| Delegate Is Delegator | True | Treat a delegated AID the same as its Delegator AID|
 |`RB`| Registrar Backers | False | The backer list MUST provide registrar backer AIDs |
+|`NRB`| No Registrar Backers | False | Registrar backers are no longer allowed |
 
-The Establishment Only, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
+ EstOnly: str = 'EO'  # Only allow establishment events. Inception only.
+    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers. Inception only.
+    RegistrarBackers: str = 'RB' # Registrar backer provided in Registrar seal in this event
+    NoBackers: str = 'NB'  #  Do not allow any (registrar backers).
+                             # Inception and Rotation in v2.  This should be NRB in next version.
+    NoRegistrarBackers: str = 'NRB'  #  Do not allow any registrar backers. Inception and Rotation.
+    DelegateIsDelegator: str = 'DID'  # Treat delegate AIDs same as their delegator. Inception only
 
-The Do Not Delegate, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
+The `Establishment Only`, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
 
-The No Registrar Backer, `NRB` config trait enables the Controller to protect itself from an attempt to change from a witnessed secondary root of trust to a ledger secondary root of trust via a ledger registrar backer.  A Validator MUST invalidate, i.e., drop any rotation events that attempt to use the Registrar Backer, `RB` configuration trait.
+The `Do Not Delegate`, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
 
-The Registrar Backer, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  A Validator MUST invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
+The `Delegate Is Delegator`, `DID` config trait enables the Controller to signal to validators that any Delegate (Delegatee) AIDs are to be treated as equivalent to the Delegator. This enables horizontal scaling of a Delegator's signing infrastructure.
+
+The `Registrar Backer`, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  This config trait enables a KEL to start with or switch to using registrar backers instead of witnesses.
+
+The `No Registrar Backer`, `NRB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of witnesses, not registrar backers. This config trait enables a KEL to switch back from using a registrar backer to using witnesses. When a KEL is not currently using registrar backers then the `NRB` config trait has no effect. The combination of the `RB` and `NRB` config traits enable a KEL to switch between using witnesses and registrar backers.
+
+In the event that an establishment event includes both `RB` and `NRB` configuration traits in its configuration trait list, then the one that appears last in the configuration trait list is enforced, i.e., activated, and any earlier appearances are ignored. 
 
 ##### Seal list field
 
