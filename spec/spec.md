@@ -530,11 +530,11 @@ The top-level fields of each message type MUST appear in a specific order. All t
 
 ##### Version string field
 
-The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. The detailed description of the version string is provided in the CESR protocol specification. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. The Regexable format is `KERIMmmKKKKSSSS.` that provides protocol type `KERI`, major version `M`, minor version `mm`, serialization type `KKKK`, size `SSSS`, and terminator `.`. 
+The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. The detailed description of the version string is provided in the CESR protocol specification. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body.  The Regexable format is `KERIMmmGggKKKKSSSS.` that provides protocol type `KERI`, major protocol version `M`, minor protocol version `mm`, major genus version `G`, minor genus version `gg`, serialization type `KKKK`, size `SSSS`, and terminator `.`. 
 
-A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1]].
+To elaborate, the protocol field, `PPPP` value in the Version String MUST be `KERI` for the KERI protocol. The protocol version field, `Mmm`, MUST encode the current major `M` and minor `mm` version of the KERI protocol [[1]] used by the associated message. The CESR genus version field `Ggg` MUST encode the major `G` and minor `gg` version of the CESR protocol used to encode the associated message [[reference to CESR protocol specification]].
 
-The protocol field, `PPPP` value in the version string MUST be `KERI` for the KERI protocol. The version field, `Mmm`, MUST encode the current major and minor version of the KERI protocol [[1]]. 
+A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [[1]].
 
 ##### Legacy version string field format
 
@@ -714,7 +714,7 @@ The JSON version is shown. There is also a native CESR version.
 
 ```json
 {
-  "d": "Eabcde..."
+  "d": "EAU5dUws4ffM9jZjWs0QfXTnhJ1qk2u3IUhBwFVbFnt5"
 }
 ```
 
@@ -731,7 +731,7 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
-  "rd": "Eabcde..."
+  "rd": "EBMFnZjWs0QfXTnht5AU5dU9jJ1qk2u3IUhwFVbws4ff"
 }
 ```
 #### Source Event seal
@@ -744,14 +744,12 @@ Source event seals MAY be used for endorsing transaction events that appear in i
 
 The JSON version is shown. There is also a CESR native version of the seal.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+
 
 ```json
 {
   "s": "e",
-  "d": "Eabcde..."
+  "d": "EJFxtbr9WioIkzTfVX4iC6Axxyg8jjKSX0ZrJgoNHiB-"
 }
 ```
 
@@ -761,16 +759,12 @@ Key Event seals bind an event from some other (external) KEL or other type of ev
 
 Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
 ```json
 {
 
-  "i": "Ebiety...",
-  "s": "e",
-  "d": "Eabcde..."
+  "i": "'EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur'",
+  "s": "1",
+  "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"
 }
 ```
 
@@ -781,13 +775,9 @@ The latest establishment event seal's function is similar to the key event seal 
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
 ```json
 {
-  "i": "BACDEF...",
+  "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
 }
 ```
 
@@ -808,8 +798,8 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
-  "bi": "BACDEF...",
-  "d": "EFGKDD..."
+  "bi": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+  "d": "EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe"
 }
 ```
 
@@ -836,15 +826,17 @@ The JSON version is shown. There is also a CESR native version of the seal.
 ```json
 {
   "t": "YCSMTCAA",
-  "d": "Eabcde..."
+  "d": "EAU5dUws4ffM9jZjWs0QfXTnhJ1qk2u3IUhBwFVbFnt5"
 }
 ```
 
 ### Key event messages
 
-The Key Event Message types MUST be as follows `[icp, rot, ixn, dip, drt]`. 
+A Key Event Message types MUST be one of the following `[icp, rot, ixn, dip, drt]`. 
 
-The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator MAY drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
+The convention for field ordering within a message is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator MAY drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
+
+In the following examples, for each of the Key Event Message types the serialization kind used is JSON. This influences the generation of the SAIDs (digests) for each message.
 
 #### Inception Event Message Body
 
