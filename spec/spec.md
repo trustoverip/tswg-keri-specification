@@ -639,29 +639,21 @@ The Configuration Traits, `c` field value is a list of strings. These are specia
 
 |Trait|Title|Inception Only|Description|
 |:---:|:---|:---:|:---|
-|`EO`| Establishment Only | True |Only establishment events MUST appear in this KEL |
-|`DND`| Do Not Delegate | True | This KEL MUST NOT act as a delegator of delegated AIDs|
-|`DID`| Delegate Is Delegator | True | Treat a delegated AID the same as its Delegator AID|
-|`RB`| Registrar Backers | False | The backer list MUST provide registrar backer AIDs |
-|`NRB`| No Registrar Backers | False | Registrar backers are no longer allowed |
+|`EO`| Establishment-Only | True |Only establishment events MUST appear in this KEL |
+|`DND`| Do-Not-Delegate | True | This KEL MUST NOT act as a delegator of delegated AIDs|
+|`DID`| Delegate-Is-Delegator | True | Treat a delegated AID the same as its Delegator AID|
+|`RB`| Registrar-Backers | False | The backer list MUST provide registrar backer AIDs |
+|`NRB`| No-Registrar-Backers | False | Registrar backers are no longer allowed |
 
- EstOnly: str = 'EO'  # Only allow establishment events. Inception only.
-    DoNotDelegate: str = 'DND'  # Dot not allow delegated identifiers. Inception only.
-    RegistrarBackers: str = 'RB' # Registrar backer provided in Registrar seal in this event
-    NoBackers: str = 'NB'  #  Do not allow any (registrar backers).
-                             # Inception and Rotation in v2.  This should be NRB in next version.
-    NoRegistrarBackers: str = 'NRB'  #  Do not allow any registrar backers. Inception and Rotation.
-    DelegateIsDelegator: str = 'DID'  # Treat delegate AIDs same as their delegator. Inception only
+The `Establishment-Only`, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
 
-The `Establishment Only`, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
+The `Do-Not-Delegate`, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
 
-The `Do Not Delegate`, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
+The `Delegate-Is-Delegator`, `DID` config trait enables the Controller to signal to validators that any Delegate (Delegatee) AIDs are to be treated as equivalent to the Delegator. This enables horizontal scaling of a Delegator's signing infrastructure.
 
-The `Delegate Is Delegator`, `DID` config trait enables the Controller to signal to validators that any Delegate (Delegatee) AIDs are to be treated as equivalent to the Delegator. This enables horizontal scaling of a Delegator's signing infrastructure.
+The `Registrar-Backer`, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  This config trait enables a KEL to start with or switch to using registrar backers instead of witnesses.
 
-The `Registrar Backer`, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  This config trait enables a KEL to start with or switch to using registrar backers instead of witnesses.
-
-The `No Registrar Backer`, `NRB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of witnesses, not registrar backers. This config trait enables a KEL to switch back from using a registrar backer to using witnesses. When a KEL is not currently using registrar backers then the `NRB` config trait has no effect. The combination of the `RB` and `NRB` config traits enable a KEL to switch between using witnesses and registrar backers.
+The `No-Registrar-Backer`, `NRB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of witnesses, not registrar backers. This config trait enables a KEL to switch back from using a registrar backer to using witnesses. When a KEL is not currently using registrar backers then the `NRB` config trait has no effect. The combination of the `RB` and `NRB` config traits enable a KEL to switch between using witnesses and registrar backers.
 
 In the event that an establishment event includes both `RB` and `NRB` configuration traits in its configuration trait list, then the one that appears last in the configuration trait list is enforced, i.e., activated, and any earlier appearances are ignored. 
 
@@ -836,203 +828,336 @@ A Key Event Message types MUST be one of the following `[icp, rot, ixn, dip, drt
 
 The convention for field ordering within a message is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator MAY drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
 
-In the following examples, for each of the Key Event Message types the serialization kind used is JSON. This influences the generation of the SAIDs (digests) for each message.
+In the following examples, for each of the Key Event Message types, the serialization kind used is JSON. This is JSON without whitespace, which in Python can be generated as follows:
+
+```python
+import json
+
+raw = json.dumps(sad, separators=(",", ":"), ensure_ascii=False).encode()
+```
+where `sad` is a Python `dict` (field map) that includes a SAID field and therefore is self-addressed data or a self-addressed dict, i.e., a SAD. The serialization kind directly influences the value generated for the SAID (digest) of a given message. 
+
+The Annex titled "Working Examples Setup" provides more detail on how to replicate the working examples. 
 
 #### Inception Event Message Body
 
 The top-level fields of an Inception, `icp`, event message body MUST appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear).  Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
 
-Inception event example:
+##### Inception Event Example
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
+
+```Python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "icp",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k":
+    "v": "KERICAACAAJSONAAKp.",
+    "t": "icp",
+    "d": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "0",
+    "kt": "2",
+    "k":
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        "DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu",
+        "DG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5",
+        "DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV"
     ],
-  "nt": "3", // 3 of 5
-  "n":
+    "nt": "2",
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB",
+        "ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YT",
+        "EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG"
     ],
-  "bt": "2",
-  "b":
+    "bt": "3",
+    "b":
     [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+        "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "BJfueFAYc7N_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt",
+        "BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH",
+        "BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
     ],
-  "c": [],
-  "a": []
+    "c": ["DID"],
+    "a": []
 }
 ```
 
-#### Rotation Event Message Body
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
 
-The top-level fields of a Rotation, `rot` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-Rotation event example:
-
-```json
-{
-  "v": "KERICAAJSONAACd.",
-  "t": "rot",
-  "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s":  "1",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "kt": "2", // 2 of 3
-  "k":
-    [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
-    ],
-  "nt": "3", // 3 of 5
-  "n":
-    [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
-    ],
-  "bt": "1",
-  "ba": ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
-  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-  "c": [],
-  "a : []
-}
+```Python
+(b'{"v":"KERICAACAAJSONAAKp.","t":"icp","d":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXj'
+b'BUcMVtvhmB","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"0","kt":'
+b'"2","k":["DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu","DG-YwInLUxzVDD5z8Sq'
+b'ZmS2FppXSB-ZX_f2bJC_ZnsM5","DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV"],"'
+b'nt":"2","n":["ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB","ENY9GYShOjeh7qZ'
+b'UpIipKRHgrWcoR2WkJ7Wgj4wZx1YT","EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG'
+b'"],"bt":"3","b":["BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","BJfueFAYc7N'
+b'_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt","BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V'
+b'22aH","BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"c":["DID"],"a":[]}')
 ```
 
-#### Interaction Event Message Body
-
-The top-level fields of an Interaction, `ixn` event message body MUST appear in the following order: `[ v, t, d, i, s, p, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-```json
-{
-  "v": "KERICAAJSONAACd.",
-  "t": "ixn",
-  "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s": "2",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "a":
-  [
-    {
-      "d": "ELvaU6Z-i0d8JJR2nmwyYAZAoTNZH3UfSVPzhzS6b5CM",
-      "i": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
-      "s": "1"
-    }
-  ]
-}
+The next key digests in the message body are derived from the following set of next keys:
+```Python
+[
+    "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
+    "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
+    "DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"
+]
 ```
+
+The AID created by this inception event is the value of the `i` field, that is, `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB`. For the purposes of the examples, let this be given the user-friendly alias `ean` as in Ean's AID. Notice that the config trait list for Ean has the config trait `DID` for `Delegate-Is-Delegator` which means that Validators may treat Delegates (Delegatees) of Ean as if they were Ean.
 
 
 #### Delegated Inception Event Message Body
 
 The top-level fields of a Delegated Inception, `dip` event message body MUST appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Delegated Inception Event Example
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERI10JSON0001ac_",
-  "t": "dip",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k" :
+    "v": "KERICAACAAJSONAAL4.",
+    "t": "dip",
+    "d": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "s": "0",
+    "kt": ["1/2", "1/2", "1/2"],
+    'k':
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        'DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3',
+        'DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv',
+        'DN3JXVEvIjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr'
     ],
-  "nt": "3",  // 3 of 5
-  "n" :
+    "nt": ["1/2", "1/2", "1/2"],
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy8vbVvUmwxcM1e-",
+        "EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM",
+        "EGVvq4Njkki3EZv838rJrYShBtwXY9o8RUrG2w3nbujn"
     ],
-  "bt": "2",
-  "b":
+    "bt": "3",
+    "b":
     [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+        "BFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ4npNEmIW_gPX",
+        "BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF",
+        "BEzZUvashpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl",
+        "BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6"
     ],
-  "c": [],
-  "a": [],
-  "di": "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+    "c": [],
+    "a": [],
+    "di": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB"
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAL4.","t":"dip","d":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2'
+b'GRc2SG3aur","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"0","kt":'
+b'["1/2","1/2","1/2"],"k":["DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3","DHy'
+b'JFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv","DN3JXVEvIjTbisPC4maYQWy6eQIRNdJs'
+b'xqGFXYUm_ygr"],"nt":["1/2","1/2","1/2"],"n":["EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy'
+b'8vbVvUmwxcM1e-","EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM","EGVvq4Njkki3'
+b'EZv838rJrYShBtwXY9o8RUrG2w3nbujn"],"bt":"3","b":["BFATArhqG_ktVCRLWt2Knbc7JD'
+b'paPAFJ4npNEmIW_gPX","BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF","BEzZUvas'
+b'hpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl","BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl'
+b'9N4M2g6"],"c":[],"a":[],"di":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB"}')
+```
+The next key digests in the message body are derived from the following set of next keys:
+
+```python
+[
+    "DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR",
+    "DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB",
+    "DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"
+]
+```
+
+The AID created by this inception event is the value of the `i` field, that is, `EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur`. For the purposes of the examples, let this be given the user-friendly alias `fay` as in Fay's AID. Notice that the Delegator AID given by the `di` field value is Ean's AID. To clarify, Ean is the Delegator of Fay the Delegatee. Also, notice that the thresholds for the signing keys and next rotation keys use the syntax of a fractionally weighted threshold instead of a simple numeric threshold.
+
+
+#### Interaction Event Message Body
+
+The top-level fields of an Interaction, `ixn` event message body MUST appear in the following order: `[ v, t, d, i, s, p, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
+
+##### Interaction Event Example
+
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
+{
+    "v": "KERICAACAAJSONAAE8.",
+    "t": "ixn",
+    "d": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "1",
+    "p": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "a":
+    [
+        {
+            "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+            "s": "0",
+            "d": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur"
+        }
+    ]
+}
+```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAE8.","t":"ixn","d":"EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno'
+b'3s9_QIYrXk","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"1","p":"'
+b'EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","a":[{"i":"EHqSsH1Imc2MEcgzEor'
+b'dBUFqJKWTcRyTz2GRc2SG3aur","s":"0","d":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GR'
+b'c2SG3aur"}]}')
+```
+Notice that in this example the Issuer is Ean and uses Ean's AID for the `i` field value. This Interaction event is sealing the delegation of Fay's AID by virtue of a SealEvent dict in the data attribute field list. In the event seal, the `i` field value is Fay's AID. The `s` field value is the hex encoded sequence number of Fay's delegated inception event, and the `d` field value is the SAID of Fay's delegated inception event. The combination of the appearance of this seal in Ean's KEL for an establishment event in the KEL of a delegated AID that designates Ean's AID as the Delegator in that KEL's Inception event provides a cryptographically verifiable two-way binding (sometimes called a two-way peg) between the delegating and delegated events.
 
 
 #### Delegated Rotation Event Message Body
 
-The top-level fields of a Delegated Rotation, `drt` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
+The top-level fields of a Delegated Rotation, `drt` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field. Even though the field set is the same for both Rotation and Delegated Rotation events, the message body type of `drt` signals to Validators that the event must be validated using the rules for delegated events.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Delegated Rotation Event Example
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "drt",
-  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s": "1",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "kt": "2", // 2 of 3
-  "k":
+    "v": "KERICAACAAJSONAAKh.",
+    "t": "drt",
+    "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "s": "1",
+    "p": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "kt": ["1/2", "1/2", "1/2"],
+    "k":
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        "DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR",
+        "DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB",
+        "DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"
     ],
-  "nt": "3", // 3 of 5
-  "n":
+    "nt": ["1/2", "1/2", "1/2"],
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW",
+        "EJdqHiijmjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW",
+        "EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGTGqj2"
     ],
-  "bt": "1",
-  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
-  "c":[],
-  "a":[]
+    "bt": "3",
+    "br": ["BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF"],
+    "ba": ["BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx"],
+    "c": [],
+    "a": []
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAKh.","t":"drt","d":"ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5'
+b'Zq5KNirISF","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"1","p":"'
+b'EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","kt":["1/2","1/2","1/2"],"k":['
+b'"DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR","DDCDFlbG4dCAX6oIbNffB1mkZqLA'
+b'S_eHnYUUIPH7BeXB","DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"],"nt":["1/2'
+b'","1/2","1/2"],"n":["EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW","EJdqHiij'
+b'mjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW","EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMs'
+b'KGTGqj2"],"bt":"3","br":["BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF"],"ba'
+b'":["BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx"],"c":[],"a":[]}')
+```
+
+The next key digests in the message body are derived from the following set of next keys:
+```python
+[
+    "DCcN7BGPo6c47EWOTvcIUCpzvetDN5E-7EPMprN6tqVI",
+    "DAaAPS7IpPe9nPrgF6eGkA9hIphUIeZE0zLkGHCS1BBD",
+    "DONoZ4RumKezgod8xoAtRQvmhPRe4LZm8QP-BVEN-MW_"
+]
+```
+
+Notice that in addition to rotating the signing keys, this event also rotates out one of the witnesses and replaces it with a new witness.
+
+#### Rotation Event Message Body
+
+The top-level fields of a Rotation, `rot` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
+
+##### Rotation Event Example
+
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
+{
+    "v": "KERICAACAAJSONAAMf.",
+    "t": "rot",
+    "d": "EJOnAKXGaSyJ_43kit0V806NNeGWS07lfjybB1UcfWsv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "2",
+    "p": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+    "kt": "2",
+    "k":
+    [
+        "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
+        "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
+        "DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"
+    ],
+    "nt": "2",
+    "n":
+    [
+        "EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe",
+        "EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_amqGh",
+        "EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg"
+    ],
+    "bt": "4",
+    "br":
+    [
+        "BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
+    ],
+    "ba":
+    [
+        "BO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-VIsCo",
+        "BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW"
+    ],
+    "c": [],
+    "a":
+    [
+        {
+            "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+            "s": "1",
+            "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"
+        }
+    ]
+}
+```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAMf.","t":"rot","d":"EJOnAKXGaSyJ_43kit0V806NNeGWS07lfj'
+b'ybB1UcfWsv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"2","p":"'
+b'EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk","kt":"2","k":["DLv9BlDvjcZWkfP'
+b'fWcYhNK-xQxz89h82_wA184Vxk8dj","DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz'
+b'","DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"],"nt":"2","n":["EA8_fj-Ezin'
+b'_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe","EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_a'
+b'mqGh","EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg"],"bt":"4","br":["BA4PSa'
+b'tfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"ba":["BO3cCAfQiqndZBBxwNk6RGkyA-OA'
+b'1XbZhBj3s4-VIsCo","BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW"],"c":[],"a"'
+b':[{"i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"1","d":"ENl9GdcDY'
+b'-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"}]}')
+
+```
+
+The next key digests in the message body are derived from the following set of next keys:
+
+```python
+[
+    "DHODGNuxeW2JTKn3S7keooAjVw582puHoK_zDflPflZg",
+    "DImP4vghHKJIgzBxt1HrTLrNLOMy07_gFV0_IekdzAQh",
+    "DNlPrQ9T7G71BDgRSpB0coMFANpw_QPVEUosPep1JC79"
+]
+```
+
+Notice that in this example, the Issuer is Ean and uses Ean's AID for the `i` field value. This Rotation event is sealing the delegation of Fay's Rotation event by virtue of a SealEvent dict in the data attribute field list. In the event seal, the `i` field value is Fay's AID. The `s` field value is the hex encoded sequence number of Fay's delegated rotation event at hex number `1`, and the `d` field value is the SAID of Fay's delegated rotation event. The combination of the appearance of this seal in Ean's KEL for an establishment event in the KEL of a delegated AID that designates Ean's AID as the Delegator in that KEL's Inception event provides a cryptographically verifiable two-way binding (sometimes called a two-way peg) between the delegating and delegated events.
 
 
 ### Receipt Messages
