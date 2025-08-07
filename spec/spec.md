@@ -842,10 +842,6 @@ In the following examples, for each of the Key Event Message types the serializa
 
 The top-level fields of an Inception, `icp`, event message body MUST appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear).  Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
 Inception event example:
 
 ```json
@@ -2024,6 +2020,177 @@ Alternatively, in the case of a complete and total dead exploit, the validator a
 
 Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
 
+### Working Examples Setup
+
+The code to generate the working examples in this specification is provided via unit tests found in tests/spec/keri in the keripy library. 
+
+A brief explanation of the setup code is provided here to help implementers who wish to reproduce the examples from scratch.
+
+#### AIDs
+
+The examples require an Issuer AID. This AID is created in accordance with the KERI protocol. This requires creating digital signing key-pairs whose public keys are used in an inception event to create the AID. The keripy library has a utility class Salter (found in keri.core.signing.Salter) that facilitates the creation of signing key pairs. For the examples, any needed signing key pairs can be recreated using a known non-random salt. The known non-random salt is merely for reproducibility. In a real-world application, the salt should be a high entropy secret. The salt used for the examples is the python byte string as follows:
+
+```python
+b'kerispecworkexam'
+```
+
+Using a Salter instance, a set of key pairs may be created. These keypairs are instantiated as Signer class instances. The Signer class can be found in keri.core.signing.Signer. The creation code is as follows:
+
+```python
+salt = b'acdcspecworkexam'
+salter = Salter(raw=salt)
+signers = salter.signers(count=8, transferable=True, temp=True)
+```
+
+The `Salter.signers()` method creates a count number of Signer instances and returns them in a list. Each Signer holds a key pair. The private key seed for each key pair is created using Argon2 to stretch a deterministic path that is based on the salt and a path that is the hex representation of the count offset for each Signer. For the zeroth signer this is as follows:
+
+```python
+import pysodium
+seed = pysodium.crypto_pwhash(outlen=32, passwd='0', salt=b'acdcspecworkexam', opslimit=1,
+                                memlimit=8192, alg=pysodium.crypto_pwhash_ALG_ARGON2ID13)
+```
+
+The seed becomes the private signing key for the keypair. The public verification key is generated using Ed25519 as follows:
+
+```python
+verkey, sigkey = pysodium.crypto_sign_seed_keypair(seed)
+```
+
+The verkey is used as the raw input to a Verfer (verifier) Class instance (found in keri.core.coring.Verfer) as follows:
+
+```python
+verfer = Verfer(raw=verkey, code=MtrDex.Ed25519)
+```
+
+From this, the initial signing public verification key in CESR encoded qualified Base64 `Text` domain representation is as follows:
+
+```python
+'DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'
+```
+
+In order to create the Issuer AID, two other signing key pairs are needed. One other is the "next" rotating key pair. The signer at index 1 is used for this. From this, the next rotating public verification key in CESR encoded qualified Base64 `Text` domain representation is as follows: 
+
+```python
+'DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM'
+```
+
+Another one is a witness key pair. Witness AIDs are usually non-transferable and use a non-transferable CESR encoding. This is produced by setting the transferable parameter to `False`. The associated key pairs may be generated as follows:
+
+```python
+walt = b'acdcspecworkwits'
+walter = Salter(raw=walt)
+wigners = walter.signers(count=4, transferable=False, temp=True)
+```
+The signer at index 0  (wigners[0]) is used for this. From this, the witness AID, (which is also its signing public verification key) in CESR encoded qualified Base64 `Text` domain representation is as follows: 
+
+```python
+'BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8'
+```
+
+From these three cryptographic primitives, we can create a Python dictionary with all the data needed to generate the inception event for the Issuer as follows:
+
+```python
+ sad = \
+ {
+        'v': 'KERICAACAAJSONAAFb.',
+        't': 'icp',
+        'd': 'ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz',
+        'i': 'ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz',
+        's': '0',
+        'kt': '1',
+        'k': ['DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'],
+        'nt': '1',
+        'n': ['DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM'],
+        'bt': '1',
+        'b': ['BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8'],
+        'c': [],
+        'a': []
+}
+```
+The JSON examples use a JSON serialization of the inception event to generate the Issuer AID. In Python, this is performed as follows:
+
+```python
+import json
+
+raw = json.dumps(sad, separators=(",", ":"), ensure_ascii=False).encode()
+```
+
+This results in the following raw JSON for the inception event.
+
+```python
+(b'{"v":"KERICAACAAJSONAAFb.","t":"icp","d":"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtz'
+b'Dn1meBVLAz","i":"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz","s":"0","kt":'
+b'"1","k":["DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_"],"nt":"1","n":["DLe4'
+b'uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM"],"bt":"1","b":["BKRaC6UsijUY1FRjEx'
+b'oAMc8WOHBDIfIKYnOlxWH8eOe8"],"c":[],"a":[]}')
+```
+
+The calculation of the SAIDed fields in the inception event requires knowledge of the SAID protocol for generating SAIDs on the serialization of the associated field map.  A utility function for generating an inception event may be found in keri.core.eventing.incept. The raw above was generated as follows:
+
+```python
+from collections import namedtuple
+
+issuerSigner = signers[0]
+issuerVerKey = issuerSigner.verfer.qb64  # issuer's public verification key
+assert issuerVerKey == 'DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'
+
+issuerRotSigner = signers[1]
+issuerRotVerKey = issuerRotSigner.verfer.qb64  # issuer's public verification key
+assert issuerRotVerKey == 'DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM' # use in example
+
+issuerWitSigner = wigners[0]
+issuerWitVerKey = issuerWitSigner.verfer.qb64  # issuer's public verification key
+assert issuerWitVerKey == 'BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8' # use in example
+
+Versionage = namedtuple("Versionage", "major minor")
+Vrsn_2_0 = Versionage(major=2, minor=0)  # KERI Protocol Version Specific
+
+assert MtrDex.Blake3_256 == 'E'
+
+keys = [issuerVerKey]  # initial signing keys
+nkeys = [issuerRotVerKey]  # next (rotation) keys
+wits = [issuerWitVerKey]  # witness aids (same as public verkey)
+serder = incept(keys, code='E', ndigs=nkeys, wits=wits, version=Vrsn_2_0, kind='JSON')
+```
+
+The resultant Issuer AID, namely:
+```python
+"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz"
+```
+It can be used in an example. This AID may be given the user friendly alias `amy` has in Amy's AID. Likewise, the same process can be followed to created other AID's used in examples.
+
+#### UUIDs
+
+Many of the examples include UUID, `u` fields with salty nonce values. For ease of reproducibility, deterministic UUIDs are used. These may be generated with the following Python code snippet:
+
+```python
+from keri.core import Noncer
+
+raws = [b'kerispecworkraw' + b'%0x'%(i, ) for i in range(16)]
+uuids = [Noncer(raw=raw).qb64 for raw in raws]
+assert uuids == \
+[
+    '0ABrZXJpc3BlY3dvcmtyYXcw',
+    '0ABrZXJpc3BlY3dvcmtyYXcx',
+    '0ABrZXJpc3BlY3dvcmtyYXcy',
+    '0ABrZXJpc3BlY3dvcmtyYXcz',
+    '0ABrZXJpc3BlY3dvcmtyYXc0',
+    '0ABrZXJpc3BlY3dvcmtyYXc1',
+    '0ABrZXJpc3BlY3dvcmtyYXc2',
+    '0ABrZXJpc3BlY3dvcmtyYXc3',
+    '0ABrZXJpc3BlY3dvcmtyYXc4',
+    '0ABrZXJpc3BlY3dvcmtyYXc5',
+    '0ABrZXJpc3BlY3dvcmtyYXdh',
+    '0ABrZXJpc3BlY3dvcmtyYXdi',
+    '0ABrZXJpc3BlY3dvcmtyYXdj',
+    '0ABrZXJpc3BlY3dvcmtyYXdk',
+    '0ABrZXJpc3BlY3dvcmtyYXdl',
+    '0ABrZXJpc3BlY3dvcmtyYXdm'
+]
+```
+
+The Noncer class may be found in keri.core.coring.Noncer. Essentially, a Noncer instance can encode a byte string as a salty nonce in CESR format.
+
 ### Native CESR Encodings of KERI Messages
 
 A native CESR encoding of the field map of a KERI message body is represented using pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; the second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no top-level labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
@@ -2108,9 +2275,6 @@ Converting the slashes to dashes gives:
 
 
 In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base64 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
-
-One caveat for Base64 encoded variable lengths strings is that the string MUST not start with the `A` character. This is because of a pre-padding ambiguity for variable length Base64 strings. The convention to prevent this is always starting the route with a slash, `/`, which is converted to a dash, `-`. Otherwise, the route MUST be treated as a variable-length binary string, which MUST be converted to Base64 for encoding in the Text domain.
-
 
 #### Key Event Messages
 These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
