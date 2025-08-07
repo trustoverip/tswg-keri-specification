@@ -1174,21 +1174,28 @@ The Identifier AID, `i` field value is the Controller AID of the KEL for the key
 
 The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Receipt example:
 
-Receipt example:
+The message body is provided as a Python dict. This dict is then serialized. The serialization kind is JSON. Note that unlike the other message bodies a reciept does not have a field that is the SAID of its serialization. A Receipt message body merely holds a reference to the SAID of some Key Event Message body. 
 
-```json
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "rct",
-  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-  "s": "1"
+    "v": "KERICAACAAJSONAACT.",
+    "t": "rct",
+    "d": "EJOnAKXGaSyJ_43kit0V806NNeGWS07lfjybB1UcfWsv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "2"
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAACT.","t":"rct","d":"EJOnAKXGaSyJ_43kit0V806NNeGWS07lfj'
+b'ybB1UcfWsv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"2"}')
+```
+
+Notice that this is a receipt for Ean's Rotation Event message above.
 
 ### Routed Messages
 
@@ -2652,12 +2659,27 @@ b'IsCoBPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW-JAA-JAY-TAXEF-jViYoBr8p3vkp'
 b'ZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAABEFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv')
 ```
 
+#### Receipt Messages
 ##### Receipt `rct`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`.
 
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAABw.',
+    't': 'rct',
+    'd': 'EADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFc',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '2'
+}
+```
 
-
+CESR serialization as a Python byte string.
+```python
+(b'-FAb0OKERICAACAAXrctEADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFcEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAAC')
+```
 
 #### KERI Routed Messages
 These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
@@ -2666,37 +2688,29 @@ These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `qry` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-|  `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+Message body as a Python dict.
+```python
 
+```
 
+CESR serialization as a Python byte string.
+```python
+
+```
 
 #### Reply Message
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rpy` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
+```python
 
+```
+
+CESR serialization as a Python byte string.
+```python
+
+```
 
 
 #### Prod Message
