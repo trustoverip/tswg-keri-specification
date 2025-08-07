@@ -2404,192 +2404,259 @@ In the case where a route may be converted to Base64 characters by merely subsit
 #### Key Event Messages
 These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
 
+These examples are identical to the examples provided in the body of the specification above except that the serialization kind is CESR instead of JSON. This changes any fields that are SAIDive, i.e. are derived from digest of the message body using the SAID protocol. All the keys and UUIDs are the same as the examples above. The other field value that changes is the version string that appears in the Python dict expression of a message body. This is because the size and serialization kind both appear in the version string and both of these are affected by the serialization kind.
+
 ##### Inception `icp`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `Y&&&&###` e.g., `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `X&&&` e.g., `icp` | Packet Type |
-| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `M&&&` e.g., `MAAA` | Sequence Number of Event |
-| `kt` | `M&&&` e.g., `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
-| `nt` | `M&&&` e.g., `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
-| `bt` | `M&&&` e.g., `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `b` | `-I##` or `-I#####` | Count code for Backer AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer 0 |
-| 1th element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1 |
-| 2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer 2 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_&` e.g., `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of Seal 1 (event seal triple) pre+snu+dig |
+Message body as a Python dict.
 
-##### Rotation `rot`
+```python
+{
+        'v': 'KERICAACAACESRAAJM.',
+        't': 'icp',
+        'd': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        's': '0',
+        'kt': '2',
+        'k':
+        [
+            'DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu',
+            'DG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5',
+            'DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV'
+        ],
+        'nt': '2',
+        'n':
+        [
+            'ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB',
+            'ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YT',
+            'EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG'
+        ],
+        'bt': '3',
+        'b':
+        [
+            'BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B',
+            'BJfueFAYc7N_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt',
+            'BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH',
+            'BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB'
+        ],
+        'c': ['DID'],
+        'a': []
+    }
+```
 
-Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+CESR serialization as a Python byte string.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rot` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAB` | Sequence Number of Event |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer cut 0 |
-| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List |
-| 0th element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label  | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl` | Value of Seal 1 (event seal triple) pre+snu+dig |
-
-##### Interaction `ixn`
-
-Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
-
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `ixn` | Packet Type |
-| `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAC` | Sequence Number of Event |
-| `p` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Prior event SAID |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
-| 0.0th label| `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
-|0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl` | Value of  Seal 1 (event seal triple) pre+snu+dig |
-
+```python
+(b'-FCS0OKERICAACAAXicpEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAAAMAAC-JAhDBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1H'
+b'xpDx95bFvufuDG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5DGIAk2jkC3xuLIe-DI9r'
+b'cA0naevtZiKuU9wz91L_qBAVMAAC-JAhELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB'
+b'ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YTEGyJ7y3TlewCW97dgBN-4pckhCqsni-z'
+b'HNZ_G8zVerPGMAAD-JAsBGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3BBJfueFAYc7N_'
+b'V-zmDEn2SPCoVFx3H20alWsNZKgsS1vtBAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH'
+b'BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB-JABXDID-JAA')
+```
 
 ##### Delegated Inception `dip`
 
 Field order by label:  `v`, `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`, `di`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native  op-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `dip` | Packet Type |
-| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAA` | Sequence Number of Event |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `b` | `-I##` or `-I#####` | Count code for Backer AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer 0 |
-| 1th element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1 |
-| 2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer 2 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
-| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAKM.',
+    't': 'dip',
+    'd': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    's': '0',
+    'kt': ['1/2', '1/2', '1/2'],
+    'k':
+    [
+        'DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3',
+        'DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv',
+        'DN3JXVEvIjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr'
+    ],
+    'nt': ['1/2', '1/2', '1/2'],
+    'n':
+    [
+        'EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy8vbVvUmwxcM1e-',
+        'EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM',
+        'EGVvq4Njkki3EZv838rJrYShBtwXY9o8RUrG2w3nbujn'
+    ],
+    'bt': '3',
+    'b':
+    [
+        'BFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ4npNEmIW_gPX',
+        'BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF',
+        'BEzZUvashpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl',
+        'BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6'
+    ],
+    'c': [],
+    'a': [],
+    'di': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs'
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FCi0OKERICAACAAXdipEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3EF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAAA4AADA1s2c1s2c1s2-JAhDEE-HCMSwqMDkEBzlmUN'
+b'mVBAGIinGu7wZ5_hfY6bSMz3DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkvDN3JXVEv'
+b'IjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr4AADA1s2c1s2c1s2-JAhEFzr1nnfHpT-nkSfd6vQ'
+b'vbPC-Kq6zy8vbVvUmwxcM1e-EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJMEGVvq4Nj'
+b'kki3EZv838rJrYShBtwXY9o8RUrG2w3nbujnMAAD-JAsBFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ'
+b'4npNEmIW_gPXBOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsFBEzZUvashpXh_nfPoR6a'
+b'iqvag0a8E_tbhpeJIgHhOXzlBCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6-JAA-JAA'
+b'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs')
+```
+
+##### Interaction `ixn`
+
+Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
+
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAEA.',
+    't': 'ixn',
+    'd': 'EDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKD',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '1',
+    'p': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'a':
+    [
+        {
+            'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+            's': '0',
+            'd': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3'
+        }
+    ]
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FA_0OKERICAACAAXixnEDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKDEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAABEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7f'
+b'rTYs-JAY-TAXEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAAAEF-jViYoBr8p3vkp'
+b'ZuHlkvxAAY5GZkmQ0QaaHfiE0kg3')
+```
 
 
 ##### Delegated Rotation `drt`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`, `di`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `drt` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAB` | Sequence Number of Event |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer cut 0 |
-| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List |
-| 0th element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
-| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAI4.',
+    't': 'drt',
+    'd': 'EFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    's': '1',
+    'p': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'kt': ['1/2', '1/2', '1/2'],
+    'k':
+    [
+        'DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR',
+        'DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB',
+        'DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1'
+    ],
+    'nt': ['1/2', '1/2', '1/2'],
+    'n':
+    [
+        'EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW',
+        'EJdqHiijmjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW',
+        'EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGTGqj2'
+    ],
+    'bt': '3',
+    'br': ['BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF'],
+    'ba': ['BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx'],
+    'c': [],
+    'a': []
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FCN0OKERICAACAAXdrtEFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwvEF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAABEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE'
+b'0kg34AADA1s2c1s2c1s2-JAhDB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctRDDCDFlbG'
+b'4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXBDP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z'
+b'0zs14AADA1s2c1s2c1s2-JAhEKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXWEJdqHiij'
+b'mjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzWEDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGT'
+b'Gqj2MAAD-JALBOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF-JALBOMrYd5izsqbqaq1'
+b'WZYa3nbEeTYLPwccfqfhirybKKqx-JAA-JAA')
+
+```
+
+##### Rotation `rot`
+
+Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAKs.',
+    't': 'rot',
+    'd': 'EADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFc',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '2',
+    'p': 'EDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKD',
+    'kt': '2',
+    'k':
+    [
+        'DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj',
+        'DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz',
+        'DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf'
+    ],
+    'nt': '2',
+    'n':
+    [
+        'EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe',
+        'EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_amqGh',
+        'EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg'
+    ],
+    'bt': '4',
+    'br': ['BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB'],
+    'ba':
+    [
+        'BO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-VIsCo',
+        'BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW'
+    ],
+    'c': [],
+    'a':
+    [
+        {
+            'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+            's': '1',
+            'd': 'EFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv'
+        }
+    ]
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FCq0OKERICAACAAXrotEADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFcEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAACEDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV'
+b'4uKDMAAC-JAhDLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8djDCx3WypeBym3fCkVizTg'
+b'18qEThSrVnB63dFq2oX5c3mzDO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXfMAAC-JAh'
+b'EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpeEERS8udHp2FW89nmaHweQWnZz7I8v9FT'
+b'QdA-LZ_amqGhEAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTgMAAE-JALBA4PSatfQMw1'
+b'lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB-JAWBO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-V'
+b'IsCoBPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW-JAA-JAY-TAXEF-jViYoBr8p3vkp'
+b'ZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAABEFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv')
+```
 
 ##### Receipt `rct`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rct` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL being receipted |
-| `s` | `MAAB` | Sequence Number of event message being receipted |
+
 
 
 #### KERI Routed Messages
