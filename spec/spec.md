@@ -530,9 +530,11 @@ The top-level fields of each message type MUST appear in a specific order. All t
 
 ##### Version string field
 
-The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1]].
+The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2]] [[ref: RFC8949]] [[3]]. The detailed description of the version string is provided in the CESR protocol specification. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body.  The Regexable format is `KERIMmmGggKKKKSSSS.` that provides protocol type `KERI`, major protocol version `M`, minor protocol version `mm`, major genus version `G`, minor genus version `gg`, serialization type `KKKK`, size `SSSS`, and terminator `.`. 
 
-The protocol field, `PPPP` value in the version string MUST be `KERI` for the KERI protocol. The version field, `VVV`, MUST encode the current version of the KERI protocol [[1]].
+To elaborate, the protocol field, `PPPP` value in the Version String MUST be `KERI` for the KERI protocol. The protocol version field, `Mmm`, MUST encode the current major `M` and minor `mm` version of the KERI protocol [[1]] used by the associated message. The CESR genus version field `Ggg` MUST encode the major `G` and minor `gg` version of the CESR protocol used to encode the associated message [[reference to CESR protocol specification]].
+
+A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [[1]].
 
 ##### Legacy version string field format
 
@@ -637,18 +639,23 @@ The Configuration Traits, `c` field value is a list of strings. These are specia
 
 |Trait|Title|Inception Only|Description|
 |:---:|:---|:---:|:---|
-|`EO`| Establishment Only | True |Only establishment events MUST appear in this KEL |
-|`DND`| Do Not Delegate | True | This KEL MUST NOT act as a delegator of delegated AIDs|
-|`NRB`| No Registrar Backers | True | This KEL MUST NOT allow any registrar backers |
-|`RB`| Registrar Backers | False | The backer list MUST provide registrar backer AIDs |
+|`EO`| Establishment-Only | True |Only establishment events MUST appear in this KEL |
+|`DND`| Do-Not-Delegate | True | This KEL MUST NOT act as a delegator of delegated AIDs|
+|`DID`| Delegate-Is-Delegator | True | Treat a delegated AID the same as its Delegator AID|
+|`RB`| Registrar-Backers | False | The backer list MUST provide registrar backer AIDs |
+|`NRB`| No-Registrar-Backers | False | Registrar backers are no longer allowed |
 
-The Establishment Only, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
+The `Establishment-Only`, `EO` config trait enables the Controller to increase its KELs security by not allowing interaction (non-establishment) events. This means all events MUST be signed by first-time, one-time pre-rotated keys. Key compromise is not possible due to repeated exposure of signing keys on interaction events. A Validator MUST invalidate, i.e., drop any non-establishment events.
 
-The Do Not Delegate, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
+The `Do-Not-Delegate`, `DND` config trait enables the Controller to limit delegations entirely or limit the depth to which a given AID can delegate. This prevents spurious delegations. A delegation seal MAY appear in an Interaction event.  Interaction events are less secure than rotation events so this configuration trait prevents delegations.  In addition, a Delegatee holds its own private keys. Therefore, a given delegate could delegate other AIDS via interaction events that do not require the approval of its delegate. A Validator MUST invalidate, i.e., drop any delegated events whose Delegator has this configuration trait.
 
-The No Registrar Backer, `NRB` config trait enables the Controller to protect itself from an attempt to change from a witnessed secondary root of trust to a ledger secondary root of trust via a ledger registrar backer.  A Validator MUST invalidate, i.e., drop any rotation events that attempt to use the Registrar Backer, `RB` configuration trait.
+The `Delegate-Is-Delegator`, `DID` config trait enables the Controller to signal to validators that any Delegate (Delegatee) AIDs are to be treated as equivalent to the Delegator. This enables horizontal scaling of a Delegator's signing infrastructure.
 
-The Registrar Backer, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  A Validator MUST invalidate, i.e., drop any rotation events that attempt to use this Registrar Backer, `RB` configuration trait if the inception event includes an active "No Registrar Backer", `NRB` config trait. In the event that the inception event includes both an `NRB` and `RB` configuration trait in its list, then the latter is enforced, i.e., activated, and the former is ignored.
+The `Registrar-Backer`, `RB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of ledger registrar backers. The event MUST also include Registrar Backer Seal for each registrar backer in the list.  This config trait enables a KEL to start with or switch to using registrar backers instead of witnesses.
+
+The `No-Registrar-Backer`, `NRB` config trait indicates that the backer (witness) list in the establishment event in which this trait appears provides the AIDs of witnesses, not registrar backers. This config trait enables a KEL to switch back from using a registrar backer to using witnesses. When a KEL is not currently using registrar backers then the `NRB` config trait has no effect. The combination of the `RB` and `NRB` config traits enable a KEL to switch between using witnesses and registrar backers.
+
+In the event that an establishment event includes both `RB` and `NRB` configuration traits in its configuration trait list, then the one that appears last in the configuration trait list is enforced, i.e., activated, and any earlier appearances are ignored. 
 
 ##### Seal list field
 
@@ -662,46 +669,50 @@ The collision resistance of a cryptographic strength digest makes it computation
 
 Seals MAY also be used as attachments to events to provide a reference for looking up the key state to be used for signatures on that event. The semantics of a given seal are also modified by the context in which the seal appears, such as appearing in the seal list of a key event in a KEL as opposed to appearing as an attachment to an event or receipt of an event.
 
+When a seal appears in a message whose serialization KIND is not CESR native, i.e. is one of JSON, CBOR, or MGPK then it MUST be encoded as a field map in the message's serialization format. 
+
+When a seal appears either as an attachment to a message of any serialization kind or inside a message whose serialization KIND is CESR native, then the seal MUST be encoded using CESR with the appropriate CESR count (group) code for that type of seal. There are two count codes for each seal type, one is the small-sized code and the other the big-sized code. A given count code can contain multiple seals of the same type. The count code frames all the seals in the counted group by counting the total number of quadlets (triplets) in the counted frame.  Each field in a given seal is unlabeled, but its purpose is determined by its order of appearance in the set of fields for that seal.  The field values appear sequentially in a CESR serialization of that seal. The field ordering is provided in the tables below.
+
+#### Seal Count Codes
+
+|Code| Name | Type | Field Labels | Description |
+|:---:|:---|:---|:---:|:---|
+|`-Q`| DigestSealSingles | SealDigest | `[d]` | Cryptographic digest as seal |
+|`--Q`| BigDigestSealSingles | SealDigest | `[d]` | Cryptographic digest as seal  |
+|`-R`| MerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
+|`--R`| BigMerkleRootSealSingles | SealRoot | `[rd]` | Merkle tree root digest as seal |
+|`-S`| SealSourceCouples | SealTrans | `[s, d]` | Source event issuance/delegation/transaction as seal implied AID |
+|`--S`| BigSealSourceCouples | SealTrans | `[s, d]` | Source event issuance/delegation/transaction as seal implied AID |
+|`-T`| SealSourceTriples | SealEvent | `[i, s, d]` | Source key event as seal |
+|`--T`| BigSealSourceTriples | SealEvent | `[i, s, d]` | Source key event as seal |
+|`-U`| SealSourceLastSingles | SealLast | `[i]` | Source AID last Est Event as seal |
+|`--U`| BigSealSourceLastSingles | SealLast | `[i]` | Source AID last Est Event as seal |
+|`-V`| BackerRegistrarSealCouples | SealBack | `[bi, d]` | Backer AID metadata digest as seal |
+|`--V`| BigBackerRegistrarSealCouples | SealBack | `[bi, d]` | Backer AID metadata digest as seal |
+|`-W`| TypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
+|`--W`| BigTypedDigestSealCouples | SealBack | `[t, d]` | Typed digest as seal |
+
+
 #### Digest seal
 
-The value of this seal's `d` field is an undifferentiated digest of some external data item.  If the data is a SAD, then the value is its SAID. This is the JSON version. There is also a native CESR version.
+The value of this seal's `d` field is an undifferentiated digest of some external data item.  If the data is a SAD, then the value is its SAID. 
 
-```json
-{
-  "d": "Eabcde..."
-}
-```
-
-#### Merkle Tree root digest seal
-
-The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  The JSON version is shown. There is also a native CESR version of the seal.
-
-```json
-{
-  "rd": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
-}
-```
-
-#### Event seal
-
-Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
+The JSON version is shown. There is also a native CESR version.
 
 ::: note 
   Examples in this section are not cryptographically verifiable
 :::
 
+
 ```json
 {
-
-  "i": "Ebietyi8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM.",
-  "s": "3",
-  "d": "Eabcde8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+  "d": "EAU5dUws4ffM9jZjWs0QfXTnhJ1qk2u3IUhBwFVbFnt5"
 }
 ```
 
-#### Latest establishment event seal
+#### Merkle Tree root digest seal
 
-The latest establishment event seal's function is similar to the event seal above except that it does not designate a specific event but merely designates that latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the external KEL. This is useful for endorsing a message.
+The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.  
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
@@ -709,18 +720,65 @@ The JSON version is shown. There is also a native CESR version of the seal.
   Examples in this section are not cryptographically verifiable
 :::
 
+
 ```json
 {
-  "i": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
+  "rd": "EBMFnZjWs0QfXTnht5AU5dU9jJ1qk2u3IUhwFVbws4ff"
+}
+```
+#### Source Event seal
+
+Source event seals bind to an event that implies what AID is associated with the seal from the context in which that seal appears. This provides an implicit approval or endorsement of that event. The associated event might be an issuance, a delegation, or a transaction event. 
+
+The `s` field value is the sequence number of the associated event being sealed. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the associated event. The fields in an Event seal MUST appear in the following order `[ s, d]`.
+
+Source event seals MAY be used for endorsing transaction events that appear in issuance/revocation registries for ACDCs.  They MAY be used as references to delegating events in the KEL of the delegator where the delegator AID is implied by the context in which the seal appears.
+
+The JSON version is shown. There is also a CESR native version of the seal.
+
+
+
+```json
+{
+  "s": "e",
+  "d": "EJFxtbr9WioIkzTfVX4iC6Axxyg8jjKSX0ZrJgoNHiB-"
 }
 ```
 
-#### Registrar backer seal
+#### Key Event seal
+
+Key Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. The fields in an Event seal MUST appear in the following order `[ i, s, d]`.
+
+Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
+
+```json
+{
+
+  "i": "'EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur'",
+  "s": "1",
+  "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"
+}
+```
+
+
+#### Latest establishment event seal
+
+The latest establishment event seal's function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.
+
+The JSON version is shown. There is also a native CESR version of the seal.
+
+```json
+{
+  "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+}
+```
+
+#### Registrar Backer seal
 
 When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is REQUIRED. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer MUST also include a configuration trait (see below) of `RB` for registrar backers. This indicates that the KEL is ledger registrar-backed instead of witness pool-backed.
 
 The `bi` field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose `bi` field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same `bi` value).
-The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field is an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
+The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field in an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
 
 To reiterate, the seal MUST appear in the same establishment event that designates the registrar backer identifier as a backer identifier in the event's backer's list along with the config trait `RB`.
 
@@ -732,12 +790,26 @@ The JSON version is shown. There is also a native CESR version of the seal.
 
 ```json
 {
-  "bi": "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM"
+  "bi": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+  "d": "EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe"
 }
 ```
 
-Attached bare, `bar` message.
+
+#### Typed seal
+
+Typed seals bind some data via a digest of that data to whatever context in which the seal appears. This provides an implicit approval or endorsement of that data. The type field provides a seal type and version so that various types of digests with different semantics and derivations may be used. This allows each type to also be versioned. This provides a generic facility for seals. 
+
+The `t` field value is the versioned type of the seal. The `d` field value is a cryptographic digest of cryptographic strength. While the CESR encoding of the `d` field value provides the cryptographic algorithm used to compute the digest, the `t` field provides other information useful to its derivation. For example, there are various types of Merkle trees. In every case, the root digest is the digest of its connected nodes; the construction of the tree and proofs of inclusion and exclusion, however, may differ based on the type of Merkle tree, such as a Sparse Merkle tree versus a non-sparse tree.
+
+The value of the type `t` field is a CESR encoded primitive in the Text domain (qb64). It has 4 characters for the seal digest type, and 3 Base64 characters for version. The first version character is the major version, and the last two characters are the minor version.  This provides for a total of 64 major versions and 4096 minor versions for each major version. For example, `CAB` represents a major version of `2` and a minor version of `01`. In dotted decimal notation, this would be `2.1`. The 4 character encoded seal type plus the 3 character encoded seal version consume 7 Base64 characters. The CESR primitive code for such a 7-character primitive is `Y`.  
+An example seal type/version field value for seal type `CSMT` version 2.0 is as follows:
+
+`YCSMTCAA`
+
+The fields in a typed MUST appear in the following order `[ t, d]`.
+
+The JSON version is shown. There is also a CESR native version of the seal.
 
 ::: note 
   Examples in this section are not cryptographically verifiable
@@ -745,231 +817,347 @@ Attached bare, `bar` message.
 
 ```json
 {
-  "v": "KERI10JSON00011c_",
-  "t": "bar",
-  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "r": "process/registrar/bitcoin",
-  "a":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "bi", "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-    "sd":
-    {
-       "d": "EaAoTNZH3ULvYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8J",
-       "stuff": "meta data field"
-     }
-  }
+  "t": "YCSMTCAA",
+  "d": "EAU5dUws4ffM9jZjWs0QfXTnhJ1qk2u3IUhBwFVbFnt5"
 }
 ```
 
-
 ### Key event messages
 
-The Key Event Message types MUST be as follows `[icp, rot, ixn, dip, drt]`. 
+A Key Event Message types MUST be one of the following `[icp, rot, ixn, dip, drt]`. 
 
-The convention for field ordering is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator MAY drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
+The convention for field ordering within a message is to put the fields that are common to all Message types first followed by fields that are not common. The common fields are `v`, `t`, and `d` in that order. A Validator MAY drop any provided key event message body that does not have at least one attached signature from the current controlling key state of the AID of the associated KEL.
+
+In the following examples, for each of the Key Event Message types, the serialization kind used is JSON. This is JSON without whitespace, which in Python can be generated as follows:
+
+```python
+import json
+
+raw = json.dumps(sad, separators=(",", ":"), ensure_ascii=False).encode()
+```
+where `sad` is a Python `dict` (field map) that includes a SAID field and therefore is self-addressed data or a self-addressed dict, i.e., a SAD. The serialization kind directly influences the value generated for the SAID (digest) of a given message. 
+
+The Annex titled "Working Examples Setup" provides more detail on how to replicate the working examples. 
 
 #### Inception Event Message Body
 
 The top-level fields of an Inception, `icp`, event message body MUST appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear).  Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Inception Event Example
 
-Inception event example:
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
 
-```json
+```Python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "icp",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k":
+    "v": "KERICAACAAJSONAAKp.",
+    "t": "icp",
+    "d": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "0",
+    "kt": "2",
+    "k":
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        "DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu",
+        "DG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5",
+        "DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV"
     ],
-  "nt": "3", // 3 of 5
-  "n":
+    "nt": "2",
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB",
+        "ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YT",
+        "EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG"
     ],
-  "bt": "2",
-  "b":
+    "bt": "3",
+    "b":
     [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+        "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "BJfueFAYc7N_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt",
+        "BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH",
+        "BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
     ],
-  "c": [],
-  "a": []
+    "c": ["DID"],
+    "a": []
 }
 ```
 
-#### Rotation Event Message Body
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
 
-The top-level fields of a Rotation, `rot` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-Rotation event example:
-
-```json
-{
-  "v": "KERICAAJSONAACd.",
-  "t": "rot",
-  "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i" : "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s":  "1",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "kt": "2", // 2 of 3
-  "k":
-    [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
-    ],
-  "nt": "3", // 3 of 5
-  "n":
-    [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
-    ],
-  "bt": "1",
-  "ba": ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
-  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-  "c": [],
-  "a : []
-}
+```Python
+(b'{"v":"KERICAACAAJSONAAKp.","t":"icp","d":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXj'
+b'BUcMVtvhmB","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"0","kt":'
+b'"2","k":["DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu","DG-YwInLUxzVDD5z8Sq'
+b'ZmS2FppXSB-ZX_f2bJC_ZnsM5","DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV"],"'
+b'nt":"2","n":["ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB","ENY9GYShOjeh7qZ'
+b'UpIipKRHgrWcoR2WkJ7Wgj4wZx1YT","EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG'
+b'"],"bt":"3","b":["BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","BJfueFAYc7N'
+b'_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt","BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V'
+b'22aH","BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"c":["DID"],"a":[]}')
 ```
 
-#### Interaction Event Message Body
-
-The top-level fields of an Interaction, `ixn` event message body MUST appear in the following order: `[ v, t, d, i, s, p, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-```json
-{
-  "v": "KERICAAJSONAACd.",
-  "t": "ixn",
-  "d": "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s": "2",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "a":
-  [
-    {
-      "d": "ELvaU6Z-i0d8JJR2nmwyYAZAoTNZH3UfSVPzhzS6b5CM",
-      "i": "EJJR2nmwyYAfSVPzhzS6b5CMZAoTNZH3ULvaU6Z-i0d8",
-      "s": "1"
-    }
-  ]
-}
+The next key digests in the message body are derived from the following set of next keys:
+```Python
+[
+    "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
+    "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
+    "DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"
+]
 ```
+
+The AID created by this inception event is the value of the `i` field, that is, `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB`. For the purposes of the examples, let this be given the user-friendly alias `ean` as in Ean's AID. Notice that the config trait list for Ean has the config trait `DID` for `Delegate-Is-Delegator` which means that Validators may treat Delegates (Delegatees) of Ean as if they were Ean.
 
 
 #### Delegated Inception Event Message Body
 
 The top-level fields of a Delegated Inception, `dip` event message body MUST appear in the following order: `[ v, t, d, i, s, kt, k, nt, n, bt, b, c, a, di]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Delegated Inception Event Example
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERI10JSON0001ac_",
-  "t": "dip",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k" :
+    "v": "KERICAACAAJSONAAL4.",
+    "t": "dip",
+    "d": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "s": "0",
+    "kt": ["1/2", "1/2", "1/2"],
+    'k':
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        'DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3',
+        'DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv',
+        'DN3JXVEvIjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr'
     ],
-  "nt": "3",  // 3 of 5
-  "n" :
+    "nt": ["1/2", "1/2", "1/2"],
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy8vbVvUmwxcM1e-",
+        "EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM",
+        "EGVvq4Njkki3EZv838rJrYShBtwXY9o8RUrG2w3nbujn"
     ],
-  "bt": "2",
-  "b":
+    "bt": "3",
+    "b":
     [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
+        "BFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ4npNEmIW_gPX",
+        "BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF",
+        "BEzZUvashpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl",
+        "BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6"
     ],
-  "c": [],
-  "a": [],
-  "di": "EJJR2nmwyYAZAoTNZH3ULvaU6Z-i0d8fSVPzhzS6b5CM"
+    "c": [],
+    "a": [],
+    "di": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB"
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAL4.","t":"dip","d":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2'
+b'GRc2SG3aur","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"0","kt":'
+b'["1/2","1/2","1/2"],"k":["DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3","DHy'
+b'JFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv","DN3JXVEvIjTbisPC4maYQWy6eQIRNdJs'
+b'xqGFXYUm_ygr"],"nt":["1/2","1/2","1/2"],"n":["EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy'
+b'8vbVvUmwxcM1e-","EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM","EGVvq4Njkki3'
+b'EZv838rJrYShBtwXY9o8RUrG2w3nbujn"],"bt":"3","b":["BFATArhqG_ktVCRLWt2Knbc7JD'
+b'paPAFJ4npNEmIW_gPX","BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF","BEzZUvas'
+b'hpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl","BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl'
+b'9N4M2g6"],"c":[],"a":[],"di":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB"}')
+```
+The next key digests in the message body are derived from the following set of next keys:
+
+```python
+[
+    "DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR",
+    "DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB",
+    "DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"
+]
+```
+
+The AID created by this inception event is the value of the `i` field, that is, `EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur`. For the purposes of the examples, let this be given the user-friendly alias `fay` as in Fay's AID. Notice that the Delegator AID given by the `di` field value is Ean's AID. To clarify, Ean is the Delegator of Fay the Delegatee. Also, notice that the thresholds for the signing keys and next rotation keys use the syntax of a fractionally weighted threshold instead of a simple numeric threshold.
+
+
+#### Interaction Event Message Body
+
+The top-level fields of an Interaction, `ixn` event message body MUST appear in the following order: `[ v, t, d, i, s, p, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
+
+##### Interaction Event Example
+
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
+{
+    "v": "KERICAACAAJSONAAE8.",
+    "t": "ixn",
+    "d": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "1",
+    "p": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "a":
+    [
+        {
+            "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+            "s": "0",
+            "d": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur"
+        }
+    ]
+}
+```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAE8.","t":"ixn","d":"EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno'
+b'3s9_QIYrXk","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"1","p":"'
+b'EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","a":[{"i":"EHqSsH1Imc2MEcgzEor'
+b'dBUFqJKWTcRyTz2GRc2SG3aur","s":"0","d":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GR'
+b'c2SG3aur"}]}')
+```
+Notice that in this example the Issuer is Ean and uses Ean's AID for the `i` field value. This Interaction event is sealing the delegation of Fay's AID by virtue of a SealEvent dict in the data attribute field list. In the event seal, the `i` field value is Fay's AID. The `s` field value is the hex encoded sequence number of Fay's delegated inception event, and the `d` field value is the SAID of Fay's delegated inception event. The combination of the appearance of this seal in Ean's KEL for an establishment event in the KEL of a delegated AID that designates Ean's AID as the Delegator in that KEL's Inception event provides a cryptographically verifiable two-way binding (sometimes called a two-way peg) between the delegating and delegated events.
 
 
 #### Delegated Rotation Event Message Body
 
-The top-level fields of a Delegated Rotation, `drt` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field.
+The top-level fields of a Delegated Rotation, `drt` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes. Notice that the Delegated Rotation event does not have a Delgator AID, `di` field. It uses the Delegator AID provided by the associated Delegated Inception event's Delegator AID, `di` field. Even though the field set is the same for both Rotation and Delegated Rotation events, the message body type of `drt` signals to Validators that the event must be validated using the rules for delegated events.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Delegated Rotation Event Example
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "drt",
-  "d" : "E0d8JJR2nmwyYAfZAoTNZH3ULvaU6Z-iSVPzhzS6b5CM",
-  "i": "EZAoTNZH3ULvaU6Z-i0d8JJR2nmwyYAfSVPzhzS6b5CM",
-  "s": "1",
-  "p": "EULvaU6JR2nmwyZ-i0d8JZAoTNZH3YAfSVPzhzS6b5CM",
-  "kt": "2", // 2 of 3
-  "k":
+    "v": "KERICAACAAJSONAAKh.",
+    "t": "drt",
+    "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "s": "1",
+    "p": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "kt": ["1/2", "1/2", "1/2"],
+    "k":
     [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
+        "DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR",
+        "DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB",
+        "DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"
     ],
-  "nt": "3", // 3 of 5
-  "n":
+    "nt": ["1/2", "1/2", "1/2"],
+    "n":
     [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
+        "EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW",
+        "EJdqHiijmjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW",
+        "EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGTGqj2"
     ],
-  "bt": "1",
-  "br": ["DH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8TNZJZAo5CM"],
-  "ba":  ["DTNZH3ULvaU6JR2nmwyYAfSVPzhzS6bZ-i0d8JZAo5CM"],
-  "c":[],
-  "a":[]
+    "bt": "3",
+    "br": ["BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF"],
+    "ba": ["BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx"],
+    "c": [],
+    "a": []
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAKh.","t":"drt","d":"ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5'
+b'Zq5KNirISF","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"1","p":"'
+b'EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","kt":["1/2","1/2","1/2"],"k":['
+b'"DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR","DDCDFlbG4dCAX6oIbNffB1mkZqLA'
+b'S_eHnYUUIPH7BeXB","DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1"],"nt":["1/2'
+b'","1/2","1/2"],"n":["EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW","EJdqHiij'
+b'mjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW","EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMs'
+b'KGTGqj2"],"bt":"3","br":["BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF"],"ba'
+b'":["BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx"],"c":[],"a":[]}')
+```
+
+The next key digests in the message body are derived from the following set of next keys:
+```python
+[
+    "DCcN7BGPo6c47EWOTvcIUCpzvetDN5E-7EPMprN6tqVI",
+    "DAaAPS7IpPe9nPrgF6eGkA9hIphUIeZE0zLkGHCS1BBD",
+    "DONoZ4RumKezgod8xoAtRQvmhPRe4LZm8QP-BVEN-MW_"
+]
+```
+
+Notice that in addition to rotating the signing keys, this event also rotates out one of the witnesses and replaces it with a new witness.
+
+#### Rotation Event Message Body
+
+The top-level fields of a Rotation, `rot` event message body MUST appear in the following order: `[ v, t, d, i, s, p, kt, k, nt, n, bt, br, ba, c, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
+
+##### Rotation Event Example
+
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
+{
+    "v": "KERICAACAAJSONAAMf.",
+    "t": "rot",
+    "d": "EJOnAKXGaSyJ_43kit0V806NNeGWS07lfjybB1UcfWsv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "2",
+    "p": "EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk",
+    "kt": "2",
+    "k":
+    [
+        "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
+        "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
+        "DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"
+    ],
+    "nt": "2",
+    "n":
+    [
+        "EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe",
+        "EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_amqGh",
+        "EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg"
+    ],
+    "bt": "4",
+    "br":
+    [
+        "BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
+    ],
+    "ba":
+    [
+        "BO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-VIsCo",
+        "BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW"
+    ],
+    "c": [],
+    "a":
+    [
+        {
+            "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+            "s": "1",
+            "d": "ENl9GdcDY-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"
+        }
+    ]
+}
+```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAMf.","t":"rot","d":"EJOnAKXGaSyJ_43kit0V806NNeGWS07lfj'
+b'ybB1UcfWsv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"2","p":"'
+b'EDeCPBTHAt75Acgi9PfEciHFnc1r2DKAno3s9_QIYrXk","kt":"2","k":["DLv9BlDvjcZWkfP'
+b'fWcYhNK-xQxz89h82_wA184Vxk8dj","DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz'
+b'","DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf"],"nt":"2","n":["EA8_fj-Ezin'
+b'_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe","EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_a'
+b'mqGh","EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg"],"bt":"4","br":["BA4PSa'
+b'tfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"ba":["BO3cCAfQiqndZBBxwNk6RGkyA-OA'
+b'1XbZhBj3s4-VIsCo","BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW"],"c":[],"a"'
+b':[{"i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","s":"1","d":"ENl9GdcDY'
+b'-4hlg5GtVwOg2E9X7JHw-7Dr5Zq5KNirISF"}]}')
+
+```
+
+The next key digests in the message body are derived from the following set of next keys:
+
+```python
+[
+    "DHODGNuxeW2JTKn3S7keooAjVw582puHoK_zDflPflZg",
+    "DImP4vghHKJIgzBxt1HrTLrNLOMy07_gFV0_IekdzAQh",
+    "DNlPrQ9T7G71BDgRSpB0coMFANpw_QPVEUosPep1JC79"
+]
+```
+
+Notice that in this example, the Issuer is Ean and uses Ean's AID for the `i` field value. This Rotation event is sealing the delegation of Fay's Rotation event by virtue of a SealEvent dict in the data attribute field list. In the event seal, the `i` field value is Fay's AID. The `s` field value is the hex encoded sequence number of Fay's delegated rotation event at hex number `1`, and the `d` field value is the SAID of Fay's delegated rotation event. The combination of the appearance of this seal in Ean's KEL for an establishment event in the KEL of a delegated AID that designates Ean's AID as the Delegator in that KEL's Inception event provides a cryptographically verifiable two-way binding (sometimes called a two-way peg) between the delegating and delegated events.
 
 
 ### Receipt Messages
@@ -986,21 +1174,28 @@ The Identifier AID, `i` field value is the Controller AID of the KEL for the key
 
 The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the key event being receipted.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Receipt example:
 
-Receipt example:
+The message body is provided as a Python dict. This dict is then serialized. The serialization kind is JSON. Note that unlike the other message bodies a reciept does not have a field that is the SAID of its serialization. A Receipt message body merely holds a reference to the SAID of some Key Event Message body. 
 
-```json
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "rct",
-  "d": "DZ-i0d8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "i": "AaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-  "s": "1"
+    "v": "KERICAACAAJSONAACT.",
+    "t": "rct",
+    "d": "EJOnAKXGaSyJ_43kit0V806NNeGWS07lfjybB1UcfWsv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "s": "2"
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAACT.","t":"rct","d":"EJOnAKXGaSyJ_43kit0V806NNeGWS07lfj'
+b'ybB1UcfWsv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"2"}')
+```
+
+Notice that this is a receipt for Ean's Rotation Event message above.
 
 ### Routed Messages
 
@@ -1100,176 +1295,236 @@ The Attribute, `a` field value is a field map (block). Its fields provide the at
 
 The top-level fields of a Query, `qry` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Example Query Message
+##### Example Query Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "qry",
-  "d" : "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/logs",
-  "rr": "/log/processor",
-  "q":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "dt": "2020-08-01T12:20:05.123456+00:00",
-  }
+    "v": "KERICAACAAJSONAAEe.",
+    "t": "qry",
+    "d": "EEiUK4cVgcyA1Dk6g2jFzqc5JerkaSnJi3IosutVCyYO",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "dt": "2025-08-21T17:50:00.000000+00:00",
+    "r": "/oobi",
+    "rr": "/oobi/process",
+    "q":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAEe.","t":"qry","d":"EEiUK4cVgcyA1Dk6g2jFzqc5JerkaSnJi3'
+b'IosutVCyYO","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","dt":"2025-08'
+b'-21T17:50:00.000000+00:00","r":"/oobi","rr":"/oobi/process","q":{"i":"EPR7FW'
+b'sN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness"}}')
+```
+
+The issuer/sender of this message is Fay because Fay's AID appears in the top-level `i` field. The query could be to fetch a witness OOBI for Ean. This is determined by the route and the appearance of Ean's AID in the `i` field of the query `q` block and the role being "witness".
 
 #### Reply Message Body
 
 The top-level fields of a Reply, `rpy` message body MUST appear in the following order: `[ v, t, d, dt, r, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Reply message example:
+##### Example Reply Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t": "rpy",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r":  "/logs/processor",
-  "a" :
-  {
-    "d":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "name": "John Jones",
-    "role": "Founder",
-  }
+    "v": "KERICAACAAJSONAAFR.",
+    "t": "rpy",
+    "d": "EPdgmUkvx5o_KRg3elBqj_vSZOFgWI9hCVWO-FfGZz8U",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/process",
+    "a":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "url": "https://example.com/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAFR.","t":"rpy","d":"EPdgmUkvx5o_KRg3elBqj_vSZOFgWI9hCV'
+b'WO-FfGZz8U","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/process","a":{"i":"EPR7FWsN3tOM8PqfMap'
+b'2FRfF4MFQ4v3ZXjBUcMVtvhmB","url":"https://example.com/witness/BGKV6v93ue5L5w'
+b'sgk75t6j8TcdgABMN9x-eIyPi96J3B"}}')
+```
+
+Ean is the issuer/sender of this reply whose data attribute block includes the url of a service endpoint (aka url OOBI) for one of Ean's witnesses.
 
 #### Prod Message Body
 
-The top-level fields of a Prod, `pro` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
+The top-level fields of a Prod, `pro` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro`, and the identically structured Query, `qry`, messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages, is unconstrained.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Example Prod Message
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
 
-Prod message example:
-
-```json
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "pro",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/sealed/data",
-  "rr": "/process/sealed/data",
-  "q":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "ri": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "dd": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"
-  }
-}
+    "v": "KERICAACAAJSONAAEp.",
+    "t": "pro",
+    "d": "EHNqhJXgUdYHFzNiuO7Ue06QWRnOMjhTrVt_QGOfZjH_",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "dt": "2025-08-21T17:50:00.000000+00:00",
+    "r": "/confidential",
+    "rr": "/confidential/process",
+    "q":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "name": True
+    }
+}  
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAEp.","t":"pro","d":"EHNqhJXgUdYHFzNiuO7Ue06QWRnOMjhTrV'
+b't_QGOfZjH_","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","dt":"2025-08'
+b'-21T17:50:00.000000+00:00","r":"/confidential","rr":"/confidential/process",'
+b'"q":{"i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","name":true}}')
+```
+
+In this example, Fay is prodding Ean for his name.
+
 
 #### Bare Message Body
 
 The top-level fields of a Reply, `bar` message body MUST appear in the following order: `[ v, t, d, dt, r, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Bare message example:
+##### Example Bare Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "bre",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/process/sealed/data",
-  "a":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "dt": "2020-08-22T17:50:12.988921+00:00",
-    "name": "John Jones",
-    "role": "Founder",
-  }
+    "v": "KERICAACAAJSONAAEV.",
+    "t": "bar",
+    "d": "EMSlSHIe04CuAqhz55nAnBpE_0T65Sqs2fmaPpsNIbnn",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-22T17:52:00.000000+00:00",
+    "r": "/confidential/process",
+    "a":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "name": "Ean"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAEV.","t":"bar","d":"EMSlSHIe04CuAqhz55nAnBpE_0T65Sqs2f'
+b'maPpsNIbnn","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-22T17:52:00.000000+00:00","r":"/confidential/process","a":{"i":"EPR7FWsN3tO'
+b'M8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","name":"Ean"}}')
+```
+
+This message has Ean exposing his name.
+
 
 #### Exchange Transaction Inception Message Body
 
 The top-level fields of an Exchange Transaction Incept, `xip` message body MUST appear in the following order: `[ v, t, d, u, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Exchange transaction inception message example:
+##### Example Exchange Transaction Inception Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "xip",
-  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "u": '0AAwMTIzNDU2Nzg5YWJjZGVm',
-  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
-  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
-  "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo/out",
-  "q": {},
-  "a": 
-  {
-    "msg": "test echo"
-  }
-}
+    "v": "KERICAACAAJSONAAFn.",
+    "t": "xip",
+    "d": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "u": "0ABrZXJpc3BlY3dvcmtyYXcw",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "ri": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-30T13:30:10.123456+00:00",
+    "r": "/offer",
+    "q":
+    {
+        "timing": "immediate"
+    },
+    "a":
+    {
+        "action": "sell",
+        "item": "Rembrant",
+        "price": 300000.0
+    }
+}  
 ```
 
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAFn.","t":"xip","d":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0mA'
+b'xxUm67gWOU","u":"0ABrZXJpc3BlY3dvcmtyYXcw","i":"EHqSsH1Imc2MEcgzEordBUFqJKWT'
+b'cRyTz2GRc2SG3aur","ri":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"'
+b'2020-08-30T13:30:10.123456+00:00","r":"/offer","q":{"timing":"immediate"},"a'
+b'":{"action":"sell","item":"Rembrant","price":300000.0}}')
+```
+
+This message is an offer (ask) from Fay (sender) to sell a painting to Ean (receiver). 
 
 #### Exchange Message Body
 
 The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, ri, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Exchange message example:
+##### Example Exchange Transaction Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "exn",
-  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
-  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
-  "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
-  "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo/back",
-  "q": {},
-  "a": 
-  {
-    "msg": "test echo"
-  }
+    "v": "KERICAACAAJSONAAGt.",
+    "t": "exn",
+    "d": "EEIp1e5v4L6rt7cp1nRsn4mN6bJVUDyIQEATIzxR8UnE",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "ri": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "x": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "p": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "dt": "2020-08-30T13:42:11.123456+00:00",
+    "r": "/agree",
+    "q":
+    {
+        "timing": "immediate"
+    },
+    "a":
+    {
+        "action": "buy",
+        "item": "Rembrant",
+        "price": 300000.0
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAGt.","t":"exn","d":"EEIp1e5v4L6rt7cp1nRsn4mN6bJVUDyIQE'
+b'ATIzxR8UnE","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","ri":"EHqSsH1'
+b'Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","x":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0'
+b'mAxxUm67gWOU","p":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU","dt":"2020-'
+b'08-30T13:42:11.123456+00:00","r":"/agree","q":{"timing":"immediate"},"a":{"a'
+b'ction":"buy","item":"Rembrant","price":300000.0}}')
+```
+
+This message is an agreement (bid) from Ean (sender) to buy the painting from Fay (receiver). Notice that the `x` and `p` field values bind this message to the `xip` message from Fay.
 
 ### Signing and sealing KERI data structures
 
@@ -1285,7 +1540,7 @@ Controller-indexed signatures index into either or both the signing key list fro
 
 Witness-indexed signatures index into the effective witness list as established by the latest Establishment event (interaction or rotation). To clarify, witness-indexed signatures attached to any type of key event (inception, rotation, interaction, delegated inception, delegated rotation) need only one index into the current list of witnesses that is in effect as of the latest establishment event, which MAY or MAY NOT be the event to which the witness signature is attached. Witnesses MUST use only nontransferable identifiers, which include the controlling public key. Consequently, the public key needed for witness signature verification can be extracted from the witness identifier given by the effective witness list.
 
-CESR codes for indexed signatures support up to two indices so that, at most, one copy of an indexed signature needs to be attached. The first index is into the signing list when it's controller-indexed or into the witness list when it is witness-indexed. The second index is into the prior next key digest list when it is controller-indexed.  The CESR group code used to attach the indexed signature MAY vary depending on the type of event, key-event or not, and type of key event,
+CESR codes for indexed signatures support up to two indices per code so that, at most, one encoded instance of an indexed signature needs to be attached. The first index in a given code provides an offset into the signing list in the message to which the indexed signature is attached. The signing list may be the signing key list when it is controller-indexed or the witness AID list when it is witness-indexed. The second index in a given code, when present, is always controller-indexed and is an offset into the prior next key digest list.  The CESR group code used to attach the indexed signature MAY vary depending on the type of key event or other type of message.
 
 Recall that a prior next key digest MUST be exposed as a public key in the succeeding rotation event signing key list when used to sign. Therefore, when the second index is present, it is used to look up the public key digest from the prior next key digest list, then the first index is used to look up the exposed public key from the signing key list, then the digest is verified against the exposed public key, and finally, the doubly indexed signature is verified using the exposed public key.  Verification of the digest means digesting the exposed public key using the same digest type as the prior next key digest and comparing the digests.
 
@@ -1321,7 +1576,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[1]]
+Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attaching seal source references to receipts. [[1]]
 
 ## KERI key management
 
@@ -1411,53 +1666,10 @@ Upon emittance of the Inception event, the current (initial) set of keypairs bec
 
 There MUST be only one Establishment event that is an Inception event. All subsequent Establishment events MUST be Rotation events.
 
-Inception event message example:
-
-When the AID in the `i` field is SAID, the new Inception event has two qualified digest fields. In this case, both the `d` and `i` fields MUST have the same value. This means the digest suite's derivation code, used for the `i` field MUST be the same for the `d` field.
+When the AID in the `i` field is a SAID, the new Inception event has two qualified digest fields. In this case, both the `d` and `i` fields MUST have the same value. This means the digest suite's derivation code, used for the `i` field MUST be the same for the `d` field.
 The derivation of the `d` and `i` fields is special. Both the `d` and `i` fields are replaced with dummy `#` characters of the length of the digest to be used. The digest of the Inception event is then computed and both the `d` and `i` fields are replaced with the qualified digest value. Validation of an Inception event requires examining the `i` field's derivation code and if it is a digest-type then the `d` field MUST be identical otherwise the Inception event is invalid.
 
-When the AID is not self-addressing, i.e.., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which is the standard SAID algorithm.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-Inception event message body
-
-```json
-{
-  "v": "KERI10JSON0001ac_",
-  "t": "icp",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k":
-    [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
-    ],
-  "nt": "3",  // 3 of 5
-  "n":
-    [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
-    ],
-  "bt": "2",
-  "b":
-    [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
-    ],
-  "c": [],
-  "a": []
-}
-```
+When the AID is not self-addressing, i.e., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which is the standard SAID algorithm.
 
 ### Rotation using pre-rotation
 
@@ -1930,6 +2142,177 @@ Alternatively, in the case of a complete and total dead exploit, the validator a
 
 Finally, however unlikely, subsequent improvements in cryptographic attack mechanisms such as quantum computing may enable, at some future time, complete compromise of all exposed key pairs. One solution would be for the market to operate a trusted set of jurors that archive KERLs just in case of some such future total compromise. These trusted jurors may secure their archives with post-quantum cryptography. Thus, any post-quantum attack may be detectable merely by appeal to one or more of these archives.
 
+### Working Examples Setup
+
+The code to generate the working examples in this specification is provided via unit tests found in tests/spec/keri in the keripy library. 
+
+A brief explanation of the setup code is provided here to help implementers who wish to reproduce the examples from scratch.
+
+#### AIDs
+
+The examples require an Issuer AID. This AID is created in accordance with the KERI protocol. This requires creating digital signing key-pairs whose public keys are used in an inception event to create the AID. The keripy library has a utility class Salter (found in keri.core.signing.Salter) that facilitates the creation of signing key pairs. For the examples, any needed signing key pairs can be recreated using a known non-random salt. The known non-random salt is merely for reproducibility. In a real-world application, the salt should be a high entropy secret. The salt used for the examples is the python byte string as follows:
+
+```python
+b'kerispecworkexam'
+```
+
+Using a Salter instance, a set of key pairs may be created. These keypairs are instantiated as Signer class instances. The Signer class can be found in keri.core.signing.Signer. The creation code is as follows:
+
+```python
+salt = b'acdcspecworkexam'
+salter = Salter(raw=salt)
+signers = salter.signers(count=8, transferable=True, temp=True)
+```
+
+The `Salter.signers()` method creates a count number of Signer instances and returns them in a list. Each Signer holds a key pair. The private key seed for each key pair is created using Argon2 to stretch a deterministic path that is based on the salt and a path that is the hex representation of the count offset for each Signer. For the zeroth signer this is as follows:
+
+```python
+import pysodium
+seed = pysodium.crypto_pwhash(outlen=32, passwd='0', salt=b'acdcspecworkexam', opslimit=1,
+                                memlimit=8192, alg=pysodium.crypto_pwhash_ALG_ARGON2ID13)
+```
+
+The seed becomes the private signing key for the keypair. The public verification key is generated using Ed25519 as follows:
+
+```python
+verkey, sigkey = pysodium.crypto_sign_seed_keypair(seed)
+```
+
+The verkey is used as the raw input to a Verfer (verifier) Class instance (found in keri.core.coring.Verfer) as follows:
+
+```python
+verfer = Verfer(raw=verkey, code=MtrDex.Ed25519)
+```
+
+From this, the initial signing public verification key in CESR encoded qualified Base64 `Text` domain representation is as follows:
+
+```python
+'DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'
+```
+
+In order to create the Issuer AID, two other signing key pairs are needed. One other is the "next" rotating key pair. The signer at index 1 is used for this. From this, the next rotating public verification key in CESR encoded qualified Base64 `Text` domain representation is as follows: 
+
+```python
+'DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM'
+```
+
+Another one is a witness key pair. Witness AIDs are usually non-transferable and use a non-transferable CESR encoding. This is produced by setting the transferable parameter to `False`. The associated key pairs may be generated as follows:
+
+```python
+walt = b'acdcspecworkwits'
+walter = Salter(raw=walt)
+wigners = walter.signers(count=4, transferable=False, temp=True)
+```
+The signer at index 0  (wigners[0]) is used for this. From this, the witness AID, (which is also its signing public verification key) in CESR encoded qualified Base64 `Text` domain representation is as follows: 
+
+```python
+'BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8'
+```
+
+From these three cryptographic primitives, we can create a Python dictionary with all the data needed to generate the inception event for the Issuer as follows:
+
+```python
+ sad = \
+ {
+        'v': 'KERICAACAAJSONAAFb.',
+        't': 'icp',
+        'd': 'ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz',
+        'i': 'ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz',
+        's': '0',
+        'kt': '1',
+        'k': ['DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'],
+        'nt': '1',
+        'n': ['DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM'],
+        'bt': '1',
+        'b': ['BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8'],
+        'c': [],
+        'a': []
+}
+```
+The JSON examples use a JSON serialization of the inception event to generate the Issuer AID. In Python, this is performed as follows:
+
+```python
+import json
+
+raw = json.dumps(sad, separators=(",", ":"), ensure_ascii=False).encode()
+```
+
+This results in the following raw JSON for the inception event.
+
+```python
+(b'{"v":"KERICAACAAJSONAAFb.","t":"icp","d":"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtz'
+b'Dn1meBVLAz","i":"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz","s":"0","kt":'
+b'"1","k":["DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_"],"nt":"1","n":["DLe4'
+b'uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM"],"bt":"1","b":["BKRaC6UsijUY1FRjEx'
+b'oAMc8WOHBDIfIKYnOlxWH8eOe8"],"c":[],"a":[]}')
+```
+
+The calculation of the SAIDed fields in the inception event requires knowledge of the SAID protocol for generating SAIDs on the serialization of the associated field map.  A utility function for generating an inception event may be found in keri.core.eventing.incept. The raw above was generated as follows:
+
+```python
+from collections import namedtuple
+
+issuerSigner = signers[0]
+issuerVerKey = issuerSigner.verfer.qb64  # issuer's public verification key
+assert issuerVerKey == 'DA8-J0EW88RMYqtUHQDqT4q2YH2iBFlW8HobHKV74yi_'
+
+issuerRotSigner = signers[1]
+issuerRotVerKey = issuerRotSigner.verfer.qb64  # issuer's public verification key
+assert issuerRotVerKey == 'DLe4uewytqfqa4NB4AntNKBZ61I0TYcgMz-FSz1V9qeM' # use in example
+
+issuerWitSigner = wigners[0]
+issuerWitVerKey = issuerWitSigner.verfer.qb64  # issuer's public verification key
+assert issuerWitVerKey == 'BKRaC6UsijUY1FRjExoAMc8WOHBDIfIKYnOlxWH8eOe8' # use in example
+
+Versionage = namedtuple("Versionage", "major minor")
+Vrsn_2_0 = Versionage(major=2, minor=0)  # KERI Protocol Version Specific
+
+assert MtrDex.Blake3_256 == 'E'
+
+keys = [issuerVerKey]  # initial signing keys
+nkeys = [issuerRotVerKey]  # next (rotation) keys
+wits = [issuerWitVerKey]  # witness aids (same as public verkey)
+serder = incept(keys, code='E', ndigs=nkeys, wits=wits, version=Vrsn_2_0, kind='JSON')
+```
+
+The resultant Issuer AID, namely:
+```python
+"ECmiMVHTfZIjhA_rovnfx73T3G_FJzIQtzDn1meBVLAz"
+```
+It can be used in an example. This AID may be given the user friendly alias `amy` has in Amy's AID. Likewise, the same process can be followed to created other AID's used in examples.
+
+#### UUIDs
+
+Many of the examples include UUID, `u` fields with salty nonce values. For ease of reproducibility, deterministic UUIDs are used. These may be generated with the following Python code snippet:
+
+```python
+from keri.core import Noncer
+
+raws = [b'kerispecworkraw' + b'%0x'%(i, ) for i in range(16)]
+uuids = [Noncer(raw=raw).qb64 for raw in raws]
+assert uuids == \
+[
+    '0ABrZXJpc3BlY3dvcmtyYXcw',
+    '0ABrZXJpc3BlY3dvcmtyYXcx',
+    '0ABrZXJpc3BlY3dvcmtyYXcy',
+    '0ABrZXJpc3BlY3dvcmtyYXcz',
+    '0ABrZXJpc3BlY3dvcmtyYXc0',
+    '0ABrZXJpc3BlY3dvcmtyYXc1',
+    '0ABrZXJpc3BlY3dvcmtyYXc2',
+    '0ABrZXJpc3BlY3dvcmtyYXc3',
+    '0ABrZXJpc3BlY3dvcmtyYXc4',
+    '0ABrZXJpc3BlY3dvcmtyYXc5',
+    '0ABrZXJpc3BlY3dvcmtyYXdh',
+    '0ABrZXJpc3BlY3dvcmtyYXdi',
+    '0ABrZXJpc3BlY3dvcmtyYXdj',
+    '0ABrZXJpc3BlY3dvcmtyYXdk',
+    '0ABrZXJpc3BlY3dvcmtyYXdl',
+    '0ABrZXJpc3BlY3dvcmtyYXdm'
+]
+```
+
+The Noncer class may be found in keri.core.coring.Noncer. Essentially, a Noncer instance can encode a byte string as a salty nonce in CESR format.
+
 ### Native CESR Encodings of KERI Messages
 
 A native CESR encoding of the field map of a KERI message body is represented using pure CESR instead of JSON, CBOR, or MGPK. Because the top-level fields in every KERI message body are fixed and each value in CESR is self-describing and self-framing, there is no need to provide labels at the top level, only the field values in a fixed order. In the following tables, for comparison and clarity, the first column provides the equivalent field label as would be used in JSON, CBOR, or MGPK; the second column provides the field value format; and the third column a short description. For field values that are primitives, an example primitive may be provided as the value. To restate, no top-level labels appear in an actual serialized native CESR message body, just the concatenated field values either as primitives or groups of primitives with the appropriate prepended CESR group codes. The order of appearance of fields as values is strict.
@@ -1941,6 +2324,22 @@ Similarly, lists may appear as values of top-level fields. For example, the curr
 #### CESR Field Encodings
 
 Some field values in KERI messages that include non-Base64 characters have custom CESR  Text domain encodings (Base64). These encodings are more compact than the case given the direct conversion of a binary string with non-Base64 characters into Base64.
+
+##### Protocol and Genus Version
+
+In a CESR-encoded message, the count code for the message includes the message size. This means that the version field in the messages does not need to include the size. Likewise the serialization kind of CESR is determined by the first tritet of the first character of a given message, so the version does not need to include the serialization kind. The only information that MUST be encoded in a native CESR message's version field is the protocol, the protocol version and the genus version of the associated code table. This assumes that for each protocol the genus is fixed so that only the genus version is required not the genus itself given the protocol.
+
+The protocol type uses four characters and MUST be `KERI` for a normative KERI protocol. 
+
+The protocol version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of decimal `1`. In dotted notation, this would be `0.1`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+
+The CESR genus version uses three Base64 characters. The first one provides the major version. The second two provide the minor version. For example, `AAB` represents a major version of `0` and a minor version of decimal `1`. In dotted notation, this would be `0.1`.  This provides for a total of 64 major versions and 4096 minor versions for each major version. 
+
+The encoded protocol type, protocol version, and genus version consume 10 Base64 characters. The CESR primitive code for such a 10-character primitive is `0O`.  
+An example KERI protocol type/protocolversion/genusversion field value for protocol version 2.0 and genus version 2.0  is as follows:
+
+`0OKERICAACAA`
+
 
 ##### DateTime
 
@@ -1999,199 +2398,278 @@ Converting the slashes to dashes gives:
 
 In the case where a route may be converted to Base64 characters by merely subsituting dashes, `-` for slashes, `/`  then a fully qualified CESR Text domain representation may be created by prepending the appropriate CESR code for variable length Base64 strings.  This encodes the route compactly into Base64 without doing a direct Base64 conversion of a binary string. Otherwise, the route is treated as a variable-length binary string and is converted to Base64. In that case, the appropriate CESR code for variable-length binary strings is prepended to the converted route to provide the Text Domain encoding.
 
-One caveat for Base64 encoded variable lengths strings is that the string MUST not start with the `A` character. This is because of a pre-padding ambiguity for variable length Base64 strings. The convention to prevent this is always starting the route with a slash, `/`, which is converted to a dash, `-`. Otherwise, the route MUST be treated as a variable-length binary string, which MUST be converted to Base64 for encoding in the Text domain.
-
-
 #### Key Event Messages
 These have the packet types `icp`, `rot`, `ixn`, `dip`, `drt`
+
+These examples are identical to the examples provided in the body of the specification above except that the serialization kind is CESR instead of JSON. This changes any fields that are SAIDive, i.e. are derived from digest of the message body using the SAID protocol. All the keys and UUIDs are the same as the examples above. The other field value that changes is the version string that appears in the Python dict expression of a message body. This is because the size and serialization kind both appear in the version string and both of these are affected by the serialization kind.
 
 ##### Inception `icp`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `Y&&&&###` e.g., `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `X&&&` e.g., `icp` | Packet Type |
-| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `M&&&` e.g., `MAAA` | Sequence Number of Event |
-| `kt` | `M&&&` e.g., `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0  |
-| `nt` | `M&&&` e.g., `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
-| `bt` | `M&&&` e.g., `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `b` | `-I##` or `-I#####` | Count code for Backer AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer 0 |
-| 1th element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1 |
-| 2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer 2 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_&` e.g., `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of Seal 1 (event seal triple) pre+snu+dig |
+Message body as a Python dict.
 
-##### Rotation `rot`
+```python
+{
+        'v': 'KERICAACAACESRAAJM.',
+        't': 'icp',
+        'd': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        's': '0',
+        'kt': '2',
+        'k':
+        [
+            'DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu',
+            'DG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5',
+            'DGIAk2jkC3xuLIe-DI9rcA0naevtZiKuU9wz91L_qBAV'
+        ],
+        'nt': '2',
+        'n':
+        [
+            'ELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB',
+            'ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YT',
+            'EGyJ7y3TlewCW97dgBN-4pckhCqsni-zHNZ_G8zVerPG'
+        ],
+        'bt': '3',
+        'b':
+        [
+            'BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B',
+            'BJfueFAYc7N_V-zmDEn2SPCoVFx3H20alWsNZKgsS1vt',
+            'BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH',
+            'BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB'
+        ],
+        'c': ['DID'],
+        'a': []
+    }
+```
 
-Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+CESR serialization as a Python byte string.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rot` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAB` | Sequence Number of Event |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer cut 0 |
-| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List |
-| 0th element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label  | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl` | Value of Seal 1 (event seal triple) pre+snu+dig |
-
-##### Interaction `ixn`
-
-Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
-
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `ixn` | Packet Type |
-| `d` | `EGgbiglDXNE0GC4NQq-hiB5xhHKXBxkiojgBabiu_JCk` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAC` | Sequence Number of Event |
-| `p` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Prior event SAID |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####`  | Count code for field map of Seal 0 |
-| 0.0th label| `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-|  0.2th label  | `0J_d` |  Label of field 2 of Seal 0 `d`   |
-|0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl` | Value of  Seal 1 (event seal triple) pre+snu+dig |
-
+```python
+(b'-FCS0OKERICAACAAXicpEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAAAMAAC-JAhDBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1H'
+b'xpDx95bFvufuDG-YwInLUxzVDD5z8SqZmS2FppXSB-ZX_f2bJC_ZnsM5DGIAk2jkC3xuLIe-DI9r'
+b'cA0naevtZiKuU9wz91L_qBAVMAAC-JAhELeFYMmuJb0hevKjhv97joA5bTfuA8E697cMzi8eoaZB'
+b'ENY9GYShOjeh7qZUpIipKRHgrWcoR2WkJ7Wgj4wZx1YTEGyJ7y3TlewCW97dgBN-4pckhCqsni-z'
+b'HNZ_G8zVerPGMAAD-JAsBGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3BBJfueFAYc7N_'
+b'V-zmDEn2SPCoVFx3H20alWsNZKgsS1vtBAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH'
+b'BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB-JABXDID-JAA')
+```
 
 ##### Delegated Inception `dip`
 
 Field order by label:  `v`, `t`, `d`, `i` , `s`, `kt`, `k`, `nt`, `n`, `bt`, `b`, `c`, `a`, `di`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native  op-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `dip` | Packet Type |
-| `d` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAA` | Sequence Number of Event |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DN6WBhWqp6wC08no2iWhgFYTaUgrasnqz6llSvWQTWZN` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EDDOarj1lzr8pqG5a-SSnM2cc_3JgstRRjmzrrA_Bibg` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `b` | `-I##` or `-I#####` | Count code for Backer AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer 0 |
-| 1th element | `BH8KSsFvoaOSgEbx-XCuDiSPCTq-qBBFDHkhf1_kmysr` | AID of backer 1 |
-| 2th element | `BBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCuDiSPCTq-q` | AID of backer 2 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
-| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAKM.',
+    't': 'dip',
+    'd': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    's': '0',
+    'kt': ['1/2', '1/2', '1/2'],
+    'k':
+    [
+        'DEE-HCMSwqMDkEBzlmUNmVBAGIinGu7wZ5_hfY6bSMz3',
+        'DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkv',
+        'DN3JXVEvIjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr'
+    ],
+    'nt': ['1/2', '1/2', '1/2'],
+    'n':
+    [
+        'EFzr1nnfHpT-nkSfd6vQvbPC-Kq6zy8vbVvUmwxcM1e-',
+        'EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJM',
+        'EGVvq4Njkki3EZv838rJrYShBtwXY9o8RUrG2w3nbujn'
+    ],
+    'bt': '3',
+    'b':
+    [
+        'BFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ4npNEmIW_gPX',
+        'BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF',
+        'BEzZUvashpXh_nfPoR6aiqvag0a8E_tbhpeJIgHhOXzl',
+        'BCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6'
+    ],
+    'c': [],
+    'a': [],
+    'di': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs'
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FCi0OKERICAACAAXdipEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3EF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAAA4AADA1s2c1s2c1s2-JAhDEE-HCMSwqMDkEBzlmUN'
+b'mVBAGIinGu7wZ5_hfY6bSMz3DHyJFyFzuD5vvUWv5jy6nwWI3wZmSnoePu29tBR-jXkvDN3JXVEv'
+b'IjTbisPC4maYQWy6eQIRNdJsxqGFXYUm_ygr4AADA1s2c1s2c1s2-JAhEFzr1nnfHpT-nkSfd6vQ'
+b'vbPC-Kq6zy8vbVvUmwxcM1e-EIXFsLk9kmESy0ZsoHMUaDyK_g3DVRiJQYiAlyeCeYJMEGVvq4Nj'
+b'kki3EZv838rJrYShBtwXY9o8RUrG2w3nbujnMAAD-JAsBFATArhqG_ktVCRLWt2Knbc7JDpaPAFJ'
+b'4npNEmIW_gPXBOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsFBEzZUvashpXh_nfPoR6a'
+b'iqvag0a8E_tbhpeJIgHhOXzlBCE6biH4a-Zg8LI3cMSx7JRoOvb8rRD62xbyl9N4M2g6-JAA-JAA'
+b'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs')
+```
+
+##### Interaction `ixn`
+
+Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `a`.
+
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAEA.',
+    't': 'ixn',
+    'd': 'EDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKD',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '1',
+    'p': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'a':
+    [
+        {
+            'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+            's': '0',
+            'd': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3'
+        }
+    ]
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FA_0OKERICAACAAXixnEDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKDEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAABEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7f'
+b'rTYs-JAY-TAXEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAAAEF-jViYoBr8p3vkp'
+b'ZuHlkvxAAY5GZkmQ0QaaHfiE0kg3')
+```
 
 
 ##### Delegated Rotation `drt`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`, `di`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `drt` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL |
-| `s` | `MAAB` | Sequence Number of Event |
-| `p` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Prior event SAID |
-| `kt` | `MAAB` | Signing Threshold, either number or fractional weight qb64 variable length string (1) |
-| `k` | `-I##` or `-I#####` | Count code for Signing Key List |
-| 0th element | `DC08no2iWhgFYTaUgrasnqz6llSvWQTWZNN6WBhWqp6w` | Public Key of signer 0 |
-| `nt` | `MAAB` | Rotation Threshold, either number or fractional weight qb64 variable length string (1) |
-| `n` | `-I##` or `-I#####` | Count code for Rotation Key Digest List |
-| 0th element | `EM2cc_3JgstRRjmzrrA_BibgDDOarj1lzr8pqG5a-SSn` | Digest of Public Key of rotator 0 |
-| `bt` | `MAAC` | Rotation Threshold, either number or fractional weight qb64 variable length string (2) |
-| `br` | `-I##` or `-I#####` | Count code for Backer Remove (cuts) AID List |
-| 0th element | `BCuDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-X` | AID of backer cut 0 |
-| `ba` | `-I##` or `-I#####` | Count code for Backer Add (adds) AID List |
-| 0th element | `BDiSPCTq-qBBFDHkhf1_kmysrH8KSsFvoaOSgEbx-XCu` | AID of backer add 0 |
-| `c` | `-I##` or `-I#####` | Count code for Config Trait List |
-| 0th element | `XDND` | Config trait 0 `DND` |
-| `a` | `-I##` or `-I#####` | Count code for Anchored Seal List |
-| 0th element | `-H##` or `-H#####` | Count code for field map of Seal 0 |
-| 0.0th label | `0J_i` | Label of field 0 of Seal 0 `i`   |
-| 0.0th value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field 0 of Seal 0 AID |
-| 0.1th label | `0J_s` | Label of field 1 of Seal 0 `s`   |
-| 0.1th value | `MAAC` | Value of field 1 of Seal 0 Sequence Number |
-| 0.2th label | `0J_d` | Label of field 2 of Seal 0 `d`   |
-| 0.2th value | `EiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5C4NQq-h` | Value of field 2 of Seal 0 SAID |
-| 1th element | `-R##` or `-R#####` | Count code for value of Seal 1 (event seal triple) |
-| 1.1th value | `EHKXBxkiojgBaC4NQq-hiGCkE0GbiglDXNB5gxhbiu_JMAADEBxkiojgiGgxhHKXBDXNB5C4NQq-habiu_JCkE0Gbigl`  | Value of of Seal 1 (event seal triple) pre+snu+dig |
-| `di` | `EFXNB5C4NQq-hiGgxhHKXBxkiojgabiu_JCkE0GbiglD` | AID of delegating controller |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAI4.',
+    't': 'drt',
+    'd': 'EFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    's': '1',
+    'p': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'kt': ['1/2', '1/2', '1/2'],
+    'k':
+    [
+        'DB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctR',
+        'DDCDFlbG4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXB',
+        'DP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z0zs1'
+    ],
+    'nt': ['1/2', '1/2', '1/2'],
+    'n':
+    [
+        'EKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXW',
+        'EJdqHiijmjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzW',
+        'EDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGTGqj2'
+    ],
+    'bt': '3',
+    'br': ['BOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF'],
+    'ba': ['BOMrYd5izsqbqaq1WZYa3nbEeTYLPwccfqfhirybKKqx'],
+    'c': [],
+    'a': []
+}
+```
 
+CESR serialization as a Python byte string.
+```python
+(b'-FCN0OKERICAACAAXdrtEFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwvEF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAABEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE'
+b'0kg34AADA1s2c1s2c1s2-JAhDB1S8zOh4_qdFhxVHn7BDZb1ErWbBFvcVJX1suKSBctRDDCDFlbG'
+b'4dCAX6oIbNffB1mkZqLAS_eHnYUUIPH7BeXBDP3GAMcSx7eCApzk1N7DceV42o1dZemAe0s3r_-Z'
+b'0zs14AADA1s2c1s2c1s2-JAhEKUlc5Ml4HLSvdk39k_vh0m6rc061mfM1a4qoEuiBwXWEJdqHiij'
+b'mjII-ZtlhFAM5D7myuNeESQkzHoqeWJMMHzWEDyk8pj0YPHjGNfrG2qZI866WwevwlHEbWYMsKGT'
+b'Gqj2MAAD-JALBOtF-I9geAUjX9NW1kLIq5qDRNgEXCuwpE4mKHkYuWsF-JALBOMrYd5izsqbqaq1'
+b'WZYa3nbEeTYLPwccfqfhirybKKqx-JAA-JAA')
+
+```
+
+##### Rotation `rot`
+
+Field order by label:  `v`, `t`, `d`, `i`, `s`, `p`, `kt`, `k`, `nt`, `n`, `bt`, `br`, `ba`, `c`, `a`.
+
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAKs.',
+    't': 'rot',
+    'd': 'EADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFc',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '2',
+    'p': 'EDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV4uKD',
+    'kt': '2',
+    'k':
+    [
+        'DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj',
+        'DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz',
+        'DO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXf'
+    ],
+    'nt': '2',
+    'n':
+    [
+        'EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpe',
+        'EERS8udHp2FW89nmaHweQWnZz7I8v9FTQdA-LZ_amqGh',
+        'EAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTg'
+    ],
+    'bt': '4',
+    'br': ['BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB'],
+    'ba':
+    [
+        'BO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-VIsCo',
+        'BPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW'
+    ],
+    'c': [],
+    'a':
+    [
+        {
+            'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+            's': '1',
+            'd': 'EFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv'
+        }
+    ]
+}
+```
+
+CESR serialization as a Python byte string.
+```python
+(b'-FCq0OKERICAACAAXrotEADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFcEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAACEDmgVuwPOXDjIW3reg4_k8SeJoQEKJKP24fGzeMV'
+b'4uKDMAAC-JAhDLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8djDCx3WypeBym3fCkVizTg'
+b'18qEThSrVnB63dFq2oX5c3mzDO0PG_ww4PbF2jUIxQnlb4DluJu5ndNehp0BTGWXErXfMAAC-JAh'
+b'EA8_fj-Ezin_Us_gUcg5JQJkIIBnrcZt3HEIuH-E1lpeEERS8udHp2FW89nmaHweQWnZz7I8v9FT'
+b'QdA-LZ_amqGhEAEzmrPusrj4CDKnSFQvhCEW6T95C7hBeFtZtRD7rOTgMAAE-JALBA4PSatfQMw1'
+b'lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB-JAWBO3cCAfQiqndZBBxwNk6RGkyA-OA1XbZhBj3s4-V'
+b'IsCoBPowpltoeF14nMbU1ng89JSoYf3AmWhZ50KaCaVO6SIW-JAA-JAY-TAXEF-jViYoBr8p3vkp'
+b'ZuHlkvxAAY5GZkmQ0QaaHfiE0kg3MAABEFzRkEIXetj-ojZaj0U6P9OqroqZzV0kYwoHGqnlUOwv')
+```
+
+#### Receipt Messages
 ##### Receipt `rct`
 
 Field order by label:  `v`, `t`, `d`, `i`, `s`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rct` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | AID of controller of event message KEL being receipted |
-| `s` | `MAAB` | Sequence Number of event message being receipted |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAABw.',
+    't': 'rct',
+    'd': 'EADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFc',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    's': '2'
+}
+```
 
+CESR serialization as a Python byte string.
+```python
+(b'-FAb0OKERICAACAAXrctEADBM_Gjzv1_mImlJPPD0bzYmUXmXmCiFIncRYfZMaFcEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsMAAC')
+```
 
 #### KERI Routed Messages
 These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
@@ -2200,121 +2678,206 @@ These have the packet types `qry`, `rpy`, `pro`, `bar`, `exn`
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `qry` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-|  `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAD0.',
+    't': 'qry',
+    'd': 'EF6usM5fNtZWF33E_EQTo9cgU-5f2DH7iBK2V0RPexSe',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'dt': '2025-08-21T17:50:00.000000+00:00',
+    'r': '/oobi',
+    'rr': '/oobi/process',
+    'q':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'role': 'witness'
+    }
+}
+```
 
-
+CESR serialization as a Python byte string.
+```python
+(b'-FA80OKERICAACAAXqryEF6usM5fNtZWF33E_EQTo9cgU-5f2DH7iBK2V0RPexSeEF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg31AAG2025-08-21T17c50c00d000000p00c006AACAAA-'
+b'oobi6AAEAAA-oobi-process-IAQ0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs'
+b'1AAFroleYwitness')
+```
 
 #### Reply Message
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `rpy` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
+```python
+{
+    'v': 'KERICAACAACESRAAFA.',
+    't': 'rpy',
+    'd': 'EPvuKFb4DpBKOA-HPJHKXf3mHFokUcYnBE3tjBougM9S',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-21T17:52:00.000000+00:00',
+    'r': '/oobi/process',
+    'a':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'url': 'https://example.com/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B'
+    }
+}
+```
 
+CESR serialization as a Python byte string.
+```python
+(b'-FBP0OKERICAACAAXrpyEPvuKFb4DpBKOA-HPJHKXf3mHFokUcYnBE3tjBougM9SEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-21T17c52c00d000000p00c006AAEAAA-'
+b'oobi-process-IAm0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsXurl4BAYaHR0'
+b'cHM6Ly9leGFtcGxlLmNvbS93aXRuZXNzL0JHS1Y2djkzdWU1TDV3c2drNzV0Nmo4VGNkZ0FCTU45'
+b'eC1lSXlQaTk2SjNC')
+```
 
 
 #### Prod Message
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `pro` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAEA.',
+    't': 'pro',
+    'd': 'EJRa0zYQjeupTLGMJxdLBkxZP175elZFCI_Ddg0IjKI1',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'dt': '2025-08-21T17:50:00.000000+00:00',
+    'r': '/confidential',
+    'rr': '/confidential/process',
+    'q':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'name': True
+    }
+}
+```
 
+CESR serialization as a Python byte string.
+
+```python
+(b'-FA_0OKERICAACAAXproEJRa0zYQjeupTLGMJxdLBkxZP175elZFCI_Ddg0IjKI1EF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg31AAG2025-08-21T17c50c00d000000p00c006AAEAAA-'
+b'confidential6AAGAAA-confidential-process-IAP0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3ee'
+b'YNM0w9iTkT7frTYs1AAFname1AAM')
+```
 
 #### Bare Message
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `bar` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
+
+```python
+{
+    'v': 'KERICAACAACESRAADs.',
+    't': 'bar',
+    'd': 'EMaAeoTKrRTGIhJeSp-WhwIMSQMvdf13fChMWV6IL6fa',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-22T17:52:00.000000+00:00',
+    'r': '/confidential/process',
+    'a':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'name': 'Ean'
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FA60OKERICAACAAXbarEMaAeoTKrRTGIhJeSp-WhwIMSQMvdf13fChMWV6IL6faEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-22T17c52c00d000000p00c006AAGAAA-'
+b'confidential-process-IAP0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAF'
+b'nameXEan')
+```
 
 
 #### Exchange Transaction Inception Message
 
 Field order by label:  `v`, `t`, `d`, `i`, `ri`, `dt`, `r`, `q`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `xip` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
-| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAE0.',
+    't': 'xip',
+    'd': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'u': '0ABrZXJpc3BlY3dvcmtyYXcw',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'ri': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-30T13:30:10.123456+00:00',
+    'r': '/offer',
+    'q':
+    {
+        'timing': 'immediate'
+    },
+    'a':
+    {
+        'action': 'sell',
+        'item': 'Rembrant',
+        'price': 300000.0
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FBM0OKERICAACAAXxipEISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU0ABrZXJpc3Bl'
+b'Y3dvcmtyYXcwEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3EDZOA3y_b_0LG4_cfpKT'
+b'bWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-30T13c30c10d123456p00c005AACAA-offer-IAF'
+b'0Mtiming0N_immediate-IAO0Maction1AAFsell1AAFitem1AANRembrant0L_price4HAC3000'
+b'00p0')
+```
 
 
 #### Exchange Message
 
 Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `exn` | Packet Type |
-| `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
-| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
-| `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
-| `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAFw.',
+    't': 'exn',
+    'd': 'ELG8gjElCt6Q53u0m6QuvVRle32EJz0quZkWITml8BMb',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'ri': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'x': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'p': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'dt': '2020-08-30T13:42:11.123456+00:00',
+    'r': '/agree',
+    'q':
+    {
+        'timing': 'immediate'
+    },
+    'a':
+    {
+        'action': 'buy',
+        'item': 'Rembrant',
+        'price': 300000.0
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FBb0OKERICAACAAXexnELG8gjElCt6Q53u0m6QuvVRle32EJz0quZkWITml8BMbEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3'
+b'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwUEISX00jpyZ1_XZBubJghQ2MSxAEgbuBP'
+b'SoNIKT-4EdwU1AAG2020-08-30T13c42c11d123456p00c005AACAA-agree-IAF0Mtiming0N_i'
+b'mmediate-IAN0MactionXbuy1AAFitem1AANRembrant0L_price4HAC300000p0')
+```
 
 
 ### Out-Of-Band-Introduction (OOBI)
@@ -2333,15 +2896,15 @@ A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (
 
 The simplest form of a KERI OOBI MAY be expressed by any of a namespaced string, a tuple, a mapping, a structured message, or a structured attachment where every form contains both a KERI AID and a URL (or URI). The OOBI associates the URL with the AID. By convention, the URL typically includes the word `oobi` in its path to indicate that it is to be used as an OOBI, but this is NOT REQUIRED. In abstract tuple form, an OOBI is as follows:
 
-~~~python
+```python
 (url, aid)
-~~~
+```
 
 In concrete tuple form, an OOBI is as follows:
 
-~~~python
-("http://8.8.5.6:8080/oobi", "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM")
-~~~
+```python
+("http://8.8.5.6:8080/oobi", "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB")
+```
 
 An OOBI itself is not signed or otherwise authenticatable by KERI but may employ some other Out-Of-Band-Authentication (OOBA) mechanism, i.e., non-KERI.
 
@@ -2354,29 +2917,31 @@ URLs provide a namespace, which means that the mapping between URL and AID can b
 
 For example, suppose the AID is
 
-~~~python
-EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
-~~~
+```python
+EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 This may be included as a path component of the URL, such as,
 
-~~~python
-http://8.8.5.6:8080/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
-~~~
+```python
+http://8.8.5.6:8080/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 This is called an OOBI URL, or IURL for short. All that is needed to bootstrap the discovery of a KERI AID is an IURL. KERI can leverage the full IP/DNS infrastructure as a discovery bootstrap of an AID by providing an associated IURL.
 
-The AID may act in any of the KERI roles such as `watcher`, `witness`, `juror`, `judge` or `registrar` but is usually a `controller`. In the latter case, the IURL may be a service endpoint provided by one of the supporting components for a given controller. Thus, the AID in an OOBI may be either a controller ID, CID or an endpoint provider ID, EID. The resource at that URL in the OOBI is ultimately responsible for providing that detail, but an OOBI as a URL may contain hints in the query string for the URL, such as a `role` or `name` designation.
+The AID may act in any of the KERI roles such as `watcher`, `witness`, `juror`, `judge` or `registrar` but is usually a `controller`. In the latter case, the IURL may be a service endpoint provided by one of the supporting components for a given controller. Thus, the AID in an OOBI may be either a controller ID, CID or an endpoint provider ID, EID. The resource at that URL in the OOBI is ultimately responsible for providing that detail, but an OOBI as a URL may contain hints in the query string for the URL, such as a `role` and/or `name` designation.
 
-~~~python
-http://8.8.5.6:8080/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM?role=watcher&name=eve
+```python
+https://example.com/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB?role=witness
+```
 
-https://example.com/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM?role=witness
-~~~
+```python
+http://8.8.5.6:8080/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB?role=watcher&name=eve
+```
 
-When the role is provided in the IURL, the EID of the endpoint provider for that role would be discovered via the proof returned by querying the URL. In addition, The proof returned may indicate a different URL for that role so a self-describing IURL may act also as a forwarding mechanism.
+When the role is provided in the IURL, the EID of the endpoint provider for that role would be discovered via the proof returned by querying the URL. In addition, the proof returned may indicate a different URL for that role, so a self-describing IURL may also act as a forwarding mechanism.
 
-To clarify, the minimum information in an OOBI is the pair, `(URL, AID)`. The compact representation of an OOBI leverages the namespacing of the URL itself to provide the AID. Furthermore, the query string in the URL namespace may contain other information or hints, such as the role of the service endpoint represented by the URL or a user-friendly name.
+To clarify, the minimum information in an OOBI is the pair `(URL, AID)`. The compact representation of an OOBI leverages the namespacing of the URL itself to provide the AID. Furthermore, the query string in the URL namespace may contain other information or hints, such as the role of the service endpoint represented by the URL and/or a user-friendly name.
 
 
 #### Well-Known OOBI
@@ -2385,99 +2950,123 @@ An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC57
 
 For example,
 
-~~~python
- /.well-known/keri/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
-~~~
+```python
+ /.well-known/keri/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 Where:
+`EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID and the result of the request is either the target URL or a redirection to the target URL, where the target URL can be found, such as,
 
- `EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM` is the AID
-and the result of the request is either target URL or a redirection to the target URL where the target URL can be
-
-~~~python
+```python
 https://example.com/witness/witmer
+``` 
+or
 
+```python
 http://8.8.5.5:8080/witness/witmer
-
-http://10.0.5.15:8088/witness/witmer
-~~~
+```
 
 The resultant target URL may be in a different domain or IP address from the `well-known` resource.
 
 
 #### CID and EID
 
-A more verbose version would also include the endpoint role and the AID (EID) of the endpoint provider in a self-describing OOBI URL.
+A more verbose version of an OOBI would also include the endpoint role and the AID (EID) of the endpoint provider in a self-describing OOBI URL. And endpoint provider might by a witness.
 
 For example,
 
-~~~python
-https://example.com/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/witness/BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE
+```python
+https://example.com/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B
+```
+where `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID (CID) of the controller and `BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B` is the AID (EID) of one of its witnesses as endpoint provider.
 
-http://8.8.5.6/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/witness/BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE
-~~~
+Similarly,
+
+```python
+http://8.8.5.6/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B
+```
 
 
 Where:
-`EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM` is the AID (CID) of the controller and `BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE` is the AID (EID) of the controller's endpoint provider acting in the role of `witness`.
-
+where `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID (CID) of the controller and `BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B` is the AID (EID) of one of its witnesses as endpoint provider.
 
 #### Multi-OOBI (MOOBI)
 
-An OOBI may include a list of URLs thus simultaneously making an introductory association between the AID and multiple URLs. This would be a multi-OOBI (MOOBI). In general, a MOOBI is a special case of an OOBI without making a named distinction. The first KERI reply message below is an example of a MOOBI.
+An OOBI may include a list of URLs, thus simultaneously making an introductory association between the AID and multiple URLs. This would be a multi-OOBI (MOOBI). In general, an MOOBI is a special case of an OOBI without making a named distinction. The first KERI reply message below is an example of a MOOBI.
 
 #### KERI Reply Messages as OOBIs
 
-A more verbose expression for an OOBI would be an unsigned KERI reply message, `rpy`. The route, `r` field in the message starts with `/oobi`. This specifies that it is an OOBI, so the recipient knows to apply OOBI processing logic to the message. A list of URLs may be provided so that one reply message may provide multiple introductions.
+A more verbose expression for an OOBI would be an unsigned KERI reply message, `rpy`. The route, `r` field in the message starts with `/oobi`. This specifies that it is an OOBI, so the recipient knows to apply OOBI processing logic to the message. A list of URLs may be provided so that one reply message may provide multiple introductions.  In the following examples, the reply messages are serialized with JSON.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+Reply message as Python dict.
 
-For example,
-
-~~~json
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t":  "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/oobi/witness",
-  "a" :
-  {
-    "urls":
-    [
-      "http://example.com/watcher/watson",
-      "http://example.com/witness/wilma"
-    ],
-    "aid":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"
-  }
+    "v": "KERICAACAAJSONAAIA.",
+    "t": "rpy",
+    "d": "ELtIQ71PMr9m5a8eYiC39hikuU8yTWoFw1vWjtqbVUX4",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/witness",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "urls":
+        [
+            "https://example.com/witness/wilma/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+            "https://example.com/witness/watson/BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH",
+            "https://example.com/witness/winona/BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
+        ]
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAIA.","t":"rpy","d":"ELtIQ71PMr9m5a8eYiC39hikuU8yTWoFw1'
+b'vWjtqbVUX4","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/witness","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","urls":["https://example.com/witness/wilma/BGKV'
+b'6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","https://example.com/witness/watso'
+b'n/BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH","https://example.com/witness'
+b'/winona/BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"]}}')
+```
 
 A service endpoint location reply message could also be re-purposed as an OOBI by using a special route path that starts with `/oobi` but also includes the AID being introduced and, optionally, the role of the service endpoint provider. This approach effectively combines the information from both the `/end/role` and `/loc/scheme`reply messages into one. This may allow a shortcut to authenticate the service endpoint. This is shown below.
 
-~~~json
+Reply message as Python dict.
+
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/watcher",
-  "a":
-  {
-    "eid": "BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE",
-    "scheme": "http",
-    "url":  "http://example.com/watcher/wilma"
-  }
+    "v": "KERICAACAAJSONAAFq.",
+    "t": "rpy",
+    "d": "EFMQh0w5-AHw-H01DtqEFhAIC6KXbjYvUSOEX6kSPY4j",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": "https://example.com/witness/wilma"
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFq.","t":"rpy","d":"EFMQh0w5-AHw-H01DtqEFhAIC6KXbjYvUS'
+b'OEX6kSPY4j","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcM'
+b'VtvhmB/witness","a":{"eid":"BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","s'
+b'cheme":"https","url":"https://example.com/witness/wilma"}}')
+```
 
 #### Self (Blind) OOBI (SOOBI)
 
 A bare URL but no AID may be used as a self (blind) OOBI for blind or self-introductions e.g., SOOBI. Querying that SOOBI may return or result in a default target OOBI or default target endpoint reply. This provides a mechanism for self-introduction or blind i.e., self OOBI (SOOBI). Consider the examples of self-OOBIs below.
 
-~~~python
+```python
 http://8.8.5.7:8080/oobi
 
 http://localhost:8080/oobi
@@ -2485,7 +3074,7 @@ http://localhost:8080/oobi
 http://8.8.5.7:8080/oobi?role=controller&name=eve
 
 http://localhost:8080/oobi?role=controller&name=eve
-~~~
+```
 
 
 To elaborate, by default, the result of a `GET` request to a self OOBI URL could be another OOBI with an AID that is the `self` AID of the node providing the self OOBI endpoint or the actual authenticatable `self` endpoint with its AID or a default set of authenticatable endpoints. This is useful to bootstrap components in an infrastructure where the target URLs do not use a public DNS address but instead use something more secure like an explicit public IP address or a private IP or private DNS address. A self-introduction provides a bootstrap mechanism similar to a hostname configuration file with the exception that in the OOBI case, the AID is not in the configuration file, just the bare URL, and the given node queries that bare URL (SOOBI) to get the target endpoint AID.  This allows bootstrap using bare IP addresses in systems where the IP infrastructure is more securely managed than public DNS or where some other OOBA mechanism is used in concert.
@@ -2597,7 +3186,7 @@ In order to ensure that the destination Peers are resistant to replay and deleti
 
 #### OOBI KERI Endpoint Authorization (OKEA)
 
-An important use case for BADA-RUN is to process OOBIs that provide service endpoint discovery of the AIDS of KERI components. These components include but are not limited to, Controllers, Agents, Backers (Witness or Registrar), Watchers, Jurors, Judges, and Forwarders. An endpoint is a URL that may include an IP Scheme, Host, Port, and Path. The model for securely managing endpoint data starts with a Principal Controller of an AID. A Principal Controller authorizes some other component to act as a Player in a Role. Typically, a Role serves some function needed by the Principal Controller to support its AID and may be reached at a service endpoint URL for that Role. Each component, in turn, is the Controller of its own AID. Each component AID is a Player that may provide or act in a Role on behalf of the Principal Controller by providing services at the associated service endpoint for its associated Role.
+An important use case for BADA-RUN is to process OOBIs that provide service endpoint discovery of the AIDS of KERI components. These components include but are not limited to Controllers, Agents, Backers (Witness or Registrar), Watchers, Jurors, Judges, and Forwarders. An endpoint is a URL that may include an IP Scheme, Host, Port, and Path. The model for securely managing endpoint data starts with a Principal Controller of an AID. A Principal Controller authorizes some other component to act as a Player in a Role. Typically, a Role serves some function needed by the Principal Controller to support its AID and may be reached at a service endpoint URL for that Role. Each component, in turn, is the Controller of its own AID. Each component AID is a Player that may provide or act in a Role on behalf of the Principal Controller by providing services at the associated service endpoint for its associated Role.
 
 The authorization model uses a zero-trust BADA-RUN policy to Update authorizations. A Principal Controller authorizes a Player by signing a Role authorization message that authorizes the Player's AID to act in a role. A Player authorizes its endpoint URL by signing an endpoint authorization message that authorizes a URL (location) with a scheme. Any Peer may keep an updated copy of the latest service endpoint URL(s) provided by a Player in a Role for a given Principal AID by following the BADA-RUN policy on Updates sent to its database of these authorizations. The authorizations are issued in the context of the KERI Key-state for the Principal and Player AIDs.
 
@@ -2636,79 +3225,130 @@ Example reply messages.
 
 #### Player EID in Role by CID Update
 
-~~~json
-{
-  "v": "KERI10JSON000113_",
-  "t": "rpy",
-  "d": "Ekd189yFsX1eLhQ2NffI6AaF8ZxKXyej_jfn4wMNJq-w",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/end/role/add",
-  "a":
-  {
-    "cid": "EhlsdBaCvxnW0z3m2OXxStaZkG76g0zC_vtPbPPglDK0",
-    "role": "witness",
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-  }
-}
-~~~
+Reply message as Python dict.
 
-#### Player EID in Role by CID Nullify
-
-~~~json
+```python
 {
-  "v": "KERI10JSON000113_",
-  "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/end/role/cut",
-  "a":
-  {
-    "cid": "EhlsdBaCvxnW0z3m2OXxStaZkG76g0zC_vtPbPPglDK0",
-    "role": "witness",
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-  }
+    "v": "KERICAACAAJSONAAFI.",
+    "t": "rpy",
+    "d": "EBcL5FQ2cHPcLmGb7AKk-ORtq0_A-m-mQTygGxTrqTBb",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/end/role/add",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness",
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFI.","t":"rpy","d":"EBcL5FQ2cHPcLmGb7AKk-ORtq0_A-m-mQT'
+b'ygGxTrqTBb","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/end/role/add","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness","eid":"BGKV6v93ue5L5wsgk75t6j8'
+b'TcdgABMN9x-eIyPi96J3B"}}')
+```
+
+#### Player EID in Role by CID Nullify via cut
+To nullify cut the EID
+
+Reply message as Python dict.
+
+```python
+ {
+    "v": "KERICAACAAJSONAAFI.",
+    "t": "rpy",
+    "d": "EH4uEDQHtCxoJ-RXbvmIjl-NE3JoPJ26fN7sZm9dsqPv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:10.000000+00:00",
+    "r": "/end/role/cut",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness",
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
+}
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFI.","t":"rpy","d":"EH4uEDQHtCxoJ-RXbvmIjl-NE3JoPJ26fN'
+b'7sZm9dsqPv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:10.000000+00:00","r":"/end/role/cut","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness","eid":"BGKV6v93ue5L5wsgk75t6j8'
+b'TcdgABMN9x-eIyPi96J3B"}}')
+```
 
 
 #### Endpoint Location with Scheme by EID Update
 
-~~~json
+Reply message as Python dict.
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
 {
-  "v": "KERI10JSON000108_",
-  "t": "rpy",
-  "d": "EbAwspDQjS-Ve-tzDtAuzx4K8uhh-0AyXWZrSKm64PFQ",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/loc/scheme",
-  "a":
-  {
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
-    "scheme": "http",
-    "url": "http://localhost:8080/controller/tam"
-  }
+    "v": "KERICAACAAJSONAAE6.",
+    "t": "rpy",
+    "d": "ELH2kZK9QXgV9utSqRE-jf2Xwk4rgca6xk35Mpo4EeZP",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:11.000000+00:00",
+    "r": "/loc/scheme",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": "https//example.com/witness/wilma"
+    }
 }
+```
 
-~~~
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAE6.","t":"rpy","d":"ELH2kZK9QXgV9utSqRE-jf2Xwk4rgca6xk'
+b'35Mpo4EeZP","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:11.000000+00:00","r":"/loc/scheme","a":{"eid":"BGKV6v93ue5L5wsgk75'
+b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":"https//example.com/witnes'
+b's/wilma"}}')
+```
 
-#### Endpoint Location with Scheme by EID Nullify
+#### Endpoint Location with Scheme by EID Nullify via empty
+
 To Nullify set the `url` to the empty string `""`.
 
-~~~json
-{
-  "v": "KERI10JSON000108_",
-  "t": "rpy",
-  "d": "EbAwspDQjS-Ve-tzDtAuzx4K8uhh-0AyXWZrSKm64PFQ",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/loc/scheme",
-  "a":
-  {
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
-    "scheme": "http",
-    "url": ""
-  }
-}
+Reply message as Python dict.
 
-~~~
+```python
+{
+    "v": "KERICAACAAJSONAAEa.",
+    "t": "rpy",
+    "d": "EGWrf4ve6Nlec3iC7ba0-f6YBIHXKRzrGG-bWE-gcHY_",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:12.000000+00:00",
+    "r": "/loc/scheme",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": ""
+    }
+}
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+
+```python
+(b'{"v":"KERICAACAAJSONAAEa.","t":"rpy","d":"EGWrf4ve6Nlec3iC7ba0-f6YBIHXKRzrGG'
+b'-bWE-gcHY_","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:12.000000+00:00","r":"/loc/scheme","a":{"eid":"BGKV6v93ue5L5wsgk75'
+b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
+```
+
+
 
 [//]: # (\newpage)
 
