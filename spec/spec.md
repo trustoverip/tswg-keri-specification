@@ -1435,7 +1435,7 @@ b'-22T17:52:00.000000+00:00","r":"/confidential/process","a":{"i":"EPR7FWsN3tO'
 b'M8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","name":"Ean"}}')
 ```
 
-This message has Ean baring his name.
+This message has Ean exposing his name.
 
 
 #### Exchange Transaction Inception Message Body
@@ -1443,71 +1443,88 @@ This message has Ean baring his name.
 The top-level fields of an Exchange Transaction Incept, `xip` message body MUST appear in the following order: `[ v, t, d, u, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
 
+##### Example Exchange Transaction Inception Message
 
 The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
 
-
-
 ```python
 {
-  
+    "v": "KERICAACAAJSONAAFn.",
+    "t": "xip",
+    "d": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "u": "0ABrZXJpc3BlY3dvcmtyYXcw",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "ri": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-30T13:30:10.123456+00:00",
+    "r": "/offer",
+    "q":
+    {
+        "timing": "immediate"
+    },
+    "a":
+    {
+        "action": "sell",
+        "item": "Rembrant",
+        "price": 300000.0
+    }
+}  
 ```
 
 The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
 ```python
-
-
+(b'{"v":"KERICAACAAJSONAAFn.","t":"xip","d":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0mA'
+b'xxUm67gWOU","u":"0ABrZXJpc3BlY3dvcmtyYXcw","i":"EHqSsH1Imc2MEcgzEordBUFqJKWT'
+b'cRyTz2GRc2SG3aur","ri":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"'
+b'2020-08-30T13:30:10.123456+00:00","r":"/offer","q":{"timing":"immediate"},"a'
+b'":{"action":"sell","item":"Rembrant","price":300000.0}}')
 ```
 
-Exchange transaction inception message example:
-
-```json
-{
-  "v": "KERICAAJSONAACd.",
-  "t": "xip",
-  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "u": '0AAwMTIzNDU2Nzg5YWJjZGVm',
-  "i": "EBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3Dd96ATbbMIZgU",
-  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
-  "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo/out",
-  "q": {},
-  "a": 
-  {
-    "msg": "test echo"
-  }
-}
-```
-
+This message is an offer (ask) from Fay (sender) to sell a painting to Ean (receiver). 
 
 #### Exchange Message Body
 
 The top-level fields of an Exchange, `exn` message body MUST appear in the following order: `[ v, t, d, i, ri, x, p, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Exchange message example:
+##### Example Exchange Transaction Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "exn",
-  "d": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "i": "EMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_b",
-  "ri": "ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey",
-  "x": "EF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bM",
-  "p": "EDd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jeyCRXq_bMF3",
-  "dt": "2021-11-12T19:11:19.342132+00:00",
-  "r": "/echo/back",
-  "q": {},
-  "a": 
-  {
-    "msg": "test echo"
-  }
+    "v": "KERICAACAAJSONAAGt.",
+    "t": "exn",
+    "d": "EEIp1e5v4L6rt7cp1nRsn4mN6bJVUDyIQEATIzxR8UnE",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "ri": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "x": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "p": "EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU",
+    "dt": "2020-08-30T13:42:11.123456+00:00",
+    "r": "/agree",
+    "q":
+    {
+        "timing": "immediate"
+    },
+    "a":
+    {
+        "action": "buy",
+        "item": "Rembrant",
+        "price": 300000.0
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAGt.","t":"exn","d":"EEIp1e5v4L6rt7cp1nRsn4mN6bJVUDyIQE'
+b'ATIzxR8UnE","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","ri":"EHqSsH1'
+b'Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","x":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0'
+b'mAxxUm67gWOU","p":"EJbE2agA3239Iusld1lNvFAxRuhv1SX0mAxxUm67gWOU","dt":"2020-'
+b'08-30T13:42:11.123456+00:00","r":"/agree","q":{"timing":"immediate"},"a":{"a'
+b'ction":"buy","item":"Rembrant","price":300000.0}}')
+```
+
+This message is an agreement (bid) from Ean (sender) to buy the painting from Fay (receiver). Notice that the `x` and `p` field values bind this message to the `xip` message from Fay.
 
 ### Signing and sealing KERI data structures
 
@@ -2663,12 +2680,28 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 
 Message body as a Python dict.
 ```python
-
+{
+    'v': 'KERICAACAACESRAAD0.',
+    't': 'qry',
+    'd': 'EF6usM5fNtZWF33E_EQTo9cgU-5f2DH7iBK2V0RPexSe',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'dt': '2025-08-21T17:50:00.000000+00:00',
+    'r': '/oobi',
+    'rr': '/oobi/process',
+    'q':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'role': 'witness'
+    }
+}
 ```
 
 CESR serialization as a Python byte string.
 ```python
-
+(b'-FA80OKERICAACAAXqryEF6usM5fNtZWF33E_EQTo9cgU-5f2DH7iBK2V0RPexSeEF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg31AAG2025-08-21T17c50c00d000000p00c006AACAAA-'
+b'oobi6AAEAAA-oobi-process-IAQ0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs'
+b'1AAFroleYwitness')
 ```
 
 #### Reply Message
@@ -2677,12 +2710,28 @@ Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
 Message body as a Python dict.
 ```python
-
+{
+    'v': 'KERICAACAACESRAAFA.',
+    't': 'rpy',
+    'd': 'EPvuKFb4DpBKOA-HPJHKXf3mHFokUcYnBE3tjBougM9S',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-21T17:52:00.000000+00:00',
+    'r': '/oobi/process',
+    'a':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'url': 'https://example.com/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B'
+    }
+}
 ```
 
 CESR serialization as a Python byte string.
 ```python
-
+(b'-FBP0OKERICAACAAXrpyEPvuKFb4DpBKOA-HPJHKXf3mHFokUcYnBE3tjBougM9SEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-21T17c52c00d000000p00c006AAEAAA-'
+b'oobi-process-IAm0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsXurl4BAYaHR0'
+b'cHM6Ly9leGFtcGxlLmNvbS93aXRuZXNzL0JHS1Y2djkzdWU1TDV3c2drNzV0Nmo4VGNkZ0FCTU45'
+b'eC1lSXlQaTk2SjNC')
 ```
 
 
@@ -2690,84 +2739,145 @@ CESR serialization as a Python byte string.
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `rr`, `q`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `pro` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `rr` | `5AABAA-A` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAEA.',
+    't': 'pro',
+    'd': 'EJRa0zYQjeupTLGMJxdLBkxZP175elZFCI_Ddg0IjKI1',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'dt': '2025-08-21T17:50:00.000000+00:00',
+    'r': '/confidential',
+    'rr': '/confidential/process',
+    'q':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'name': True
+    }
+}
+```
 
+CESR serialization as a Python byte string.
+
+```python
+(b'-FA_0OKERICAACAAXproEJRa0zYQjeupTLGMJxdLBkxZP175elZFCI_Ddg0IjKI1EF-jViYoBr8p'
+b'3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg31AAG2025-08-21T17c50c00d000000p00c006AAEAAA-'
+b'confidential6AAGAAA-confidential-process-IAP0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3ee'
+b'YNM0w9iTkT7frTYs1AAFname1AAM')
+```
 
 #### Bare Message
 
 Field order by label:  `v`, `t`, `d`, `dt`, `r`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `bar` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of event message being receipted |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
+
+```python
+{
+    'v': 'KERICAACAACESRAADs.',
+    't': 'bar',
+    'd': 'EMaAeoTKrRTGIhJeSp-WhwIMSQMvdf13fChMWV6IL6fa',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-22T17:52:00.000000+00:00',
+    'r': '/confidential/process',
+    'a':
+    {
+        'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+        'name': 'Ean'
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FA60OKERICAACAAXbarEMaAeoTKrRTGIhJeSp-WhwIMSQMvdf13fChMWV6IL6faEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-22T17c52c00d000000p00c006AAGAAA-'
+b'confidential-process-IAP0J_iEDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs1AAF'
+b'nameXEan')
+```
 
 
 #### Exchange Transaction Inception Message
 
 Field order by label:  `v`, `t`, `d`, `i`, `ri`, `dt`, `r`, `q`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `xip` | Packet Type |
-| `d` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | SAID of message, transaction identifier SAID |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID |
-| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAE0.',
+    't': 'xip',
+    'd': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'u': '0ABrZXJpc3BlY3dvcmtyYXcw',
+    'i': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'ri': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'dt': '2020-08-30T13:30:10.123456+00:00',
+    'r': '/offer',
+    'q':
+    {
+        'timing': 'immediate'
+    },
+    'a':
+    {
+        'action': 'sell',
+        'item': 'Rembrant',
+        'price': 300000.0
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FBM0OKERICAACAAXxipEISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU0ABrZXJpc3Bl'
+b'Y3dvcmtyYXcwEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3EDZOA3y_b_0LG4_cfpKT'
+b'bWU-_3eeYNM0w9iTkT7frTYs1AAG2020-08-30T13c30c10d123456p00c005AACAA-offer-IAF'
+b'0Mtiming0N_immediate-IAO0Maction1AAFsell1AAFitem1AANRembrant0L_price4HAC3000'
+b'00p0')
+```
 
 
 #### Exchange Message
 
 Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
-| Field Label | Value | Description |
-|:--------:|:-------|:------|
-| NA | `-F##` or `-0F#####` | Count code for CESR native top-level fixed field signable message |
-| `v` | `YKERIBAA` | Protocol Version primitive (KERI 2.00) |
-| `t` | `exn` | Packet Type |
-| `d` | `EBxkiojgBabiu_JCkE0GC4NQq-hiGgbiglDXNB5xhHKX` | SAID of message |
-| `i` | `EBabiu_JCkE0GbiglDXNB5C4NQq-hiGgxhHKXBxkiojg` | Sender AID  |
-| `ri` | `ECRXq_bMF3Dd96ATbbMIZgUBBwuFAWx3_8s5XSt_0jey` | Receiver AID |
-| `x` | `EC4NQq-hiGgbiglDXNB5xhHKXBxkiojgBabiu_JCkE0G` | Transaction Identifier SAID |
-| `p` | `EGbiglDXNB5C4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0` | Prior message SAID |
-| `dt` | `1AAG2020-08-22T17c50c09d988921p00c00` | Base64 custom encoded 32 char ISO-8601 DateTime |
-| `r` | `4AAC-A-1-B-3` | Base64 variable length CESR SAD Path string |
-| `q` | `-H##` or `-H#####` | Count code for Query field map |
-| `i` label | `0J_i` | Label of field  `i` in `q` field map  |
-| `i` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `i` in `q` field map |
-| `a` | `-H##` or `-H#####` | Count code for Attribute field map |
-| `d` label | `0J_d` | Label of field `d` in `a` field map   |
-| `d` value | `EC4NQq-hiGgxhHKXBxkiojgBabiu_JCkE0GbiglDXNB5` | Value of field `d` in `a` field map |
+Message body as a Python dict.
 
+```python
+{
+    'v': 'KERICAACAACESRAAFw.',
+    't': 'exn',
+    'd': 'ELG8gjElCt6Q53u0m6QuvVRle32EJz0quZkWITml8BMb',
+    'i': 'EDZOA3y_b_0LG4_cfpKTbWU-_3eeYNM0w9iTkT7frTYs',
+    'ri': 'EF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3',
+    'x': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'p': 'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwU',
+    'dt': '2020-08-30T13:42:11.123456+00:00',
+    'r': '/agree',
+    'q':
+    {
+        'timing': 'immediate'
+    },
+    'a':
+    {
+        'action': 'buy',
+        'item': 'Rembrant',
+        'price': 300000.0
+    }
+}
+```
+
+CESR serialization as a Python byte string.
+
+```python
+(b'-FBb0OKERICAACAAXexnELG8gjElCt6Q53u0m6QuvVRle32EJz0quZkWITml8BMbEDZOA3y_b_0L'
+b'G4_cfpKTbWU-_3eeYNM0w9iTkT7frTYsEF-jViYoBr8p3vkpZuHlkvxAAY5GZkmQ0QaaHfiE0kg3'
+b'EISX00jpyZ1_XZBubJghQ2MSxAEgbuBPSoNIKT-4EdwUEISX00jpyZ1_XZBubJghQ2MSxAEgbuBP'
+b'SoNIKT-4EdwU1AAG2020-08-30T13c42c11d123456p00c005AACAA-agree-IAF0Mtiming0N_i'
+b'mmediate-IAN0MactionXbuy1AAFitem1AANRembrant0L_price4HAC300000p0')
+```
 
 
 ### Out-Of-Band-Introduction (OOBI)
@@ -2786,15 +2896,15 @@ A secondary use case for OOBIs is to provide service endpoints or URIs for SAD (
 
 The simplest form of a KERI OOBI MAY be expressed by any of a namespaced string, a tuple, a mapping, a structured message, or a structured attachment where every form contains both a KERI AID and a URL (or URI). The OOBI associates the URL with the AID. By convention, the URL typically includes the word `oobi` in its path to indicate that it is to be used as an OOBI, but this is NOT REQUIRED. In abstract tuple form, an OOBI is as follows:
 
-~~~python
+```python
 (url, aid)
-~~~
+```
 
 In concrete tuple form, an OOBI is as follows:
 
-~~~python
-("http://8.8.5.6:8080/oobi", "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM")
-~~~
+```python
+("http://8.8.5.6:8080/oobi", "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB")
+```
 
 An OOBI itself is not signed or otherwise authenticatable by KERI but may employ some other Out-Of-Band-Authentication (OOBA) mechanism, i.e., non-KERI.
 
@@ -2807,29 +2917,31 @@ URLs provide a namespace, which means that the mapping between URL and AID can b
 
 For example, suppose the AID is
 
-~~~python
-EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
-~~~
+```python
+EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 This may be included as a path component of the URL, such as,
 
-~~~python
-http://8.8.5.6:8080/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
-~~~
+```python
+http://8.8.5.6:8080/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 This is called an OOBI URL, or IURL for short. All that is needed to bootstrap the discovery of a KERI AID is an IURL. KERI can leverage the full IP/DNS infrastructure as a discovery bootstrap of an AID by providing an associated IURL.
 
-The AID may act in any of the KERI roles such as `watcher`, `witness`, `juror`, `judge` or `registrar` but is usually a `controller`. In the latter case, the IURL may be a service endpoint provided by one of the supporting components for a given controller. Thus, the AID in an OOBI may be either a controller ID, CID or an endpoint provider ID, EID. The resource at that URL in the OOBI is ultimately responsible for providing that detail, but an OOBI as a URL may contain hints in the query string for the URL, such as a `role` or `name` designation.
+The AID may act in any of the KERI roles such as `watcher`, `witness`, `juror`, `judge` or `registrar` but is usually a `controller`. In the latter case, the IURL may be a service endpoint provided by one of the supporting components for a given controller. Thus, the AID in an OOBI may be either a controller ID, CID or an endpoint provider ID, EID. The resource at that URL in the OOBI is ultimately responsible for providing that detail, but an OOBI as a URL may contain hints in the query string for the URL, such as a `role` and/or `name` designation.
 
-~~~python
-http://8.8.5.6:8080/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM?role=watcher&name=eve
+```python
+https://example.com/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB?role=witness
+```
 
-https://example.com/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM?role=witness
-~~~
+```python
+http://8.8.5.6:8080/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB?role=watcher&name=eve
+```
 
-When the role is provided in the IURL, the EID of the endpoint provider for that role would be discovered via the proof returned by querying the URL. In addition, The proof returned may indicate a different URL for that role so a self-describing IURL may act also as a forwarding mechanism.
+When the role is provided in the IURL, the EID of the endpoint provider for that role would be discovered via the proof returned by querying the URL. In addition, the proof returned may indicate a different URL for that role, so a self-describing IURL may also act as a forwarding mechanism.
 
-To clarify, the minimum information in an OOBI is the pair, `(URL, AID)`. The compact representation of an OOBI leverages the namespacing of the URL itself to provide the AID. Furthermore, the query string in the URL namespace may contain other information or hints, such as the role of the service endpoint represented by the URL or a user-friendly name.
+To clarify, the minimum information in an OOBI is the pair `(URL, AID)`. The compact representation of an OOBI leverages the namespacing of the URL itself to provide the AID. Furthermore, the query string in the URL namespace may contain other information or hints, such as the role of the service endpoint represented by the URL and/or a user-friendly name.
 
 
 #### Well-Known OOBI
@@ -2838,98 +2950,123 @@ An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC57
 
 For example,
 
-~~~python
- /.well-known/keri/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
-~~~
+```python
+ /.well-known/keri/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB
+```
 
 Where:
+`EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID and the result of the request is either the target URL or a redirection to the target URL, where the target URL can be found, such as,
 
- `EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM` is the AID
-and the result of the request is either target URL or a redirection to the target URL where the target URL can be
-
-~~~python
+```python
 https://example.com/witness/witmer
+``` 
+or
 
+```python
 http://8.8.5.5:8080/witness/witmer
-
-http://10.0.5.15:8088/witness/witmer
-~~~
+```
 
 The resultant target URL may be in a different domain or IP address from the `well-known` resource.
 
 
 #### CID and EID
 
-A more verbose version would also include the endpoint role and the AID (EID) of the endpoint provider in a self-describing OOBI URL.
+A more verbose version of an OOBI would also include the endpoint role and the AID (EID) of the endpoint provider in a self-describing OOBI URL. And endpoint provider might by a witness.
 
 For example,
 
-~~~python
-https://example.com/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM/witness/BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE
+```python
+https://example.com/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B
+```
+where `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID (CID) of the controller and `BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B` is the AID (EID) of one of its witnesses as endpoint provider.
 
-http://8.8.5.6/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM/witness/BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE~~~
+Similarly,
+
+```python
+http://8.8.5.6/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B
+```
 
 
 Where:
-`EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM` is the AID (CID) of the controller and `BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE` is the AID (EID) of the controller's endpoint provider acting in the role of `witness`.
-
+where `EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB` is the AID (CID) of the controller and `BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B` is the AID (EID) of one of its witnesses as endpoint provider.
 
 #### Multi-OOBI (MOOBI)
 
-An OOBI may include a list of URLs thus simultaneously making an introductory association between the AID and multiple URLs. This would be a multi-OOBI (MOOBI). In general, a MOOBI is a special case of an OOBI without making a named distinction. The first KERI reply message below is an example of a MOOBI.
+An OOBI may include a list of URLs, thus simultaneously making an introductory association between the AID and multiple URLs. This would be a multi-OOBI (MOOBI). In general, an MOOBI is a special case of an OOBI without making a named distinction. The first KERI reply message below is an example of a MOOBI.
 
 #### KERI Reply Messages as OOBIs
 
-A more verbose expression for an OOBI would be an unsigned KERI reply message, `rpy`. The route, `r` field in the message starts with `/oobi`. This specifies that it is an OOBI, so the recipient knows to apply OOBI processing logic to the message. A list of URLs may be provided so that one reply message may provide multiple introductions.
+A more verbose expression for an OOBI would be an unsigned KERI reply message, `rpy`. The route, `r` field in the message starts with `/oobi`. This specifies that it is an OOBI, so the recipient knows to apply OOBI processing logic to the message. A list of URLs may be provided so that one reply message may provide multiple introductions.  In the following examples, the reply messages are serialized with JSON.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+Reply message as Python dict.
 
-For example,
-
-~~~json
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t":  "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/oobi/witness",
-  "a" :
-  {
-    "urls":
-    [
-      "http://example.com/watcher/watson",
-      "http://example.com/witness/wilma"
-    ],
-    "aid":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"
-  }
+    "v": "KERICAACAAJSONAAIA.",
+    "t": "rpy",
+    "d": "ELtIQ71PMr9m5a8eYiC39hikuU8yTWoFw1vWjtqbVUX4",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/witness",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "urls":
+        [
+            "https://example.com/witness/wilma/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+            "https://example.com/witness/watson/BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH",
+            "https://example.com/witness/winona/BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"
+        ]
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAIA.","t":"rpy","d":"ELtIQ71PMr9m5a8eYiC39hikuU8yTWoFw1'
+b'vWjtqbVUX4","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/witness","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","urls":["https://example.com/witness/wilma/BGKV'
+b'6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","https://example.com/witness/watso'
+b'n/BAPv2MnoiCsgOnklmFyfU07QDK_93NeH9iKfOy8V22aH","https://example.com/witness'
+b'/winona/BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"]}}')
+```
 
 A service endpoint location reply message could also be re-purposed as an OOBI by using a special route path that starts with `/oobi` but also includes the AID being introduced and, optionally, the role of the service endpoint provider. This approach effectively combines the information from both the `/end/role` and `/loc/scheme`reply messages into one. This may allow a shortcut to authenticate the service endpoint. This is shown below.
 
-~~~json
+Reply message as Python dict.
+
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/watcher",
-  "a":
-  {
-    "eid": "BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE",
-    "scheme": "http",
-    "url":  "http://example.com/watcher/wilma"
-  }
+    "v": "KERICAACAAJSONAAFq.",
+    "t": "rpy",
+    "d": "EFMQh0w5-AHw-H01DtqEFhAIC6KXbjYvUSOEX6kSPY4j",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB/witness",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": "https://example.com/witness/wilma"
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFq.","t":"rpy","d":"EFMQh0w5-AHw-H01DtqEFhAIC6KXbjYvUS'
+b'OEX6kSPY4j","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcM'
+b'VtvhmB/witness","a":{"eid":"BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B","s'
+b'cheme":"https","url":"https://example.com/witness/wilma"}}')
+```
 
 #### Self (Blind) OOBI (SOOBI)
 
 A bare URL but no AID may be used as a self (blind) OOBI for blind or self-introductions e.g., SOOBI. Querying that SOOBI may return or result in a default target OOBI or default target endpoint reply. This provides a mechanism for self-introduction or blind i.e., self OOBI (SOOBI). Consider the examples of self-OOBIs below.
 
-~~~python
+```python
 http://8.8.5.7:8080/oobi
 
 http://localhost:8080/oobi
@@ -2937,7 +3074,7 @@ http://localhost:8080/oobi
 http://8.8.5.7:8080/oobi?role=controller&name=eve
 
 http://localhost:8080/oobi?role=controller&name=eve
-~~~
+```
 
 
 To elaborate, by default, the result of a `GET` request to a self OOBI URL could be another OOBI with an AID that is the `self` AID of the node providing the self OOBI endpoint or the actual authenticatable `self` endpoint with its AID or a default set of authenticatable endpoints. This is useful to bootstrap components in an infrastructure where the target URLs do not use a public DNS address but instead use something more secure like an explicit public IP address or a private IP or private DNS address. A self-introduction provides a bootstrap mechanism similar to a hostname configuration file with the exception that in the OOBI case, the AID is not in the configuration file, just the bare URL, and the given node queries that bare URL (SOOBI) to get the target endpoint AID.  This allows bootstrap using bare IP addresses in systems where the IP infrastructure is more securely managed than public DNS or where some other OOBA mechanism is used in concert.
@@ -3088,80 +3225,130 @@ Example reply messages.
 
 #### Player EID in Role by CID Update
 
-~~~json
+Reply message as Python dict.
+
+```python
 {
-  "v": "KERI10JSON000113_",
-  "t": "rpy",
-  "d": "Ekd189yFsX1eLhQ2NffI6AaF8ZxKXyej_jfn4wMNJq-w",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/end/role/add",
-  "a":
-  {
-    "cid": "EhlsdBaCvxnW0z3m2OXxStaZkG76g0zC_vtPbPPglDK0",
-    "role": "witness",
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-  }
+    "v": "KERICAACAAJSONAAFI.",
+    "t": "rpy",
+    "d": "EBcL5FQ2cHPcLmGb7AKk-ORtq0_A-m-mQTygGxTrqTBb",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/end/role/add",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness",
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFI.","t":"rpy","d":"EBcL5FQ2cHPcLmGb7AKk-ORtq0_A-m-mQT'
+b'ygGxTrqTBb","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/end/role/add","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness","eid":"BGKV6v93ue5L5wsgk75t6j8'
+b'TcdgABMN9x-eIyPi96J3B"}}')
+```
 
 #### Player EID in Role by CID Nullify via cut
 To nullify cut the EID
-~~~json
-{
-  "v": "KERI10JSON000113_",
-  "t": "rpy",
-  "d": "EZ-i0d8JZAoTNZH3ULaU6JR2nmwyvYAfSVPzhzS6b5CM",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/end/role/cut",
-  "a":
-  {
-    "cid": "EhlsdBaCvxnW0z3m2OXxStaZkG76g0zC_vtPbPPglDK0",
-    "role": "witness",
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY"
-  }
+
+Reply message as Python dict.
+
+```python
+ {
+    "v": "KERICAACAAJSONAAFI.",
+    "t": "rpy",
+    "d": "EH4uEDQHtCxoJ-RXbvmIjl-NE3JoPJ26fN7sZm9dsqPv",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:10.000000+00:00",
+    "r": "/end/role/cut",
+    "a":
+    {
+        "cid": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness",
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
 }
-~~~
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAFI.","t":"rpy","d":"EH4uEDQHtCxoJ-RXbvmIjl-NE3JoPJ26fN'
+b'7sZm9dsqPv","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:10.000000+00:00","r":"/end/role/cut","a":{"cid":"EPR7FWsN3tOM8PqfM'
+b'ap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness","eid":"BGKV6v93ue5L5wsgk75t6j8'
+b'TcdgABMN9x-eIyPi96J3B"}}')
+```
 
 
 #### Endpoint Location with Scheme by EID Update
 
-~~~json
-{
-  "v": "KERI10JSON000108_",
-  "t": "rpy",
-  "d": "EbAwspDQjS-Ve-tzDtAuzx4K8uhh-0AyXWZrSKm64PFQ",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/loc/scheme",
-  "a":
-  {
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
-    "scheme": "http",
-    "url": "http://localhost:8080/controller/tam"
-  }
-}
+Reply message as Python dict.
 
-~~~
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+{
+    "v": "KERICAACAAJSONAAE6.",
+    "t": "rpy",
+    "d": "ELH2kZK9QXgV9utSqRE-jf2Xwk4rgca6xk35Mpo4EeZP",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:11.000000+00:00",
+    "r": "/loc/scheme",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": "https//example.com/witness/wilma"
+    }
+}
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+```python
+(b'{"v":"KERICAACAAJSONAAE6.","t":"rpy","d":"ELH2kZK9QXgV9utSqRE-jf2Xwk4rgca6xk'
+b'35Mpo4EeZP","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:11.000000+00:00","r":"/loc/scheme","a":{"eid":"BGKV6v93ue5L5wsgk75'
+b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":"https//example.com/witnes'
+b's/wilma"}}')
+```
 
 #### Endpoint Location with Scheme by EID Nullify via empty
 
 To Nullify set the `url` to the empty string `""`.
 
-~~~json
-{
-  "v": "KERI10JSON000108_",
-  "t": "rpy",
-  "d": "EbAwspDQjS-Ve-tzDtAuzx4K8uhh-0AyXWZrSKm64PFQ",
-  "dt": "2021-01-01T00:00:00.000000+00:00",
-  "r": "/loc/scheme",
-  "a":
-  {
-    "eid": "BFUOWBaJz-sB_6b-_u_P9W8hgBQ8Su9mAtN9cY2sVGiY",
-    "scheme": "http",
-    "url": ""
-  }
-}
+Reply message as Python dict.
 
-~~~
+```python
+{
+    "v": "KERICAACAAJSONAAEa.",
+    "t": "rpy",
+    "d": "EGWrf4ve6Nlec3iC7ba0-f6YBIHXKRzrGG-bWE-gcHY_",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:12.000000+00:00",
+    "r": "/loc/scheme",
+    "a":
+    {
+        "eid": "BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B",
+        "scheme": "https",
+        "url": ""
+    }
+}
+```
+
+Serialized reply message as a Python byte string of JSON without whitespace.
+
+```python
+(b'{"v":"KERICAACAAJSONAAEa.","t":"rpy","d":"EGWrf4ve6Nlec3iC7ba0-f6YBIHXKRzrGG'
+b'-bWE-gcHY_","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:12.000000+00:00","r":"/loc/scheme","a":{"eid":"BGKV6v93ue5L5wsgk75'
+b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
+```
+
+
 
 [//]: # (\newpage)
 
