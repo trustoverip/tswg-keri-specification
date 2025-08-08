@@ -1295,153 +1295,169 @@ The Attribute, `a` field value is a field map (block). Its fields provide the at
 
 The top-level fields of a Query, `qry` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Example Query Message
+##### Example Query Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "qry",
-  "d" : "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/logs",
-  "rr": "/log/processor",
-  "q":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i" : "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "dt": "2020-08-01T12:20:05.123456+00:00",
-  }
+    "v": "KERICAACAAJSONAAEe.",
+    "t": "qry",
+    "d": "EEiUK4cVgcyA1Dk6g2jFzqc5JerkaSnJi3IosutVCyYO",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "dt": "2025-08-21T17:50:00.000000+00:00",
+    "r": "/oobi",
+    "rr": "/oobi/process",
+    "q":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "role": "witness"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAEe.","t":"qry","d":"EEiUK4cVgcyA1Dk6g2jFzqc5JerkaSnJi3'
+b'IosutVCyYO","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","dt":"2025-08'
+b'-21T17:50:00.000000+00:00","r":"/oobi","rr":"/oobi/process","q":{"i":"EPR7FW'
+b'sN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","role":"witness"}}')
+```
+
+The issuer/sender of this message is Fay because Fay's AID appears in the top-level `i` field. The query could be to fetch a witness OOBI for Ean. This is determined by the route and the appearance of Ean's AID in the `i` field of the query `q` block and the role being "witness".
 
 #### Reply Message Body
 
 The top-level fields of a Reply, `rpy` message body MUST appear in the following order: `[ v, t, d, dt, r, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Reply message example:
+##### Example Reply Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERI10JSON00011c_",
-  "t": "rpy",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r":  "/logs/processor",
-  "a" :
-  {
-    "d":  "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "name": "John Jones",
-    "role": "Founder",
-  }
+    "v": "KERICAACAAJSONAAFR.",
+    "t": "rpy",
+    "d": "EPdgmUkvx5o_KRg3elBqj_vSZOFgWI9hCVWO-FfGZz8U",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-21T17:52:00.000000+00:00",
+    "r": "/oobi/process",
+    "a":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "url": "https://example.com/witness/BGKV6v93ue5L5wsgk75t6j8TcdgABMN9x-eIyPi96J3B"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+
+```python
+(b'{"v":"KERICAACAAJSONAAFR.","t":"rpy","d":"EPdgmUkvx5o_KRg3elBqj_vSZOFgWI9hCV'
+b'WO-FfGZz8U","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-21T17:52:00.000000+00:00","r":"/oobi/process","a":{"i":"EPR7FWsN3tOM8PqfMap'
+b'2FRfF4MFQ4v3ZXjBUcMVtvhmB","url":"https://example.com/witness/BGKV6v93ue5L5w'
+b'sgk75t6j8TcdgABMN9x-eIyPi96J3B"}}')
+```
+
+Ean is the issuer/sender of this reply whose data attribute block includes the url of a service endpoint (aka url OOBI) for one of Ean's witnesses.
 
 #### Prod Message Body
 
-The top-level fields of a Prod, `pro` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro` and the identically structured Query, `qry` messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages is unconstrained.
+The top-level fields of a Prod, `pro` message body MUST appear in the following order: `[ v, t, d, dt, r, rr, q]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. The fundamental difference between the Prod, `pro`, and the identically structured Query, `qry`, messages is that the data targeted by Prod messages is Sealed data. Whereas the data targeted by Query, `qry` messages, is unconstrained.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+##### Example Prod Message
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
 
-Prod message example:
-
-```json
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "pro",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/sealed/data",
-  "rr": "/process/sealed/data",
-  "q":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "ri": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "dd": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM"
-  }
-}
+    "v": "KERICAACAAJSONAAEp.",
+    "t": "pro",
+    "d": "EHNqhJXgUdYHFzNiuO7Ue06QWRnOMjhTrVt_QGOfZjH_",
+    "i": "EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur",
+    "dt": "2025-08-21T17:50:00.000000+00:00",
+    "r": "/confidential",
+    "rr": "/confidential/process",
+    "q":
+    {
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "name": True
+    }
+}  
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAEp.","t":"pro","d":"EHNqhJXgUdYHFzNiuO7Ue06QWRnOMjhTrV'
+b't_QGOfZjH_","i":"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur","dt":"2025-08'
+b'-21T17:50:00.000000+00:00","r":"/confidential","rr":"/confidential/process",'
+b'"q":{"i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","name":true}}')
+```
+
+In this example, Fay is prodding Ean for his name.
+
 
 #### Bare Message Body
 
 The top-level fields of a Reply, `bar` message body MUST appear in the following order: `[ v, t, d, dt, r, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 The fundamental difference between the Bare, `bar` and the identically structured Reply, `rpy` messages is that the data returned by Bare messages is Sealed data. Whereas the data returned by Reply, `rpy` messages is unconstrained.
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
 
-Bare message example:
+##### Example Bare Message
 
-```json
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+```python
 {
-  "v": "KERICAAJSONAACd.",
-  "t": "bre",
-  "d": "EH3ULaU6JR2nmwyvYAfSVPzhzS6b5CMZ-i0d8JZAoTNZ",
-  "i" : "EAfSVPzhzS6b5CMZ-i0d8JZAoTNZH3ULaU6JR2nmwyvY",
-  "dt": "2020-08-22T17:50:12.988921+00:00",
-  "r": "/process/sealed/data",
-  "a":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "dt": "2020-08-22T17:50:12.988921+00:00",
-    "name": "John Jones",
-    "role": "Founder",
-  }
-}
-```
-
-Attached bare, `bar` message for backer seal.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-```json
-{
-  "v": "KERI10JSON00011c_",
-  "t": "bar",
-  "d": "EFGKDDA8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-  "r": "process/registrar/bitcoin",
-  "a":
-  {
-    "d": "EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM",
-    "i": "EAoTNZH3ULvYAfSVPzhzS6baU6JR2nmwyZ-i0d8JZ5CM",
-    "s": "5",
-    "bi", "BACDEFG8JZAoTNZH3ULvaU6JR2nmwyYAfSVPzhzS6b5CM",
-    "sd":
+    "v": "KERICAACAAJSONAAEV.",
+    "t": "bar",
+    "d": "EMSlSHIe04CuAqhz55nAnBpE_0T65Sqs2fmaPpsNIbnn",
+    "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+    "dt": "2020-08-22T17:52:00.000000+00:00",
+    "r": "/confidential/process",
+    "a":
     {
-       "d": "EaAoTNZH3ULvYAfSVPzhzS6b5CMaU6JR2nmwyZ-i0d8J",
-       "stuff": "meta data field"
-     }
-  }
+        "i": "EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB",
+        "name": "Ean"
+    }
 }
 ```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+(b'{"v":"KERICAACAAJSONAAEV.","t":"bar","d":"EMSlSHIe04CuAqhz55nAnBpE_0T65Sqs2f'
+b'maPpsNIbnn","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","dt":"2020-08'
+b'-22T17:52:00.000000+00:00","r":"/confidential/process","a":{"i":"EPR7FWsN3tO'
+b'M8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","name":"Ean"}}')
+```
+
+This message has Ean baring his name.
+
 
 #### Exchange Transaction Inception Message Body
 
 The top-level fields of an Exchange Transaction Incept, `xip` message body MUST appear in the following order: `[ v, t, d, u, i, ri, dt, r, q, a]`. All are REQUIRED. No other top-level fields are allowed (MUST NOT appear). Signatures and Seals MUST be attached to the Message body using CESR attachment codes. 
 
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
+
+
+The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive value in the `d` field. The serialization kind is JSON.
+
+
+
+```python
+{
+  
+```
+
+The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
+```python
+
+
+```
 
 Exchange transaction inception message example:
 
@@ -1633,53 +1649,10 @@ Upon emittance of the Inception event, the current (initial) set of keypairs bec
 
 There MUST be only one Establishment event that is an Inception event. All subsequent Establishment events MUST be Rotation events.
 
-Inception event message example:
-
-When the AID in the `i` field is SAID, the new Inception event has two qualified digest fields. In this case, both the `d` and `i` fields MUST have the same value. This means the digest suite's derivation code, used for the `i` field MUST be the same for the `d` field.
+When the AID in the `i` field is a SAID, the new Inception event has two qualified digest fields. In this case, both the `d` and `i` fields MUST have the same value. This means the digest suite's derivation code, used for the `i` field MUST be the same for the `d` field.
 The derivation of the `d` and `i` fields is special. Both the `d` and `i` fields are replaced with dummy `#` characters of the length of the digest to be used. The digest of the Inception event is then computed and both the `d` and `i` fields are replaced with the qualified digest value. Validation of an Inception event requires examining the `i` field's derivation code and if it is a digest-type then the `d` field MUST be identical otherwise the Inception event is invalid.
 
-When the AID is not self-addressing, i.e.., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which is the standard SAID algorithm.
-
-::: note 
-  Examples in this section are not cryptographically verifiable
-:::
-
-Inception event message body
-
-```json
-{
-  "v": "KERI10JSON0001ac_",
-  "t": "icp",
-  "d": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "i": "EL1L56LyoKrIofnn0oPChS4EyzMHEEk75INJohDS_Bug",
-  "s": "0",
-  "kt": "2", // 2 of 3
-  "k":
-    [
-      "DnmwyZ-i0H3ULvad8JZAoTNZaU6JR2YAfSVPzh5CMzS6b",
-      "DZaU6JR2nmwyZ-VPzhzSslkie8c8TNZaU6J6bVPzhzS6b",
-      "Dd8JZAoTNnmwyZ-i0H3U3ZaU6JR2LvYAfSVPzhzS6b5CM"
-    ],
-  "nt": "3",  // 3 of 5
-  "n":
-    [
-      "ETNZH3ULvYawyZ-i0d8JZU6JR2nmAoAfSVPzhzS6b5CM",
-      "EYAfSVPzhzaU6JR2nmoTNZH3ULvwyZb6b5CMi0d8JZAS",
-      "EnmwyZdi0d8JZAoTNZYAfSVPzhzaU6JR2H3ULvS6b5CM",
-      "ETNZH3ULvS6bYAfSVPzhzaU6JR2nmwyZfi0d8JZ5s8bk",
-      "EJR2nmwyZ2i0dzaU6ULvS6b5CM8JZAoTNZH3YAfSVPzh",
-    ],
-  "bt": "2",
-  "b":
-    [
-      "BGKVzj4ve0VSd8z_AmvhLg4lqcC_9WYX90k03q-R_Ydo",
-      "BuyRFMideczFZoapylLIyCjSdhtqVb31wZkRKvPfNqkw",
-      "Bgoq68HCmYNUDgOz4Skvlu306o_NY-NrYuKAVhk3Zh9c"
-    ],
-  "c": [],
-  "a": []
-}
-```
+When the AID is not self-addressing, i.e., the `i` field derivation code is not a digest, then the `i` is given its value and the `d` field is replaced with dummy characters `#` of the correct length and then the digest is computed., which is the standard SAID algorithm.
 
 ### Rotation using pre-rotation
 
@@ -2835,13 +2808,13 @@ URLs provide a namespace, which means that the mapping between URL and AID can b
 For example, suppose the AID is
 
 ~~~python
-EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
+EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
 ~~~
 
 This may be included as a path component of the URL, such as,
 
 ~~~python
-http://8.8.5.6:8080/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
+http://8.8.5.6:8080/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
 ~~~
 
 This is called an OOBI URL, or IURL for short. All that is needed to bootstrap the discovery of a KERI AID is an IURL. KERI can leverage the full IP/DNS infrastructure as a discovery bootstrap of an AID by providing an associated IURL.
@@ -2849,9 +2822,9 @@ This is called an OOBI URL, or IURL for short. All that is needed to bootstrap t
 The AID may act in any of the KERI roles such as `watcher`, `witness`, `juror`, `judge` or `registrar` but is usually a `controller`. In the latter case, the IURL may be a service endpoint provided by one of the supporting components for a given controller. Thus, the AID in an OOBI may be either a controller ID, CID or an endpoint provider ID, EID. The resource at that URL in the OOBI is ultimately responsible for providing that detail, but an OOBI as a URL may contain hints in the query string for the URL, such as a `role` or `name` designation.
 
 ~~~python
-http://8.8.5.6:8080/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM?role=watcher&name=eve
+http://8.8.5.6:8080/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM?role=watcher&name=eve
 
-https://example.com/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM?role=witness
+https://example.com/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM?role=witness
 ~~~
 
 When the role is provided in the IURL, the EID of the endpoint provider for that role would be discovered via the proof returned by querying the URL. In addition, The proof returned may indicate a different URL for that role so a self-describing IURL may act also as a forwarding mechanism.
@@ -2866,12 +2839,12 @@ An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC57
 For example,
 
 ~~~python
- /.well-known/keri/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
+ /.well-known/keri/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM
 ~~~
 
 Where:
 
- `EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM` is the AID
+ `EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM` is the AID
 and the result of the request is either target URL or a redirection to the target URL where the target URL can be
 
 ~~~python
@@ -2892,14 +2865,13 @@ A more verbose version would also include the endpoint role and the AID (EID) of
 For example,
 
 ~~~python
-https://example.com/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/witness/BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE
+https://example.com/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM/witness/BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE
 
-http://8.8.5.6/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM/witness/BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE
-~~~
+http://8.8.5.6/oobi/EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM/witness/BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE~~~
 
 
 Where:
-`EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM` is the AID (CID) of the controller and `BrHLayDN-mXKv62DAjFLX1_Y5yEUe0vA9YPe_ihiKYHE` is the AID (EID) of the controller's endpoint provider acting in the role of `witness`.
+`EAoTNZH3ULvYAfaU6JR2nmwyZ-i0d8JZSVPzhzS6b5CM` is the AID (CID) of the controller and `BDN-mXKv62DArHLayjFLX1_Y5yEUe0vA9YPe_ihiKYHE` is the AID (EID) of the controller's endpoint provider acting in the role of `witness`.
 
 
 #### Multi-OOBI (MOOBI)
@@ -3077,7 +3049,7 @@ In order to ensure that the destination Peers are resistant to replay and deleti
 
 #### OOBI KERI Endpoint Authorization (OKEA)
 
-An important use case for BADA-RUN is to process OOBIs that provide service endpoint discovery of the AIDS of KERI components. These components include but are not limited to, Controllers, Agents, Backers (Witness or Registrar), Watchers, Jurors, Judges, and Forwarders. An endpoint is a URL that may include an IP Scheme, Host, Port, and Path. The model for securely managing endpoint data starts with a Principal Controller of an AID. A Principal Controller authorizes some other component to act as a Player in a Role. Typically, a Role serves some function needed by the Principal Controller to support its AID and may be reached at a service endpoint URL for that Role. Each component, in turn, is the Controller of its own AID. Each component AID is a Player that may provide or act in a Role on behalf of the Principal Controller by providing services at the associated service endpoint for its associated Role.
+An important use case for BADA-RUN is to process OOBIs that provide service endpoint discovery of the AIDS of KERI components. These components include but are not limited to Controllers, Agents, Backers (Witness or Registrar), Watchers, Jurors, Judges, and Forwarders. An endpoint is a URL that may include an IP Scheme, Host, Port, and Path. The model for securely managing endpoint data starts with a Principal Controller of an AID. A Principal Controller authorizes some other component to act as a Player in a Role. Typically, a Role serves some function needed by the Principal Controller to support its AID and may be reached at a service endpoint URL for that Role. Each component, in turn, is the Controller of its own AID. Each component AID is a Player that may provide or act in a Role on behalf of the Principal Controller by providing services at the associated service endpoint for its associated Role.
 
 The authorization model uses a zero-trust BADA-RUN policy to Update authorizations. A Principal Controller authorizes a Player by signing a Role authorization message that authorizes the Player's AID to act in a role. A Player authorizes its endpoint URL by signing an endpoint authorization message that authorizes a URL (location) with a scheme. Any Peer may keep an updated copy of the latest service endpoint URL(s) provided by a Player in a Role for a given Principal AID by following the BADA-RUN policy on Updates sent to its database of these authorizations. The authorizations are issued in the context of the KERI Key-state for the Principal and Player AIDs.
 
@@ -3132,8 +3104,8 @@ Example reply messages.
 }
 ~~~
 
-#### Player EID in Role by CID Nullify
-
+#### Player EID in Role by CID Nullify via cut
+To nullify cut the EID
 ~~~json
 {
   "v": "KERI10JSON000113_",
@@ -3170,7 +3142,8 @@ Example reply messages.
 
 ~~~
 
-#### Endpoint Location with Scheme by EID Nullify
+#### Endpoint Location with Scheme by EID Nullify via empty
+
 To Nullify set the `url` to the empty string `""`.
 
 ~~~json
