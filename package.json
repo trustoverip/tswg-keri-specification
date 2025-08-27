@@ -1,29 +1,16 @@
 {
   "name": "spec-up",
   "version": "-.-.-",
+  "license": "Apache 2.0",
   "description": "Technical specification drafting tool that generates rich specification documents from markdown.",
-  "main": "./index",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "spec-up-t": "^1.2.7"
+  },
+  "author": "Daniel Buchner",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentralized-identity/spec-up.git"
-  },
-  "scripts": {
-    "edit": "node -e \"require('spec-up-t')()\"",
-    "render": "node --no-warnings -e \"require('spec-up-t/index.js')({ nowatch: true })\"",
-    "dev": "node -e \"require('spec-up-t')({ dev: true })\"",
-    "xtrefupdate": "node src/server/xtref-update.js",
-    "xtrefupdateall": "node src/server/xtref-update-all.js",
-    "topdf": "node -e \"require('spec-up-t/src/create-pdf.js')\"",
-    "freeze": "node -e \"require('spec-up-t/src/freeze.js')\"",
-    "references": "node -e \"require('spec-up-t/src/references.js')\"",
-    "help": "cat ./node_modules/spec-up-t/src/install-from-boilerplate/help.txt",
-    "menu": "bash ./node_modules/spec-up-t/src/install-from-boilerplate/menu.sh",
-    "addremovexrefsource": "node --no-warnings -e \"require('spec-up-t/src/add-remove-xref-source.js')\"",
-    "configure": "node --no-warnings -e \"require('spec-up-t/src/configure.js')\"",
-    "postinstall": "node postinstall-message.js",
-    "collectExternalReferencesCache": "node --no-warnings -e \"require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: true})\"",
-    "collectExternalReferencesNoCache": "node --no-warnings -e \"require('spec-up-t/src/collect-external-references.js').collectExternalReferences({cache: false})\"",
-    "custom-update": "npm update && node -e \"require('spec-up-t/src/install-from-boilerplate/custom-update.js')\""
   },
   "keywords": [
     "spec",
@@ -32,45 +19,24 @@
     "editor",
     "standards"
   ],
-  "author": "Daniel Buchner",
-  "license": "Apache 2.0",
+  "homepage": "https://github.com/decentralized-identity/spec-up#readme",
   "bugs": {
     "url": "https://github.com/decentralized-identity/spec-up/issues"
   },
-  "homepage": "https://github.com/decentralized-identity/spec-up#readme",
-  "dependencies": {
-    "@traptitech/markdown-it-katex": "3.3.0",
-    "axios": "^1.6.4",
-    "dotenv": "^16.4.5",
-    "find-pkg-dir": "2.0.0",
-    "fs-extra": "8.1.0",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "4.3.0",
-    "gulp-concat": "2.6.1",
-    "gulp-terser": "1.2.0",
-    "markdown-it": "13.0.1",
-    "markdown-it-anchor": "5.2.5",
-    "markdown-it-attrs": "4.1.4",
-    "markdown-it-chart": "^0.2.0",
-    "markdown-it-container": "^2.0.0",
-    "markdown-it-deflist": "^2.1.0",
-    "markdown-it-icons": "^0.4.1",
-    "markdown-it-ins": "^2.0.0",
-    "markdown-it-mark": "^2.0.0",
-    "markdown-it-modify-token": "1.0.2",
-    "markdown-it-multimd-table": "^4.1.3",
-    "markdown-it-prism": "^2.2.0",
-    "markdown-it-references": "1.0.0-alpha.10",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0",
-    "markdown-it-task-lists": "2.1.1",
-    "markdown-it-textual-uml": "0.1.3",
-    "markdown-it-toc-and-anchor": "4.2.0",
-    "merge-stream": "2.0.0",
-    "pkg-dir": "4.2.0",
-    "prismjs": ">=1.24.0",
-    "spec-up-splitter": "^1.0.16",
-    "spec-up-t": "^1.0.87",
-    "yargs": "16.2.0"
+  "scripts": {
+    "edit": "node -e \"require('spec-up-t')()\"",
+    "render": "node --no-warnings -e \"require('spec-up-t/index.js')({ nowatch: true })\"",
+    "dev": "node -e \"require('spec-up-t')({ dev: true })\"",
+    "collectExternalReferences": "node --no-warnings -e \"require('spec-up-t/src/collect-external-references.js').collectExternalReferences()\"",
+    "topdf": "node -e \"require('spec-up-t/src/create-pdf.js')\"",
+    "todocx": "node -e \"require('spec-up-t/src/create-docx.js')\"",
+    "freeze": "node -e \"require('spec-up-t/src/freeze.js')\"",
+    "references": "node -e \"require('spec-up-t/src/references.js')\"",
+    "help": "cat ./node_modules/spec-up-t/src/install-from-boilerplate/help.txt",
+    "menu": "bash ./node_modules/spec-up-t/src/install-from-boilerplate/menu.sh",
+    "addremovexrefsource": "node --no-warnings -e \"require('spec-up-t/src/add-remove-xref-source.js')\"",
+    "configure": "node --no-warnings -e \"require('spec-up-t/src/configure.js')\"",
+    "healthCheck": "node --no-warnings -e \"require('spec-up-t/src/health-check.js')\"",
+    "custom-update": "npm update && node -e \"require('spec-up-t/src/install-from-boilerplate/custom-update.js')\""
   }
 }
