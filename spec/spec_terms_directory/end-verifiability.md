@@ -1,3 +1,3 @@
-[[tref: toip1, end-verifiability]]
+[[tref: keri1, end-verifiability]]
 
 ~ No local definition found.

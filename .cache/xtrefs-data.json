@@ -2,19 +2,6 @@
   "xtrefs": [
     {
       "externalSpec": "keri1",
-      "term": "keris-algorithm-for-witness-agreement",
-      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
-      "terms_dir": "spec/terms-definitions",
-      "owner": "henkvancann",
-      "repo": "kerisuite-glossary",
-      "avatarUrl": null,
-      "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
-      "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
-    },
-    {
-      "externalSpec": "keri1",
       "term": "authentic-chained-data-container",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
       "terms_dir": "spec/terms-definitions",
@@ -193,19 +180,6 @@
       "repo": "ctwg-general-glossary",
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-general-glossary/",
-      "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
-    },
-    {
-      "externalSpec": "toip1",
-      "term": "end-verifiability",
-      "repoUrl": "https://github.com/henkvancann/ctwg-main-glossary",
-      "terms_dir": "spec/terms-definitions",
-      "owner": "henkvancann",
-      "repo": "ctwg-main-glossary",
-      "avatarUrl": null,
-      "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
@@ -420,19 +394,6 @@
       "content": "<dd class=\"last-dd last-dd\">\n<p>a serialization of a unitary value. All Primitives in KERI must be expressed in <a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a>.</p>\n</dd>"
     },
     {
-      "externalSpec": "toip2",
-      "term": "rotation-event",
-      "repoUrl": "https://github.com/henkvancann/ctwg-general-glossary",
-      "terms_dir": "spec/terms-definitions",
-      "owner": "henkvancann",
-      "repo": "ctwg-general-glossary",
-      "avatarUrl": null,
-      "ghPageUrl": "https://henkvancann.github.io/ctwg-general-glossary/",
-      "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
-    },
-    {
       "externalSpec": "keri1",
       "term": "rotation",
       "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
@@ -590,6 +551,45 @@
       "site": null,
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
       "content": "<dd>\n<p>a witness is an entity or component designated (trusted) by the controller of an identifier. The primary role of a witness is to verify, sign, and keep events associated with an identifier. A witness is the controller of its own self-referential identifier which may or may not be the same as the identifier to which it is a witness. See also <a class=\"term-reference\" href=\"#term:keri’s-algorithm-for-witness-agreement\">keri’s-algorithm-for-witness-agreement</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/witness\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "end-verifiability",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "henkvancann",
+      "repo": "kerisuite-glossary",
+      "avatarUrl": null,
+      "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
+      "site": null,
+      "commitHash": "not found",
+      "content": "This term was not found in the external repository."
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "rotation-event",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "henkvancann",
+      "repo": "kerisuite-glossary",
+      "avatarUrl": null,
+      "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
+      "site": null,
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>an Establishment Event that provides the information needed to change the Key state, which includes a change to the set of <a class=\"term-reference\" href=\"#term:authoritative\">authoritative</a> keypairs for an AID.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/rotation-event\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "keri’s-algorithm-for-witness-agreement",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "henkvancann",
+      "repo": "kerisuite-glossary",
+      "avatarUrl": null,
+      "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
+      "site": null,
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>a type of Byzantine Fault Tolerant (<a class=\"term-reference\" href=\"#term:byzantine-fault-tolerance\">byzantine-fault-tolerance</a>) algorithm.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/keri’s-algorithm-for-witness-agreement\">extended KERI glossary</a></p>\n</dd>"
     }
   ]
 }
