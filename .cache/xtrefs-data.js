@@ -580,6 +580,20 @@ const allXTrefs = {
       "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
       "content": "<dd>\n<p>an instance of a KEL for an AID in which at least one event is unique between two instances of the <a class=\"term-reference\" href=\"#term:kel\">kel</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/version\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "self-certifying-identifier",
+      "alias": "Self-certifying identifier",
+      "repoUrl": "https://github.com/henkvancann/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "henkvancann",
+      "repo": "kerisuite-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>a type of Cryptonym that is uniquely cryptographically derived from the public key of an asymmetric signing keypair (public, private).</p>\n</dd>\n<dd>\n<p>Source: Dr. S. Smith</p>\n</dd>\n<dd>\n<p>Also see the TrustoverIP scope definition: <a class=\"x-term-reference term-reference\" data-local-href=\"#term:toip1:self-certifying-identifier\" href=\"https://henkvancann.github.io/ctwg-main-glossary/#term:self-certifying-identifier\">self-certifying identifier</a></p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/self-certifying-identifier\">extended KERI glossary</a></p>\n</dd>"
     }
   ]
 };

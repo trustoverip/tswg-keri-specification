@@ -1,3 +1,3 @@
-[[tref: toip2, key-state]]
+[[tref: toip2, key-state, Key-State]]
 
 ~ No local definition found.

@@ -1,4 +1,4 @@
-[[tref: keri1, self-certifying-identifier
+[[tref: keri1, self-certifying-identifier, Self-certifying identifier]]
 
 ~ -
 

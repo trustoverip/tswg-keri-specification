@@ -1,3 +1,3 @@
-[[tref: toip2, primitive]]
+[[tref: toip2, primitive, Primitive]]
 
 ~ No local definition found.
