@@ -36,7 +36,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>an identity system that includes a primary root-of-trust in self-certifying identifiers that are strongly bound at issuance to a cryptographic signing (public, private) key pair. An AIS enables any entity to establish control over an AN in an independent, interoperable, and portable way.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>There’s nobody that can intervene with the establishment of the authenticity of a control operation because you can verify all the way back to the root-of-trust.</p>\n</dd>"
     },
     {
@@ -49,7 +49,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>a namespace that is self-certifying and hence self-administrating. An AN has a self-certifying prefix that provides cryptographic verification of root control authority over its namespace. All derived AIDs in the same AN share the same root-of-trust, source-of-truth, and locus-of-control (RSL). The governance of the namespace is, therefore, unified into one entity, that is, the controller who is/holds the root authority over the namespace.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>Namespaces are, therefore, portable and truly self-sovereign.</p>\n</dd>"
     },
     {
@@ -102,7 +102,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>In the context of digital <a class=\"term-reference\" href=\"#term:communications\">communications</a>, the <a class=\"term-reference\" href=\"#term:entity\">entity</a> in control of sending and receiving digital <a class=\"term-reference\" href=\"#term:communications\">communications</a>. In the context of decentralized digital trust infrastructure, the <a class=\"term-reference\" href=\"#term:entity\">entity</a> in control of the <a class=\"term-reference\" href=\"#term:cryptographic-keys\">cryptographic keys</a> necessary to perform <a class=\"term-reference\" href=\"#term:cryptographically-verifiable\">cryptographically verifiable</a> <a class=\"term-reference\" href=\"#term:actions\">actions</a> using a <a class=\"term-reference\" href=\"#term:digital-agent\">digital agent</a> and <a class=\"term-reference\" href=\"#term:digital-wallet\">digital wallet</a>. In a ToIP context, the <a class=\"term-reference\" href=\"#term:entity\">entity</a> in control of a <a class=\"term-reference\" href=\"#term:toip-endpoint\">ToIP endpoint</a>.</p>\n</dd>\n<dd>\n<p>See also: <a class=\"term-reference\" href=\"#term:device-controller\">device controller</a>, <a class=\"term-reference\" href=\"#term:did-controller\">DID controller</a>, <a class=\"term-reference\" href=\"#term:toip-controller\">ToIP controller</a>.</p>\n</dd>\n<dd>\n<p>Supporting definitions:</p>\n</dd>\n<dd>\n<p><a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"essifLab-glossary#controller\" href=\"https://essif-lab.github.io/framework/docs/essifLab-glossary#controller\">eSSIF-Lab</a>: the role that an <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"actor\" href=\"https://essif-lab.github.io/framework/docs/terms/actor\">actor</a> performs as it is executing actions on that <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"entity\" href=\"https://essif-lab.github.io/framework/docs/terms/entity\">entity</a> for the purpose of ensuring that the <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"entity\" href=\"https://essif-lab.github.io/framework/docs/terms/entity\">entity</a> will act/behave, or be used, in a particular way.</p>\n</dd>"
     },
     {
@@ -351,7 +351,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>A discrete unit of <a class=\"term-reference\" href=\"#term:communication\">communication</a> intended by the source for consumption by some recipient or group of recipients.</p>\n</dd>\n<dd>\n<p>Source: <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Message\" href=\"https://en.wikipedia.org/wiki/Message\">Wikipedia</a>.</p>\n</dd>\n<dd>\n<p>See also: <a class=\"term-reference\" href=\"#term:toip-message\">ToIP message</a>, <a class=\"term-reference\" href=\"#term:verifiable-message\">verifiable message</a>.</p>\n</dd>"
     },
     {
@@ -497,7 +497,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>In the context of digital <a class=\"term-reference\" href=\"#term:communications\">communications</a> infrastructure, the ability to determine the <a class=\"term-reference\" href=\"#term:authenticity\">authenticity</a> of a <a class=\"term-reference\" href=\"#term:communication\">communication</a> (e.g., sender, contents, <a class=\"term-reference\" href=\"#term:claims\">claims</a>, <a class=\"term-reference\" href=\"#term:metadata\">metadata</a>, provenance), or the underlying <a class=\"term-reference\" href=\"#term:sociotechnical\">sociotechnical</a> infrastructure (e.g., <a class=\"term-reference\" href=\"#term:governance\">governance</a>, <a class=\"term-reference\" href=\"#term:roles\">roles</a>, <a class=\"term-reference\" href=\"#term:policies\">policies</a>, <a class=\"term-reference\" href=\"#term:authorizations\">authorizations</a>, <a class=\"term-reference\" href=\"#term:certifications\">certifications</a>).</p>\n</dd>\n<dd>\n<p>See also:<a class=\"term-reference\" href=\"#term:appraisable\">appraisable</a>, <a class=\"term-reference\" href=\"#term:digital-signature\">digital signature</a>.</p>\n</dd>"
     },
     {
@@ -510,7 +510,7 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/ctwg-main-glossary/",
       "site": null,
-      "commitHash": "beb6bd72e68d975465ed00556834bad7a5d47fc8",
+      "commitHash": "6de0480a63aaf618e786e165a584a1a1b63bc7d0",
       "content": "<dd>\n<p>A <a class=\"term-reference\" href=\"#term:role\">role</a> an <a class=\"term-reference\" href=\"#term:agent\">agent</a> performs to perform <a class=\"term-reference\" href=\"#term:verification\">verification</a> of one or more <a class=\"term-reference\" href=\"#term:proofs\">proofs</a> of the <a class=\"term-reference\" href=\"#term:claims\">claims</a> in a <a class=\"term-reference\" href=\"#term:digital-credential\">digital credential</a> or other <a class=\"term-reference\" href=\"#term:verifiable-data\">verifiable data</a>.</p>\n</dd>\n<dd>\n<p>See also: <a class=\"term-reference\" href=\"#term:relying-party\">relying party</a>; <a class=\"term-reference\" href=\"#term:issuer\">issuer</a>, <a class=\"term-reference\" href=\"#term:holder\">holder</a>.</p>\n</dd>\n<dd>\n<p>Mental model: <a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"#roles\" href=\"https://www.w3.org/TR/vc-data-model/#roles\">W3C Verifiable Credentials Data Model Roles &amp; Information Flows</a></p>\n</dd>\n<dd>\n<p>Supporting definitions:</p>\n</dd>\n<dd>\n<p><a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"#terminology\" href=\"https://www.w3.org/TR/vc-data-model/#terminology\">W3C VC</a>: A role an <a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"#dfn-entities\" href=\"https://www.w3.org/TR/vc-data-model/#dfn-entities\">entity</a> performs by receiving one or more <a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"#dfn-verifiable-credentials\" href=\"https://www.w3.org/TR/vc-data-model/#dfn-verifiable-credentials\">verifiable credentials</a>, optionally inside a <a path-0=\"www.w3.org\" path-1=\"TR\" path-2=\"vc-data-model\" path-3=\"#dfn-verifiable-presentations\" href=\"https://www.w3.org/TR/vc-data-model/#dfn-verifiable-presentations\">verifiable presentation</a> for processing. Other specifications might refer to this concept as a <a class=\"term-reference\" href=\"#term:relying-party\">relying party</a>.</p>\n</dd>\n<dd>\n<p><a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"essifLab-glossary#verifier\" href=\"https://essif-lab.github.io/framework/docs/essifLab-glossary#verifier\">eSSIF-Lab</a>: a component that implements the <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"capability\" href=\"https://essif-lab.github.io/framework/docs/terms/capability\">capability</a> to request <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"peer-agent\" href=\"https://essif-lab.github.io/framework/docs/terms/peer-agent\">peer agents</a> to present (provide) data from credentials (of a specified kind, issued by specified <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"party\" href=\"https://essif-lab.github.io/framework/docs/terms/party\">parties</a>), and to verify such responses (check structure, signatures, dates), according to its <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"principal\" href=\"https://essif-lab.github.io/framework/docs/terms/principal\">principal</a>’s <a path-0=\"essif-lab.github.io\" path-1=\"framework\" path-2=\"docs\" path-3=\"terms\" path-4=\"verifier-policy\" href=\"https://essif-lab.github.io/framework/docs/terms/verifier-policy\">verifier policy</a>.</p>\n</dd>\n<dd>\n<p><a path-0=\"csrc.nist.gov\" path-1=\"glossary\" path-2=\"term\" path-3=\"verifier\" href=\"https://csrc.nist.gov/glossary/term/verifier\">NIST</a> The entity that verifies the authenticity of a digital signature using the public key.</p>\n</dd>"
     },
     {
@@ -562,8 +562,8 @@ const allXTrefs = {
       "avatarUrl": null,
       "ghPageUrl": "https://henkvancann.github.io/kerisuite-glossary/",
       "site": null,
-      "commitHash": "not found",
-      "content": "This term was not found in the external repository."
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>a data item or statement may be cryptographically securely attributable to its source (party at the source end) by any recipient verifier (party at the destination end) without reliance on any infrastructure not under the verifier’s ultimate control.</p>\n</dd>\n<dd>\n<p>Source Dr. S.Smith</p>\n</dd>"
     },
     {
       "externalSpec": "keri1",
