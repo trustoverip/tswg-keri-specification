@@ -1,7 +1,3 @@
-[[tref: keri1, self-certifying-identifier, Self-certifying identifier]]
-
-~ -
-
-~ Self-certifying Identifier, SCID]]
+[[tref: keri1, self-certifying-identifier, Self-certifying identifier, , SCID]]
 
 ~ No local definition found.
