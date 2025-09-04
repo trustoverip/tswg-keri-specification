@@ -258,7 +258,7 @@ The top-level fields of each message type MUST appear in a specific order. All t
 
 ##### Version string field
 
-The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[spec: RFC4627]] [[spec: RFC4627]] [[2](#ref2)] [[ref: RFC8949]] [[3](#ref3)]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1](#ref1)].
+The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[RFC4627](#RFC4627)] [[2](#ref2)] [[RFC8949](#RFC8949)] [[3](#ref3)]. It provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body. A stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body in a stream MAY use a different serialization type. The format for the version string field value is defined in the CESR specification [[1](#ref1)].
 
 The protocol field, `PPPP` value in the version string MUST be `KERI` for the KERI protocol. The version field, `VVV`, MUST encode the current version of the KERI protocol [[1](#ref1)].
 
@@ -2038,7 +2038,7 @@ Field order by label:  `v`, `t`, `d`, `i`, `ri`, `x`, `p`, `dt`, `r`, `q`, `a`.
 
 An Out-Of-Band Introduction (OOBI) provides a discovery mechanism that associates a given URI or URL with a given AID or [[ref: SAID]]. The URI provided by an OOBI acts as a service endpoint for discovering verifiable information about the AID or SAID. As such, an OOBI itself is not trusted but MUST be verified. To clarify, any information obtained from the service endpoint provided in the OOBI MUST be verified by some other mechanism. An OOBI, however, enables any internet and web search infrastructure to act as an out-of-band infrastructure to discover verifiable information over an in-band mechanism or protocol. The primary in-band verification protocol is KERI. The OOBI protocol provides a web-based bootstrap and/or discovery mechanism for the KERI and the ACDC (Authentic Chained Data Container) protocols [[ref: ACDC]] [[ref: OOBI]]. Thus, the security (or, more correctly, the lack of security) of an OOBI is out-of-band with respect to a KERI AID or an ACDC that uses KERI. To clarify, everything in KERI or that depends on KERI is end-verifiable; therefore, it has no security dependency, nor does it rely on security guarantees that may or may not be provided by web or internet infrastructure.  OOBIs provide a bootstrap that enables what we call Percolated Information Discovery (PID) based on the academic concept called Invasion Percolation Theory [[27](#ref27)] [[28](#ref28)] [[25](#ref25)] [[26](#ref26)]. This bootstrap may then be parlayed into a secure mechanism for accepting and updating data. The principal data acceptance and update policy is denoted BADA (Best-Available-Data-Acceptance).
 
-Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID depend an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[29](#ref29)]. The principal reason for this dependency is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI for bootstrapping discovery.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[spec: RFC3986]] [[29](#ref29)]. We call this a KERI OOBI and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
+Vacuous discovery of IP resources such as service endpoints associated with a KERI AID or SAID depend an OOBI to associate a given URL with a given AID or SAID [[ref: SAID]] [[ref: OOBI]] [[29](#ref29)]. The principal reason for this dependency is that KERI AIDs are derived in a completely decentralized manner. The root-of-trust of a KERI AID is completely independent of the Internet and DNS addressing infrastructure. Thus, an IP address or URL could be considered a type of Out-Of-Band Infrastructure (OOBI) for KERI for bootstrapping discovery.  In this context, an introduction is an association between a KERI AID and a URL that may include either an explicit IP address or a DNS name for its host [[RFC3986](#RFC3986)] [[29](#ref29)]. We call this a KERI OOBI (and is a special case of OOBI) with a shared acronym. For the sake of clarity, unless otherwise qualified, OOBI is used to mean this special case of an 'introduction' and not the general case of 'infrastructure'.
 
 Moreover, because IP infrastructure is not trusted by KERI, a KERI OOBI by itself is considered insecure with respect to KERI, and any OOBI must, therefore, be later verified using a KERI BADA mechanism. The principal use case for an OOBI is to jump-start or bootstrap the discovery of a service endpoint for a given AID. To reiterate, the OOBI by itself is not sufficient for discovery because the OOBI itself is insecure. The OOBI merely jump-starts or bootstraps the authenticated discovery.
 
@@ -2098,7 +2098,7 @@ To clarify, the minimum information in an OOBI is the pair, `(URL, AID)`. The co
 
 #### Well-Known OOBI
 
-An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC5785]] well-known URL.
+An OOBI may be returned as the result of a ‘GET’ request to an [[spec: RFC5785](#RFC5785)] well-known URL.
 
 For example,
 
@@ -2429,9 +2429,7 @@ To Nullify set the `url` to the empty string `""`.
 
 ## Bibliography
 
-[[spec]]
-
-### Informative section
+### Normative section
 
 <a id="CESR">1</a><a id="ref1"></a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
 
@@ -2440,6 +2438,23 @@ To Nullify set the `url` to the empty string `""`.
 <a id="MessagePack">3</a><a id="ref3"></a>. Sadayuki Furuhashi, [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md), 2008
 
 <a id="KERI-WP">4</a><a id="ref4"></a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
+
+<a id="RFC0791">30</a><a id="ref30"></a>. [Internet Protocol. J. Postel; 1981-09](https://www.rfc-editor.org/rfc/rfc791). Status: Internet Standard.
+
+<a id="RFC3986">31</a><a id="ref31"></a>. [Uniform Resource Identifier (URI): Generic Syntax](https://www.rfc-editor.org/rfc/rfc3986). T. Berners-Lee; R. Fielding; L. Masinter; 2005-01. Status: Internet Standard.
+
+
+<a id="RFC4627">32</a><a id="ref32"></a>. [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.rfc-editor.org/rfc/rfc4627). D. Crockford; 2006-07. Status: Informational.
+
+<a id="RFC5280">33</a><a id="ref33"></a>. [Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://www.rfc-editor.org/rfc/rfc5280). D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk; 2008-05. Status: Proposed Standard.
+
+<a id="RFC5785">34</a><a id="ref34"></a>. [Defining Well-Known Uniform Resource Identifiers (URIs)](https://www.rfc-editor.org/rfc/rfc5785). M. Nottingham; E. Hammer-Lahav; 2010-04. Status: Proposed Standard.
+
+
+<a id="RFC6960">35</a><a id="ref35"></a>. [X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP](https://www.rfc-editor.org/rfc/rfc6960). S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.
+
+
+### Informative section
 
 <a id="UIT">5</a><a id="ref5"></a>. Samuel M. Smith, [Universal Identifier Theory](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf), 2020
 
