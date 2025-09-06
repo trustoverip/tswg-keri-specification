@@ -35,12 +35,6 @@
           "terms_dir": "spec/terms-definitions"
         },
         {
-          "external_spec": "vlei1",
-          "gh_page": "https://henkvancann.github.io/vlei-glossary/",
-          "url": "https://github.com/henkvancann/vlei-glossary",
-          "terms_dir": "spec/terms-definitions"
-        },
-        {
           "external_spec": "toip2",
           "gh_page": "https://henkvancann.github.io/ctwg-general-glossary/",
           "url": "https://github.com/henkvancann/ctwg-general-glossary",
