@@ -1,0 +1,140 @@
+name: Run Menu
+
+on:
+  workflow_dispatch:
+    inputs:
+      action_type:
+        description: 'Action to perform'
+        required: true
+        default: 'render'
+        type: choice
+        options:
+          - render
+          - topdf
+          - todocx
+          - freeze
+          - custom-update
+          - collectExternalReferences
+      repository:
+        description: 'Repository'
+        required: false
+      branch:
+        description: 'Branch'
+        required: false
+      triggered_by:
+        description: 'Triggered by'
+        required: false
+
+jobs:
+  build-and-deploy-spec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed for pushing changes and deploying to Pages
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # We’ll use MY_PAT for push
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Extract output_path from JSON
+        id: extract-output
+        run: |
+          OUTPUT_PATH=$(jq -r '.specs[0].output_path // "default/output"' specs.json)
+          if [ "$OUTPUT_PATH" = "null" ] || [ -z "$OUTPUT_PATH" ]; then
+            echo "Error: Unable to extract output_path from specs.json"
+            exit 1
+          fi
+          echo "OUTPUT_PATH=$OUTPUT_PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies 🔧
+        run: |
+          echo "Installing dependencies..."
+          npm install
+          echo "Spec-Up-T version:"
+          npm list spec-up-t || echo "spec-up-t not found"
+
+      - name: Run selected script
+        env:
+          MY_PAT: ${{ secrets.MY_PAT }} # Make the secret available as an env var
+        run: |
+          case "${{ github.event.inputs.action_type }}" in
+            render)
+              npm run render
+              ;;
+            topdf)
+              npm run topdf
+              ;;
+            todocx)
+              npm run todocx
+              ;;
+            freeze)
+              npm run freeze
+              ;;
+            custom-update)
+              npm run custom-update
+              ;;
+            collectExternalReferences)
+              npm run collectExternalReferences
+              ;;
+            *)
+              echo "Unknown action_type: ${{ github.event.inputs.action_type }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Commit and push changes
+        if: success()
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          
+          # Add all changes
+          git add .
+          
+          # Commit with appropriate message
+          case "${{ github.event.inputs.action_type }}" in
+            render)
+              git commit -m "Render specification: Update files" || echo "No changes to commit"
+              ;;
+            topdf)
+              git commit -m "Export to PDF" || echo "No changes to commit"
+              ;;
+            todocx)
+              git commit -m "Export to DOCX" || echo "No changes to commit"
+              ;;
+            collectExternalReferences)
+              git commit -m "Collect external references" || echo "No changes to commit"
+              ;;
+            freeze)
+              git commit -m "Freeze specification" || echo "No changes to commit"
+              ;;
+            custom-update)
+              git commit -m "Custom update: Copy files from spec-up-t" || echo "No changes to commit"
+              ;;
+            *)
+              git commit -m "Update files: ${{ github.event.inputs.action_type }}" || echo "No changes to commit"
+              ;;
+          esac
+          
+          # Push changes
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+      - name: Commit output files
+        if: success()
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add "$OUTPUT_PATH"
+          git commit -m "Update output files in $OUTPUT_PATH" || echo "No changes to commit in output directory"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+      - name: Clean up
+        if: always()
+        run: |
+          echo "Cleaning up..."
+          rm -rf node_modules

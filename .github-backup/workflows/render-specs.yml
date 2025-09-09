@@ -1,0 +1,47 @@
+
+name: spec-up-t render
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy-spec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Extract output_path from JSON
+        # TODO: .specs[0] is a hack to get the first spec. This should be fixed.
+        run: |
+          OUTPUT_PATH=$(jq -r '.specs[0].output_path' specs.json)
+          echo "OUTPUT_PATH=$OUTPUT_PATH" >> $GITHUB_ENV
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          echo "start install"
+          npm install
+          echo "end install"
+          echo "Spec-Up-T version:"
+          npm list spec-up-t
+          echo "start render"
+          node -e "require('spec-up-t')({ nowatch: true })"
+          echo "end render"
+          rm -rf node_modules
+
+      # This is a GitHub Action to deploy your static files to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ env.OUTPUT_PATH }} # Use the OUTPUT_PATH environment variable
+          allow_empty_commit: true
+          force_orphan: true
+
+          

@@ -1,0 +1,92 @@
+{
+  "specs": [
+    {
+      "title": "KERI specification",
+      "description": "Create technical specifications in markdown. Based on the original Spec-Up, extended with Terminology tooling",
+      "author": "Trust over IP Foundation",
+      "spec_directory": "./spec",
+      "spec_terms_directory": "terms-definitions",
+      "output_path": "./docs",
+      "markdown_paths": [
+        "spec-head.md",
+        "terms-and-definitions-intro.md",
+        "terms-definitions/KERIs-algorithm-for-witness-agreement.md",
+        "terms-definitions/authentic-chained-data-container.md",
+        "terms-definitions/autonomic-identifier.md",
+        "terms-definitions/autonomic-identity-system.md",
+        "terms-definitions/autonomic-namespace.md",
+        "terms-definitions/backer.md",
+        "terms-definitions/concise-binary-object-representation.md",
+        "terms-definitions/configuration-traits.md",
+        "terms-definitions/controller.md",
+        "terms-definitions/cryptographic-primitive.md",
+        "terms-definitions/cryptonym.md",
+        "terms-definitions/current-threshold.md",
+        "terms-definitions/dead-attack.md",
+        "terms-definitions/decentralized-key-management-infrastructure.md",
+        "terms-definitions/duplicity.md",
+        "terms-definitions/end-verifiability.md",
+        "terms-definitions/establishment-event.md",
+        "terms-definitions/first-seen.md",
+        "terms-definitions/inception-event.md",
+        "terms-definitions/inception.md",
+        "terms-definitions/interaction-event.md",
+        "terms-definitions/key-event-log.md",
+        "terms-definitions/key-event-message.md",
+        "terms-definitions/key-event-receipt-log.md",
+        "terms-definitions/key-event-receipt.md",
+        "terms-definitions/key-event.md",
+        "terms-definitions/key-state.md",
+        "terms-definitions/live-attack.md",
+        "terms-definitions/message.md",
+        "terms-definitions/next-threshold.md",
+        "terms-definitions/non-establishment-event.md",
+        "terms-definitions/primitive.md",
+        "terms-definitions/rotation-event.md",
+        "terms-definitions/rotation.md",
+        "terms-definitions/salt.md",
+        "terms-definitions/seal.md",
+        "terms-definitions/self-addressed-data.md",
+        "terms-definitions/self-addressing-identifier.md",
+        "terms-definitions/self-certifying-identifier.md",
+        "terms-definitions/validator.md",
+        "terms-definitions/verifiable.md",
+        "terms-definitions/verifier.md",
+        "terms-definitions/version.md",
+        "terms-definitions/watcher.md",
+        "terms-definitions/witness.md",
+        "spec-body.md"
+      ],
+      "logo": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/logo.svg",
+      "logo_link": "https://github.com/trustoverip/spec-up-t",
+      "favicon": "https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/favicon.ico",
+      "source": {
+        "host": "github",
+        "account": "trustoverip",
+        "repo": "tswg-keri-specification",
+        "branch": "ihtml"
+      },
+      "external_specs": [
+        {
+          "external_spec": "keri1",
+          "gh_page": "https://trustoverip.github.io/kerisuite-glossary/",
+          "url": "https://github.com/trustoverip/kerisuite-glossary",
+          "terms_dir": "spec/terms-definitions"
+        },
+        {
+          "external_spec": "toip1",
+          "gh_page": "https://trustoverip.github.io/ctwg-main-glossary/",
+          "url": "https://github.com/trustoverip/ctwg-main-glossary",
+          "terms_dir": "spec/terms-definitions"
+        },
+        {
+          "external_spec": "toip2",
+          "gh_page": "https://trustoverip.github.io/ctwg-general-glossary/",
+          "url": "https://github.com/trustoverip/ctwg-general-glossary",
+          "terms_dir": "spec/terms-definitions"
+        }
+      ],
+      "katex": false
+    }
+  ]
+}
