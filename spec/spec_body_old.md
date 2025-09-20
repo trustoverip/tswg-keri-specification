@@ -3051,81 +3051,64 @@ b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
 
 ## Bibliography
 
-### Normative section
+[[spec]]
 
-<a id="CESR">1</a><a id="ref1"></a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
+<a id="CESR">1</a>. Samuel M. Smith, [Composable Event Streaming Representation (CESR)](https://github.com/trustoverip/tswg-cesr-specification), 2022
 
-<a id="CBOR">2</a><a id="ref2"></a>. C. Bormann, P. Hoffman, [Concise Binary Object Representation (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html), 2020
+<a id="CBOR">2</a>. C. Bormann, P. Hoffman, [Concise Binary Object Representation (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html), 2020
 
-<a id="MessagePack">3</a><a id="ref3"></a>. Sadayuki Furuhashi, [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md), 2008
+<a id="MessagePack">3</a>. Sadayuki Furuhashi, [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md), 2008
 
-<a id="KERI-WP">4</a><a id="ref4"></a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
+<a id="KERI-WP">4</a>. Samuel M. Smith, [Key Event Receipt Infrastructure](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/KERI_WP_2.x.web.pdf), 2021
 
-<a id="RFC0791">30</a><a id="ref30"></a>. RFC0791 [Internet Protocol. J. Postel; 1981-09](https://www.rfc-editor.org/rfc/rfc791). Status: Internet Standard.
+<a id="">5</a>. Samuel M. Smith, [Universal Identifier Theory](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf), 2020
 
-<a id="RFC3986">31</a><a id="ref31"></a>. RFC3986 [Uniform Resource Identifier (URI): Generic Syntax](https://www.rfc-editor.org/rfc/rfc3986). T. Berners-Lee; R. Fielding; L. Masinter; 2005-01. Status: Internet Standard.
+<a id="">6</a>. Samuel M. Smith, [Decentralized Autonomic Data (DAD) and the three R's of Key Management](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf), 2018
 
+<a id="">7</a>. David Wilkinson, Jorge F Willemsen, [Invasion percolation: a new form of percolation theory](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf), 1983
 
-<a id="RFC4627">32</a><a id="ref32"></a>. RFC4627 [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.rfc-editor.org/rfc/rfc4627). D. Crockford; 2006-07. Status: Informational.
+<a id="">8</a>. [Information-Theoretic and Perfect Security](https://en.wikipedia.org/wiki/Information-theoretic_security)
 
-<a id="RFC5280">33</a><a id="ref33"></a>. RFC5280 [Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://www.rfc-editor.org/rfc/rfc5280). D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk; 2008-05. Status: Proposed Standard.
+<a id="">9</a>. [Cryptographically-secure pseudorandom number generator](https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator)
 
-<a id="RFC5785">34</a><a id="ref34"></a>. RFC5785 [Defining Well-Known Uniform Resource Identifiers (URIs)](https://www.rfc-editor.org/rfc/rfc5785). M. Nottingham; E. Hammer-Lahav; 2010-04. Status: Proposed Standard.
+<a id="">10</a>. [Information Theory](https://en.wikipedia.org/wiki/Information_theory)
 
+<a id="">11</a>. [Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete](https://cr.yp.to/hash/collisioncost-20090823.pdf?
 
-<a id="RFC6960">35</a><a id="ref35"></a>. RFC6960 [X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP](https://www.rfc-editor.org/rfc/rfc6960). S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.
+<a id="">12</a>. Jean-Philippe Aumasson, [Too Much Crypto](https://eprint.iacr.org/2019/1492.pdf), 2021
 
+<a id="">13</a>. [One-way Function](https://en.wikipedia.org/wiki/One-way_function)
 
-### Informative section
+<a id="">14</a>. [One-way Function](http://www.crypto-it.net/eng/theory/one-way-function.html)
 
-<a id="UIT">5</a><a id="ref5"></a>. Samuel M. Smith, [Universal Identifier Theory](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf), 2020
+<a id="">15</a>. [Public-key Cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
 
-<a id="DAD">6</a><a id="ref6"></a>. Samuel M. Smith, [Decentralized Autonomic Data (DAD) and the three R's of Key Management](https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf), 2018
+<a id="">16</a>. Marc Girault, [Self-certified public keys](https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf)
 
-<a id="NFPercTheo">7</a><a id="ref7"></a>. David Wilkinson, Jorge F Willemsen, [Invasion percolation: a new form of percolation theory](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf), 1983
+<a id="">17</a>. M. Kaminsky, E. Banks, [SFS-HTTP: Securing the Web with Self-Certifying URLs](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 1999
 
-<a id="ITPS">8</a><a id="ref8"></a>. [Information-Theoretic and Perfect Security](https://en.wikipedia.org/wiki/Information-theoretic_security)
+<a id="">18</a>. David Mazieres, [Self-certifying File System](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 2000
 
-<a id="CSPRG">9</a><a id="ref9"></a>. [Cryptographically-secure pseudorandom number generator](https://en.wikipedia.org/wiki/Cryptographically-secure_pseudorandom_number_generator)
+<a id="">19</a>. David Mazieres, M. Kaashoek, [Escaping the Evils of Centralized Control with self-certifying pathnames](https://dl.acm.org/doi/pdf/10.1145/319195.319213), 2000
 
-<a id="InfoTheo">10</a><a id="ref10"></a>. [Information Theory](https://en.wikipedia.org/wiki/Information_theory)
+<a id="">20</a>. [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list)
 
-<a id="CAHC">11</a><a id="ref11"></a>. [Cost analysis of hash collisions: Will quantum computers make SHARCS obsolete](https://cr.yp.to/hash/collisioncost-20090823.pdf)
+<a id="">21</a>. [Verifiable Data Structures](https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf)
 
-<a id="TMCrypto">12</a><a id="ref12"></a>. Jean-Philippe Aumasson, [Too Much Crypto](https://eprint.iacr.org/2019/1492.pdf), 2021
+<a id="">22</a>. [Ricardian contract](https://en.wikipedia.org/wiki/Ricardian_contract)
 
-<a id="OWF1">13</a><a id="ref13"></a>. [One-way Function](https://en.wikipedia.org/wiki/One-way_function)
+<a id="">23</a>. [Namespace](https://en.wikipedia.org/wiki/Namespace)
 
-<a id="OWF2">14</a><a id="ref14"></a>. [One-way Function](http://www.crypto-it.net/eng/theory/one-way-function.html)
+<a id="">24</a>. [Eclipse Attack](https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin)
 
-<a id="PKCrypt">15</a><a id="ref15"></a>. [Public-key Cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
+<a id="">25</a>. [Percolation Theory](https://en.wikipedia.org/wiki/Percolation_theory)
 
-<a id="SCPK">16</a><a id="ref16"></a>. Marc Girault, [Self-certified public keys](https://link.springer.com/content/pdf/10.1007%2F3-540-46416-6_42.pdf)
+<a id="">26</a>. [First Passage Percolation](https://en.wikipedia.org/wiki/First_passage_percolation)
 
-<a id="SFS-HTTP">17</a><a id="ref17"></a>. M. Kaminsky, E. Banks, [SFS-HTTP: Securing the Web with Self-Certifying URLs](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 1999
+<a id="">27</a>. [Invasion Percolation](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf)
 
-<a id="SCFS">18</a><a id="ref18"></a>. David Mazieres, [Self-certifying File System](https://pdos.csail.mit.edu/kaminsky/sfs-http.ps), 2000
+<a id="">28</a>. [Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
 
-<a id="EscEvils">19</a><a id="ref19"></a>. David Mazieres, M. Kaashoek, [Escaping the Evils of Centralized Control with self-certifying pathnames](https://dl.acm.org/doi/pdf/10.1145/319195.319213), 2000
+<a id="">29</a>. [QR Code](https://en.wikipedia.org/wiki/QR_code)
 
-<a id="CertRevList">20</a><a id="ref20"></a>. [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list)
-
-<a id="VDS">21</a><a id="ref21"></a>. [Verifiable Data Structures](https://github.com/google/trillian/blob/master/docs/papers/VerifiableDataStructures.pdf)
-
-<a id="RicCont">22</a><a id="ref22"></a>. [Ricardian contract](https://en.wikipedia.org/wiki/Ricardian_contract)
-
-<a id="NameSpace">23</a><a id="ref23"></a>. [Namespace](https://en.wikipedia.org/wiki/Namespace)
-
-<a id="EclipsAttack">24</a><a id="ref24"></a>. [Eclipse Attack](https://www.gemini.com/cryptopedia/eclipse-attacks-defense-bitcoin)
-
-<a id="PercTheo">25</a><a id="ref25"></a>. [Percolation Theory](https://en.wikipedia.org/wiki/Percolation_theory)
-
-<a id="FPPerc">26</a><a id="ref26"></a>. [First Passage Percolation](https://en.wikipedia.org/wiki/First_passage_percolation)
-
-<a id="InvasPerc">27</a><a id="ref27"></a>. [Invasion Percolation](https://www.physics.purdue.edu/flow/MMproject/Wilkinson1983.pdf)
-
-<a id="URL">28</a><a id="ref28"></a>. [Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
-
-<a id="QRCode">29</a><a id="ref29"></a>. [QR Code](https://en.wikipedia.org/wiki/QR_code)
-
-<a id="DataMatrix">30</a><a id="ref30"></a>. [Data Matrix](https://en.wikipedia.org/wiki/Data_Matrix)
+<a id="">30</a>. [Data Matrix](https://en.wikipedia.org/wiki/Data_Matrix)
