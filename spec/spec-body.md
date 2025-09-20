@@ -1465,32 +1465,46 @@ Given that signature from A<sup>0</sup>, A<sup>3</sup>, A<sup>5</sup>, A<sup>6</
 
 A use case for complex nested weighted lists of weights is when a given contributor to a fractionally weighted threshold manages its keys across multiple devices such that each device contributes a key. The total weight from the given contributor needs to be normalized to a single weight, but the satisfaction of its contribution is itself a fractionally weighted threshold across that contributor's devices.
 
-### Partial pre-rotation
+### General Pre-rotation
 
-The KERI protocol includes support for Partial pre-rotation i.e., a Rotation operation on a set of pre-rotated keys that MAY hold back some as unexposed while exposing others as needed.
+The KERI protocol includes support for something called Partial rotation, where not all pre-rotated keys become signing keys. A Partial rotation operation on a set of pre-rotated keys  MAY hold back some as unexposed while exposing others as needed. The KERI protocol also supports Augmented rotation, where new signing keys are added that were not pre-rotated keys.
 
-As described above, a valid Rotation operation requires the satisfaction of two different thresholds - the current threshold of the given Rotation event concerning its associated current public key list and the next threshold from the given Rotation event's most recent prior Establishment event concerning its associated blinded next key digest list. For short, the next threshold from the most recent prior Establishment event is denoted as the prior next threshold and the list of unblinded public keys taken from the blinded key digest list from the most recent prior Establishment event is the prior next key list. Explicating the elements of the prior next key list requires exposing or unblinding the underlying public keys committed to by their corresponding digests appearing in the next key digest list of the most recent prior Establishment event. The unexposed (blinded) public keys MAY be held in reserve.
+A given Rotation event may use a combination of Partial and Augmented Rotation to enable support for important use cases like reserve rotation, custodial rotation, and surprise quantum attack recovery.
 
-More precisely, any Rotation event's current public key list MUST include a satisfiable subset of the prior next key list concerning the prior next threshold. In addition, any Rotation event's current public key list MUST include a satisfiable set of public keys concerning its current threshold. In other words, the current public key list MUST be satisfiable concerning both the current and prior next thresholds.
+As described above, a valid Rotation operation requires the satisfaction of two different thresholds:
 
-To reiterate, to make Verifiable the maintenance of the integrity of the forward commitment to the pre-rotated list of keys made by the prior next event, i.e., provide Verifiable rotation control authority, the current key list MUST include a satisfiable subset of exposed (unblinded) pre-rotated next keys from the most recent prior Establishment event where satisfiable is concerning the prior next threshold. To establish Verifiable signing control authority, the current key list MUST also include a satisfiable subset of public keys where satisfiable concerns the current threshold.
+1.  The next threshold from the given Rotation event's most recent prior Establishment event concerning its associated blinded next key digest list. For short, the next threshold from the most recent prior Establishment event is denoted as the *prior-next* threshold. The list of unblinded public keys taken from the blinded key digest list in the most recent prior Establishment event is the *prior-next* key list. Explicating the elements of the *prior-next* key list requires exposing or unblinding the underlying public keys committed to by their corresponding digests appearing in the next key digest list of the most recent prior Establishment event. For short, this is called the *prior-next* key digest list. Importantly, the unexposed (blinded) public keys from the *prior-next* key list MAY be held in reserve to be used in some later Rotation event.
 
-These two conditions are satisfied trivially whenever the current and prior next key lists and thresholds are equivalent. When both the current and the prior next key lists and thresholds are identical, the validation can be simplified by comparing the two lists and thresholds to confirm that they are identical and then confirming that the signatures satisfy the one threshold concerning the one key list. When not identical, the Validator MUST perform the appropriate set math to confirm compliance.
+2. The current threshold of the given Rotation event concerning its associated current public key list.
 
-Recall that the public key's appearance order in a given key list and its associated threshold weight list MUST be the same. The order of appearance, however, of any public keys that appear in both the current and prior next key lists may be different between the two key lists and, hence, the two associated threshold weight lists.  A Validator, therefore, MUST confirm that the set of keys in the current key list truly includes a satisfiable subset of the prior next key list and that the current key list is satisfiable with respect to both the current and prior next thresholds. Actual satisfaction means that the set of attached signatures MUST satisfy both the current and prior next thresholds as applied to their respective key lists.
+More precisely, any Rotation event's current public key list MUST include both a satisfiable subset of the *prior-next* key list concerning the prior next threshold and a satisfiable set of public keys concerning its current threshold.
 
-Suppose the current public key list does not include a proper subset of the prior next key list. This means that no keys were held in reserve. This also means that the current key list is either identical to the prior next key list or is a superset of the prior next key list.  Nonetheless, such a Rotation may change the current key list and or threshold with respect to the prior next key list and/or threshold as long as it meets the satisfiability constraints defined above.
+In other words, the current public key list MUST be satisfiable concerning both the *prior-next* and current thresholds.
 
-If the current key list includes the full set of keys from the prior next key list, then a full Rotation has occurred, not a Partial rotation because no keys were held in reserve or omitted. A full Rotation may add new keys to the current key list and/or change the current threshold with respect to the prior next key list and threshold.
+The *prior-next* threshold and *prior-next* key list are not to be confused with the next threshold and the next key list. To clarify, the *prior-next* threshold is provided by the most recent prior establishment event (Inception or Rotation). The next threshold, on the other hand, is provided by the current Rotation event. The next threshold is not used to verify the signatures on the current Rotation event but will be used on the next (subsequent) Rotation event.
+
+A rotation event estabishes two control authorities: verifiable rotation control authority and verifiable signing control authority.
+
+To establish verifiable rotation control authority, the current key list MUST include a satisfiable subset of exposed (unblinded) pre-rotated next keys from the most recent prior Establishment event. Where satisfiable concerns the prior next threshold. The exposed pre-rotated keys must be verified against their pre-committed digests from the prior-next establishment event.
+
+To establish a Verifiable signing control authority, the current key list MUST also include a satisfiable subset of public keys. Where satisfiable concerns the current threshold.
+
+These two conditions are satisfied trivially whenever the prior-next and current key lists and thresholds are equivalent. When both the current and the prior-next key lists and thresholds are identical, the validation can be simplified by comparing the two lists and thresholds to confirm that they are identical and then confirming that the signatures satisfy the threshold for the key list. When not identical, the Validator MUST perform the appropriate mathematical set operations to confirm compliance.
+
+Recall that the public key's appearance order in a given key list and its associated threshold weight list MUST be the same. The order of appearance, however, of any public keys that appear in both the current and prior next key lists may be different between the two key lists and, hence, the two associated threshold weight lists.  A Validator, therefore, MUST confirm that the set of keys in the current key list truly includes a satisfiable subset of the prior next key list and that the current key list is satisfiable with respect to both the current and prior next thresholds. Actual satisfaction means that the set of attached signatures MUST satisfy both prior-next and current thresholds as applied to their respective key lists.
+
+Suppose the current public key list does not include a proper subset of the prior-next key list. This means that no keys were held in reserve. This also means that the current key list is either identical to the prior-next key list or is a superset of the prior-next key list.  Nonetheless, such a Rotation may change the current key list and or threshold with respect to the prior-next key list and/or threshold as long as it meets the satisfiability constraints defined above.
+
+If the current key list includes the full set of keys from the prior-next key list, then a full Rotation has occurred, not a Partial Rotation because no keys were held in reserve or omitted. A full Rotation may also be an Augmented rotation when it adds new keys to the current key list and/or changes the current threshold with respect to the prior next key list and threshold.
 
 
-#### Reserve rotation
+#### Reserve Rotation
 
 As described above, the pre-rotation mechanism supports partial pre-rotation or, more exactly, partial Rotation of pre-rotated keypairs. One important use case for partial Rotation is to enable pre-rotated keypairs designated in one Establishment event to be held in reserve and not exposed at the next (immediately subsequent) Establishment event. This reserve feature enables keypairs held by Controllers as members of a set of pre-rotated keypairs to be used for fault tolerance in the case of non-availability by other Controllers while at the same time minimizing the burden of participation by the reserve members. In other words, a reserved pre-rotated keypair contributes to the potential availability and fault tolerance of control authority over the AID without necessarily requiring the participation of the reserve key-pair in a Rotation until and unless it is needed to provide continuity of control authority in the event of a fault (non-availability of a non-reserved member). This reserve feature enables different classes of key Controllers to contribute to the control authority over an AID. This enables provisional key control authority. For example, a key custodial service or key escrow service could hold a keypair in reserve to be used only upon satisfaction of the terms of the escrow agreement. This could be used to provide continuity of service in the case of some failure event. Provisional control authority may be used to prevent types of common-mode failures without burdening the provisional participants in the normal non-failure use cases.
 
 Reserve rotation example:
 
-Provided here is an illustrative example to help to clarify the pre-rotation protocol, especially with regard to and threshold satisfaction for Reserve rotation.
+Provided here is an illustrative example to help clarify the pre-rotation protocol, especially with regard to threshold satisfaction for Reserve rotation.
 
 | SN | Role | Keys | Threshold |
 |:-:|:-:|--:|--:|
@@ -1511,26 +1525,26 @@ Where, in the column labels:
 
 SN is the sequence number of the event. Each event uses two rows in the table.
 Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
-Keys is the list of public keys denoted with indexed label of the keypair sequence.
+Keys is the list of public keys denoted with the indexed label of the keypair sequence.
 Threshold is the threshold of signatures that MUST be satisfied for validity.
 
-Commentary of each event:
+Commentary on each event:
 
-(0) Inception: Five keypairs have signing authority and five other keypairs have rotation authority. Any two of the first three or any one of the first three and both the last two are sufficient. This anticipates holding the last two in reserve.
+(0) Inception: Five keypairs have signing authority, and five other keypairs have rotation authority. Any two of the first three or any one of the first three, and both the last two are sufficient. This anticipates holding the last two in reserve.
 
-(1) Rotation: The first three keypairs from the prior next, A<sup>5</sup>, A<sup>6</sup>, and A<sup>7</sup>, are rotated at the new current signing keypairs. This exposes the keypairs. The last two from the prior next, A<sup>8</sup> and A<sup>9</sup>, are held in reserve. They have not been exposed are included in the next key list.
+(1) Rotation: The first three keypairs from the prior next, A<sup>5</sup>, A<sup>6</sup>, and A<sup>7</sup>, are rotated at the new current signing keypairs. This exposes the keypairs. The last two from the prior next, A<sup>8</sup> and A<sup>9</sup>, are held in reserve. They have not been exposed and are included in the next key list.
 
-(2) Rotation: The prior next keypairs, A<sup>11</sup> and A<sup>12</sup> are unavailable to sign the Rotation and participate as the part of the newly current signing keys. Therefore, A<sup>8</sup> and A<sup>9</sup> MUST be activated (pulled out of reserve) and included and exposed as both one-time rotation keys and newly current signing keys. The signing authority (weight) of each of A<sup>8</sup> and A<sup>9</sup> has been increased to 1/2 from 1/4. This means that any two of the three of A<sup>10</sup>, A<sup>8</sup>, and A<sup>9</sup> may satisfy the signing threshold. Nonetheless, the Rotation event \#2 MUST be signed by all three of A<sup>10</sup>, A<sup>8</sup>, and A<sup>9</sup> in order to satisfy the prior next threshold because in that threshold A<sup>8</sup>, and A<sup>9</sup>  only have a weight of 1/4.
+(2) Rotation: The prior next keypairs, A<sup>11</sup> and A<sup>12</sup>, are unavailable to sign the Rotation and participate as part of the newly current signing keys. Therefore, A<sup>8</sup> and A<sup>9</sup> MUST be activated (pulled out of reserve) and included and exposed as both one-time rotation keys and newly current signing keys. The signing authority (weight) of each of A<sup>8</sup> and A<sup>9</sup> has been increased to 1/2 from 1/4. This means that any two of the three of A<sup>10</sup>, A<sup>8</sup>, and A<sup>9</sup> may satisfy the signing threshold. Nonetheless, the Rotation event \#2 MUST be signed by all three of A<sup>10</sup>, A<sup>8</sup>, and A<sup>9</sup> in order to satisfy the prior next threshold because in that threshold A<sup>8</sup>, and A<sup>9</sup>  only have a weight of 1/4.
 
 (3) Rotation: The keypairs H(A<sup>16</sup>), H(A<sup>17</sup>) have been held in reserve from event \#2
 
 (4) Rotation: The keypairs H(A<sup>16</sup>), H(A<sup>17</sup>) continue to be held in reserve.
 
-(5) Rotation: The keypairs A<sup>16</sup>, and A<sup>17</sup> are pulled out of reserved and exposed in order to perform the Rotation because A<sup>23</sup>, and A<sup>24</sup> are unavailable. Two new keypairs, A<sup>25</sup>, A<sup>26</sup>, are added to the current signing key list. The current signing authority of A<sup>16</sup>, and A<sup>17</sup> is none because they are assigned a weight of 0 in the new current signing threshold. For the Rotation event to be valid, it MUST be signed by A<sup>22</sup>, A<sup>16</sup>, and A<sup>17</sup> in order to satisfy the prior next threshold for rotation authority and also MUST be signed by any two of A<sup>22</sup>, A<sup>25</sup>, and A<sup>26</sup> in order to satisfy the new current signing authority for the event itself. This illustrates how reserved keypairs may be used exclusively for rotation authority and not for signing authority.
+(5) Rotation: The keypairs A<sup>16</sup>, and A<sup>17</sup> are pulled out of reserve and exposed in order to perform the Rotation because A<sup>23</sup>, and A<sup>24</sup> are unavailable. Two new keypairs, A<sup>25</sup>, A<sup>26</sup>, are added to the current signing key list. The current signing authority of A<sup>16</sup>, and A<sup>17</sup> is none because they are assigned a weight of 0 in the new current signing threshold. For the Rotation event to be valid, it MUST be signed by A<sup>22</sup>, A<sup>16</sup>, and A<sup>17</sup> in order to satisfy the prior next threshold for rotation authority and also MUST be signed by any two of A<sup>22</sup>, A<sup>25</sup>, and A<sup>26</sup> in order to satisfy the new current signing authority for the event itself. This illustrates how reserved keypairs may be used exclusively for rotation authority and not for signing authority.
 
-#### Custodial rotation
+#### Custodial Rotation
 
-Partial pre-rotation supports another important use case that of Custodial key rotation. Because control authority is split between two key sets, the first for signing authority and the second (pre-rotated) for rotation authority, the associated thresholds and key list can be structured in such a way that a designated custodial agent can hold signing authority while the original Controller can hold exclusive rotation authority. The holder of the rotation authority can then, at any time, without the cooperation of the custodial agent, if needed,  revoke the agent's signing authority and assign it to some other agent or return that authority to itself.
+Partial rotation combined with Augmented rotation supports another important use case, that of Custodial key rotation. Because control authority is split between two key sets, the first for signing authority and the second (pre-rotated) for rotation authority, the associated thresholds and key list can be structured in such a way that a designated custodial agent can hold signing authority while the original Controller can hold exclusive rotation authority. The holder of the rotation authority can then, at any time, without the cooperation of the custodial agent, if needed,  revoke the agent's signing authority and assign it to some other agent or return that authority to itself.
 
 Custodial rotation example:
 
@@ -1553,7 +1567,7 @@ Keys is the list of public keys denoted with indexed label of the keypair sequen
 Threshold is the threshold of signatures that MUST be satisfied for validity.
 
 
-Commentary of each event:
+Commentary on each event:
 
 (0) Inception: The private keys from current signing keypairs A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are held by the custodian of the identifier. The owner of the identifier provides the digests of the next rotation keypairs, H(A<sup>3</sup>), H(A<sup>4</sup>), and H(A<sup>5</sup>) to the custodian in order that the custodian may include them in the event and then sign the event. The owner holds the private keys from the next rotation keypairs A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup>. A self-addressing AID would then be created by the formulation of the Inception event. Once formed, the custodian controls the signing authority over the identifier by virtue of holding the associated private keys for the current key list. But the Controller exercises the rotation authority by virtue of holding the associated private keys for the next key list. Because the Controller of the rotation authority may at their sole discretion revoke and replace the keys that hold signing authority, the owner, holder of the next private keys, is ultimately in control of the identifier so constituted by this Inception event.
 
@@ -1561,16 +1575,45 @@ Commentary of each event:
 
  (2) Rotation: Change to yet another custodian following the same pattern as event \#1.
 
+#### Surprise Quantum Attack Recovery (SQAR)
+
+Partial rotation, together with Augmented rotation, supports another important use case, that of Surprise Quantum Attack Recovery (SQAR). In an SQAR rotation, the resultant signing authority MUST use post-quantum safe key pairs. Because it's a surprise quantum attack, it is assumed that both the current signing keys (before the SQAR rotation) and the prior-next key pairs are not post-quantum safe.  This means that a surprise quantum attacker could invert the current signing public keys to discover the associated private keys and thereby forge verifiable Interaction events. Because the prior-next key digests are post-quantum safe in that a quantum computer is not advantaged over a conventional computer in inverting cryptographic strength digests. The surprise quantum attacker is not able to forge a verifiable Rotation event. It is also assumed that the first exposure of the prior-next keys occurs after the publication of the SQAR rotation to the witnesses. At which point it is now too late for the quantum attacker. Coincident with the SQAR rotation, the signing control authority is post-quantum safe. This recovers signing control authority from the compromised signing keys by rotation to post-quantum safe signing keys.
+
+SQAR rotation example:
+
+Provided here is an illustrative example to help clarify the pre-rotation protocol, especially regarding threshold satisfaction for the SQAR rotation.
+
+| SN | Role | Keys | Threshold |
+|:-:|:-:|--:|--:|
+| 0 | Crnt | [A<sup>0</sup>, A<sup>1</sup>, A<sup>2</sup>]| [1/2, 1/2, 1/2] |
+| 0 | Next | [H(A<sup>3</sup>), H(A<sup>4</sup>), H(A<sup>5</sup>)] | [1/2, 1/2, 1/2] |
+| 1 | Crnt | [A<sup>3</sup>, A<sup>4</sup>, A<sup>5</sup>, A<sup>6</sup>, A<sup>7</sup>, A<sup>8</sup>] | [0, 0, 0, 1/2, 1/2, 1/2] |
+| 1 | Next | [H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>)] | [1/2, 1/2, 1/2] |
+
+Where for the column labels:
+
+SN is the sequence number of the event. Each event uses two rows in the table.
+Role is either Current (Crnt) or Next and indicates the role of the key list and threshold on that row.
+Keys is the list of public keys denoted with the indexed label of the keypair sequence.
+Threshold is the threshold of signatures that MUST be satisfied for validity.
+
+Commentary on each event:
+
+(0) Inception: The private keys from current signing keypairs A<sup>0</sup>, A<sup>1</sup>, and A<sup>2</sup> are non-post-quantum safe. The key pairs are represented by the next digests H(A<sup>3</sup>), H(A<sup>4</sup>), and H(A<sup>5</sup>) are also non-post-quantum safe.
+
+(1) SQAR Rotation: The controller recovers from a surprise quantum attack with this rotation.  The new current signing keypairs, A<sup>6</sup>, A<sup>7</sup>, and A<sup>8</sup> use post-quantum-safe signing key pair generation algorithms. The controller exposes its non-quantum-safe rotation public keys, A<sup>3</sup>, A<sup>4</sup>, and A<sup>5</sup> by including them in the new current key list. But the weights of those rotation keys in the new current signing threshold are all 0, so they have no signing authority, only rotation authority. Therefore, the new signing authority is not subject to a post-quantum attack.  The controller creates a new set of next keypairs that are post-quantum-safe and includes their public key digests, H(A<sup>9</sup>), H(A<sup>10</sup>), H(A<sup>11</sup>) in the new next key list. Now all future Interaction events are protected with post-quantum-safe signing keys, and the next Rotation is already using post-quantum safe rotation keys.
+
+Technically, the next rotation key digests could be for non-post-quantum safe keys as long as the next rotation was also an SQAR rotation. This is because the next key digests are post-quantum safe commitments to the next rotation keys. In an SQAR rotation, none of the rotation keys is given any current signing authority, all weights are zero.
 
 ### Cooperative Delegation
 
 A delegation or identifier delegation operation is provided by a pair of events. One event is the delegating event in the KEL of the Delegator and the other event is the delegated event in the KEL of the Delegatee. This pairing of events is a somewhat novel approach to delegation in that the resultant delegation requires cooperation between the Delegator and Delegatee. This is called cooperative delegation.  In a cooperative delegation, a delegating identifier approves the establishment operation (inception or rotation) of a delegated identifier. A delegating event is a type of event that includes in its data payload an event seal of the delegated event that is the target the delegation operation. This delegated event seal includes a digest of the delegated event. This verifiably seals or anchors or binds the delegated event to the KEL of the Delegator.
 
-Likewise, the inception event of the Delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the Delegatee’s KEL to a unique delegator. A validator MUST be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in Delegatee's inception event) make the delegation cooperative. Both MUST participate. As will be seen later, this cooperation adds an additional layer of security to the Delegatee's KEL and provides a way to recover from pre-rotated key compromise.
+Likewise, the inception event of the Delegatee’s KEL includes the delegator’s AID. This binds the inception and any later establishment events in the Delegatee’s KEL to a unique delegator. A validator MUST be given or find the delegating seal in the delegator’s KEL before the event may be accepted as valid. The pair of bindings (delegation seal in delegator's KEL and delegator's AID in Delegatee's inception event) makes the delegation cooperative. Both MUST participate. As will be seen later, this cooperation adds an additional layer of security to the Delegatee's KEL and provides a way to recover from a pre-rotated key compromise.
 
-Because the delegating event payload is a list, a single delegating event may perform multiple delegation operations, one per each delegation seal.
+Because the delegating event payload is a list, a single delegating event may perform multiple delegation operations, one for each delegation seal.
 
-A delegation operation directly delegates an establishment event. Either an inception or rotation. Thus, a delegation operation may either delegate an inception or delegate a rotation that respectively may create and rotate the authoritative keys for delegated AID. The AID for a Delegatee (delegated identifier prefix) MUST be a fully qualified digest of its inception event. This cryptographically binds the Delegatee's AID to the delegator's AID.
+A delegation operation directly seals an establishment event for a delegated AID. Either an inception or rotation. Thus, a delegation operation either delegates an inception or a rotation that respectively, either creates or rotates the authoritative keys for delegated AID. The AID for a Delegatee AID (delegated identifier prefix) MUST be a fully qualified digest of its inception event, which includes a reference to the Delegator's AID. This cryptographically binds the Delegatee's AID to the Delegator's AID.
 
 The Delegator (controller) retains establishment control authority over the delegated identifier in that the new delegated identifier may only authorize non-establishment events with respect to itself. Delegation, therefore, authorizes revokable signing authority to some other AID. The delegated identifier has a delegated key event sequence where the inception event is a delegated inception, and any rotation events are delegated rotation events. Control authority for the delegated identifier, therefore, requires verification of a given delegated establishment event, which in turn requires verification of the delegating identifier’s establishment event.
 
