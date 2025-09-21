@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Create technical specifications in markdown. Based on the original Spec-Up, extended with Terminology tooling">
     <meta name="author" content="Trust over IP Foundation">
-    <meta property="spec-up-t:github-repo-info" content="trustoverip,tswg-keri-specification,main">
+    <meta property="spec-up-t:github-repo-info" content="trustoverip,tswg-keri-specification,addFixedRefs">
     <link rel="icon" href="https://raw.githubusercontent.com/trustoverip/spec-up-t-starter-pack/main/spec-up-t-starterpack/static/favicon.ico" type="image/x-icon">
     <meta name="generator" content="Spec-Up-T" />
     <title>KERI specification</title>
@@ -1406,8 +1406,8 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                             <a class="mx-auto p-2" href="https://github.com/trustoverip/spec-up-t"
                                 target="_blank" rel="noopener">Powered By Spec-Up-T</a>
                             <small>
-                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-09-20T14:40:08.576Z">
-                                    Generated: 2025-09-20T14:40:08.576Z
+                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-09-21T11:02:00.507Z">
+                                    Generated: 2025-09-21T11:02:00.507Z
                                 </time>
                             </small>
                         </div>
@@ -1735,9 +1735,9 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <h4 id="special-label-ordering-requirements"><a class="toc-anchor d-print-none" href="#special-label-ordering-requirements">§</a> Special label ordering requirements</h4>
 <p>The top-level fields of each message type MUST appear in a specific order. All top-level fields are REQUIRED. This enables compact top-level fixed field CESR native messages. These top-level fields are defined for each message type below.</p>
 <h5 id="version-string-field"><a class="toc-anchor d-print-none" href="#version-string-field">§</a> Version string field</h5>
-<p>The version string, <code>v</code>, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [<a href="#RFC4627">RFC4627</a>] [<a href="#ref2">2</a>] [<a href="#RFC8949">RFC8949</a>] [<a href="#ref3">3</a>]. The detailed description of the version string is provided in the CESR protocol specification [<a href="#ref1">1</a>]. In summary here, it provides a regular expression target for determining a serialized field map’s serialization format and size (character count) constituting an KERI message body.  The Regexable format is <code>KERIMmmGggKKKKSSSS.</code> that provides protocol type <code>KERI</code>, major protocol version <code>M</code>, minor protocol version <code>mm</code>, major genus version <code>G</code>, minor genus version <code>gg</code>, serialization type <code>KKKK</code>, size <code>SSSS</code>, and terminator <code>.</code>.</p>
+<p>The version string, <code>v</code>, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [<a href="#RFC4627">RFC4627</a>] [<a href="#CBOR">2</a>] [<a href="#RFC8949">RFC8949</a>] [<a href="#MessagePack">3</a>]. The detailed description of the version string is provided in the CESR protocol specification [<a href="#CESR">1</a>]. In summary here, it provides a regular expression target for determining a serialized field map’s serialization format and size (character count) constituting an KERI message body.  The Regexable format is <code>KERIMmmGggKKKKSSSS.</code> that provides protocol type <code>KERI</code>, major protocol version <code>M</code>, minor protocol version <code>mm</code>, major genus version <code>G</code>, minor genus version <code>gg</code>, serialization type <code>KKKK</code>, size <code>SSSS</code>, and terminator <code>.</code>.</p>
 <p>To elaborate, the protocol field, <code>PPPP</code> value in the Version String MUST be <code>KERI</code> for the KERI protocol. The protocol version field, <code>Mmm</code>, MUST encode the current major <code>M</code> and minor <code>mm</code> version of the KERI protocol [<a href="#CESR">1</a>] used by the associated message. The CESR genus version field <code>Ggg</code> MUST encode the major <code>G</code> and minor <code>gg</code> version of the CESR protocol used to encode the associated message [<a href="#CESR">1</a>].</p>
-<p>At the top-level, a stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body at the top-level of a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [<a href="#ref1">1</a>].</p>
+<p>At the top-level, a stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body at the top-level of a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [<a href="#CESR">1</a>].</p>
 <h5 id="legacy-version-string-field-format"><a class="toc-anchor d-print-none" href="#legacy-version-string-field-format">§</a> Legacy version string field format</h5>
 <p>Compliant KERI version 2.XX implementations MUST support the old KERI version 1.x version string format to properly verify message bodies created with 1.x format events. The old version 1.x version string format is defined in the CESR specification [<a href="#CESR">1</a>]. The protocol field, <code>PPPP</code> value in the version string MUST be <code>KERI</code> for the KERI protocol. The version field, <code>vv</code>, MUST encode the old version of the KERI protocol [<a href="#CESR">1</a>].</p>
 <h5 id="message-type-field"><a class="toc-anchor d-print-none" href="#message-type-field">§</a> Message type  field</h5>
@@ -4287,7 +4287,7 @@ Confirm signature on the Update verifies against indicated key-state under which
     </ul></div>
             </div>
             <hr>
-            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 20 September 2025</p>
+            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 21 September 2025</p>
         </div>
     </div>
 
