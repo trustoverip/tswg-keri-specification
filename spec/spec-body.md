@@ -559,7 +559,7 @@ The top-level fields of an Inception, `icp`, event message body MUST appear in t
 
 The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
 
-```Python
+```python
 {
     "v": "KERICAACAAJSONAAKp.",
     "t": "icp",
@@ -595,7 +595,7 @@ The message body is provided as a Python dict. This dict is then serialized usin
 
 The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
 
-```Python
+```python
 (b'{"v":"KERICAACAAJSONAAKp.","t":"icp","d":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXj'
 b'BUcMVtvhmB","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"0","kt":'
 b'"2","k":["DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu","DG-YwInLUxzVDD5z8Sq'
@@ -608,7 +608,7 @@ b'22aH","BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"c":["DID"],"a":[]}')
 ```
 
 The next key digests in the message body are derived from the following set of next keys:
-```Python
+```python
 [
     "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
     "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
