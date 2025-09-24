@@ -26,7 +26,7 @@ Key event validation includes everything needed to validate events, including st
 
 #### Direct exchange
 
-The simplest mode of operation is that a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
+The simplest mode of operation is that of a pair of controllers, each with their own AID, use their respective applications (including agents when applicable) to directly exchange key event messages that verifiably establish the current key state of their own AID with the other controller. For each exchange of key events, the destination controller acts as a validator of events received from the source controller. Therefore, given any key event, a given entity is either the event's controller or a validator of some other controller's event.
 
 The set of key event messages forms an append-only, cryptographically verifiable data structure called a key event log or KEL. The events in a KEL are signed and are both forward and backward-chained. The backward chaining commitments are cryptographic digests of the previous event. The forward chaining commitments are cryptographic digests of the next set of public keys that will constitute the key state after a key rotation. The commitments are nonrepudiably signed with the private keys of the current key state. Each KEL is somewhat like a "blockchain" that manages the key state for one and only one AID. In addition to key states, each KEL also manages commitments to external data. These commitments are signed cryptographic digests of external data called seals. When included in a KEL, a seal binds (or anchors) the external data to the key state of the AID at the location in the KEL where the seal appears. This binding enables a controller to make cryptographically verifiable, non-repudiable issuances of external data that are bound to a specific key state of that AID.
 
@@ -262,11 +262,11 @@ The top-level fields of each message type MUST appear in a specific order. All t
 
 ##### Version string field
 
-The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[RFC4627](#RFC4627)] [[2](#ref2)] [[RFC8949](#RFC8949)] [[3](#ref3)]. The detailed description of the version string is provided in the CESR protocol specification [[1](#ref1)]. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body.  The Regexable format is `KERIMmmGggKKKKSSSS.` that provides protocol type `KERI`, major protocol version `M`, minor protocol version `mm`, major genus version `G`, minor genus version `gg`, serialization type `KKKK`, size `SSSS`, and terminator `.`.
+The version string, `v`, field MUST be the first field in any top-level KERI field map encoded in JSON, CBOR, or MGPK as a message body [[RFC4627](#RFC4627)] [[2](#CBOR)] [[RFC8949](#RFC8949)] [[3](#MessagePack)]. The detailed description of the version string is provided in the CESR protocol specification [[1](#CESR)]. In summary here, it provides a regular expression target for determining a serialized field map's serialization format and size (character count) constituting an KERI message body.  The Regexable format is `KERIMmmGggKKKKSSSS.` that provides protocol type `KERI`, major protocol version `M`, minor protocol version `mm`, major genus version `G`, minor genus version `gg`, serialization type `KKKK`, size `SSSS`, and terminator `.`.
 
 To elaborate, the protocol field, `PPPP` value in the Version String MUST be `KERI` for the KERI protocol. The protocol version field, `Mmm`, MUST encode the current major `M` and minor `mm` version of the KERI protocol [[1](#CESR)] used by the associated message. The CESR genus version field `Ggg` MUST encode the major `G` and minor `gg` version of the CESR protocol used to encode the associated message [[1](#CESR)].
 
-At the top-level, a stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body at the top-level of a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [[1](#ref1)].
+At the top-level, a stream parser can use the version string to extract and deserialize (deterministically) any serialized stream of KERI message bodies. Each KERI message body at the top-level of a stream MAY use a different serialization type. A more detailed format specification for the version string field value is found in the CESR specification [[1](#CESR)].
 
 ##### Legacy version string field format
 
@@ -559,7 +559,7 @@ The top-level fields of an Inception, `icp`, event message body MUST appear in t
 
 The message body is provided as a Python dict. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
 
-```Python
+```python
 {
     "v": "KERICAACAAJSONAAKp.",
     "t": "icp",
@@ -595,7 +595,7 @@ The message body is provided as a Python dict. This dict is then serialized usin
 
 The raw JSON serialization of the message body is shown as a compact (no whitespace) Python byte string as follows:
 
-```Python
+```python
 (b'{"v":"KERICAACAAJSONAAKp.","t":"icp","d":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXj'
 b'BUcMVtvhmB","i":"EPR7FWsN3tOM8PqfMap2FRfF4MFQ4v3ZXjBUcMVtvhmB","s":"0","kt":'
 b'"2","k":["DBFiIgoCOpJ_zW_OO0GdffhHfEvJWb1HxpDx95bFvufu","DG-YwInLUxzVDD5z8Sq'
@@ -608,7 +608,7 @@ b'22aH","BA4PSatfQMw1lYhQoZkSSvOCrE0Sdw1hmmniDL-yDtrB"],"c":["DID"],"a":[]}')
 ```
 
 The next key digests in the message body are derived from the following set of next keys:
-```Python
+```python
 [
     "DLv9BlDvjcZWkfPfWcYhNK-xQxz89h82_wA184Vxk8dj",
     "DCx3WypeBym3fCkVizTg18qEThSrVnB63dFq2oX5c3mz",
