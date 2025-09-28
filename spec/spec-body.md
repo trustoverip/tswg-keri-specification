@@ -175,7 +175,7 @@ A Rotation is performed by appending a Rotation event to the KEL. A Rotation eve
 
 Each event in a KEL MUST include an integer sequence number that is one greater than the previous event. Each event after the Inception event also MUST include a cryptographic digest of the previous event. This digest means that a given event is bound cryptographically to the previous event in the sequence. The list of digests or pre-rotated keys in the Inception event cryptographically binds the Inception event to a subsequent Rotation event, essentially making a forward commitment that forward chains together the events. The only valid Rotation event that MAY follow the Inception event MUST include the pre-rotated keys. But only the Controller who created those keys and created the digests can verifiably expose them. Each Rotation event, in turn, makes a forward commitment (chain) to the following Rotation event via its list of pre-rotated key digests.   This makes the KEL a doubly (backward and forward) hash (digest) chained nonrepudiably signed append-only Verifiable data structure.
 
-Because the signatures on each event are nonrepudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there MUST be at most one valid KEL for any identifier or none at all. Any Validator of a KEL can enforce this one valid KEL rule that protects the Validator before relying on the KEL as proof of the current key state for the identifier. Any unreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed below in section [Reconciliation](#reconciliation). From a Validator's perspective, either there is one-and-only-one valid KEL or none at all, which also protects the Validator by removing any potential ambiguity about the Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL (or not at all). This, in turn, binds the identifier to the Controllers of the current keypairs given by the KEL, thus completing the tetrad.
+Because the signatures on each event are nonrepudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there MUST be at most one valid KEL for any identifier or none at all. Any Validator of a KEL can enforce this one valid KEL rule that protects the Validator before relying on the KEL as proof of the current key state for the identifier. Any irreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed below in section [Reconciliation](#reconciliation). From a Validator's perspective, either there is one-and-only-one valid KEL or none at all, which also protects the Validator by removing any potential ambiguity about the Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL (or not at all). This, in turn, binds the identifier to the Controllers of the current keypairs given by the KEL, thus completing the tetrad.
 
 At Inception, the KEL can be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in any of the incepting information included in the Inception event will result in a different identifier (including not only the original controlling keys pairs but also the pre-rotated keypairs).
 
@@ -217,7 +217,7 @@ The primary purpose of an AID is to enable any entity to establish control over 
 
 ### KERI data structure format
 
-A KERI data structure, such as a Key event Message body, can be abstractly modeled as a nested key: value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead herein to refer to a mapping pair, with the terms field label and field value used to refer to each pair member. Two tuples can represent these pairs, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps can be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
+A KERI data structure, such as a Key event message body, can be abstractly modeled as a nested key:value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead herein to refer to a mapping pair, with the terms field label and field value used to refer to each pair member. Two tuples can represent these pairs, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps can be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
 
 A field can be represented by a framing code or block delimited serialization.  In a block delimited serialization, such as JSON, each field map is represented by an object block with block delimiters such as `{}`. Given this equivalence, the term block or nested block can be used as synonymous with field map or nested field map. In many programming languages, a field map is implemented as a dictionary or hash table. This enables performant asynchronous lookup of a field value from its field label. Reproducible serialization of field maps requires a canonical ordering of those fields. One such canonical ordering is called insertion or field creation order. A list of (field, value) pairs provides an ordered representation of any field map.
 
@@ -274,7 +274,7 @@ Compliant KERI version 2.XX implementations MUST support the old KERI version 1.
 
 ##### Message type  field
 
-The message type, `t` field value MUST be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.
+The message type, `t` field value MUST be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.
 
 The message types in KERI are detailed in the table below:
 
@@ -311,7 +311,7 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 
 ##### AID fields
 
-Some fields, such as the `i` and `di` fields, MUST each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[4](#KERI-WP)].
+Some fields, such as the `i` and `di` fields, MUST each have an AID as its value. An AID is a fully qualified primitive as described above ([[ref: key-event-receipt-infrastructure]]) ([[ref: KERI]]) [[4](#KERI-WP)].
 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field can also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement can be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
@@ -388,7 +388,7 @@ In the event that an establishment event includes both `RB` and `NRB` configurat
 
 ##### Seal list field
 
-The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seal Section below.
+The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seals Section below.
 
 ### Seals
 
@@ -3113,6 +3113,9 @@ b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
 
 
 <a id="RFC6960">35</a><a id="ref35"></a>. RFC6960 [X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP](https://www.rfc-editor.org/rfc/rfc6960). S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.
+
+<a id="RFC8949">35</a><a id="ref36"></a>. RFC8948 [Concise Binary Object Representation (CBOR)
+](https://www.rfc-editor.org/rfc/rfc8949.html). C. Bormann; P. Hoffman; 2020-12. Status:Internet Standard
 
 
 ### Informative section
