@@ -1426,8 +1426,8 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                             <a class="mx-auto p-2" href="https://github.com/trustoverip/spec-up-t"
                                 target="_blank" rel="noopener">Powered By Spec-Up-T</a>
                             <small>
-                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-09-28T12:59:48.815Z">
-                                    Generated: 2025-09-28T12:59:48.815Z
+                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-03T10:42:50.957Z">
+                                    Generated: 2025-10-03T10:42:50.957Z
                                 </time>
                             </small>
                         </div>
@@ -2072,7 +2072,7 @@ The Delegator identifier AID, <code>di</code> field in a Delegated Inception, <c
 <span class="token punctuation">}</span>
 </code></pre>
 <h4 id="merkle-tree-root-digest-seal"><a class="toc-anchor d-print-none" href="#merkle-tree-root-digest-seal">§</a> Merkle Tree root digest seal</h4>
-<p>The value of this seal’s <code>rd</code> field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.</p>
+<p>The value of this seal’s <code>rd</code> field is the root of a Merkle tree of digests of external data. This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.</p>
 <p>The JSON version is shown. There is also a native CESR version of the seal.</p>
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"rd"</span><span class="token operator">:</span> <span class="token string">"EBMFnZjWs0QfXTnht5AU5dU9jJ1qk2u3IUhwFVbws4ff"</span>
@@ -2099,7 +2099,7 @@ The Delegator identifier AID, <code>di</code> field in a Delegated Inception, <c
 <span class="token punctuation">}</span>
 </code></pre>
 <h4 id="latest-establishment-event-seal"><a class="toc-anchor d-print-none" href="#latest-establishment-event-seal">§</a> Latest establishment event seal</h4>
-<p>The latest establishment event seal’s function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its <code>i</code> field value. This seal endorses or approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.</p>
+<p>The latest establishment event seal’s function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its <code>i</code> field value. This seal endorses, approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.</p>
 <p>The JSON version is shown. There is also a native CESR version of the seal.</p>
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"i"</span><span class="token operator">:</span> <span class="token string">"EHqSsH1Imc2MEcgzEordBUFqJKWTcRyTz2GRc2SG3aur"</span><span class="token punctuation">,</span>
@@ -2108,7 +2108,7 @@ The Delegator identifier AID, <code>di</code> field in a Delegated Inception, <c
 <h4 id="registrar-backer-seal"><a class="toc-anchor d-print-none" href="#registrar-backer-seal">§</a> Registrar Backer seal</h4>
 <p>When a ledger backer or backers are used as a secondary root-of-trust instead of a Witness pool, then a backer seal is REQUIRED. The backer registrar is responsible for anchoring key events as transactions on the ledger. In addition to the backer seal, the establishment event that designates the backer MUST also include a configuration trait (see below) of <code>RB</code> for registrar backers. This indicates that the KEL is ledger registrar-backed instead of witness pool-backed.</p>
 <p>The <code>bi</code> field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose <code>bi</code> field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same <code>bi</code> value).</p>
-<p>The <code>d</code> field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, <code>sd</code> field in an associated bare, <code>bar</code> message (defined later). The nested <code>d</code> said of this <code>sd</code> block in the bare message MUST be the <code>d</code> field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.</p>
+<p>The <code>d</code> field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, <code>sd</code> field in an associated bare, <code>bar</code> message (defined later). The nested <code>d</code> SAID of this <code>sd</code> block in the bare message MUST be the <code>d</code> field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.</p>
 <p>To reiterate, the seal MUST appear in the same establishment event that designates the registrar backer identifier as a backer identifier in the event’s backer’s list along with the config trait <code>RB</code>.</p>
 <p>The JSON version is shown. There is also a native CESR version of the seal.</p>
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
@@ -4310,7 +4310,7 @@ Confirm signature on the Update verifies against indicated key-state under which
     </ul></div>
             </div>
             <hr>
-            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 28 September 2025</p>
+            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 03 October 2025</p>
         </div>
     </div>
 
