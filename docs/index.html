@@ -1426,8 +1426,8 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                             <a class="mx-auto p-2" href="https://github.com/trustoverip/spec-up-t"
                                 target="_blank" rel="noopener">Powered By Spec-Up-T</a>
                             <small>
-                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-03T10:42:50.957Z">
-                                    Generated: 2025-10-03T10:42:50.957Z
+                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-03T23:45:12.117Z">
+                                    Generated: 2025-10-03T23:45:12.117Z
                                 </time>
                             </small>
                         </div>
@@ -2442,7 +2442,7 @@ raw <span class="token operator">=</span> json<span class="token punctuation">.<
 </li>
 </ul>
 <p>One security vulnerability of routed architectures is attacks on the routers themselves (especially router configuration, both static and dynamic). This vulnerability is most acute when a single router needs to handle information with different security properties. One solution to this problem is to use a pre-router that can redirect messages to different post-routers with different security properties.  For example, a pre-router would route sensitive data to a sensitive data post-router and non-sensitive data to a non-sensitive data post-router. This ensures that sensitive and non-sensitive data are never mixed. This enables tighter, more secure configuration control over data flows within an infrastructure. The best pre-routers act early in the routing process.</p>
-<p>In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange can used for the first type of information above, namely information public to a KEL. The second class, prod-bare can be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it needs to take appropriate measures to protect the router.</p>
+<p>In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange can be used for the first type of information above, namely information public to a KEL. The second class, prod-bare can be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it needs to take appropriate measures to protect the router.</p>
 <p>Notable is that the exchange message types are only associated with the first class of data. This is because exchange messages are signed by the participating peers but not sealed. Once an exchange transaction is completed successfully, the set of messages in that transaction can be aggregated and then sealed to the participating peer’s KELs. The transaction set can then be treated as sealed-confidential information, and its subsequent disclosure is managed with prod-bare messages. An exchange message can reference a data item that is sealed but the disclosure of that seal can happen with a bare, <code>bar</code> message. Often, the point of an exchange is to negotiate a chain-link confidential disclosure of information. The detailed disclosure can happen out-of-band to the exchange that negotiates the contractual commitments to that data. Those commitments use cryptographic digests that maintain confidentiality. Later disclosure of the information can be facilitated with a prod-bare pair.</p>
 <h4 id="reserved-field-labels-in-routed-messages"><a class="toc-anchor d-print-none" href="#reserved-field-labels-in-routed-messages">§</a> Reserved field labels in routed messages</h4>
 <p>Reserved field labels in other KERI message body types:</p>
@@ -4310,7 +4310,7 @@ Confirm signature on the Update verifies against indicated key-state under which
     </ul></div>
             </div>
             <hr>
-            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 03 October 2025</p>
+            <p class="ps-3 pe-3" id="w3c-state">W3C Recommendation, 04 October 2025</p>
         </div>
     </div>
 
