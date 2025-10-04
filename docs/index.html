@@ -1426,8 +1426,8 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                             <a class="mx-auto p-2" href="https://github.com/trustoverip/spec-up-t"
                                 target="_blank" rel="noopener">Powered By Spec-Up-T</a>
                             <small>
-                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-03T23:45:12.117Z">
-                                    Generated: 2025-10-03T23:45:12.117Z
+                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-04T11:38:51.614Z">
+                                    Generated: 2025-10-04T11:38:51.614Z
                                 </time>
                             </small>
                         </div>
@@ -2533,7 +2533,7 @@ raw <span class="token operator">=</span> json<span class="token punctuation">.<
 <h5 id="exchange-identifier-field"><a class="toc-anchor d-print-none" href="#exchange-identifier-field">§</a> Exchange identifier field</h5>
 <p>The Exchange Identifier SAID, <code>x</code> field value MUST be the SAID, <code>d</code> field value of the first message in the set of exchange messages that constitute a transaction. The first message MUST be an Exchange Inception message with type <code>xip</code>.  The SAID, <code>d</code> field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the <code>x</code> field in each subsequent exchange message in a transaction set, universally uniquely associates them with that set. Furthermore, the prior <code>p</code> field value in each subsequent exchange message verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, the Exchange Identifier, <code>x</code> field value, MUST be the empty string.</p>
 <h5 id="datetime-dt-field"><a class="toc-anchor d-print-none" href="#datetime-dt-field">§</a> Datetime, <code>dt</code> field</h5>
-<p>The datetime, <code>dt</code> field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, <code>dt</code>. The usage context of the message and the block where a given DateTime, <code>dt</code> field appears determines which clock (sender or receiver) the datetime is relative to.</p>
+<p>The datetime, <code>dt</code> field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF <a href="#RFC3339">RFC-3339</a>.  In a given field map (block) the primary datetime will use the label, <code>dt</code>. The usage context of the message and the block where a given DateTime, <code>dt</code> field appears determines which clock (sender or receiver) the datetime is relative to.</p>
 <p>An example datetime string in this format is as follows:</p>
 <p><code>2020-08-22T17:50:09.988921+00:00</code></p>
 <h5 id="route-field"><a class="toc-anchor d-print-none" href="#route-field">§</a> Route field</h5>
@@ -3394,7 +3394,7 @@ uuids <span class="token operator">=</span> <span class="token punctuation">[</s
 An example KERI protocol type/protocolversion/genusversion field value for protocol version 2.0 and genus version 2.0  is as follows:</p>
 <p><code>0OKERICAACAA</code></p>
 <h5 id="datetime"><a class="toc-anchor d-print-none" href="#datetime">§</a> DateTime</h5>
-<p>As described above, the datetime, <code>dt</code> field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  An example datetime string in this format is as follows:</p>
+<p>As described above, the datetime, <code>dt</code> field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF <a href="#RFC3339">RFC-3339</a>.  An example datetime string in this format is as follows:</p>
 <p><code>2020-08-22T17:50:09.988921+00:00</code></p>
 <p>Because this field value format employs non-Base64 characters, direct conversion to Base64 would increase the size of the value. Instead, the non-Base64 characters are converted to unique Base-64 characters using the following conversion table:</p>
 <div class="table-responsive-md"><table class="table table-striped table-bordered table-hover">
@@ -4184,8 +4184,12 @@ Confirm signature on the Update verifies against indicated key-state under which
 <p><a id="RFC5280">33</a><a id="ref33"></a>. RFC5280 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc5280" href="https://www.rfc-editor.org/rfc/rfc5280">Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>. D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk; 2008-05. Status: Proposed Standard.</p>
 <p><a id="RFC5785">34</a><a id="ref34"></a>. RFC5785 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc5785" href="https://www.rfc-editor.org/rfc/rfc5785">Defining Well-Known Uniform Resource Identifiers (URIs)</a>. M. Nottingham; E. Hammer-Lahav; 2010-04. Status: Proposed Standard.</p>
 <p><a id="RFC6960">35</a><a id="ref35"></a>. RFC6960 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc6960" href="https://www.rfc-editor.org/rfc/rfc6960">X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP</a>. S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.</p>
-<p><a id="RFC8949">35</a><a id="ref36"></a>. RFC8948 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc8949.html" href="https://www.rfc-editor.org/rfc/rfc8949.html">Concise Binary Object Representation (CBOR)
+<p><a id="RFC8949">36</a><a id="ref36"></a>. RFC8948 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc8949.html" href="https://www.rfc-editor.org/rfc/rfc8949.html">Concise Binary Object Representation (CBOR)
 </a>. C. Bormann; P. Hoffman; 2020-12. Status:Internet Standard</p>
+<p><a id="RFC4648">37</a><a id="ref37"></a>. RFC4648 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc4648" href="https://www.rfc-editor.org/rfc/rfc4648">The Base16, Base32, and Base64 Data Encodings</a>. S. Josefsson; 2006-10. Status: Proposed Standard.</p>
+<p><a id="RFC2119">38</a><a id="ref38"></a>. IETF RFC-2119 <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc2119.txt" href="https://www.rfc-editor.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>. S. Bradner. 1997-03. Status: Best Current Practice</p>
+<p><a id="IT7498">38</a><a id="ref39"></a>. ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. June 1999. Introduction. Retrieved 26 August 2022.</p>
+<p><a id="RFC3339">38</a><a id="ref40"></a>. IETF RFC-3339 Date and Time on the Internet: Timestamps <a path-0="www.rfc-editor.org" path-1="rfc" path-2="rfc3339.txt" href="https://www.rfc-editor.org/rfc/rfc3339.txt">DateTime</a>. G. Klyne. 2002-07. Status: Standards Track</p>
 <h3 id="informative-section"><a class="toc-anchor d-print-none" href="#informative-section">§</a> Informative section</h3>
 <p><a id="UIT">5</a><a id="ref5"></a>. Samuel M. Smith, <a path-0="github.com" path-1="SmithSamuelM" path-2="Papers" path-3="blob" path-4="master" path-5="whitepapers" path-6="IdentifierTheory_web.pdf" href="https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/IdentifierTheory_web.pdf">Universal Identifier Theory</a>, 2020</p>
 <p><a id="DAD">6</a><a id="ref6"></a>. Samuel M. Smith, <a path-0="github.com" path-1="SmithSamuelM" path-2="Papers" path-3="blob" path-4="master" path-5="whitepapers" path-6="DecentralizedAutonomicData.pdf" href="https://github.com/SmithSamuelM/Papers/blob/master/whitepapers/DecentralizedAutonomicData.pdf">Decentralized Autonomic Data (DAD) and the three R’s of Key Management</a>, 2018</p>

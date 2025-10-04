@@ -980,7 +980,7 @@ The Exchange Identifier SAID, `x` field value MUST be the SAID, `d` field value 
 
 
 ##### Datetime, `dt` field
-The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
+The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
 
  An example datetime string in this format is as follows:
 
@@ -2090,7 +2090,7 @@ An example KERI protocol type/protocolversion/genusversion field value for proto
 
 ##### DateTime
 
-As described above, the datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  An example datetime string in this format is as follows:
+As described above, the datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  An example datetime string in this format is as follows:
 
 `2020-08-22T17:50:09.988921+00:00`
 
@@ -3114,9 +3114,16 @@ b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
 
 <a id="RFC6960">35</a><a id="ref35"></a>. RFC6960 [X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP](https://www.rfc-editor.org/rfc/rfc6960). S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.
 
-<a id="RFC8949">35</a><a id="ref36"></a>. RFC8948 [Concise Binary Object Representation (CBOR)
+<a id="RFC8949">36</a><a id="ref36"></a>. RFC8948 [Concise Binary Object Representation (CBOR)
 ](https://www.rfc-editor.org/rfc/rfc8949.html). C. Bormann; P. Hoffman; 2020-12. Status:Internet Standard
 
+<a id="RFC4648">37</a><a id="ref37"></a>. RFC4648 [The Base16, Base32, and Base64 Data Encodings](https://www.rfc-editor.org/rfc/rfc4648). S. Josefsson; 2006-10. Status: Proposed Standard.
+
+<a id="RFC2119">38</a><a id="ref38"></a>. IETF RFC-2119 [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119.txt). S. Bradner. 1997-03. Status: Best Current Practice
+
+<a id="IT7498">38</a><a id="ref39"></a>. ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. June 1999. Introduction. Retrieved 26 August 2022.
+
+<a id="RFC3339">38</a><a id="ref40"></a>. IETF RFC-3339 Date and Time on the Internet: Timestamps [DateTime](https://www.rfc-editor.org/rfc/rfc3339.txt). G. Klyne. 2002-07. Status: Standards Track
 
 ### Informative section
 
