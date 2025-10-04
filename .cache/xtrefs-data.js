@@ -132,7 +132,7 @@ const allXTrefs = {
       "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
       "site": null,
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
-      "content": "<dd>\n<p>a list of specially defined strings representing a configuration of a KEL. See <a class=\"term-reference\" href=\"#term:#configuration-traits-field\">#configuration-traits-field</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-traits\">extended KERI glossary</a></p>\n</dd>",
+      "content": "<dd>\n<p>a list of specially defined strings representing a configuration of a KEL.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-traits\">extended KERI glossary</a></p>\n</dd>",
       "sourceFile": "configuration-traits.md",
       "sourceFiles": [
         {
@@ -909,6 +909,26 @@ const allXTrefs = {
           "type": "tref"
         }
       ]
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "key-event-receipt-infrastructure",
+      "alias": "Key Event Receipt Infrastructure",
+      "sourceFiles": [
+        {
+          "file": "key-event-receipt-infrastructure.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "kerisuite-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>"
     }
   ]
 };

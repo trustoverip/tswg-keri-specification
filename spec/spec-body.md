@@ -175,7 +175,7 @@ A Rotation is performed by appending a Rotation event to the KEL. A Rotation eve
 
 Each event in a KEL MUST include an integer sequence number that is one greater than the previous event. Each event after the Inception event also MUST include a cryptographic digest of the previous event. This digest means that a given event is bound cryptographically to the previous event in the sequence. The list of digests or pre-rotated keys in the Inception event cryptographically binds the Inception event to a subsequent Rotation event, essentially making a forward commitment that forward chains together the events. The only valid Rotation event that MAY follow the Inception event MUST include the pre-rotated keys. But only the Controller who created those keys and created the digests can verifiably expose them. Each Rotation event, in turn, makes a forward commitment (chain) to the following Rotation event via its list of pre-rotated key digests.   This makes the KEL a doubly (backward and forward) hash (digest) chained nonrepudiably signed append-only Verifiable data structure.
 
-Because the signatures on each event are nonrepudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there MUST be at most one valid KEL for any identifier or none at all. Any Validator of a KEL can enforce this one valid KEL rule that protects the Validator before relying on the KEL as proof of the current key state for the identifier. Any unreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed below in section [Reconciliation](#reconciliation). From a Validator's perspective, either there is one-and-only-one valid KEL or none at all, which also protects the Validator by removing any potential ambiguity about the Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL (or not at all). This, in turn, binds the identifier to the Controllers of the current keypairs given by the KEL, thus completing the tetrad.
+Because the signatures on each event are nonrepudiable, the existence of an alternate but Verifiable KEL for an identifier is provable evidence of Duplicity. In KERI, there MUST be at most one valid KEL for any identifier or none at all. Any Validator of a KEL can enforce this one valid KEL rule that protects the Validator before relying on the KEL as proof of the current key state for the identifier. Any irreconcilable evidence of Duplicity means the Validator does not trust (rely on) any KEL to provide the key state for the identifier. Rules for handling reconcilable Duplicity will be discussed below in section [Reconciliation](#reconciliation). From a Validator's perspective, either there is one-and-only-one valid KEL or none at all, which also protects the Validator by removing any potential ambiguity about the Key state.  The combination of a Verifiable KEL made from nonrepudiably signed backward and forward hash chained events together with the only-one-valid KEL rule strongly binds the identifier to its current Key state as given by that one valid KEL (or not at all). This, in turn, binds the identifier to the Controllers of the current keypairs given by the KEL, thus completing the tetrad.
 
 At Inception, the KEL can be bound even more strongly to its tetrad by deriving the identifier from a digest of the Inception event so that even one change in any of the incepting information included in the Inception event will result in a different identifier (including not only the original controlling keys pairs but also the pre-rotated keypairs).
 
@@ -217,7 +217,7 @@ The primary purpose of an AID is to enable any entity to establish control over 
 
 ### KERI data structure format
 
-A KERI data structure, such as a Key event Message body, can be abstractly modeled as a nested key: value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead herein to refer to a mapping pair, with the terms field label and field value used to refer to each pair member. Two tuples can represent these pairs, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps can be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
+A KERI data structure, such as a Key event message body, can be abstractly modeled as a nested key:value mapping. To avoid confusion with the cryptographic use of the term key, the term field is used instead herein to refer to a mapping pair, with the terms field label and field value used to refer to each pair member. Two tuples can represent these pairs, e.g., (label, value). When necessary, this terminology is qualified by using the term field map to reference such a mapping. Field maps can be nested where a given field value is itself a reference to another field map and are referred to as a nested field map or simply a nested map for short.
 
 A field can be represented by a framing code or block delimited serialization.  In a block delimited serialization, such as JSON, each field map is represented by an object block with block delimiters such as `{}`. Given this equivalence, the term block or nested block can be used as synonymous with field map or nested field map. In many programming languages, a field map is implemented as a dictionary or hash table. This enables performant asynchronous lookup of a field value from its field label. Reproducible serialization of field maps requires a canonical ordering of those fields. One such canonical ordering is called insertion or field creation order. A list of (field, value) pairs provides an ordered representation of any field map.
 
@@ -274,7 +274,7 @@ Compliant KERI version 2.XX implementations MUST support the old KERI version 1.
 
 ##### Message type  field
 
-The message type, `t` field value MUST be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment Event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.
+The message type, `t` field value MUST be a three-character string that provides the message type. There are three classes of message types in KERI. The first class consists of key event messages. These are part of the KEL for an AID. A subclass of key event messages are Establishment event messages, these determine the current key state. Non-establishment event messages are key event messages that do not change the key state. The second class of messages consists of Receipt messages. These are not themselves part of a KEL but convey proofs such as signatures or seals as attachments to a key event. The third class of messages consists of various message types not part of a KEL but are useful for managing the information associated with an AID.
 
 The message types in KERI are detailed in the table below:
 
@@ -311,7 +311,7 @@ The prior, `p` field is the SAID of a prior event message. When the prior `p` fi
 
 ##### AID fields
 
-Some fields, such as the `i` and `di` fields, MUST each have an AID as its value. An AID is a fully qualified primitive as described above [[ref: KERI]] [[4](#KERI-WP)].
+Some fields, such as the `i` and `di` fields, MUST each have an AID as its value. An AID is a fully qualified primitive as described above ([[ref: key-event-receipt-infrastructure]]) ([[ref: KERI]]) [[4](#KERI-WP)].
 
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field can also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement can be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
@@ -388,7 +388,7 @@ In the event that an establishment event includes both `RB` and `NRB` configurat
 
 ##### Seal list field
 
-The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seal Section below.
+The Seal, `a` (anchor) field value is a list of field maps representing Seals. These are defined in detail in the Seals Section below.
 
 ### Seals
 
@@ -435,7 +435,7 @@ The JSON version is shown. There is also a native CESR version.
 
 #### Merkle Tree root digest seal
 
-The value of this seal's `rd` field is root of a Merkle tree of digests of external data.  This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.
+The value of this seal's `rd` field is the root of a Merkle tree of digests of external data. This enables a compact commitment to a large number of data items. A Merkle tree is constructed so that an inclusion proof of a given digest in the tree does not require disclosure of the whole tree.
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
@@ -479,7 +479,7 @@ Event seals are used for endorsing delegated events and for endorsing external i
 
 #### Latest establishment event seal
 
-The latest establishment event seal's function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses or approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.
+The latest establishment event seal's function is similar to the key event seal above except that it does not designate a specific key event but merely designates the latest establishment event in the external KEL for the AID given as its `i` field value. This seal endorses, approves or commits to the key state of the latest establishment event of the referenced KEL. This is useful for endorsing a message.
 
 The JSON version is shown. There is also a native CESR version of the seal.
 
@@ -495,7 +495,7 @@ When a ledger backer or backers are used as a secondary root-of-trust instead of
 
 The `bi` field value in the seal is the non-transferable identifier of the registrar backer (backer identifier). The first seal appearing in the seal list containing the event whose `bi` field matches that registrar backer identifier is the authoritative one for that registrar (in the event that there are multiple registrar seals for the same `bi` value).
 
-The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field in an associated bare, `bar` message (defined later). The nested `d` said of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
+The `d` field value in the seal MUST be the SAID of the associated metadata SAD that provides the backer registrar metadata. The SAD MAY appear as the value of the seal data, `sd` field in an associated bare, `bar` message (defined later). The nested `d` SAID of this `sd` block in the bare message MUST be the `d` field in the associated seal. This metadata could include the address used to source events onto the ledger, a service endpoint for the ledger registrar, and a corresponding ledger oracle.
 
 To reiterate, the seal MUST appear in the same establishment event that designates the registrar backer identifier as a backer identifier in the event's backer's list along with the config trait `RB`.
 
@@ -932,7 +932,7 @@ Suppose that some information needs to be protected as sealed-confidential where
 
 One security vulnerability of routed architectures is attacks on the routers themselves (especially router configuration, both static and dynamic). This vulnerability is most acute when a single router needs to handle information with different security properties. One solution to this problem is to use a pre-router that can redirect messages to different post-routers with different security properties.  For example, a pre-router would route sensitive data to a sensitive data post-router and non-sensitive data to a non-sensitive data post-router. This ensures that sensitive and non-sensitive data are never mixed. This enables tighter, more secure configuration control over data flows within an infrastructure. The best pre-routers act early in the routing process.
 
-In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange can used for the first type of information above, namely information public to a KEL. The second class, prod-bare can be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it needs to take appropriate measures to protect the router.
+In KERI, the earliest possible place for a pre-router is at the stream parser. The stream parser does not look at routes but does look at message types. Therefore, a stream parser as a pre-router needs the sensitive data to be segregated by message type. As a result, the KERI protocol supports two classes of routed messages distinguished by message types. The first class is denoted by query-reply-exchange messages, and the second by prod-bare messages. The first class, query-reply-exchange can be used for the first type of information above, namely information public to a KEL. The second class, prod-bare can be used for the second type of information, namely hidden but sealed to a KEL (sealed confidential). When a given implementation chooses to use one router for both classes of information, it needs to take appropriate measures to protect the router.
 
 Notable is that the exchange message types are only associated with the first class of data. This is because exchange messages are signed by the participating peers but not sealed. Once an exchange transaction is completed successfully, the set of messages in that transaction can be aggregated and then sealed to the participating peer's KELs. The transaction set can then be treated as sealed-confidential information, and its subsequent disclosure is managed with prod-bare messages. An exchange message can reference a data item that is sealed but the disclosure of that seal can happen with a bare, `bar` message. Often, the point of an exchange is to negotiate a chain-link confidential disclosure of information. The detailed disclosure can happen out-of-band to the exchange that negotiates the contractual commitments to that data. Those commitments use cryptographic digests that maintain confidentiality. Later disclosure of the information can be facilitated with a prod-bare pair.
 
@@ -980,7 +980,7 @@ The Exchange Identifier SAID, `x` field value MUST be the SAID, `d` field value 
 
 
 ##### Datetime, `dt` field
-The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
+The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
 
  An example datetime string in this format is as follows:
 
@@ -2090,7 +2090,7 @@ An example KERI protocol type/protocolversion/genusversion field value for proto
 
 ##### DateTime
 
-As described above, the datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF RFC-3339.  An example datetime string in this format is as follows:
+As described above, the datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  An example datetime string in this format is as follows:
 
 `2020-08-22T17:50:09.988921+00:00`
 
@@ -3114,6 +3114,16 @@ b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
 
 <a id="RFC6960">35</a><a id="ref35"></a>. RFC6960 [X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP](https://www.rfc-editor.org/rfc/rfc6960). S. Santesson; M. Myers; R. Ankney; A. Malpani; S. Galperin; C. Adams; 2013-06. Status: Proposed Standard.
 
+<a id="RFC8949">36</a><a id="ref36"></a>. RFC8948 [Concise Binary Object Representation (CBOR)
+](https://www.rfc-editor.org/rfc/rfc8949.html). C. Bormann; P. Hoffman; 2020-12. Status:Internet Standard
+
+<a id="RFC4648">37</a><a id="ref37"></a>. RFC4648 [The Base16, Base32, and Base64 Data Encodings](https://www.rfc-editor.org/rfc/rfc4648). S. Josefsson; 2006-10. Status: Proposed Standard.
+
+<a id="RFC2119">38</a><a id="ref38"></a>. IETF RFC-2119 [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119.txt). S. Bradner. 1997-03. Status: Best Current Practice
+
+<a id="IT7498">38</a><a id="ref39"></a>. ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. June 1999. Introduction. Retrieved 26 August 2022.
+
+<a id="RFC3339">38</a><a id="ref40"></a>. IETF RFC-3339 Date and Time on the Internet: Timestamps [DateTime](https://www.rfc-editor.org/rfc/rfc3339.txt). G. Klyne. 2002-07. Status: Standards Track
 
 ### Informative section
 
