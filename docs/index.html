@@ -1446,8 +1446,8 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                             <a class="mx-auto p-2" href="https://github.com/trustoverip/spec-up-t"
                                 target="_blank" rel="noopener">Powered By Spec-Up-T</a>
                             <small>
-                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-05T14:56:02.142Z">
-                                    Generated: 2025-10-05T14:56:02.142Z
+                                <time class="timestamp mx-auto p-2 text-muted" datetime="2025-10-05T15:10:20.539Z">
+                                    Generated: 2025-10-05T15:10:20.539Z
                                 </time>
                             </small>
                         </div>
@@ -1895,7 +1895,7 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <p>Some fields, such as the <code>i</code> and <code>di</code> fields, MUST each have an AID as its value. An AID is a fully qualified primitive as described above (<a class="term-reference" href="#term:key-event-receipt-infrastructure">key-event-receipt-infrastructure</a>) (<a class="term-reference" href="#term:keri">KERI</a>) [<a href="#KERI-WP">4</a>].</p>
 <p>In this context, <code>i</code> is short for <code>ai</code>, which is short for the Autonomic identifier (AID). The AID given by the <code>i</code> field can also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an <code>i</code> field is that it is the identifier of the authoritative entity to which a statement can be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).</p>
 <p>The Controller AID, <code>i</code> field value is an AID that controls its associated KEL. When the Controller Identifier AID, <code>i</code> field appears at the top-level of a key event, <code>[icp, rot, ixn, dip, drt]</code> or a receipt, <code>rct</code> message it refers to the Controller of the associated KEL. When the Controller Identifier AID, <code>i</code> field appears at the top-level of an Exchange Transaction Inception, <code>xip</code> or Exchange, <code>exn</code> message it refers Controller AID of the sender of that message. A Controller AID, <code>i</code> field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
-The Delegator identifier AID, <code>di</code> field in a Delegated Inception, <code>dip</code> event is the AID of the Delegator.</p>
+The value of the di (Delegator identifier AID ) field in a Delegated Inception dip event is the AID of the Delegator.</p>
 <h5 id="sequence-number-field"><a class="toc-anchor d-print-none" href="#sequence-number-field">§</a> Sequence number field</h5>
 <p>The Sequence Number, <code>s</code> field value is a hex encoded (no leading zeros) non-negative strictly monotonically increasing integer.  The Sequence Number, <code>s</code> field value in Inceptions, <code>icp</code> and Delegated Inception, <code>dip</code> events MUST be <code>0</code> (hex encoded 0). The Sequence number value of all subsequent key events in a KEL MUST be 1 greater than the previous event. The maximum value of a sequence number MUST be <code>ffffffffffffffffffffffffffffffff</code> which is the hex encoding of <code>2^128 - 1 = 340282366920938463463374607431768211455</code>. This is large enough to be deemed computationally infeasible for a KEL ever to reach the maximum.</p>
 <h5 id="key-and-key-digest-threshold-fields"><a class="toc-anchor d-print-none" href="#key-and-key-digest-threshold-fields">§</a> Key and key digest threshold fields</h5>

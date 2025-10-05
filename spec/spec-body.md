@@ -316,7 +316,7 @@ Some fields, such as the `i` and `di` fields, MUST each have an AID as its value
 In this context, `i` is short for `ai`, which is short for the Autonomic identifier (AID). The AID given by the `i` field can also be thought of as a securely attributable identifier, authoritative identifier, authenticatable identifier, authorizing identifier, or authoring identifier. Another way of thinking about an `i` field is that it is the identifier of the authoritative entity to which a statement can be securely attributed, thereby making the statement verifiably authentic via a non-repudiable signature made by that authoritative entity as the Controller of the private key(s).
 
 The Controller AID, `i` field value is an AID that controls its associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of a key event, `[icp, rot, ixn, dip, drt]` or a receipt, `rct` message it refers to the Controller of the associated KEL. When the Controller Identifier AID, `i` field appears at the top-level of an Exchange Transaction Inception, `xip` or Exchange, `exn` message it refers Controller AID of the sender of that message. A Controller AID, `i` field MAY appear in other places in messages. In those cases, its meaning SHOULD be determined by the context of its appearance.
-The Delegator identifier AID, `di` field in a Delegated Inception, `dip` event is the AID of the Delegator.
+The value of the di (Delegator identifier AID ) field in a Delegated Inception dip event is the AID of the Delegator.
 
 ##### Sequence number field
 
