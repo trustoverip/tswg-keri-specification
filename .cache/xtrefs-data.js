@@ -464,26 +464,6 @@ const allXTrefs = {
       ]
     },
     {
-      "externalSpec": "toip1",
-      "term": "message",
-      "repoUrl": "https://github.com/trustoverip/ctwg-main-glossary",
-      "terms_dir": "spec/terms-definitions",
-      "owner": "trustoverip",
-      "repo": "ctwg-main-glossary",
-      "avatarUrl": null,
-      "ghPageUrl": "https://trustoverip.github.io/ctwg-main-glossary/",
-      "site": null,
-      "commitHash": "f7c60e4a1dde10985f707da5921e83c6f42350a0",
-      "content": "<dd>\n<p>A discrete unit of <a class=\"term-reference\" href=\"#term:communication\">communication</a> intended by the source for consumption by some recipient or group of recipients.</p>\n</dd>\n<dd>\n<p>Source: <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Message\" href=\"https://en.wikipedia.org/wiki/Message\">Wikipedia</a>.</p>\n</dd>\n<dd>\n<p>See also: <a class=\"term-reference\" href=\"#term:toip-message\">ToIP message</a>, <a class=\"term-reference\" href=\"#term:verifiable-message\">verifiable message</a>.</p>\n</dd>",
-      "sourceFile": "message.md",
-      "sourceFiles": [
-        {
-          "file": "message.md",
-          "type": "tref"
-        }
-      ]
-    },
-    {
       "externalSpec": "keri1",
       "term": "next-threshold",
       "repoUrl": "https://github.com/trustoverip/kerisuite-glossary",
@@ -929,6 +909,46 @@ const allXTrefs = {
       "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
       "content": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>"
+    },
+    {
+      "externalSpec": "toip2",
+      "term": "message",
+      "alias": "Message",
+      "sourceFiles": [
+        {
+          "file": "message.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/ctwg-general-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "ctwg-general-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
+      "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
+      "content": "<dd>\n<p>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>"
+    },
+    {
+      "externalSpec": "toip2",
+      "term": "messagepack",
+      "alias": "MsgPack",
+      "sourceFiles": [
+        {
+          "file": "messagepack.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/ctwg-general-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "ctwg-general-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
+      "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
+      "content": "<dd>\n<p>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</p>\n</dd>"
     }
   ]
 };

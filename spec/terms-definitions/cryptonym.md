@@ -1,1 +1,1 @@
-[[tref: toip2, cryptonym, Cryptonym]]
+[[tref: toip2, cryptonym, Cryptonym, Cryptonymous]]
