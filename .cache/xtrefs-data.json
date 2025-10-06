@@ -18,7 +18,14 @@
           "file": "authentic-chained-data-container.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Authentic Chained Data Container",
+        "ACDC"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Authentic Chained Data Container",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -38,7 +45,14 @@
           "file": "autonomic-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic identifier",
+        "AID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic identifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -58,7 +72,14 @@
           "file": "autonomic-identity-system.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic identity system",
+        "AIS"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic identity system",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -78,7 +99,14 @@
           "file": "autonomic-namespace.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic namespace",
+        "AN"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic namespace",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -98,7 +126,13 @@
           "file": "backer.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Backer"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Backer",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -118,7 +152,14 @@
           "file": "concise-binary-object-representation.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Concise Binary Object Representation",
+        "CBOR"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Concise Binary Object Representation",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -139,7 +180,14 @@
           "file": "configuration-traits.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Configuration traits",
+        "Modes"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Configuration traits",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -159,7 +207,13 @@
           "file": "controller.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Controller"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Controller",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -179,7 +233,13 @@
           "file": "cryptographic-primitive.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Cryptographic primitive"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Cryptographic primitive",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -199,7 +259,14 @@
           "file": "cryptonym.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Cryptonym",
+        "Cryptonymous"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Cryptonym",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -219,7 +286,13 @@
           "file": "current-threshold.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Current threshold"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Current threshold",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -239,7 +312,13 @@
           "file": "dead-attack.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Dead-attack"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Dead-attack",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -260,7 +339,14 @@
           "file": "decentralized-key-management-infrastructure.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Decentralized Key Management Infrastructure",
+        "DKMI"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Decentralized Key Management Infrastructure",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -280,7 +366,13 @@
           "file": "establishment-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Establishment event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Establishment event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -300,7 +392,14 @@
           "file": "first-seen.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "First-seen",
+        "First-Seen"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "First-seen",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -320,7 +419,13 @@
           "file": "inception-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Inception event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Inception event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -340,7 +445,13 @@
           "file": "interaction-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Interaction event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Interaction event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -360,7 +471,14 @@
           "file": "key-event-log.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event log",
+        "KEL"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event log",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -380,7 +498,13 @@
           "file": "key-event-message.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event message"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event message",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -401,7 +525,14 @@
           "file": "key-event-receipt-log.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event receipt log",
+        "KERL"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt log",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -421,7 +552,13 @@
           "file": "key-event-receipt.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event receipt"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -441,7 +578,13 @@
           "file": "key-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -461,7 +604,13 @@
           "file": "key-state.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key-state"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key-state",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -481,7 +630,13 @@
           "file": "next-threshold.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Next threshold"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Next threshold",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -501,7 +656,13 @@
           "file": "non-establishment-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Non-establishment event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Non-establishment event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -521,7 +682,13 @@
           "file": "primitive.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Primitive"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Primitive",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -541,7 +708,13 @@
           "file": "rotation.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Rotation"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Rotation",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -561,7 +734,13 @@
           "file": "salt.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Salt"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Salt",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -581,7 +760,13 @@
           "file": "seal.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Seal"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Seal",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -602,7 +787,14 @@
           "file": "self-addressed-data.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-addressed data",
+        "SAD"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-addressed data",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -622,7 +814,13 @@
           "file": "validator.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Validator"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Validator",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -642,7 +840,13 @@
           "file": "verifiable.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Verifiable"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Verifiable",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -662,7 +866,13 @@
           "file": "verifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Verifier"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Verifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -682,7 +892,13 @@
           "file": "watcher.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Watcher"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Watcher",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -702,7 +918,13 @@
           "file": "witness.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Witness"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Witness",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -722,7 +944,13 @@
           "file": "end-verifiability.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "End-verifiability"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "End-verifiability",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -742,7 +970,13 @@
           "file": "rotation-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Rotation event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Rotation event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -762,7 +996,14 @@
           "file": "KERIs-algorithm-for-witness-agreement.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "KERI’s Algorithm for Witness Agreement",
+        "KAWA"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "KERI’s Algorithm for Witness Agreement",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -783,7 +1024,13 @@
           "file": "duplicity.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Duplicity"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Duplicity",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -804,7 +1051,13 @@
           "file": "inception.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Inception"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Inception",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -825,7 +1078,13 @@
           "file": "live-attack.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Live-attack"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Live-attack",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -846,7 +1105,14 @@
           "file": "self-addressing-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-addressing identifier",
+        "SAID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-addressing identifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -867,7 +1133,13 @@
           "file": "version.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Version"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Version",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -888,7 +1160,14 @@
           "file": "self-certifying-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-certifying identifier",
+        "SCID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-certifying identifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -908,7 +1187,14 @@
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
-      "content": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>"
+      "content": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>",
+      "trefAliases": [
+        "Key event receipt infrastructure",
+        "KERI"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt infrastructure",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -928,7 +1214,13 @@
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
       "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
-      "content": "<dd>\n<p>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>"
+      "content": "<dd>\n<p>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>",
+      "trefAliases": [
+        "Message"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Message",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -948,7 +1240,14 @@
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
       "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
-      "content": "<dd>\n<p>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</p>\n</dd>"
+      "content": "<dd>\n<p>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</p>\n</dd>",
+      "trefAliases": [
+        "MsgPack",
+        "MGPK"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "MsgPack",
+      "branch": "typosOut"
     }
   ]
 }
