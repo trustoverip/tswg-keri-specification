@@ -464,7 +464,7 @@ The JSON version is shown. There is also a CESR native version of the seal.
 
 #### Key Event seal
 
-Key Event seals bind an event from some other (external) KEL or other type of event log to an event in the KEL that the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. The fields in an Event seal MUST appear in the following order `[ i, s, d]`.
+Key Event seals bind an event from some other (external) KEL or other type of event log to the event in the KEL where the seal appears. This provides an implicit approval or endorsement of that external event. The `i` field value is the AID of the external event log. The `s` field value is the sequence number of the event in the external event log. It is in lower case hexidecimal text with no leading zeros. The `d` field value is the SAID of the external event. The fields in an Event seal MUST appear in the following order `[ i, s, d]`.
 
 Event seals are used for endorsing delegated events and for endorsing external issuances of other types of data. The JSON version is shown. There is also a CESR native version of the seal.
 
