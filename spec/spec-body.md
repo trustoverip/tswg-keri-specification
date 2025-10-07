@@ -557,7 +557,7 @@ The top-level fields of an Inception, `icp`, event message body MUST appear in t
 
 ##### Inception Event Example
 
-The message body is provided as a [[ref: Python dict]]. This dict is then serialized using the SAID protocol to generate the SAIDive values in the `d` and `i` fields. The serialization kind is JSON.
+The message body is provided as a [[ref: Python dict]]. This dict is then serialized using the SAID protocol to generate the [[ref: SAIDive]] values in the `d` and `i` fields. The serialization kind is JSON.
 
 ```python
 {
