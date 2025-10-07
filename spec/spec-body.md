@@ -396,7 +396,7 @@ The dictionary definition of the seal is "evidence of authenticity". Seals make 
 
 The collision resistance of a cryptographic strength digest makes it computationally infeasible for any other serialized data to have the same digest. Thus, a non-repudiable signature on a digest of serialized data is equivalent to such a signature on the serialized data itself. Because all key events in a KEL are signed by the controller of that KEL, the inclusion of a seal in a key event is equivalent to signing the external data but without revealing that data. When given the external data, a Validator can verify that the seal is a digest of that data and hence verify the equivalent nonrepudiable commitment. A seal, at a minimum, includes a cryptographic digest of the serialized external data, usually its SAID. The external data MAY itself be composed of digests of other data.
 
-Seals MAY also be used as attachments to events to provide a reference for looking up the key state to be used for signatures on that event. The semantics of a given seal are also modified by the context in which the seal appears, such as appearing in the seal list of a key event in a KEL as opposed to appearing as an attachment to an event or receipt of an event.
+Seals MAY also be used as attachments to events to provide a reference for looking up the key state to be used for signatures on that event. For seals that do not appear as attachments, the semantics of these seals are modified by the context in which the seal appears, such as appearing in the seal list of a key event in a KEL.
 
 When a seal appears in a message whose serialization KIND is not CESR native, i.e. is one of JSON, CBOR, or MGPK then it MUST be encoded as a field map in the message's serialization format.
 
