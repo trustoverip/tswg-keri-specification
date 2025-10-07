@@ -1425,6 +1425,31 @@
       "ghPageUrl": "https://trustoverip.github.io/ctwg-main-glossary/",
       "commitHash": "not found",
       "content": "This term was not found in the external repository."
+    },
+    {
+      "externalSpec": "toip2",
+      "term": "certificate-transparency",
+      "trefAliases": [
+        "Certificate transparency"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Certificate transparency",
+      "sourceFiles": [
+        {
+          "file": "certificate-transparency.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/ctwg-general-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "ctwg-general-glossary",
+      "site": null,
+      "branch": "typosOut",
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
+      "commitHash": "not found",
+      "content": "This term was not found in the external repository."
     }
   ]
 }
