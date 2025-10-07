@@ -1,1 +1,1 @@
-[[tref: toip2, concise-binary-object-representation, Concise Binary Object Representation]]
+[[tref: toip2, concise-binary-object-representation, Concise Binary Object Representation, CBOR]]

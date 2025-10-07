@@ -18,7 +18,14 @@ const allXTrefs = {
           "file": "authentic-chained-data-container.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Authentic Chained Data Container",
+        "ACDC"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Authentic Chained Data Container",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -38,7 +45,14 @@ const allXTrefs = {
           "file": "autonomic-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic identifier",
+        "AID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic identifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -58,7 +72,14 @@ const allXTrefs = {
           "file": "autonomic-identity-system.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic identity system",
+        "AIS"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic identity system",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -78,7 +99,14 @@ const allXTrefs = {
           "file": "autonomic-namespace.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Autonomic namespace",
+        "AN"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Autonomic namespace",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -98,7 +126,13 @@ const allXTrefs = {
           "file": "backer.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Backer"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Backer",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -118,7 +152,14 @@ const allXTrefs = {
           "file": "concise-binary-object-representation.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Concise Binary Object Representation",
+        "CBOR"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Concise Binary Object Representation",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -132,14 +173,21 @@ const allXTrefs = {
       "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
       "site": null,
       "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
-      "content": "<dd>\n<p>a list of specially defined strings representing a configuration of a KEL. See <a class=\"term-reference\" href=\"#term:#configuration-traits-field\">#configuration-traits-field</a>.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-traits\">extended KERI glossary</a></p>\n</dd>",
+      "content": "<dd>\n<p>a list of specially defined strings representing a configuration of a KEL.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith, 2024</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/configuration-traits\">extended KERI glossary</a></p>\n</dd>",
       "sourceFile": "configuration-traits.md",
       "sourceFiles": [
         {
           "file": "configuration-traits.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Configuration traits",
+        "Modes"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Configuration traits",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -159,7 +207,13 @@ const allXTrefs = {
           "file": "controller.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Controller"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Controller",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -179,7 +233,13 @@ const allXTrefs = {
           "file": "cryptographic-primitive.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Cryptographic primitive"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Cryptographic primitive",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -199,7 +259,14 @@ const allXTrefs = {
           "file": "cryptonym.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Cryptonym",
+        "Cryptonymous"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Cryptonym",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -219,7 +286,13 @@ const allXTrefs = {
           "file": "current-threshold.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Current threshold"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Current threshold",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -239,7 +312,13 @@ const allXTrefs = {
           "file": "dead-attack.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Dead-attack"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Dead-attack",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -260,7 +339,14 @@ const allXTrefs = {
           "file": "decentralized-key-management-infrastructure.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Decentralized Key Management Infrastructure",
+        "DKMI"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Decentralized Key Management Infrastructure",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -280,7 +366,13 @@ const allXTrefs = {
           "file": "establishment-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Establishment event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Establishment event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -300,7 +392,14 @@ const allXTrefs = {
           "file": "first-seen.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "First-seen",
+        "First-Seen"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "First-seen",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -320,7 +419,13 @@ const allXTrefs = {
           "file": "inception-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Inception event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Inception event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -340,7 +445,13 @@ const allXTrefs = {
           "file": "interaction-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Interaction event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Interaction event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -360,7 +471,14 @@ const allXTrefs = {
           "file": "key-event-log.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event log",
+        "KEL"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event log",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -380,7 +498,13 @@ const allXTrefs = {
           "file": "key-event-message.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event message"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event message",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -401,7 +525,14 @@ const allXTrefs = {
           "file": "key-event-receipt-log.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event receipt log",
+        "KERL"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt log",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -421,7 +552,13 @@ const allXTrefs = {
           "file": "key-event-receipt.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event receipt"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -441,7 +578,13 @@ const allXTrefs = {
           "file": "key-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Key event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -461,27 +604,13 @@ const allXTrefs = {
           "file": "key-state.md",
           "type": "tref"
         }
-      ]
-    },
-    {
-      "externalSpec": "toip1",
-      "term": "message",
-      "repoUrl": "https://github.com/trustoverip/ctwg-main-glossary",
-      "terms_dir": "spec/terms-definitions",
-      "owner": "trustoverip",
-      "repo": "ctwg-main-glossary",
-      "avatarUrl": null,
-      "ghPageUrl": "https://trustoverip.github.io/ctwg-main-glossary/",
-      "site": null,
-      "commitHash": "f7c60e4a1dde10985f707da5921e83c6f42350a0",
-      "content": "<dd>\n<p>A discrete unit of <a class=\"term-reference\" href=\"#term:communication\">communication</a> intended by the source for consumption by some recipient or group of recipients.</p>\n</dd>\n<dd>\n<p>Source: <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Message\" href=\"https://en.wikipedia.org/wiki/Message\">Wikipedia</a>.</p>\n</dd>\n<dd>\n<p>See also: <a class=\"term-reference\" href=\"#term:toip-message\">ToIP message</a>, <a class=\"term-reference\" href=\"#term:verifiable-message\">verifiable message</a>.</p>\n</dd>",
-      "sourceFile": "message.md",
-      "sourceFiles": [
-        {
-          "file": "message.md",
-          "type": "tref"
-        }
-      ]
+      ],
+      "trefAliases": [
+        "Key-state"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key-state",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -501,7 +630,13 @@ const allXTrefs = {
           "file": "next-threshold.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Next threshold"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Next threshold",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -521,7 +656,13 @@ const allXTrefs = {
           "file": "non-establishment-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Non-establishment event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Non-establishment event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -541,7 +682,13 @@ const allXTrefs = {
           "file": "primitive.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Primitive"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Primitive",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -561,7 +708,13 @@ const allXTrefs = {
           "file": "rotation.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Rotation"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Rotation",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -581,7 +734,13 @@ const allXTrefs = {
           "file": "salt.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Salt"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Salt",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -601,7 +760,13 @@ const allXTrefs = {
           "file": "seal.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Seal"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Seal",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -622,7 +787,14 @@ const allXTrefs = {
           "file": "self-addressed-data.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-addressed data",
+        "SAD"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-addressed data",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip2",
@@ -642,7 +814,13 @@ const allXTrefs = {
           "file": "validator.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Validator"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Validator",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -662,7 +840,13 @@ const allXTrefs = {
           "file": "verifiable.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Verifiable"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Verifiable",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "toip1",
@@ -682,7 +866,13 @@ const allXTrefs = {
           "file": "verifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Verifier"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Verifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -702,7 +892,13 @@ const allXTrefs = {
           "file": "watcher.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Watcher"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Watcher",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -722,7 +918,13 @@ const allXTrefs = {
           "file": "witness.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Witness"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Witness",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -742,7 +944,13 @@ const allXTrefs = {
           "file": "end-verifiability.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "End-verifiability"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "End-verifiability",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -762,7 +970,13 @@ const allXTrefs = {
           "file": "rotation-event.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Rotation event"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Rotation event",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -782,7 +996,14 @@ const allXTrefs = {
           "file": "KERIs-algorithm-for-witness-agreement.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "KERI’s Algorithm for Witness Agreement",
+        "KAWA"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "KERI’s Algorithm for Witness Agreement",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -803,7 +1024,13 @@ const allXTrefs = {
           "file": "duplicity.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Duplicity"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Duplicity",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -824,7 +1051,13 @@ const allXTrefs = {
           "file": "inception.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Inception"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Inception",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -845,7 +1078,13 @@ const allXTrefs = {
           "file": "live-attack.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Live-attack"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Live-attack",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -866,7 +1105,14 @@ const allXTrefs = {
           "file": "self-addressing-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-addressing identifier",
+        "SAID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-addressing identifier",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -887,7 +1133,13 @@ const allXTrefs = {
           "file": "version.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Version"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Version",
+      "branch": "typosOut"
     },
     {
       "externalSpec": "keri1",
@@ -908,7 +1160,94 @@ const allXTrefs = {
           "file": "self-certifying-identifier.md",
           "type": "tref"
         }
-      ]
+      ],
+      "trefAliases": [
+        "Self-certifying identifier",
+        "SCID"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Self-certifying identifier",
+      "branch": "typosOut"
+    },
+    {
+      "externalSpec": "keri1",
+      "term": "key-event-receipt-infrastructure",
+      "alias": "Key Event Receipt Infrastructure",
+      "sourceFiles": [
+        {
+          "file": "key-event-receipt-infrastructure.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/kerisuite-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "kerisuite-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/kerisuite-glossary/",
+      "commitHash": "6820014a1111b38dc3d653a0026ff981db2dee17",
+      "content": "<dd>\n<p>or the KERI protocol, is an identity system-based secure overlay for the Internet.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smtih</p>\n</dd>\n<dd>\n<p>More in <a href=\"https://weboftrust.github.io/WOT-terms/docs/glossary/key-event-receipt-infrastructure\">extended KERI glossary</a></p>\n</dd>",
+      "trefAliases": [
+        "Key event receipt infrastructure",
+        "KERI"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Key event receipt infrastructure",
+      "branch": "typosOut"
+    },
+    {
+      "externalSpec": "toip2",
+      "term": "message",
+      "alias": "Message",
+      "sourceFiles": [
+        {
+          "file": "message.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/ctwg-general-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "ctwg-general-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
+      "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
+      "content": "<dd>\n<p>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</p>\n</dd>\n<dd>\n<p>Source: Dr. S.Smith</p>\n</dd>",
+      "trefAliases": [
+        "Message"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "Message",
+      "branch": "typosOut"
+    },
+    {
+      "externalSpec": "toip2",
+      "term": "messagepack",
+      "alias": "MsgPack",
+      "sourceFiles": [
+        {
+          "file": "messagepack.md",
+          "type": "tref"
+        }
+      ],
+      "repoUrl": "https://github.com/trustoverip/ctwg-general-glossary",
+      "terms_dir": "spec/terms-definitions",
+      "owner": "trustoverip",
+      "repo": "ctwg-general-glossary",
+      "site": null,
+      "avatarUrl": null,
+      "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
+      "commitHash": "d4430f3134d6c0f50e885d7efc4d285a195b202e",
+      "content": "<dd>\n<p>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</p>\n</dd>",
+      "trefAliases": [
+        "MsgPack",
+        "MGPK"
+      ],
+      "xrefAliases": [],
+      "firstTrefAlias": "MsgPack",
+      "branch": "typosOut"
     }
   ]
 };

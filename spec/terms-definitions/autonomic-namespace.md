@@ -1,1 +1,1 @@
-[[tref: toip1, autonomic-namespace, Autonomic namespace]]
+[[tref: toip1, autonomic-namespace, Autonomic namespace, AN]]
