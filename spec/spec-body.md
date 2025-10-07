@@ -14,7 +14,7 @@ Each KERI AID is controlled by an entity (or entities when multi-sig) that holds
 - key event signing, and
 - key event validation.
 
-[[ref: Key event]] validation includes everything needed to validate events, including structure validation, chaining digest verification, signature verification, and [[ref: Witness]] receipt verification. The execution of these functions, including the associated code and data, SHOULD be protected by the controller using best practices. For example, this might be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller MAY host encrypted keypair storage and highly available key event validation functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession. The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions. For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
+[[ref: Key event]] validation includes everything needed to validate events, including structure validation, chaining digest verification, [[ref: Signature]] verification, and [[ref: Witness]] receipt verification. The execution of these functions, including the associated code and data, SHOULD be protected by the controller using best practices. For example, this might be accomplished by securely installing the controller application on a device in the physical possession of the controller, such as a mobile phone with appropriate secure storage and trusted code execution environments. Alternatively, the functions might be split between devices where a remote software agent that runs on behalf of the controller MAY host encrypted keypair storage and highly available key event validation functions while the more critical keypair generation, key event generation, and key event signing functions are on a device in the user's possession. The latter might be called a key chain or wallet. The extra security and scalability properties of delegated AIDs enable other arrangements for securely hosting the five functions. For the sake of clarity and without loss of generality, the controller application, including any devices or software agents, will be referred to as the controller application or application for short.
 
 ![Controller Application](https://raw.githubusercontent.com/trustoverip/tswg-keri-specification/revised-format/images/ControllerApplicationFunctions.png)
 
@@ -40,7 +40,7 @@ By exchanging KELs, each controller can validate the current key state of the ot
 
 For many if not most use cases, the direct exchange of key event messages between controller applications (including agents when applicable) may not provide sufficient availability, scalability, or even security. KERI includes two other components for those use cases. These components are witnesses and [[ref: Watcher]]s.
 
-Each controller of an AID MAY create or choose to use a set or pool of witnesses for that AID. The controller chooses how the witnesses are hosted. It MAY use a witness service provided by some other party or MAY directly host its own witnesses in its own infrastructure or some combination of the two. Regardless, the composition of the Witness pool is under the ultimate control of the AID's controller, which means the controller MAY change the witness infrastructure at will. Witnesses for the AID are managed by the key events in the AID's KEL. Each witness creates a signed receipt of each event it witnesses, which is exchanged with the other witnesses (directly or indirectly). Based on those receipts, the witness pool uses an agreement algorithm called [[ref: KAWA]] that provides high availability, fault tolerance, and security guarantees.  Thereby, an AID's witness pool constitutes a highly available and secure promulgation network for that AID.
+Each controller of an AID MAY create or choose to use a set or pool of witnesses for that AID. The controller chooses how the witnesses are hosted. It MAY use a witness service provided by some other party or MAY directly host its own witnesses in its own infrastructure or some combination of the two. Regardless, the composition of the Witness pool is under the ultimate control of the AID's controller, which means the controller MAY change the witness infrastructure at will. Witnesses for the AID are managed by the key events in the AID's KEL. Each witness creates a signed [[ref: Receipt]] of each event it witnesses, which is exchanged with the other witnesses (directly or indirectly). Based on those receipts, the witness pool uses an agreement algorithm called [[ref: KAWA]] that provides high availability, fault tolerance, and security guarantees.  Thereby, an AID's witness pool constitutes a highly available and secure promulgation network for that AID.
 
 Likewise, each controller acting as a validator of some other controller's events MAY create or choose a set or pool of watchers. The validator chooses how the watchers are hosted. It MAY use a watcher service provided by some other party or MAY directly host its own watchers in its own infrastructure or some combination of the two. Nonetheless, the pool is under the ultimate control of the AID's event validator. To clarify, it is not under the control of the AID's controller. This means the validator MAY change its watcher infrastructure at will. Watchers are not AID-specific; instead, they watch the KELs of any or all AIDs that are shared with them. Watchers are not explicitly managed by key events. This is so that the watcher infrastructure used by any validator MAY be kept confidential and, therefore, unknown to potential attackers. It is up to each validator to manage its watcher infrastructure as it sees fit. Each validator uses its own watcher pool to watch the KELs of other controllers. When an AID has witnesses, the watchers of one validator watch the witnesses of the AID of some other controller.  Each validator MAY use its own watcher pool to watch its own witness pool of the AID that it itself controls in order to detect external attacks on its witnesses.
 
@@ -889,7 +889,7 @@ The Sequence Number, `s` field value is the Sequence Number (hex-encoded) of the
 
 ##### Receipt example:
 
-The message body is provided as a Python dict. This dict is then serialized. The serialization kind is JSON. Note that unlike the other message bodies a reciept does not have a field that is the SAID of its serialization. A Receipt message body merely holds a reference to the SAID of some [[ref: Key event message]] body.
+The message body is provided as a Python dict. This dict is then serialized. The serialization kind is JSON. Note that unlike the other message bodies a reciept does not have a field that is the SAID of its serialization. A [[ref: Receipt]] message body merely holds a reference to the SAID of some [[ref: Key event message]] body.
 
 ```python
 {
@@ -968,7 +968,7 @@ The Controller AID, `i` field value is an AID that controls its associated KEL. 
 
 ##### Receiver AID field
 
-The Receiver AID, `ri` field value is an AID of the receiver (recipient) of an exchange message. The receiver is a controller on its associated KEL but is not the sender of the exchange message. The Reciever Identifier AID, `ri` field appears at the top-level of a Routed Exchange Message, it refers to the AID of the receiver (recipient) of that message.
+The [[ref: Receiver]] AID, `ri` field value is an AID of the receiver (recipient) of an exchange message. The receiver is a controller on its associated KEL but is not the sender of the exchange message. The Reciever Identifier AID, `ri` field appears at the top-level of a [[ref: Routed Exchange Message]], it refers to the AID of the receiver (recipient) of that message.
 
 ##### Prior event SAID field
 
@@ -976,11 +976,11 @@ The prior, `p` field is the SAID of the prior exchange message in a transaction.
 
 ##### Exchange identifier field
 
-The Exchange Identifier SAID, `x` field value MUST be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message MUST be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each subsequent exchange message in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each subsequent exchange message verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, the Exchange Identifier, `x` field value, MUST be the empty string.
+The [[ref: Exchange Identifier]] SAID, `x` field value MUST be the SAID, `d` field value of the first message in the set of exchange messages that constitute a transaction. The first message MUST be an Exchange Inception message with type `xip`.  The SAID, `d` field value of the Exchange Inception message is strongly bound to the details of that message. As a cryptographic strength digest, it is a universally unique identifier. Therefore, the appearance of that value as the Exchange identifier, the `x` field in each subsequent exchange message in a transaction set, universally uniquely associates them with that set. Furthermore, the prior `p` field value in each subsequent exchange message verifiably orders the transaction set in a duplicity-evident way. When an exchange message is not part of a transaction, the Exchange Identifier, `x` field value, MUST be the empty string.
 
 
 ##### Datetime, `dt` field
-The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or receiver) the datetime is relative to.
+The datetime, `dt` field value, if any, MUST be the ISO-8601 datetime string with microseconds and UTC offset as per IETF [RFC-3339](#RFC3339).  In a given field map (block) the primary datetime will use the label, `dt`. The usage context of the message and the block where a given DateTime, `dt` field appears determines which clock (sender or [[ref: Receiver]]) the datetime is relative to.
 
  An example datetime string in this format is as follows:
 
@@ -1241,7 +1241,7 @@ This message is an agreement (bid) from Ean (sender) to buy the painting from Fa
 
 #### Indexed Signatures
 
-Cryptographic signatures are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and can be attached to the KERI data structure as part of a CESR stream. Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
+Cryptographic [[ref: Signatures]] are computed on the serialization of a KERI data structure. The serializations use CESR. The signatures are also encoded in CESR and can be attached to the KERI data structure as part of a CESR stream. Signatures and other information, when attached, MUST be attached to the Message body using CESR attachment codes.
 
 CESR provides special indexed signature codes for signatures that index the signature to the public key inside a key list inside a KERI [[ref: Establishment event]] message data structure. This way, only the indexed signature MUST be attached, not the public key needed to verify the signature. The public key is looked up from the index into the key list in the appropriate establishment event in the KEL. CESR also supports group codes that differentiate the type of indexed signatures in the group and enable pipelined extraction of the whole group for processing when attached [[1](#CESR)]. Indexed signatures MAY be attached to both key event messages and non-key event messages.  In this case, information about the associated key state for the signature MUST be attached. This is typically a reference to the AID, sequence number, and SAID (digest), of the establishment event that determines the key state. In other cases, that latest key state is assumed, and only the AID of the signer is REQUIRED. In the former case, where the signature is attached to a key event, the AID MAY be inferred.
 
@@ -1269,7 +1269,7 @@ Indexed signatures minimize the space requirements for signatures. The indexed s
 
 #### Non-indexed signatures
 
-CESR also supports codes for signatures that are not indexed. In this case, additional information MUST be attached, such as the associated public key, in order for a validator to verify the signature. This additional information MUST be in the form of a CESR group defined by a CESR group code. [[1](#CESR)]
+CESR also supports codes for [[ref: Signatures]] that are not indexed. In this case, additional information MUST be attached, such as the associated public key, in order for a validator to verify the signature. This additional information MUST be in the form of a CESR group defined by a CESR group code. [[1](#CESR)]
 
 #### Endorsements
 
@@ -1287,7 +1287,7 @@ Receipt message data structures are not key events but merely reference key even
 
 #### Receipt Seals
 
-Similar to attached signatures, a Receipt message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[1](#CESR)]
+Similar to attached signatures, a [[ref: Receipt]] message can convey an attached seal reference that allows a validator to associate the sealing event in the sealer's KEL with the reference to the sealed event given by the Receipt body. CESR provides codes for attached seal source references to receipts. [[1](#CESR)]
 
 ## KERI key management
 
