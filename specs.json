@@ -19,7 +19,7 @@
         "host": "github",
         "account": "trustoverip",
         "repo": "tswg-keri-specification",
-        "branch": "ihtml"
+        "branch": "main"
       },
       "external_specs": [
         {
