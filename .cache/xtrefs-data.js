@@ -152,7 +152,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>\n<p>It is a binary data <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Serialization\" href=\"https://en.wikipedia.org/wiki/Serialization\">serialization</a> format loosely based on <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"JSON\" href=\"https://en.wikipedia.org/wiki/JSON\">JSON</a> authored by C. Bormann. Like JSON it allows the transmission of data objects that contain <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Attribute%E2%80%93value_pair\" href=\"https://en.wikipedia.org/wiki/Attribute%E2%80%93value_pair\">name–value pairs</a>, but in a more concise manner. This increases processing and transfer speeds at the cost of <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Human-readable_medium\" href=\"https://en.wikipedia.org/wiki/Human-readable_medium\">human readability</a>.</p>\n</dd>\n<dd>\n<p>Also knows as: <a class=\"term-reference\" href=\"#term:cbor\">CBOR</a></p>\n</dd>"
     },
     {
@@ -228,7 +228,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>the serialization of a value associated with a cryptographic operation including but not limited to a digest (hash), a salt, a seed, a private key, a public key, or a signature.</dd>\n<dd>Source: Dr. S.Smith, 2024</dd>"
     },
     {
@@ -254,7 +254,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a cryptographic pseudonymous identifier represented by a string of characters derived from a random or pseudo-random secret seed or salt via a one-way cryptographic function with a sufficiently high degree of cryptographic strength (e.g., 128 bits, see appendix on <a class=\"term-reference\" href=\"#term:cryptographic-strength\">cryptographic-strength</a>. A cryptonym is a type of <a class=\"term-reference\" href=\"#term:primitive\">primitive</a>.</dd>"
     },
     {
@@ -330,7 +330,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a key management infrastructure that does not rely on a single entity for the integrity and security of the system as a whole. Trust in a DKMI is decentralized through the use of technologies that make it possible for geographically and politically disparate entities to reach an agreement on the key state of an identifier <a path-0=\"trustoverip.github.io\" path-1=\"tswg-keri-specification\" path-2=\"#term:dpki\" href=\"https://trustoverip.github.io/tswg-keri-specification/#term:dpki\">DPKI</a>.</dd>\n<dd>Source: Dr. S.Smith, 2024</dd>"
     },
     {
@@ -564,7 +564,8 @@ const allXTrefs = {
       "term": "key-event-log",
       "trefAliases": [
         "Key event log",
-        "KEL"
+        "KEL",
+        "kel"
       ],
       "xrefAliases": [],
       "firstTrefAlias": "Key event log",
@@ -734,7 +735,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a set of currently authoritative keypairs for an AID and any other information necessary to secure or establish control authority over an AID. This includes current keys, prior next key digests, current thresholds, prior next thresholds, witnesses, witness thresholds, and configurations.</dd>"
     },
     {
@@ -784,7 +785,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a serialized data structure that comprises its body and a set of serialized data structures that are its attachments. Attachments may include but are not limited to signatures on the body.</dd>\n<dd>Source: Dr. S.Smith</dd>"
     },
     {
@@ -810,7 +811,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>MessagePack is a <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Computer\" href=\"https://en.wikipedia.org/wiki/Computer\">computer</a> data interchange format. It is a binary form for representing simple <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Data_structure\" href=\"https://en.wikipedia.org/wiki/Data_structure\">data structures</a> like <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Array_data_structure\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">arrays</a> and <a path-0=\"en.wikipedia.org\" path-1=\"wiki\" path-2=\"Associative_array\" href=\"https://en.wikipedia.org/wiki/Associative_array\">associative arrays</a>. MessagePack aims to be as compact and simple as possible. The official implementation is available in a variety of languages</dd>"
     },
     {
@@ -911,7 +912,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a serialization of a unitary value. All Primitives in KERI must be expressed in <a class=\"term-reference\" href=\"#term:composable-event-streaming-representation\">composable-event-streaming-representation</a>.</dd>\n<dd>Source: Dr. S.Smith</dd>"
     },
     {
@@ -1061,7 +1062,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>random data fed as an additional input to a one-way function that hashes data.</dd>\n<dd>Source: Dr. S. Smith</dd>"
     },
     {
@@ -1086,7 +1087,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>a seal is a cryptographic commitment in the form of a cryptographic digest or hash tree root (Merkle root) that anchors arbitrary data or a tree of hashes of arbitrary data to a particular event in the key event sequence.</dd>\n<dd>Source: Dr. S. Smith</dd>"
     },
     {
@@ -1215,7 +1216,7 @@ const allXTrefs = {
       "branch": "typosOut",
       "avatarUrl": null,
       "ghPageUrl": "https://trustoverip.github.io/ctwg-general-glossary/",
-      "commitHash": "61ceeb1047db1ad827f7e2373c01700cbe7a1a80",
+      "commitHash": "3fd8a26165b49d4b8e6ac5af30e921179652a189",
       "content": "<dd>any entity or agent that evaluates whether or not a given signed statement as attributed to an identifier is valid at the time of its issuance.</dd>\n<dd>Source: Dr. S. Smith</dd>"
     },
     {
