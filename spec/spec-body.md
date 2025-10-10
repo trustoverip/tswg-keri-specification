@@ -3121,9 +3121,9 @@ b't6j8TcdgABMN9x-eIyPi96J3B","scheme":"https","url":""}}')
 
 <a id="RFC2119">38</a><a id="ref38"></a>. IETF RFC-2119 [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119.txt). S. Bradner. 1997-03. Status: Best Current Practice
 
-<a id="IT7498">38</a><a id="ref39"></a>. ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. June 1999. Introduction. Retrieved 26 August 2022.
+<a id="IT7498">39</a><a id="ref39"></a>. ISO/IEC 7498-1:1994 Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. June 1999. Introduction. Retrieved 26 August 2022.
 
-<a id="RFC3339">38</a><a id="ref40"></a>. IETF RFC-3339 Date and Time on the Internet: Timestamps [DateTime](https://www.rfc-editor.org/rfc/rfc3339.txt). G. Klyne. 2002-07. Status: Standards Track
+<a id="RFC3339">40</a><a id="ref40"></a>. IETF RFC-3339 Date and Time on the Internet: Timestamps [DateTime](https://www.rfc-editor.org/rfc/rfc3339.txt). G. Klyne. 2002-07. Status: Standards Track
 
 ### Informative section
 
